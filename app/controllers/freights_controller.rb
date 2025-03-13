@@ -1,17 +1,29 @@
 class FreightsController < ApplicationController
   def index
+    @address_origem ||= {}
+    @address_destino ||= {}
     @freights = Freight.all
-    @address ||= {}
   end
 
   def calcular_frete
-    cep_format = params[:cep_destino].to_s.strip.gsub('-', '')
-    calculate_service = CalculateFreightService.new(cep_format, params[:height], params[:width], params[:length], params[:weight], params[:service_type_id])
-    search_cep_service = SearchCepService.new(cep_format)
+    cep_origem = format_cep(params[:cep_origem])
+    cep_destino = format_cep(params[:cep_destino])
 
+    calculate_service = CalculateFreightService.new(cep_origem, cep_destino, params[:height], params[:width], params[:length], params[:weight], params[:service_type_id])
+
+    search_cep_origem = SearchCepService.new(cep_origem)
+    search_cep_destino = SearchCepService.new(cep_destino)
+
+    @address_origem = search_cep_origem.call
+    @address_destino = search_cep_destino.call
     @frete_calculado = calculate_service.call
-    @address = search_cep_service.call
 
     render :index
+  end
+
+  private
+
+  def format_cep(cep)
+    cep.to_s.strip.gsub('-', '')
   end
 end
