@@ -1,5 +1,6 @@
 .fixed-container {
   max-width: 1200px; /* Define uma largura máxima */
+  max-height: 1200px;
 }
 
 .fixed-card {

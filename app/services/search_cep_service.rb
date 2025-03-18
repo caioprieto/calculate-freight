@@ -6,8 +6,7 @@ class SearchCepService
   end
 
   def call
-    url = "https://viacep.com.br/ws/#{@cep}/json/"
-    response = HTTParty.get(url)
+    response = HTTParty.get("https://viacep.com.br/ws/#{@cep}/json/")
 
     if response.success?
       build_response(response)

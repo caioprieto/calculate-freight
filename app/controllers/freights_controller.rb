@@ -10,15 +10,20 @@ class FreightsController < ApplicationController
     cep_destino = format_cep(params[:cep_destino])
 
     calculate_service = CalculateFreightService.new(cep_origem, cep_destino, params[:height], params[:width], params[:length], params[:weight], params[:service_type_id])
-
     search_cep_origem = SearchCepService.new(cep_origem)
     search_cep_destino = SearchCepService.new(cep_destino)
 
-    @address_origem = search_cep_origem.call
-    @address_destino = search_cep_destino.call
-    @frete_calculado = calculate_service.call
+    @address_origem ||= search_cep_origem.call
+    @address_destino ||= search_cep_destino.call
+    @frete_calculado ||= calculate_service.call
+
+    CreateFreightJob.perform_later(@address_origem, @address_destino, @frete_calculado)
 
     render :index
+  end
+
+  def list_freights
+    @freights = Freight.all.limit(7).order(created_at: :desc)
   end
 
   private

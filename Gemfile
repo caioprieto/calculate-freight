@@ -18,6 +18,8 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
 gem 'httparty', '~> 0.22.0'
+gem 'delayed_job_active_record'
+gem 'delayed_job'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
