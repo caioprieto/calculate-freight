@@ -1,3 +1,16 @@
+body {
+  background-image: url('http://localhost:3000/images/background.jpg');
+  background-size: cover; /* Garante que a imagem cubra toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Evita repetição */
+  background-attachment: fixed; /* Mantém fixa ao rolar a página */
+  min-height: 1300px;
+}
+
+.card {
+  background-color: #F5F5F5;
+}
+
 .fixed-container {
   max-width: 1200px; /* Define uma largura máxima */
   max-height: 1200px;
@@ -5,7 +18,7 @@
 
 .fixed-card {
   width: 100%; /* Ocupa toda a largura do container */
-  min-height: 850px; /* Define uma altura mínima */
+  min-height: 1250px; /* Define uma altura mínima */
   max-height: 850px; /* Define uma altura máxima */
 }
 

@@ -1,8 +1,8 @@
 class FreightsController < ApplicationController
   def index
+    set_freights
     @address_origem ||= {}
     @address_destino ||= {}
-    @freights = Freight.all
   end
 
   def calcular_frete
@@ -17,16 +17,23 @@ class FreightsController < ApplicationController
     @address_destino ||= search_cep_destino.call
     @frete_calculado ||= calculate_service.call
 
-    CreateFreightJob.perform_later(@address_origem, @address_destino, @frete_calculado)
+    create_freight = CreateFreightJob.perform_now(@address_origem, @address_destino, @frete_calculado)
 
-    render :index
+    if create_freight
+      set_freights
+      render :index
+    end
   end
 
-  def list_freights
-    @freights = Freight.all.limit(7).order(created_at: :desc)
+  def importar_fretes
+    debugger
   end
 
   private
+
+  def set_freights
+    @freights = Freight.all.limit(7).order(created_at: :desc)
+  end
 
   def format_cep(cep)
     cep.to_s.strip.gsub('-', '')

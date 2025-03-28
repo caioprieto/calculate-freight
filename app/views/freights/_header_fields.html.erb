@@ -1,6 +1,6 @@
 <%= form_with(url: calcular_frete_path, method: :post, local: true, class: "row g-3") do |form| %>
   <div class="d-flex justify-content-between align-items-center mb-1">
-    <h3 class="mt-2 text-title">CALCULADORA DE FRETE</h3>
+    <h3 class="mt-2 text-title">NOVO FRETE</h3>
     <div>
       <a href="/" class="btn btn-danger btn-lg">
         <i class="bi bi-trash-fill"></i>
@@ -8,22 +8,29 @@
       <button type="submit" class="btn btn-success btn-lg">
         <i class="bi bi-calculator-fill"></i>
       </button>
-      <a href="/list_freights" class="btn btn-warning btn-lg">
-        <i class="bi bi-list-columns-reverse"></i>
-      </a>
     </div>
   </div>
 
   <% if @frete_calculado.present? %>
-    <div class="alert alert-warning d-flex justify-content-between align-items-center mt-3 col-12">
+    <div class="alert alert-warning d-flex justify-content-between align-items-center mt-3 col-7">
       <img src="<%= @frete_calculado["company"]["picture"] %>" alt="Logo da transportadora" class="img-fluid" style="max-height: 50px; margin-left: 40px;"><br>
 
-      <p class="mt-3" style="margin-right: 300px;">
-        <strong>Serviço:</strong> <%= @frete_calculado["name"] %><br>
-        <strong>Transportadora:</strong> <%= @frete_calculado["company"]["name"] %><br>
-        <strong>Preço Final:</strong> <%= number_to_currency(@frete_calculado["custom_price"].to_f, unit: "R$") %><br>
-        <strong>Prazo de Entrega:</strong> <%= @frete_calculado["delivery_time"] %> dias
+      <p class="mt-3" style="margin-right: 50px;">
+        Serviço: <strong> <%= @frete_calculado["name"] %> </strong><br>
+        Transportadora: <strong> <%= @frete_calculado["company"]["name"] %> </strong><br>
+        Preço Final: <strong> <%= number_to_currency(@frete_calculado["custom_price"].to_f, unit: "R$", separator: ",") %> </strong> <br>
+        Prazo de Entrega: <strong> <%= @frete_calculado["delivery_time"] %> dias </strong>
       </p>
+    </div>
+
+    <%# <div class="col-1"></div> %>
+
+    <div class="alert d-flex justify-content-center align-items-center mt-3 col-5">
+      <img src="<%= state_image_url(@address_origem[:state]) %>" alt="Estado Origem" class="img-fluid" style="max-height: 80px; margin-right: 20px;">
+
+      <i class="bi bi-arrow-right fs-2"></i>
+
+      <img src="<%= state_image_url(@address_destino[:state]) %>" alt="Estado Destino" class="img-fluid" style="max-height: 80px; margin-left: 20px;">
     </div>
   <% end %>
 
