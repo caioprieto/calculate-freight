@@ -17,7 +17,7 @@ gem "solid_cable"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
-gem 'httparty', '~> 0.22.0'
+gem 'httparty', '~> 0.23.1'
 gem 'delayed_job_active_record'
 gem 'delayed_job'
 
