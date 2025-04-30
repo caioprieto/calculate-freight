@@ -1,6 +1,6 @@
-require 'net/http'
-require 'uri'
-require 'json'
+require "net/http"
+require "uri"
+require "json"
 
 class CalculateFreightService
   API_URL = "https://sandbox.melhorenvio.com.br/api/v2/me/shipment/calculate".freeze

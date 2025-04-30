@@ -11,7 +11,7 @@ class SearchCepService
     if response.success?
       build_response(response)
     else
-      render json: { error: 'CEP não encontrado' }, status: :not_found
+      render json: { error: "CEP não encontrado" }, status: :not_found
     end
   end
 
@@ -19,14 +19,14 @@ class SearchCepService
 
   def build_response(response)
     {
-      cep: response['cep'],
-      street: response['logradouro'],
-      bairro: response['bairro'],
-      city: response['localidade'],
-      state: response['uf'],
-      region: response['regiao'],
-      ibge_code: response['ibge'],
-      ddd: response['ddd']
+      cep: response["cep"],
+      street: response["logradouro"],
+      bairro: response["bairro"],
+      city: response["localidade"],
+      state: response["uf"],
+      region: response["regiao"],
+      ibge_code: response["ibge"],
+      ddd: response["ddd"]
     }
   end
 end

@@ -1,5 +1,6 @@
 body {
-  background-image: url('http://localhost:3000/images/background.jpg');
+  background-color: #333;
+  /* background-image: url('http://localhost:3000/images/background.jpg'); */
   background-size: cover; /* Garante que a imagem cubra toda a tela */
   background-position: center; /* Centraliza a imagem */
   background-repeat: no-repeat; /* Evita repetição */

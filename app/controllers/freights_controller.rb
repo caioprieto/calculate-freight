@@ -25,17 +25,16 @@ class FreightsController < ApplicationController
     end
   end
 
-  def importar_fretes
-    debugger
-  end
-
   private
 
   def set_freights
-    @freights = Freight.all.limit(7).order(created_at: :desc)
+    @freights ||= Freight.all
+                         .preload(:address_origem, :address_destino)
+                         .limit(7)
+                         .order(created_at: :desc)
   end
 
   def format_cep(cep)
-    cep.to_s.strip.gsub('-', '')
+    cep.to_s.strip.gsub("-", "")
   end
 end

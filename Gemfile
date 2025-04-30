@@ -17,9 +17,12 @@ gem "solid_cable"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
-gem 'httparty', '~> 0.22.0'
-gem 'delayed_job_active_record'
-gem 'delayed_job'
+gem "httparty", "~> 0.22.0"
+gem "delayed_job_active_record"
+gem "delayed_job"
+gem "rtesseract"
+gem "ruby-openai"
+gem "awesome_print"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -29,7 +32,6 @@ end
 
 group :development do
   gem "web-console"
-  gem "awesome_print"
   gem "byebug"
 end
 

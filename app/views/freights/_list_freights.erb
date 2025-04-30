@@ -24,7 +24,7 @@
           <td><%= frete.address_destino_cidade %> - <%= frete.address_destino_estado %></td>
           <td><%= frete.tempo_estimado ? "#{frete.tempo_estimado} Dias" : " - " %></td>
           <td><%= frete.preço_final ? "R$ #{frete.preço_final}".gsub('.', ',') : " - "  %></td>
-          <td><%= frete.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></td>
+          <td><%= frete.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %></td>
         </tr>
       </tbody>
     <% end %>
