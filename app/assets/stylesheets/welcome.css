@@ -29,16 +29,26 @@ body {
 
 .menu a {
   color: white;
-  text-decoration: none;
   font-size: 18px;
-  transition: color 0.3s;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
 }
 
-.menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s;
+.menu a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: white;
+  transition: width 0.2s ease-in-out;
+}
+
+.menu a:hover::after {
+  width: 100%;
 }
 
 .text-custom {
@@ -65,7 +75,7 @@ body {
 
 .scroll_item {
   color: black;
-  font-size: 20px;
+  font-size: 17px;
   /* white-scape: Comando muito importante, permite com que o item nunca quebre a linha para baixo no caso do 'nowrap' */
   white-space: nowrap;
   padding-right: 200px;
@@ -74,7 +84,7 @@ body {
 .container-body {
   max-width: 2000px;
   margin-inline: auto;
-  margin-top: 10px;
+  margin-top: 3px;
 }
 
 .banner {
