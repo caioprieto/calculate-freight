@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: "welcomes#index"
   devise_for :users, controllers: {
-    sessions: "users/sessions"
+    sessions: "users/sessions",
+    registrations: "users/registrations"
   }
 
   namespace :admin do
