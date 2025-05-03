@@ -15,7 +15,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: -25px;
 }
 
 .logo img {
@@ -28,7 +27,7 @@ body {
 }
 
 .menu a {
-  color: white;
+  color: black;
   font-size: 18px;
   text-decoration: none;
   position: relative;
@@ -43,8 +42,10 @@ body {
   bottom: 0;
   height: 2px;
   width: 0;
-  background-color: white;
+  background-color: black;
   transition: width 0.2s ease-in-out;
+  width: 0%;
+  opacity: 80%;
 }
 
 .menu a:hover::after {
@@ -64,7 +65,7 @@ body {
 
 .scroll {
   overflow: hidden;
-  background-color: whitesmoke;
+  background-color: black;
 }
 
 .scroll_container {
@@ -74,7 +75,7 @@ body {
 }
 
 .scroll_item {
-  color: black;
+  color: white;
   font-size: 17px;
   /* white-scape: Comando muito importante, permite com que o item nunca quebre a linha para baixo no caso do 'nowrap' */
   white-space: nowrap;
@@ -87,9 +88,69 @@ body {
   margin-top: -10px;
 }
 
+.navbar-buttons a {
+  font-weight: 350;
+}
+
 .banner {
   display: flex;
   justify-content: center;
+}
+
+.custom-hr {
+  border: none;
+  height: 2px;
+  background-color: #302d2d; /* tom de cinza claro */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.50);
+  margin: 20px 0;
+  margin-top: -40px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-dark {
+  background-color: #1c1f23;
+  color: white;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #000;
+}
+
+.btn-light {
+  background-color: white;
+  color: #000;
+  border: 2px solid #000;
+}
+
+.btn-light:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-outline-dark {
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.card-welcome {
+  display: flex;
+  min-width: 100%;
+  min-height: 1000px;
 }
 
 @keyframes scrollInfinito {

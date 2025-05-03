@@ -2,10 +2,6 @@
   <%= link_to "Log in", new_session_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
-<% end %>
-
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end %>
@@ -15,7 +11,42 @@
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
-  <% end %>
+  <div class="button-google text-center">
+    <div class="text-and-simbol">
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= button_to omniauth_authorize_path(resource_name, provider), method: :post, data: { turbo: false }, class: "btn btn-outline-dark bg-dark text-white google-input" do %>
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" style="width:20px; margin-right:10px;margin-bottom:5px;">
+          <span> Entrar com o Google </span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <div class="row">
+    <p class="text-center mt-4">Ainda não possui conta?
+      <%= link_to "Criar conta", new_registration_path(resource_name), style: "margin-left: 10px; text-decoration: none;", class: "text-primary" %>
+    </p>
+  </div>
+<% end %>
+
+<style>
+.google-input {
+  width: 100%;
+  padding: 10px;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 0;
+  transition: none !important;
+  animation: none !important;
+}
+
+.google-btn:active {
+  background-color: whitesmoke;
+  color: inherit !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+</style>

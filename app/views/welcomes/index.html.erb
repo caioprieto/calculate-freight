@@ -7,9 +7,16 @@
   </head>
   <body>
     <nav>
+      <div class="scroll" style="margin-bottom: -40px;">
+        <div class="scroll_container">
+          <% 8.times.each do |item| %>
+            <div class="scroll_item">10% OFF NA PRIMEIRA COMPRA</div>
+          <% end %>
+        </div>
+      </div>
       <div class="container">
         <div class="logo">
-          <img src="/images/logo.png" alt="Logo">
+          <img src="/images/logo_preto.png" alt="Logo" style="margin-left: -25px; display: flex;">
         </div>
         <nav class="menu">
           <a href="/">Quem somos</a>
@@ -17,21 +24,19 @@
           <a href="/">Colegial</a>
           <a href="/">Iniciante</a>
         </nav>
-        <div class="btn btn-dark" style="margin-right: 80px">
-          <a class="text-white text-custom" href="/admin/dashboard">Já sou aluno</a>
+        <div class="navbar-buttons" style="margin-right: -15px; display: flex; gap: 10px;">
+          <a href="/inscricao" class="btn btn-light text-custom-nav">Quero me inscrever</a>
+          <a href="/admin/dashboard" class="btn btn-dark text-custom-nav">Já sou aluno</a>
         </div>
       </div>
+
+      <hr class="custom-hr">
     </nav>
-    <div class="container-body">
-      <div class="scroll">
-        <div class="scroll_container">
-          <% 8.times.each do |item| %>
-            <div class="scroll_item">10% OFF NA PRIMEIRA COMPRA</div>
-          <% end %>
-        </div>
+
+    <div class="container">
+      <div class="card-welcome bg-dark">
+        <h1> Caio </h1>
       </div>
-      <div class="banner">
-      </div>
-    </div>
+    <div>
   </body>
 </html>
