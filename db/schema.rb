@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_17_171218) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_231954) do
   create_table "address", force: :cascade do |t|
     t.string "rua"
     t.string "bairro"
@@ -55,6 +55,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_17_171218) do
     t.integer "address_destino_id", null: false
     t.index ["address_destino_id"], name: "index_freights_on_address_destino_id"
     t.index ["address_origem_id"], name: "index_freights_on_address_origem_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.boolean "admin", default: false, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "freights", "address", column: "address_destino_id"

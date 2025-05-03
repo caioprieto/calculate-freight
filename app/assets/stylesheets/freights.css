@@ -8,7 +8,7 @@ body {
   min-height: 1300px;
 }
 
-.card {
+.card-freight {
   background-color: #F5F5F5;
 }
 
@@ -21,10 +21,6 @@ body {
   width: 100%; /* Ocupa toda a largura do container */
   min-height: 1250px; /* Define uma altura mínima */
   max-height: 850px; /* Define uma altura máxima */
-}
-
-.text-custom {
-  font-size: 20px;
 }
 
 .select2-container .select2-selection--single {

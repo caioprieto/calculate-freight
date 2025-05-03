@@ -23,6 +23,7 @@ gem "delayed_job"
 gem "rtesseract"
 gem "ruby-openai"
 gem "awesome_print"
+gem "devise"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
