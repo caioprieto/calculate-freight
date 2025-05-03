@@ -24,16 +24,19 @@ gem "rtesseract"
 gem "ruby-openai"
 gem "awesome_print"
 gem "devise"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
+  gem "dotenv-rails"
+  gem "byebug"
+  gem "web-console"
 end
 
 group :development do
-  gem "web-console"
-  gem "byebug"
 end
 
 group :test do
