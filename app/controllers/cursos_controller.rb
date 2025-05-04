@@ -1,9 +1,10 @@
-class CursosController < AdminsBackofficeController
-  before_action :authorize_admin
-
+class CursosController < ApplicationController
   def index
   end
 
   def new
+  end
+
+  def edit
   end
 end

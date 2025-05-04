@@ -36,17 +36,19 @@
               <div class="carousel-container">
                 <div class="carousel-track">
                   <% 6.times do |i| %>
-                    <div class="curso-card">
-                      <div class="curso-content">
-                        <div class="curso-img">
-                          <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
-                        </div>
-                        <div class="curso-texto">
-                          <h5>5 LIVROS PARA AMPLIAR SEU REPERTÓRIO</h5>
-                          <p>Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
+                    <a href="/cursos/1/edit">
+                      <div class="curso-card">
+                        <div class="curso-content">
+                          <div class="curso-img">
+                            <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
+                          </div>
+                          <div class="curso-texto">
+                            <h5 style="text-dark">5 LIVROS PARA AMPLIAR SEU REPERTÓRIO</h5>
+                            <p class="text-dark">Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   <% end %>
                 </div>
               </div>
@@ -56,32 +58,6 @@
         </div>
 
         <%= render 'alunos_aprovados'%>
-
-        <div class="banner row mt-5 mb-5">
-          <div class="carousel-section mt-3">
-            <div class="carousel-wrapper position-relative">
-              <button class="carousel-btn prev">&#10094;</button>
-              <div class="carousel-container">
-                <div class="carousel-track">
-                  <% 6.times do |i| %>
-                    <div class="curso-card">
-                      <div class="curso-content">
-                        <div class="curso-img">
-                          <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
-                        </div>
-                        <div class="curso-texto">
-                          <h5>5 LIVROS PARA AMPLIAR SEU REPERTÓRIO</h5>
-                          <p>Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
-                        </div>
-                      </div>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-              <button class="carousel-btn next">&#10095;</button>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
     <div>
@@ -100,7 +76,7 @@
     const cards = document.querySelectorAll('.curso-card');
 
     let position = 0;
-    const cardWidth = cards[0].offsetWidth + 10; // 20 = gap/margin
+    const cardWidth = cards[0].offsetWidth + 40; // 20 = gap/margin
 
     // Adiciona evento a todos os botões "next"
     document.querySelectorAll('.carousel-btn.next').forEach(btn => {
