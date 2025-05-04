@@ -1,3 +1,3 @@
-class Admin::DashboardController < ApplicationController
-  # before_action :authorize_admin!
+class Admin::DashboardController < AdminsBackofficeController
+  before_action :authorize_admin
 end

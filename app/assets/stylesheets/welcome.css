@@ -6,6 +6,9 @@
 
 body {
   font-family: "Mukta", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -148,9 +151,34 @@ body {
 }
 
 .card-welcome {
-  display: flex;
   min-width: 100%;
   min-height: 1000px;
+  position: relative;
+}
+
+.card-welcome img {
+  margin-top: 30px;
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.banner img {
+  margin-top: 5px;
+  width: 370px;
+  height: 530px;
+  object-position: 50% 30%;
+  border: #000;
+  border-radius: 18px;
+  display: flex;
+  margin-right: 810px;
+  object-position: 50% 10%;
+}
+
+footer.footer {
+  margin-top: 10px;
+  background-color: #000;
 }
 
 @keyframes scrollInfinito {
