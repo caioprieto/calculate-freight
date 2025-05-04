@@ -1,0 +1,62 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container-dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel {
+  width: 300px;
+  background-color: black;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.right-panel {
+  flex: 1;
+  background-color: #f8f9fa;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+.menu a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: black;
+  transition: width 0.2s ease-in-out;
+  width: 0%;
+  opacity: 80%;
+}
+
+.menu a:hover::after {
+  width: 100%;
+}
+.custom-hr {
+  color: white
+}

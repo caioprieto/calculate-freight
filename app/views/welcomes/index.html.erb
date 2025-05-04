@@ -7,13 +7,7 @@
   </head>
   <body>
     <nav>
-      <div class="scroll" style="margin-bottom: -40px;">
-        <div class="scroll_container">
-          <% 8.times.each do |item| %>
-            <div class="scroll_item">10% OFF NA PRIMEIRA COMPRA</div>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'infinite_text' %>
       <div class="container">
         <div class="logo">
           <img src="/images/logo_preto.png" alt="Logo" style="margin-left: -25px; display: flex;">
@@ -26,7 +20,7 @@
         </nav>
         <div class="navbar-buttons" style="margin-right: -15px; display: flex; gap: 10px;">
           <a href="/inscricao" class="btn btn-light text-custom-nav">Quero me inscrever</a>
-          <a href="/admin/dashboard" class="btn btn-dark text-custom-nav">Já sou aluno</a>
+          <a href="/user/dashboard" class="btn btn-dark text-custom-nav">Já sou aluno</a>
         </div>
       </div>
 
@@ -36,53 +30,56 @@
     <div class="container">
       <div class="card-welcome text-dark">
         <div class="banner row">
-          <div class="col-5">
-            <img src="/images/livros.png" alt="banner">
-          </div>
-          <div class="col-7" style="margin-top: 115px;">
-            <h2>Como alcançar a Nota 1000 no ENEM?</h2>
-            <p>Se você quer conquistar uma excelente pontuação na redação do ENEM, este curso é ideal para você! Ao longo das aulas, você aprenderá as técnicas essenciais para desenvolver um texto dissertativo-argumentativo de qualidade, atendendo a todos os critérios de avaliação da prova.</p>
-            <br>
-            <h4>O que você vai aprender:</h4>
-            <p>
-               •  Como construir uma introdução impactante; <br>
-               •  Técnicas para desenvolver argumentos sólidos e convincentes; <br>
-               •  Como elaborar uma conclusão que sintetize suas ideias com eficácia; <br>
-               •  A importância da norma culta da língua e da coesão textual; <br>
-               •  Estratégias para interpretar os temas de forma crítica e reflexiva.
-            </p>
+          <div class="carousel-section mt-3">
+            <div class="carousel-wrapper position-relative">
+              <button class="carousel-btn prev">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-track">
+                  <% 6.times do |i| %>
+                    <div class="curso-card">
+                      <div class="curso-content">
+                        <div class="curso-img">
+                          <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
+                        </div>
+                        <div class="curso-texto">
+                          <h5>5 LIVROS PARA AMPLIAR SEU REPERTÓRIO</h5>
+                          <p>Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <button class="carousel-btn next">&#10095;</button>
+            </div>
           </div>
         </div>
 
-        <div class="row mt-5">
-          <h3> Alunos aprovados </h3><br>
-        </div>
-        <div class="row">
-          <% 6.times.each do |item| %>
-            <div class="col-2">
-              <img src="/images/maislinda.png" alt="alunos">
-              <h6 class="mt-2"> Lais Curtulo Anadão </h6>
-              <p>Direito ● UFMG</p>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'alunos_aprovados'%>
 
         <div class="banner row mt-5 mb-5">
-          <div class="col-8" style="margin-top: 115px;">
-            <h2>Como alcançar a Nota 1000 no ENEM?</h2>
-            <p>Se você quer conquistar uma excelente pontuação na redação do ENEM, este curso é ideal para você! Ao longo das aulas, você aprenderá as técnicas essenciais para desenvolver um texto dissertativo-argumentativo de qualidade, atendendo a todos os critérios de avaliação da prova.</p>
-            <br>
-            <h4>O que você vai aprender:</h4>
-            <p>
-               •  Como construir uma introdução impactante; <br>
-               •  Técnicas para desenvolver argumentos sólidos e convincentes; <br>
-               •  Como elaborar uma conclusão que sintetize suas ideias com eficácia; <br>
-               •  A importância da norma culta da língua e da coesão textual; <br>
-               •  Estratégias para interpretar os temas de forma crítica e reflexiva.
-            </p>
-          </div>
-          <div class="col-4">
-            <img src="/images/banner.png" alt="banner">
+          <div class="carousel-section mt-3">
+            <div class="carousel-wrapper position-relative">
+              <button class="carousel-btn prev">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-track">
+                  <% 6.times do |i| %>
+                    <div class="curso-card">
+                      <div class="curso-content">
+                        <div class="curso-img">
+                          <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
+                        </div>
+                        <div class="curso-texto">
+                          <h5>5 LIVROS PARA AMPLIAR SEU REPERTÓRIO</h5>
+                          <p>Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <button class="carousel-btn next">&#10095;</button>
+            </div>
           </div>
         </div>
         </div>
@@ -95,3 +92,37 @@
     </footer>
   </body>
 </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.carousel-track');
+    const container = document.querySelector('.carousel-container');
+    const cards = document.querySelectorAll('.curso-card');
+
+    let position = 0;
+    const cardWidth = cards[0].offsetWidth + 10; // 20 = gap/margin
+
+    // Adiciona evento a todos os botões "next"
+    document.querySelectorAll('.carousel-btn.next').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const maxScroll = track.scrollWidth - container.offsetWidth;
+        if (position + cardWidth < maxScroll) {
+          position += cardWidth;
+        } else {
+          position = maxScroll; // garante que vá até o limite, mas sem ultrapassar
+        }
+        track.style.transform = `translateX(-${position}px)`;
+      });
+    });
+
+    // Adiciona evento a todos os botões "prev"
+    document.querySelectorAll('.carousel-btn.prev').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (position > 0) {
+          position -= cardWidth;
+          track.style.transform = `translateX(-${position}px)`;
+        }
+      });
+    });
+  });
+</script>

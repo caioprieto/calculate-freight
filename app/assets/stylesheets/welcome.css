@@ -164,21 +164,109 @@ body {
   object-position: 50% 30%;
 }
 
-.banner img {
-  margin-top: 5px;
-  width: 370px;
-  height: 530px;
-  object-position: 50% 30%;
-  border: #000;
-  border-radius: 18px;
-  display: flex;
-  margin-right: 810px;
-  object-position: 50% 10%;
-}
-
 footer.footer {
   margin-top: 10px;
   background-color: #000;
+}
+
+.carousel-section {
+  width: 100%;
+  min-height: 500px;
+}
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background:black;
+  opacity: 30%;
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}
+
+.carousel-container {
+  overflow-x: hidden;
+  background-color: #e9e9e9;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 1.8rem;
+}
+
+.carousel-track {
+  transition: transform 0.7s ease-in-out;
+  display: flex;
+  align-items: stretch;
+  gap: 40px;
+  margin-top: 0;
+}
+
+.curso-card {
+  padding: 1.8rem;
+  background-color: #f8f8f8;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 1rem auto;
+  max-width: 1200px;
+}
+
+.curso-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.curso-img img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: center;
+  margin-top: 0;
+}
+
+.curso-texto {
+  flex: 1;
+  min-width: 280px;
+}
+
+.curso-texto h5 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.curso-texto p {
+  font-size: 1rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .curso-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .curso-img img {
+    max-width: 100%;
+  }
 }
 
 @keyframes scrollInfinito {
