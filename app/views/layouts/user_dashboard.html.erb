@@ -21,7 +21,39 @@
         <%= render "user/dashboard/left_panel" %>
       </div>
       <div class="right-panel">
-        <%= yield %>
+        <div class="scrollable-content">
+          <div class="container-right-panel">
+            <nav class="row">
+              <div class="col-5">
+                <%= form_with url: user_dashboard_search_path, method: :get, local: true, class: "search-form" do %>
+                  <input
+                    type="text"
+                    name="query"
+                    placeholder="Qual curso está procurando?"
+                    class="search-input"
+                  />
+                  <button type="submit" class="search-button">
+                    <i class="bi bi-search fs-4" style="margin-right: 10px"></i>
+                  </button>
+                <% end %>
+              </div>
+              <div class="col-4"></div>
+              <div class="col-3 custom-btn">
+                <a href="/inscricao" class="btn">
+                  <i class="bi bi-bell-fill fs-2 text-dark"></i>
+                </a>
+                <a href="/user/dashboard" class="btn align-items-center">
+                  <i class="bi bi-person-workspace fs-1 text-dark"></i>
+                  <span class="email-text">
+                    <%= current_user.nome.upcase %>
+                  </span>
+                </a>
+              </div>
+            </nav>
+
+            <%= yield %>
+          </div>
+        </div>
       </div>
     </div>
   </body>

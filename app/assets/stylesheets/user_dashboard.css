@@ -37,7 +37,7 @@ html, body {
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
 .menu a {
@@ -56,13 +56,13 @@ html, body {
   bottom: 0;
   height: 2px;
   width: 0;
-  background-color: white;
+  background-color: gray;
   transition: width 0.2s ease-in-out;
-  width: 0%;
-  opacity: 80%;
+  opacity: 1;
 }
 
-.menu a:hover::after {
+.menu a:hover::after,
+.menu a.active::after {
   width: 85%;
 }
 

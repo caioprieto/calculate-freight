@@ -1,97 +1,67 @@
-<div class="scrollable-content">
-  <div class="container-right-panel">
-    <nav class="row">
-      <div class="col-5">
-        <%= form_with url: user_dashboard_search_path, method: :get, local: true, class: "search-form" do %>
-          <input
-            type="text"
-            name="query"
-            placeholder="Qual curso está procurando?"
-            class="search-input"
-          />
-          <button type="submit" class="search-button">
-            <i class="bi bi-search fs-4" style="margin-right: 10px"></i>
-          </button>
+<div class="mt-3">
+  <h5 href="/" style="margin-left: 10px;">
+    <i class="bi bi-fast-forward-btn fs-4" style="margin-right: 10px"></i>
+    Continuar assistindo
+  </h5>
+</div>
+
+<div class="container-continuar-assistindo mt-2">
+  <% 3.times do |i| %>
+    <div class="continuar-assistindo-content">
+      <div class="continuar-assistindo-img" style="position: relative;">
+        <img src="/images/livros.png">
+
+        <%= link_to freights_path, class: 'play-button' do %>
+          <i class="bi bi-play-fill text-white"></i>
         <% end %>
       </div>
-      <div class="col-4"></div>
-      <div class="col-3 custom-btn">
-        <a href="/inscricao" class="btn">
-          <i class="bi bi-bell-fill fs-2 text-dark"></i>
-        </a>
-        <a href="/user/dashboard" class="btn align-items-center">
-          <i class="bi bi-person-workspace fs-1 text-dark"></i>
-          <span class="email-text">
-            <%= current_user.nome.upcase %>
-          </span>
-        </a>
-      </div>
-    </nav>
-
-    <div class="mt-3">
-      <h5 href="/" style="margin-left: 10px;">
-        <i class="bi bi-fast-forward-btn fs-4" style="margin-right: 10px"></i>
-        Continuar assistindo
-      </h5>
-    </div>
-
-    <div class="container-continuar-assistindo mt-4">
-      <% 3.times do |i| %>
-        <div class="continuar-assistindo-content">
-          <div class="continuar-assistindo-img" style="position: relative;">
-            <img src="/images/livros.png">
-
-            <%= link_to freights_path, class: 'play-button' do %>
-              <i class="bi bi-play-fill text-white"></i>
-            <% end %>
-          </div>
-          <div class="curso-texto" style="margin-top: -50px; text-align: center; position: relative;">
-            <div class="progress-background">
-              <div class="progress-fill" style="width: <%= @progress %>%;"></div>
-            </div>
-            <h6 class="text-white"style="position: relative; z-index: 1;">Extensivo ENEM - <%= @progress %> %</h6>
-          </div>
+      <div class="curso-texto" style="margin-top: -50px; text-align: center; position: relative;">
+        <div class="progress-background">
+          <div class="progress-fill" style="width: <%= @progress %>%;"></div>
         </div>
-      <% end %>
+        <h6 class="text-white"style="position: relative; z-index: 1;">Extensivo ENEM - <%= @progress %> %</h6>
+      </div>
     </div>
+  <% end %>
+</div>
 
-    <div class="mt-5">
-      <h5 href="/" style="margin-left: 10px;">
-        <i class="bi bi-collection-play fs-4" style="margin-right: 10px"></i>
-        Meus Cursos
-      </h5>
-    </div>
+<div class="mt-5">
+  <h5 href="/" style="margin-left: 10px;">
+    <i class="bi bi-collection-play fs-4" style="margin-right: 10px"></i>
+    Meus Cursos
+  </h5>
+</div>
 
-    <div class="carousel-section mt-4">
-      <div class="carousel-wrapper position-relative">
-        <button class="carousel-btn prev">&#10094;</button>
-        <div class="carousel-container">
-          <div class="carousel-track">
-            <% 12.times do |i| %>
-              <div class="curso-card">
-                <div class="curso-content">
-                    <div class="curso-img" style="position: relative;">
-                      <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
-                        <%= link_to freights_path, class: 'play-button' do %>
-                          <i class="bi bi-play-fill text-white"></i>
-                        <% end %>
-                    </div>
-                  <div class="curso-texto" style="margin-top: -30px;">
-                    <h6>Extensivo ENEM</h6>
-                    <p>Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
-                  </div>
+<div class="carousel-section mt-4">
+  <div class="carousel-wrapper position-relative">
+    <button class="carousel-btn prev">&#10094;</button>
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <% 12.times do |i| %>
+          <div class="curso-card">
+            <div class="curso-content">
+                <div class="curso-img" style="position: relative;">
+                  <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
+                    <%= link_to freights_path, class: 'play-button' do %>
+                      <i class="bi bi-play-fill text-white"></i>
+                    <% end %>
                 </div>
+              <div class="curso-texto" style="margin-top: -30px;">
+                <h6>Extensivo ENEM</h6>
+                <p>Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
               </div>
-            <% end %>
+            </div>
           </div>
-        </div>
-        <button class="carousel-btn next">&#10095;</button>
+        <% end %>
       </div>
     </div>
-
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <button class="carousel-btn next">&#10095;</button>
   </div>
 </div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

@@ -6,19 +6,22 @@
 <div style="margin-left: 30px; margin-top: -10px; width: 235px">
   <div class="row">
     <nav class="menu">
-      <a href="/user/dashboard">
+      <%= link_to '/user/dashboard', class: "menu-link #{'active' if current_page?('/user/dashboard')}" do %>
         <i class="bi bi-collection-play fs-4" style="margin-right: 10px"></i>
         Meus Cursos
-      </a>
-      <a href="/user/redacoes">
+      <% end %>
+
+      <%= link_to '/user/redacoes', class: "menu-link #{'active' if current_page?('/user/redacoes')}" do %>
         <i class="bi bi-book fs-4" style="margin-right: 10px"></i>
         Minhas Redações
-      </a>
+      <% end %>
+
       <hr class="custom-hr">
-      <a href="/user/settings">
+
+      <%= link_to '/user/settings', class: "menu-link #{'active' if current_page?('/user/settings')}" do %>
         <i class="bi bi-gear-wide-connected fs-4" style="margin-right: 10px"></i>
         Configurações
-      </a>
+      <% end %>
     </nav>
   </div>
 </div>
