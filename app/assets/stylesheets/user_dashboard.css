@@ -33,6 +33,7 @@ html, body {
   overflow-x: hidden;
   flex: 1;
 }
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -55,14 +56,14 @@ html, body {
   bottom: 0;
   height: 2px;
   width: 0;
-  background-color: black;
+  background-color: white;
   transition: width 0.2s ease-in-out;
   width: 0%;
   opacity: 80%;
 }
 
 .menu a:hover::after {
-  width: 100%;
+  width: 85%;
 }
 
 .custom-hr {

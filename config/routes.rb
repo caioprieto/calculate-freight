@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   namespace :user do
     get "dashboard", to: "dashboard#index"
     get "dashboard/search", to: "dashboard#search", as: :dashboard_search
+
+    get "redacoes", to: "redacoes#index"
+
+    get "settings", to: "settings#index"
   end
 
   resources :freights
