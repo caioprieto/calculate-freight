@@ -2,6 +2,7 @@ class User::DashboardController < ApplicationController
   layout "user_dashboard"
 
   def index
+    @progress = 3
   end
 
   def search

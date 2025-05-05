@@ -24,8 +24,15 @@ html, body {
   padding: 20px;
   box-sizing: border-box;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
+.scrollable-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
 .menu {
   display: flex;
   flex-direction: column;
@@ -97,6 +104,15 @@ html, body {
   transform: scale(1.1);
 }
 
+.custom-btn a {
+  transform: scale(1);
+  border: none;
+}
+
+.custom-btn a:hover {
+  transform: scale(1.1);
+}
+
 .container-right-panel {
   margin-top: 20px;
   margin-left: 20px;
@@ -116,21 +132,24 @@ html, body {
   padding-bottom: 2px;
 }
 
-.curso-card {
-  padding: 1.8rem;
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  margin: 1rem auto;
-}
-
 .curso-content {
+  margin-top: 10px;
   display: flex;
   align-items: center;
   gap: 3rem;
   flex-wrap: wrap;
   margin-bottom: -20px;
   width: 200px;
+}
+
+.continuar-assistindo-content {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: -20px;
+  width: 500px;
 }
 
 .curso-img img {
@@ -140,6 +159,21 @@ html, body {
   object-fit: cover;
   object-position: center;
   margin-top: -10px;
+}
+
+.continuar-assistindo-img img {
+  width: 500px;
+  height: 200px;
+  opacity: 50%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
+.container-continuar-assistindo {
+  display: flex;
+  width: 600px;
+  gap: 10px;
 }
 
 .curso-texto {
@@ -224,19 +258,47 @@ html, body {
   line-height: 50px;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.01s ease;
 }
 
 .play-button:hover {
-  background: rgba(0, 0, 0, 2);
+  font-size: 26px;
 }
 
 .email-text {
   font-size: 18px;
   margin-top: -20px;
-  color: gray;
+  color: black;
   position: relative;
   top: -8px;
   left: 10px;
   white-space: nowrap;
+}
+
+.progress-background {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background-color: gray;
+  border-radius: 8px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  border-radius: 8px;
+  transition: width 0.4s;
+}
+
+.curso-card {
+  padding: 1.8rem;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 1rem auto;
 }

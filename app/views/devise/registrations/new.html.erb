@@ -6,6 +6,21 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field">
+      <%= f.label :nome, class: "label" %><br />
+      <%= f.text_field :nome, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :sobrenome, class: "label" %><br />
+      <%= f.text_field :sobrenome, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cpf, "CPF", class: "label" %><br />
+      <%= f.text_field :cpf, class: 'cpf-field', placeholder: '000.000.000-00', class: "form-control" %>
+    </div>
+
+    <div class="field">
       <%= f.label :email, class: "label" %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
     </div>

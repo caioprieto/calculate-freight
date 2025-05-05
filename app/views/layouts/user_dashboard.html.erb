@@ -18,28 +18,7 @@
   <body>
     <div class="container-dashboard">
       <div class="left-panel">
-        <div class="row">
-          <a href="/">
-            <img src="/images/logo.png" style="width: 200px; height: 200px; margin-top: -50px; margin-left: 15px">
-          </a>
-        </div>
-        <div style="margin-left: 30px; margin-top: -10px; width: 235px">
-          <div class="row">
-            <nav class="menu">
-              <a href="/user/dashboard">
-                <i class="bi bi-collection-play fs-4" style="margin-right: 10px"></i>
-                Meus Cursos
-              </a>
-              <a href="/user/dashboard">
-                <i class="bi bi-search fs-4" style="margin-right: 10px"></i>
-                Explorar
-              </a>
-              <hr class="custom-hr">
-              <a href="/">Colegial</a>
-              <a href="/">Iniciante</a>
-            </nav>
-          </div>
-        </div>
+        <%= render "user/dashboard/left_panel" %>
       </div>
       <div class="right-panel">
         <%= yield %>
