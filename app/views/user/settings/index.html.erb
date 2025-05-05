@@ -1,32 +1,45 @@
 
-<h1>Configurações</h1>
+<div class="mt-2">
+  <%= form_for(@user, url: user_registration_path(@user), method: :patch, local: true) do |f| %>
+    <div class="row">
+      <div class="col-3 mt-2">
+        <h5 href="/">
+          <i class="bi bi-gear-wide-connected fs-4" style="margin-right: 10px"></i>
+          <span style="position: relative; top: -2px;">Configurações</span>
+        </h5>
+      </div>
+    </div>
 
-<%= form_for(@user, url: user_registration_path(@user)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: @user %>
-
-  <div class="field">
-    <%= f.label :nome, class: "label" %><br />
-    <%= f.text_field :nome, autofocus: true, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :sobrenome, class: "label" %><br />
-    <%= f.text_field :sobrenome, autofocus: true, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cpf, "CPF", class: "label" %><br />
-    <%= f.text_field :cpf, class: 'cpf-field', placeholder: '000.000.000-00', class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email, class: "label" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Criar", class: 'mt-3' %>
-  </div>
-
-  <hr class="hr">
-<% end %>
+    <div style="width: 95%;"class="col-11 logo-user">
+      <div class="row">
+        <div class="col-6">
+          <div class="field col-12">
+            <%= f.label :nome, class: "label" %><br />
+            <%= f.text_field :nome, autofocus: true, class: "form-control" %>
+          </div>
+          <div class="field col-12">
+            <%= f.label :sobrenome, class: "label" %><br />
+            <%= f.text_field :sobrenome, autofocus: true, class: "form-control" %>
+          </div>
+          <div class="field col-12">
+            <%= f.label :cpf, "CPF", class: "label" %><br />
+            <%= f.text_field :cpf, placeholder: '000.000.000-00', class: "form-control" %>
+          </div>
+          <div class="field col-12">
+            <%= f.label :email, class: "label" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", disabled: true%>
+          </div>
+          <div class="field col-2">
+            <%= button_tag type: 'submit', class: 'btn btn-dark', style: 'margin-top: 30px;' do %>
+              <i style="margin-right: 5px;" class="bi bi-floppy text-white fs-5"></i>
+              <span>Salvar</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-4 bg-dark">
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  respond_to :html
   layout "login"
-  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [ :create ]
   before_action :configure_account_update_params, only: [ :update ]
 
   # GET /resource/sign_up
@@ -21,9 +22,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    request.format = :html
+
+    @user = current_user
+
+    if @user.update(user_params)
+      redirect_to user_settings_path, notice: "Configurações atualizadas com sucesso!"
+    else
+      redirect_to user_settings_path, notice: "Erro!"
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -40,10 +49,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
+  private
+
+  def user_params
+    params.require(:user).permit(:nome, :sobrenome, :cpf, :email)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nome, :sobrenome, :cpf])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :nome, :sobrenome, :cpf ])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

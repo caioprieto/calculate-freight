@@ -64,7 +64,7 @@ html, body {
 
 .menu a:hover::after,
 .menu a.active::after {
-  width: 85%;
+  width: 78%;
 }
 
 .custom-hr {
@@ -269,11 +269,12 @@ html, body {
 
 .email-text {
   font-size: 18px;
+  font-weight: 600;
   margin-top: -20px;
   color: black;
   position: relative;
   top: -8px;
-  left: 10px;
+  left: 2px;
   white-space: nowrap;
 }
 

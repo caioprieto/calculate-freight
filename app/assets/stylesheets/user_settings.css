@@ -1,0 +1,12 @@
+.button-save span{
+  color: white;
+  position: relative;
+  top: -2px;
+  font-size: 14px;
+}
+
+.logo-user {
+  position: relative;
+  width: 400px;
+  min-height: 1200px;
+}

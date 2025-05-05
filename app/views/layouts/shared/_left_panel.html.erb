@@ -1,9 +1,9 @@
 <div class="row">
-  <a href="/">
+  <a href="/user/dashboard">
     <img src="/images/logo.png" style="width: 200px; height: 200px; margin-top: -50px; margin-left: 15px">
   </a>
 </div>
-<div style="margin-left: 30px; margin-top: -10px; width: 235px">
+<div style="margin-left: 25px; margin-top: -10px; width: 235px">
   <div class="row">
     <nav class="menu">
       <%= link_to '/user/dashboard', class: "menu-link #{'active' if current_page?('/user/dashboard')}" do %>
@@ -15,8 +15,6 @@
         <i class="bi bi-book fs-4" style="margin-right: 10px"></i>
         Minhas Redações
       <% end %>
-
-      <hr class="custom-hr">
 
       <%= link_to '/user/settings', class: "menu-link #{'active' if current_page?('/user/settings')}" do %>
         <i class="bi bi-gear-wide-connected fs-4" style="margin-right: 10px"></i>
