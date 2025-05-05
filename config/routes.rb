@@ -15,8 +15,10 @@ Rails.application.routes.draw do
     get "dashboard/search", to: "dashboard#search", as: :dashboard_search
 
     get "redacoes", to: "redacoes#index"
+    get "redacoes/search", to: "redacoes#search", as: :redacoes_search
 
     get "settings", to: "settings#index"
+    get "settings/search", to: "settings#search", as: :settings_search
   end
 
   resources :freights

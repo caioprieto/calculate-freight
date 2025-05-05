@@ -3,4 +3,8 @@ class User::RedacoesController < ApplicationController
 
   def index
   end
+
+  def search
+    debugger
+  end
 end

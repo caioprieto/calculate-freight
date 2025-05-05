@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "user_dashboard" %>
+    <%= stylesheet_link_tag "user_redacoes" %>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -25,11 +26,11 @@
           <div class="container-right-panel">
             <nav class="row">
               <div class="col-5">
-                <%= form_with url: user_dashboard_search_path, method: :get, local: true, class: "search-form" do %>
+                <%= form_with url: user_search_path, method: :get, local: true, class: "search-form" do %>
                   <input
                     type="text"
                     name="query"
-                    placeholder="Qual curso está procurando?"
+                    placeholder="Qual <%= current_page?("/user/dashboard") || current_page?("/user/settings") ? "curso" : "redação" %> está procurando?"
                     class="search-input"
                   />
                   <button type="submit" class="search-button">
