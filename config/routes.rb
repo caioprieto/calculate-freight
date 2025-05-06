@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "dashboard", to: "dashboard#index"
+    resources :redacoes
   end
 
   namespace :user do
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :freights
   resources :cursos
+  resources :videos
 
   post "calcular_frete", to: "freights#calcular_frete"
   post "importar_fretes", to: "freights#importar_fretes"

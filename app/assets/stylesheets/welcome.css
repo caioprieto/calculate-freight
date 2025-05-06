@@ -183,7 +183,7 @@ footer.footer {
   top: 50%;
   transform: translateY(-50%);
   background-color: #00000015;
-  opacity: 30%;
+  opacity: 5%;
   border: none;
   color: black;
   font-size: 20px;
@@ -192,11 +192,13 @@ footer.footer {
   z-index: 10;
   height: 100%;
   width: 50px;
+  border-radius: 10px;
 }
 
 .carousel-btn:hover {
   font-size: 23px;
   background-color: #00000040;
+  opacity: 20%;
 }
 
 .carousel-btn.prev {

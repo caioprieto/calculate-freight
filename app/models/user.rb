@@ -14,4 +14,8 @@ class User < ApplicationRecord
                         password: Devise.friendly_token[0, 20])
     user
   end
+
+  def set_admin
+    update(admin: true)
+  end
 end

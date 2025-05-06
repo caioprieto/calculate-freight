@@ -1,0 +1,8 @@
+<% if @video.video.attached? %>
+  <video id="myVideo" autoplay loop controls preload="metadata" width="40%" style="weight: 20%; position: relative;" disablePictureInPicture controlsList="nodownload noremoteplayback">
+    <source src="<%= url_for(@video.video) %>" type="<%= @video.video.content_type %>">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+<% else %>
+  <p>Nenhum vídeo disponível.</p>
+<% end %>
