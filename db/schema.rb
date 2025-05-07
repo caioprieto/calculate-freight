@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_06_024043) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_07_032033) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_024043) do
     t.integer "cep"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "aulas", force: :cascade do |t|
+    t.integer "modulo_id", null: false
+    t.string "titulo", null: false
+    t.string "description"
+    t.integer "duration"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["modulo_id"], name: "index_aulas_on_modulo_id"
   end
 
   create_table "cursos", force: :cascade do |t|
@@ -92,6 +103,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_024043) do
     t.integer "address_destino_id", null: false
     t.index ["address_destino_id"], name: "index_freights_on_address_destino_id"
     t.index ["address_origem_id"], name: "index_freights_on_address_origem_id"
+  end
+
+  create_table "modulos", force: :cascade do |t|
+    t.integer "curso_id", null: false
+    t.string "titulo", null: false
+    t.string "description"
+    t.integer "position"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curso_id"], name: "index_modulos_on_curso_id"
   end
 
   create_table "texts", force: :cascade do |t|
@@ -140,7 +162,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_024043) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "aulas", "modulos"
   add_foreign_key "freights", "address", column: "address_destino_id"
   add_foreign_key "freights", "address", column: "address_origem_id"
+  add_foreign_key "modulos", "cursos"
   add_foreign_key "texts", "words"
 end

@@ -1,0 +1,48 @@
+<%= form_with(model: [:admin, @curso], local: true, html: { class: "curso-form" }) do |form| %>
+  <div class="d-flex gap-2 mt-3 mb-3">
+    <a href="/admin/cursos" class="btn btn-secondary px-3 py-2" style="border-radius: 30px">
+      <i class="bi bi-box-arrow-left fs-4 me-1"></i>
+      <span style="position: relative; top: -4px; font-weight: 600">Voltar</span>
+    </a>
+
+    <%= form.button type: "submit", class: "btn btn-success px-3 py-0", style: "border-radius: 30px" do %>
+      <i class="bi bi-check-circle-fill fs-4 me-1"></i>
+      <span style="position: relative; top: -4px; font-weight: 600">Salvar</span>
+    <% end %>
+
+    <button type="button" id="add-modulo" class="btn btn-primary px-3 py-0" style="border-radius: 30px">
+      <i class="bi bi-plus-circle-fill fs-4 me-1"></i>
+      <span style="position: relative; top: -4px; font-weight: 600">Adicionar Módulo</span>
+    </button>
+  </div>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div id="modulos">
+    <%= form.fields_for :modulos do |modulo_fields| %>
+      <%= render "modulos_nested", f: modulo_fields %>
+    <% end %>
+  </div>
+
+  <template id="modulo-template">
+    <%= form.fields_for :modulos, @curso.modulos.build, child_index: "NEW_MODULO" do |modulo_fields| %>
+      <%= render "modulos_nested", f: modulo_fields, new_record: true %>
+    <% end %>
+  </template>
+
+  <template id="aula-template">
+    <%= form.fields_for :modulos, @curso.modulos.build do |modulo_fields| %>
+      <%= modulo_fields.fields_for :aulas, modulo_fields.object.aulas.build, child_index: "NEW_AULA" do |aula_fields| %>
+        <%= render "aulas_nested", f: aula_fields, new_record: true %>
+      <% end %>
+    <% end %>
+  </template>
+<% end %>

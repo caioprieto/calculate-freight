@@ -1,0 +1,20 @@
+<div class="aula nested-fields" data-new-record="<%= local_assigns[:new_record] ? "true" : "false" %>">
+  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+
+  <div>
+    <%= f.label :titulo, "Título da Aula" %>
+    <%= f.text_field :titulo, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Conteúdo" %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :video, "Vídeo" %>
+    <%= f.file_field :video, class: "form-control" %>
+  </div>
+
+  <button type="button" class="btn btn-warning remove-aula">Remover Aula</button>
+</div>

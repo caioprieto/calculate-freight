@@ -1,0 +1,23 @@
+<div class="modulo nested-fields" data-new-record="<%= local_assigns[:new_record] ? "true" : "false" %>">
+  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+
+  <div>
+    <%= f.label :titulo, "Título do Módulo" %>
+    <%= f.text_field :titulo, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Descrição" %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="aulas">
+    <%= f.fields_for :aulas do |aula_fields| %>
+      <%= render "aulas_nested", f: aula_fields %>
+    <% end %>
+  </div>
+
+  <button type="button" class="btn btn-secondary add-aula">Adicionar Aula</button>
+  <button type="button" class="btn btn-danger remove-modulo">Remover Módulo</button>
+  <hr>
+</div>
