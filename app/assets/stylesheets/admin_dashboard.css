@@ -1,0 +1,40 @@
+#modulos {
+  display: flex; /* Alinha os itens em uma linha */
+  flex-wrap: wrap; /* Permite quebrar a linha se os itens não couberem */
+  gap: 53px; /* Espaçamento entre os módulos */
+}
+
+/* Módulos individuais */
+#modulos .modulo {
+  display: flex; /* Flexbox para cada módulo */
+  flex-direction: column; /* Cada módulo terá seus itens empilhados verticalmente */
+  padding: 15px; /* Padding interno dos módulos */
+  border: 1px solid #ccc; /* Borda para cada módulo */
+  border-radius: 15px; /* Borda arredondada */
+  width: 250px; /* Largura de cada módulo */
+  background-color: #f9f9f9; /* Cor de fundo dos módulos */
+  margin-top: 20px;
+  width: 20%;
+}
+
+.modulo button {
+  font-weight: 600;
+  padding: 3px;
+}
+
+.aulas {
+  margin-top: 10px;
+  background-color: gray;
+  padding: 20px;
+}
+
+.video-upload label {
+  cursor: pointer;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-weight: 600;
+}
+
+.video-upload i {
+  font-size: 1.5rem; /* Ajusta o tamanho do ícone */
+}

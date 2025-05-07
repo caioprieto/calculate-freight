@@ -1,20 +1,50 @@
 <div class="aula nested-fields" data-new-record="<%= local_assigns[:new_record] ? "true" : "false" %>">
   <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+  <button type="button" class="btn btn-warning remove-aula mt-3">Remover Aula</button>
+
+  <div class="video-upload-wrapper">
+    <label class="btn btn-dark d-flex align-items-center" style="border-radius: 30px;">
+      <i class="bi bi-file-earmark-play-fill fs-3 me-2"></i>
+      <span class="video-file-name">Escolher Vídeo</span>
+      <%= f.file_field :video, class: "d-none video-upload-field" %> <!-- campo escondido -->
+    </label>
+  </div>
+
+  <% if f.object.video.attached? %>
+    <div class="video-aula mt-2">
+      <video width="235" height="140" controls>
+        <source src="<%= url_for(f.object.video) %>" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+      </video>
+    </div>
+  <% end %>
 
   <div>
     <%= f.label :titulo, "Título da Aula" %>
-    <%= f.text_field :titulo, class: "form-control" %>
+    <%= f.text_field :titulo, class: "form-control form-control-sm" %>
   </div>
 
   <div>
     <%= f.label :description, "Conteúdo" %>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= f.text_area :description, class: "form-control form-control-sm" %>
   </div>
-
-  <div>
-    <%= f.label :video, "Vídeo" %>
-    <%= f.file_field :video, class: "form-control" %>
-  </div>
-
-  <button type="button" class="btn btn-warning remove-aula">Remover Aula</button>
 </div>
+
+<script>
+  document.addEventListener("turbo:load", attachVideoUploadListeners);
+  document.addEventListener("DOMContentLoaded", attachVideoUploadListeners);
+
+  function attachVideoUploadListeners() {
+    document.querySelectorAll(".video-upload-wrapper").forEach(function(wrapper) {
+      const input = wrapper.querySelector(".video-upload-field");
+      const label = wrapper.querySelector(".video-file-name");
+
+      if (input) {
+        input.addEventListener("change", function(event) {
+          const fileName = event.target.files[0] ? event.target.files[0].name : "Escolher Vídeo";
+          label.textContent = fileName;
+        });
+      }
+    });
+  }
+</script>

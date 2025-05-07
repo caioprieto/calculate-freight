@@ -10,7 +10,7 @@ class Admin::CursosController < AdminsBackofficeController
   def create
     @curso = Curso.new(curso_params)
     if @curso.save!
-      redirect_to admin_cursos_path, notice: "Vídeo criado com sucesso!"
+      render :edit, notice: "Curso criado com sucesso!"
     else
       render :new, status: :unprocessable_entity
     end
