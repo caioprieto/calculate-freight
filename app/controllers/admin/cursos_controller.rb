@@ -21,6 +21,7 @@ class Admin::CursosController < AdminsBackofficeController
 
   def update
     @curso = Curso.find(params[:id])
+
     if @curso.update(curso_params)
       render :edit, notice: "Curso atualizado com sucesso!"
     else

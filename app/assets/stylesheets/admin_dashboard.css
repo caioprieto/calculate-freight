@@ -11,8 +11,7 @@
   padding: 15px; /* Padding interno dos módulos */
   border: 1px solid #ccc; /* Borda para cada módulo */
   border-radius: 15px; /* Borda arredondada */
-  width: 250px; /* Largura de cada módulo */
-  background-color: #f9f9f9; /* Cor de fundo dos módulos */
+  background-color: rgba(128, 128, 128, 0.274); /* Cor de fundo dos módulos */
   margin-top: 20px;
   width: 20%;
 }
@@ -24,8 +23,14 @@
 
 .aulas {
   margin-top: 10px;
-  background-color: gray;
-  padding: 20px;
+}
+
+.aula {
+  background-color: #e9e9e9;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
 }
 
 .video-upload label {
