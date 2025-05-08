@@ -30,7 +30,7 @@
   </template>
 
   <template id="aula-template">
-    <%= form.fields_for :modulos, @curso.modulos.build do |modulo_fields| %>
+    <%= form.fields_for :modulos, @curso.modulos.build, child_index: "NEW_MODULO" do |modulo_fields| %>
       <%= modulo_fields.fields_for :aulas, modulo_fields.object.aulas.build, child_index: "NEW_AULA" do |aula_fields| %>
         <%= render "aulas_nested", f: aula_fields, new_record: true %>
       <% end %>

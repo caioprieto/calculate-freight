@@ -1,4 +1,4 @@
-<div class="modulo nested-fields card-modulos" data-new-record="<%= local_assigns[:new_record] ? "true" : "false" %>">
+<div class="modulo nested-fields card-modulos" data-new-record="<%= local_assigns[:new_record] ? "true" : "false" %>" data-index="<%= f.index %>">
   <%= f.hidden_field :_destroy, class: "destroy-flag" %>
 
   <button type="button" class="btn btn-danger remove-modulo mt-2 mb-2" style="border-radius: 10px;">
