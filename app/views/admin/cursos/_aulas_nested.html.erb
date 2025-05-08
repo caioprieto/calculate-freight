@@ -1,32 +1,29 @@
 <div class="aula nested-fields" data-new-record="<%= local_assigns[:new_record] ? "true" : "false" %>">
   <%= f.hidden_field :_destroy, class: "destroy-flag" %>
-  <button type="button" class="btn btn-warning remove-aula mt-3">Remover Aula</button>
+  <button type="button" class="btn btn-danger remove-aula mt-1 mb-2 w-100" style="border-radius: 10px;">
+    <i class="bi bi-trash-fill fs-6"></i>
+  </button>
 
-  <div class="video-upload-wrapper">
-    <label class="btn btn-dark d-flex align-items-center" style="border-radius: 30px;">
-      <i class="bi bi-file-earmark-play-fill fs-3 me-2"></i>
-      <span class="video-file-name">Escolher Vídeo</span>
-      <%= f.file_field :video, class: "d-none video-upload-field" %> <!-- campo escondido -->
-    </label>
+  <div class="mb-1">
+    <%= f.label :titulo, "Título da Aula", class: "form-label fw-light" %>
+    <%= f.text_field :titulo, class: "form-control form-control-sm", style: "margin-top: -8px" %>
   </div>
 
   <% if f.object.video.attached? %>
-    <div class="video-aula mt-2">
-      <video width="235" height="140" controls>
+    <div class="video-aula mt-2 w-100">
+      <video width="245" height="140" controls>
         <source src="<%= url_for(f.object.video) %>" type="video/mp4">
         Seu navegador não suporta o elemento de vídeo.
       </video>
     </div>
   <% end %>
 
-  <div>
-    <%= f.label :titulo, "Título da Aula" %>
-    <%= f.text_field :titulo, class: "form-control form-control-sm" %>
-  </div>
-
-  <div>
-    <%= f.label :description, "Conteúdo" %>
-    <%= f.text_area :description, class: "form-control form-control-sm" %>
+  <div class="video-upload-wrapper mt-2">
+    <label class="btn btn-dark d-flex align-items-center" style="border-radius: 10px;">
+      <i class="bi bi-file-earmark-play-fill fs-3 me-2"></i>
+      <span class="video-file-name fs-6 fw-light" style="position: relative; right: -5px">Escolher Vídeo</span>
+      <%= f.file_field :video, class: "d-none video-upload-field" %>
+    </label>
   </div>
 </div>
 

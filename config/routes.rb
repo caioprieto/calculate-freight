@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get "dashboard", to: "dashboard#index"
     resources :redacoes
-    resources :cursos
+    resources :cursos do
+      collection do
+        post :delete_multiple
+      end
+    end
   end
 
   namespace :user do

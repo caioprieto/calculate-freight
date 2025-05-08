@@ -12,10 +12,10 @@
 
   <div class="mt-1">
     <%= f.label :description, "Descrição", class: "form-label fw-light fs-6" %>
-    <%= f.text_area :description, class: "form-control form-control-sm", style: "margin-top: -8px" %>
+    <%= f.text_area :description, class: "form-control form-control-sm", style: "margin-top: -8px", rows: 1 %>
   </div>
 
-  <button type="button" class="btn btn-secondary add-aula mt-3">Adicionar Aula</button>
+  <button type="button" class="btn btn-primary add-aula mt-3">+ Adicionar Aula</button>
 
   <div class="aulas">
     <%= f.fields_for :aulas do |aula_fields| %>

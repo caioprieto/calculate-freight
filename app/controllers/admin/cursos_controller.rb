@@ -28,6 +28,22 @@ class Admin::CursosController < AdminsBackofficeController
     end
   end
 
+  def destroy
+    @curso = Curso.find(params[:id])
+    @curso.destroy if @curso.present?
+  end
+
+  def delete_multiple
+    curso_ids = params[:curso_ids]
+
+    if curso_ids.present?
+      Curso.where(id: curso_ids).destroy_all
+      redirect_to admin_cursos_path, notice: "Cursos removidos com sucesso."
+    else
+      redirect_to admin_cursos_path, alert: "Nenhum curso selecionado."
+    end
+  end
+
   private
 
   def curso_params

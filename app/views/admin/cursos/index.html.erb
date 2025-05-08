@@ -3,34 +3,74 @@
   Cursos
 </h4>
 
-<a href="/admin/cursos/new" class="btn btn-success"style="margin-top: 10px; border-radius: 30px">
-  <i class="bi bi-plus-circle-fill fs-4" style="margin-right: 3px"></i>
-  <span style="margin-top: -10px; position: relative; top: -4px; font-weight: 600">Criar novo curso</span>
-</a>
+<%= form_with url: delete_multiple_admin_cursos_path, method: :post, local: true do %>
+  <a href="/admin/cursos/new" class="btn btn-success" style="margin-top: 10px; border-radius: 10px">
+    <i class="bi bi-plus-circle-fill fs-4" style="margin-right: 3px"></i>
+    <span style="margin-top: -10px; position: relative; top: -4px; font-weight: 600">Criar novo curso</span>
+  </a>
 
-<div class="table-admin">
-  <table class="table table-bordered mt-4" style="width: 99%;">
-    <thead>
-      <tr>
-        <th style="font-size: 17px; font-weight: 510;" scope="col">Nome do Curso</th>
-        <th style="font-size: 17px; font-weight: 510;" scope="col">Descrição</th>
-        <th style="font-size: 17px; font-weight: 510;" scope="col">Genêro Textual</th>
-        <th style="font-size: 17px; font-weight: 510;" scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @cursos.each do |curso| %>
+  <%= button_tag type: "submit", id: "delete-button", class: "btn btn-danger", style: "margin-top: 10px; border-radius: 10px", disabled: true do %>
+    <i class="bi bi-plus-circle-fill fs-4" style="margin-right: 3px"></i>
+    <span style="margin-top: -10px; position: relative; top: -4px; font-weight: 600">Excluir cursos</span>
+  <% end %>
+
+  <div class="table-admin">
+    <table class="table table-bordered mt-4" style="width: 99%;">
+      <thead>
         <tr>
-          <td style="font-size: 15px; font-weight: 450;"><%= curso.name %></td>
-          <td style="font-size: 15px; font-weight: 450;"><%= curso.description %></td>
-          <td style="font-size: 15px; font-weight: 450;">Texto Dissertativo-Argumentativo</td>
-          <td style="font-size: 15px; font-weight: 450;">
-            <%= link_to edit_admin_curso_path(curso) do %>
-              <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
-            <% end %>
-          </td>
+          <th style="width: 50px;">
+            <input type="checkbox" id="select-all" />
+          </th>
+          <th style="font-size: 17px; font-weight: 510;" scope="col">Nome do Curso</th>
+          <th style="font-size: 17px; font-weight: 510;" scope="col">Descrição</th>
+          <th style="font-size: 17px; font-weight: 510;" scope="col">Genêro Textual</th>
+          <th style="font-size: 17px; font-weight: 510;" scope="col"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% @cursos.each do |curso| %>
+          <tr>
+            <td>
+              <%= check_box_tag "curso_ids[]", curso.id, false, class: "curso-checkbox" %>
+            </td>
+            <td style="font-size: 15px; font-weight: 450;"><%= curso.name %></td>
+            <td style="font-size: 15px; font-weight: 450;"><%= curso.description %></td>
+            <td style="font-size: 15px; font-weight: 450;">Texto Dissertativo-Argumentativo</td>
+            <td style="font-size: 15px; font-weight: 450;">
+              <%= link_to edit_admin_curso_path(curso) do %>
+                <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const selectAll = document.getElementById("select-all");
+    const checkboxes = document.querySelectorAll(".curso-checkbox");
+    const deleteButton = document.getElementById("delete-button");
+
+    function updateButtonState() {
+      const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+      deleteButton.disabled = !anyChecked;
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", updateButtonState);
+    });
+
+    if (selectAll) {
+      selectAll.addEventListener("change", () => {
+        checkboxes.forEach(cb => cb.checked = selectAll.checked);
+        updateButtonState();
+      });
+    }
+
+    // Estado inicial
+    updateButtonState();
+  });
+</script>
