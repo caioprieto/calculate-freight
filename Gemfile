@@ -26,6 +26,7 @@ gem "awesome_print"
 gem "devise"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
+gem "image_processing"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

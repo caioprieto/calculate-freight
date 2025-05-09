@@ -22,7 +22,7 @@
     <label class="btn btn-dark d-flex align-items-center" style="border-radius: 10px;">
       <i class="bi bi-file-earmark-play-fill fs-3 me-2"></i>
       <span class="video-file-name fs-6 fw-light" style="position: relative; right: -5px">Escolher Vídeo</span>
-      <%= f.file_field :video, class: "d-none video-upload-field" %>
+      <%= f.file_field :video, class: "d-none video-upload-field", data: { filename: f.object.video.filename.to_s } %>
     </label>
   </div>
 </div>
@@ -36,7 +36,14 @@
       const input = wrapper.querySelector(".video-upload-field");
       const label = wrapper.querySelector(".video-file-name");
 
-      if (input) {
+      if (input && label) {
+        // Mostra nome do vídeo salvo (caso tenha)
+        const savedFileName = input.dataset.filename;
+        if (savedFileName) {
+          label.textContent = savedFileName;
+        }
+
+        // Atualiza ao mudar
         input.addEventListener("change", function(event) {
           const fileName = event.target.files[0] ? event.target.files[0].name : "Escolher Vídeo";
           label.textContent = fileName;

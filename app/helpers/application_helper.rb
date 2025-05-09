@@ -1,4 +1,6 @@
 module ApplicationHelper
+  require "image_processing/mini_magick"
+
   def state_image_url(state)
     state_code = state.to_s.downcase
     "/states/#{state_code}.png"

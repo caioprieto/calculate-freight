@@ -1,4 +1,5 @@
 class Admin::CursosController < AdminsBackofficeController
+  before_action :set_curso, only: %i[edit update]
   def index
     @cursos = Curso.all
   end
@@ -15,22 +16,19 @@ class Admin::CursosController < AdminsBackofficeController
       render :new, status: :unprocessable_entity
     end
   end
-  def edit
-    @curso = Curso.find(params[:id])
-  end
+
+  def edit; end
 
   def update
-    @curso = Curso.find(params[:id])
+    if params[:curso][:remove_imagem] == "1"
+      @curso.imagem.purge
+    end
+
     if @curso.update(curso_params)
-      render :edit, notice: "Curso atualizado com sucesso!"
+      redirect_to edit_admin_curso_path(@curso), notice: "Curso atualizado com sucesso!"
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @curso = Curso.find(params[:id])
-    @curso.destroy if @curso.present?
   end
 
   def delete_multiple
@@ -48,7 +46,7 @@ class Admin::CursosController < AdminsBackofficeController
 
   def curso_params
     params.require(:curso).permit(
-      :name, :description,
+      :name, :description, :prova, :tipo, :imagem, :remove_imagem,
       modulos_attributes: [
         :id, :titulo, :description, :_destroy,
         aulas_attributes: [
@@ -56,5 +54,9 @@ class Admin::CursosController < AdminsBackofficeController
         ]
       ]
     )
+  end
+
+  def set_curso
+    @curso = Curso.find(params[:id])
   end
 end

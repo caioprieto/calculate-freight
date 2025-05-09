@@ -1,16 +1,79 @@
 <div class="d-flex gap-2 mt-3 mb-3">
-  <a href="/admin/cursos" class="btn btn-secondary px-3 py-2" style="border-radius: 30px">
+  <%# Voltar %>
+  <a href="/admin/cursos" class="btn btn-secondary px-3 py-1" style="border-radius: 10px">
     <i class="bi bi-box-arrow-left fs-4 me-1"></i>
     <span style="position: relative; top: -4px; font-weight: 600">Voltar</span>
   </a>
 
-  <%= f.button type: "submit", class: "btn btn-success px-3 py-0", style: "border-radius: 30px" do %>
+  <%# Salvar %>
+  <%= f.button type: "submit", class: "btn btn-success px-3 py-0", style: "border-radius: 10px" do %>
     <i class="bi bi-check-circle-fill fs-4 me-1"></i>
     <span style="position: relative; top: -4px; font-weight: 600">Salvar</span>
   <% end %>
 
-  <button type="button" id="add-modulo" class="btn btn-primary px-3 py-0" style="border-radius: 30px">
+  <%# Adicionar Módulo %>
+  <button type="button" id="add-modulo" class="btn btn-primary px-3 py-0" style="border-radius: 10px">
     <i class="bi bi-plus-circle-fill fs-4 me-1"></i>
     <span style="position: relative; top: -4px; font-weight: 600">Adicionar Módulo</span>
   </button>
+
+  <%# Escolher Capa %>
+  <label class="btn btn-info px-3 py-0 text-white" style="border-radius: 10px;">
+    <i style="position: relative; top: 4px;" class="bi bi-file-image-fill fs-4 me-1"></i>
+    <span id="imagem_label_text" style="position: relative; top: 1px; font-weight: 600;">
+      <%= @curso.imagem.attached? ? @curso.imagem.filename.to_s.truncate(25) : "Escolher Capa" %>
+    </span>
+    <%= f.file_field :imagem, style: "display: none;", id: "imagem_input" %>
+  </label>
+
+  <%# Remover capa %>
+  <%= f.hidden_field :remove_imagem, id: "remove_imagem_field" %>
+  <button type="button" class="btn btn-danger px-3 py-0" onclick="removerImagem()" style="border-radius: 10px;">
+    <i class="bi bi-trash-fill fs-4 me-1"></i>
+    <span style="position: relative; top: -3px; font-weight: 600;">
+      Remover Capa
+    </span>
+  </button>
+
+  <%# Preview %>
+  <label class="px-3 py-0 text-dark">
+    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_preview" class="form-check-input me-2">
+    <span style="position: relative; top: 8px; font-weight: 600;">Preview</span>
+  </label>
+
+  <%# Módulos %>
+  <label class="px-3 py-0 text-dark">
+    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_modulos" class="form-check-input me-2" checked>
+    <span style="position: relative; top: 8px; font-weight: 600;">Módulos</span>
+  </label>
 </div>
+
+<script>
+  function removerImagem() {
+    document.getElementById('imagem_input').value = "";
+    document.getElementById('remove_imagem_field').value = "1";
+    document.getElementById('imagem_label_text').innerText = "Escolher Capa";
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleModulos = document.getElementById('toggle_modulos');
+    const containerModulos = document.getElementById('container_modulos');
+
+    document.getElementById('toggle_preview').addEventListener('change', function() {
+      const previewContainer = document.getElementById('preview_container');
+      if (this.checked) {
+        previewContainer.style.display = 'block';
+      } else {
+        previewContainer.style.display = 'none';
+      }
+    });
+
+    toggleModulos.addEventListener('change', function () {
+      containerModulos.style.display = this.checked ? 'block' : 'none';
+    });
+
+    window.addEventListener('DOMContentLoaded', function () {
+      containerModulos.style.display = toggleModulos.checked ? 'block' : 'none';
+    });
+  });
+</script>

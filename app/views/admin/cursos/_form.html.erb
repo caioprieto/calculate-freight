@@ -1,41 +1,71 @@
 <%= form_with(model: [:admin, @curso], local: true, html: { class: "curso-form" }) do |form| %>
   <%= render "actions", f: form %>
+  <%= render partial: "layouts/shared/errors", locals: { resource: @curso } %>
 
-  <div class="row">
-    <div class="col-5">
+  <div class="row mt-3">
+    <div class="col-6">
       <div>
         <%= form.label "Nome", class: "form-label fw-light" %>
         <%= form.text_field :name, class: "form-control", class: "form-control form-control-sm", style: "margin-top: -8px" %>
       </div>
     </div>
 
-    <div class="col-6">
-      <div>
-        <%= form.label "Descrição", class: "form-label fw-light" %>
-        <%= form.text_area :description, class: "form-control", class: "form-control form-control-sm", rows: 1, style: "margin-top: -8px" %>
+    <div class="col-2">
+      <%= form.label :prova, "Prova", class: "form-label fw-light" %>
+      <%= form.select :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.prova), {}, class: "form-select form-select-sm", style: "margin-top: -8px" %>
+    </div>
+
+    <div class="col-3">
+      <%= form.label :tipo, "Tipo", class: "form-label fw-light" %>
+      <%= form.select :tipo, options_for_select([["Texto Dissertativo/Argumentativo", "padrao"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.tipo), {}, class: "form-select form-select-sm select", style: "margin-top: -8px" %>
+    </div>
+  </div>
+
+  <div class="col-11">
+    <div>
+      <%= form.label "Descrição", class: "form-label fw-light" %>
+      <%= form.text_area :description, class: "form-control form-control-sm", rows: 1, style: "margin-top: -8px" %>
+    </div>
+  </div>
+
+  <div id="preview_container" class="mt-3 col-11" style="display: none;">
+    <div class="preview_card">
+      <% if @curso.imagem.attached? %>
+        <div class="img">
+          <%= image_tag @curso.imagem.variant(resize_to_limit: [150, 150]).processed, style: "border-radius: 10px" %>
+        </div>
+      <% end %>
+      <div class="preview_content">
+        <h4 style="right: 10px" class="mt-3">
+          <%= @curso.name %>
+        </h4>
+        <p>
+          <%= @curso.description %>
+        </p>
       </div>
     </div>
   </div>
 
-  <div id="modulos">
-    <%= form.fields_for :modulos do |modulo_fields| %>
-      <%= render "modulos_nested", f: modulo_fields %>
-    <% end %>
-  </div>
-
-  <template id="modulo-template">
-    <%= form.fields_for :modulos, @curso.modulos.build, child_index: "NEW_MODULO" do |modulo_fields| %>
-      <%= render "modulos_nested", f: modulo_fields, new_record: true %>
-    <% end %>
-  </template>
-
-  <template id="aula-template">
-    <%= form.fields_for :modulos, @curso.modulos.build, child_index: "NEW_MODULO" do |modulo_fields| %>
-      <%= modulo_fields.fields_for :aulas, modulo_fields.object.aulas.build, child_index: "NEW_AULA" do |aula_fields| %>
-        <%= render "aulas_nested", f: aula_fields, new_record: true %>
+  <div id="container_modulos" class="col-11 mt-3">
+    <div id="modulos">
+      <%= form.fields_for :modulos do |modulo_fields| %>
+        <%= render "modulos_nested", f: modulo_fields %>
       <% end %>
-    <% end %>
-  </template>
-<% end %>
+    </div>
 
+    <template id="modulo-template">
+      <%= form.fields_for :modulos, @curso.modulos.build, child_index: "NEW_MODULO" do |modulo_fields| %>
+        <%= render "modulos_nested", f: modulo_fields, new_record: true %>
+      <% end %>
+    </template>
+
+    <template id="aula-template">
+      <%= form.fields_for :modulos, @curso.modulos.build, child_index: "NEW_MODULO" do |modulo_fields| %>
+        <%= modulo_fields.fields_for :aulas, modulo_fields.object.aulas.build, child_index: "NEW_AULA" do |aula_fields| %>
+          <%= render "aulas_nested", f: aula_fields, new_record: true %>
+        <% end %>
+      <% end %>
+    </template>
+  </div>
+<% end %>
 <br><br><br><br><br>

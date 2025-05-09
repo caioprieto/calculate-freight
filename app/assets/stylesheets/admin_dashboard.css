@@ -1,7 +1,7 @@
 #modulos {
   display: flex; /* Alinha os itens em uma linha */
   flex-wrap: wrap; /* Permite quebrar a linha se os itens não couberem */
-  gap: 53px; /* Espaçamento entre os módulos */
+  gap: 35px; /* Espaçamento entre os módulos */
 }
 
 /* Módulos individuais */
@@ -11,10 +11,9 @@
   padding: 15px; /* Padding interno dos módulos */
   border: 1px solid #ccc; /* Borda para cada módulo */
   border-radius: 15px; /* Borda arredondada */
-  width: 250px; /* Largura de cada módulo */
+  width: 23%; /* Largura de cada módulo */
   background-color: #f9f9f9; /* Cor de fundo dos módulos */
   margin-top: 20px;
-  width: 20%;
 }
 
 .modulo button {
@@ -52,4 +51,25 @@ td:first-child, th:first-child {
 input[type="checkbox"] {
   transform: scale(1.3);
   margin: 5px;
+}
+
+.preview_card {
+  padding: 10px;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.411);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  align-items: center;
+}
+
+.img {
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.preview_content {
+  max-width: 40%;
+  margin-left: 20px;
 }
