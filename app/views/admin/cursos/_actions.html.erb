@@ -46,6 +46,12 @@
     <input style="position: relative; top: 8px;" type="checkbox" id="toggle_modulos" class="form-check-input me-2" checked>
     <span style="position: relative; top: 8px; font-weight: 600;">Módulos</span>
   </label>
+
+  <%# Redações %>
+  <label class="px-3 py-0 text-dark">
+    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_redacoes" class="form-check-input me-2" checked>
+    <span style="position: relative; top: 8px; font-weight: 600;">Redações</span>
+  </label>
 </div>
 
 <script>
@@ -57,15 +63,17 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     const toggleModulos = document.getElementById('toggle_modulos');
-    const containerModulos = document.getElementById('container_modulos');
+    const toggleRedacoes = document.getElementById('toggle_redacoes');
 
-    document.getElementById('toggle_preview').addEventListener('change', function() {
-      const previewContainer = document.getElementById('preview_container');
-      if (this.checked) {
-        previewContainer.style.display = 'block';
-      } else {
-        previewContainer.style.display = 'none';
-      }
+    const containerModulos = document.getElementById('container_modulos');
+    const containerRedacoes = document.getElementById('container_redacoes');
+
+    toggleRedacoes.addEventListener('change', function () {
+      containerRedacoes.style.display = this.checked ? 'flex' : 'none';
+    });
+
+    window.addEventListener('DOMContentLoaded', function () {
+      containerModulos.style.display = toggleModulos.checked ? 'block' : 'none';
     });
 
     toggleModulos.addEventListener('change', function () {
@@ -74,6 +82,15 @@
 
     window.addEventListener('DOMContentLoaded', function () {
       containerModulos.style.display = toggleModulos.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('toggle_preview').addEventListener('change', function() {
+      const previewContainer = document.getElementById('preview_container');
+      if (this.checked) {
+        previewContainer.style.display = 'block';
+      } else {
+        previewContainer.style.display = 'none';
+      }
     });
   });
 </script>
