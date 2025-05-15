@@ -1,0 +1,27 @@
+<% words.each do |word| %>
+  <div class="card-redacao mb-2">
+    <%= button_to (type == "add" ? add_word_admin_cursos_path : remove_word_admin_cursos_path),
+                  method: :post,
+                  params: { word_id: word.id, curso_id: @curso.id },
+                  class: "btn #{type == 'add' ? 'btn-primary' : 'btn-danger'} mb-3",
+                  style: "top: 10px; left: 10px; position: relative" do %>
+      <% if type == "add" %>
+        <i class="bi bi-plus-square-fill fs-5"></i>
+      <% else %>
+        <i class="bi bi-trash-fill fs-5"></i>
+      <% end %>
+    <% end %>
+
+    <div class="img-redacao">
+      <div class="word-type-label">
+        <label class="bg-white">
+          <%= word.word_type.upcase %>
+        </label>
+      </div>
+      <img src="/images/logo.png" alt="Login image" />
+    </div>
+    <div class="word-content mb-3">
+      <h6><%= word.tema %></h6>
+    </div>
+  </div>
+<% end %>

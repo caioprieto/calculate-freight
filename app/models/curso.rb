@@ -2,14 +2,18 @@ class Curso < ApplicationRecord
   attr_accessor :remove_imagem
 
   has_one_attached :imagem
-  has_and_belongs_to_many :words
+  has_many :curso_words, class_name: "CursoWord"
+  has_many :words, through: :curso_words
   has_many :modulos, class_name: "Modulo", inverse_of: :curso, dependent: :destroy
   has_many :aulas, through: :modulos
 
   accepts_nested_attributes_for :modulos, allow_destroy: true, reject_if: :titulo_blank?
-  accepts_nested_attributes_for :words, allow_destroy: true
 
   validates :name, presence: true
+
+  def add_word(word_id)
+    curso_words.create(curso_id: id, word_id: word_id)
+  end
 
   private
 

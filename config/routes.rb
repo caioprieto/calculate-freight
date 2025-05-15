@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :cursos do
       collection do
         post :delete_multiple
+        post :add_word
+        post :remove_word
       end
 
       post :destroy_image, on: :member

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_09_213030) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_12_024701) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_213030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["modulo_id"], name: "index_aulas_on_modulo_id"
+  end
+
+  create_table "curso_words", force: :cascade do |t|
+    t.integer "curso_id", null: false
+    t.integer "word_id", null: false
+    t.index ["curso_id"], name: "index_curso_words_on_curso_id"
+    t.index ["word_id"], name: "index_curso_words_on_word_id"
   end
 
   create_table "cursos", force: :cascade do |t|
@@ -172,6 +179,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_213030) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "aulas", "modulos"
+  add_foreign_key "curso_words", "cursos"
+  add_foreign_key "curso_words", "words"
   add_foreign_key "freights", "address", column: "address_destino_id"
   add_foreign_key "freights", "address", column: "address_origem_id"
   add_foreign_key "modulos", "cursos"

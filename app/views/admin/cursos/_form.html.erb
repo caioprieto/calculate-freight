@@ -2,31 +2,45 @@
   <%= render "actions", f: form %>
   <%= render partial: "layouts/shared/errors", locals: { resource: @curso } %>
 
-  <div class="row mt-3">
-    <div class="col-6">
-      <div>
-        <%= form.label "Nome", class: "form-label fw-light" %>
-        <%= form.text_field :name, class: "form-control", class: "form-control form-control-sm", style: "margin-top: -8px" %>
+  <label class="px-3 py-0 text-dark mt-1">
+    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_fields" class="form-check-input me-2">
+    <span style="position: relative; top: 8px; font-weight: 600;">Campos</span>
+  </label>
+
+  <br>
+
+  <div id="form_container" style="display: none;">
+    <div class="row mt-3">
+      <div class="col-6">
+        <div>
+          <%= form.label "Nome", class: "form-label fw-light" %>
+          <%= form.text_field :name, class: "form-control", class: "form-control form-control-sm", style: "margin-top: -8px" %>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <%= form.label :prova, "Prova", class: "form-label fw-light" %>
+        <%= form.select :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.prova), {}, class: "form-select form-select-sm", style: "margin-top: -8px" %>
+      </div>
+
+      <div class="col-3">
+        <%= form.label :tipo, "Tipo", class: "form-label fw-light" %>
+        <%= form.select :tipo, options_for_select([["Texto Dissertativo/Argumentativo", "padrao"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.tipo), {}, class: "form-select form-select-sm select", style: "margin-top: -8px" %>
       </div>
     </div>
 
-    <div class="col-2">
-      <%= form.label :prova, "Prova", class: "form-label fw-light" %>
-      <%= form.select :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.prova), {}, class: "form-select form-select-sm", style: "margin-top: -8px" %>
-    </div>
-
-    <div class="col-3">
-      <%= form.label :tipo, "Tipo", class: "form-label fw-light" %>
-      <%= form.select :tipo, options_for_select([["Texto Dissertativo/Argumentativo", "padrao"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.tipo), {}, class: "form-select form-select-sm select", style: "margin-top: -8px" %>
+    <div class="col-11">
+      <div>
+        <%= form.label "Descrição", class: "form-label fw-light" %>
+        <%= form.text_area :description, class: "form-control form-control-sm", rows: 1, style: "margin-top: -8px" %>
+      </div>
     </div>
   </div>
 
-  <div class="col-11">
-    <div>
-      <%= form.label "Descrição", class: "form-label fw-light" %>
-      <%= form.text_area :description, class: "form-control form-control-sm", rows: 1, style: "margin-top: -8px" %>
-    </div>
-  </div>
+  <label class="px-3 py-0 text-dark mt-3">
+    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_preview" class="form-check-input me-2">
+    <span style="position: relative; top: 8px; font-weight: 600;">Preview</span>
+  </label>
 
   <div id="preview_container" class="mt-3 col-11" style="display: none;">
     <div class="preview_card">
@@ -46,23 +60,11 @@
     </div>
   </div>
 
-  <div id="container_redacoes" class="container-redacoes col-11 mt-4">
-    <% Word.all.limit(8).each do |word| %>
-      <div class="card-redacao mb-2">
-        <%= check_box_tag "word_ids[]", word.id, false, class: "word-checkbox", style: "transform: scale(1.6); top: 10px; left: 10px; position: relative" %>
-        <div class="img-redacao">
-          <div class="word-type-label">
-            <label class="bg-white">
-              <%= word.word_type.upcase %>
-            </label>
-          </div>
-          <%= image_tag @curso.imagem.variant(resize_to_limit: [150, 150]).processed, style: "border-radius: 10px" %>
-        </div>
-        <div class="word-content mb-3">
-          <h6> <%= word.tema %> </h6>
-        </div>
-      </div>
-    <% end %>
+  <div class="col-11 mt-3">
+    <label class="px-3 py-0 text-dark">
+      <input style="position: relative; top: 8px;" type="checkbox" id="toggle_modulos" class="form-check-input me-2">
+      <span style="position: relative; top: 8px; font-weight: 600;">Módulos</span>
+    </label>
   </div>
 
   <div id="container_modulos" class="col-11 mt-3">
@@ -87,4 +89,19 @@
     </template>
   </div>
 <% end %>
+
+<%# Redações %>
+<label class="px-3 py-0 text-dark mt-3">
+  <input style="position: relative; top: 8px;" type="checkbox" id="toggle_redacoes" class="form-check-input me-2">
+  <span style="position: relative; top: 8px; font-weight: 600;">Redações</span>
+</label>
+
+<div id="container_redacoes_escolhidas" class="container-redacoes-escolhidas col-11 mt-4" style="display: none;">
+  <%= render partial: "words", locals: { words: @curso.words, type: "remove" } %>
+</div>
+
+<div id="container_redacoes" class="container-redacoes col-11 mt-1" style="display: none;">
+  <%= render partial: "words", locals: { words: Word.where.not(id: @curso.word_ids).limit(8), type: "add" } %>
+</div>
+
 <br><br><br><br><br>

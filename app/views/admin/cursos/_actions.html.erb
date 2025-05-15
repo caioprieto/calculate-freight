@@ -34,24 +34,6 @@
       Remover Capa
     </span>
   </button>
-
-  <%# Preview %>
-  <label class="px-3 py-0 text-dark">
-    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_preview" class="form-check-input me-2">
-    <span style="position: relative; top: 8px; font-weight: 600;">Preview</span>
-  </label>
-
-  <%# Módulos %>
-  <label class="px-3 py-0 text-dark">
-    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_modulos" class="form-check-input me-2" checked>
-    <span style="position: relative; top: 8px; font-weight: 600;">Módulos</span>
-  </label>
-
-  <%# Redações %>
-  <label class="px-3 py-0 text-dark">
-    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_redacoes" class="form-check-input me-2" checked>
-    <span style="position: relative; top: 8px; font-weight: 600;">Redações</span>
-  </label>
 </div>
 
 <script>
@@ -67,9 +49,11 @@
 
     const containerModulos = document.getElementById('container_modulos');
     const containerRedacoes = document.getElementById('container_redacoes');
+    const containerRedacoesEscolhidas = document.getElementById('container_redacoes_escolhidas');
 
     toggleRedacoes.addEventListener('change', function () {
       containerRedacoes.style.display = this.checked ? 'flex' : 'none';
+      containerRedacoesEscolhidas.style.display = this.checked ? 'flex' : 'none';
     });
 
     window.addEventListener('DOMContentLoaded', function () {
@@ -90,6 +74,16 @@
         previewContainer.style.display = 'block';
       } else {
         previewContainer.style.display = 'none';
+      }
+    });
+
+    document.getElementById('toggle_fields').addEventListener('change', function() {
+      const fieldsContainer = document.getElementById('form_container');
+
+      if (this.checked) {
+        fieldsContainer.style.display = 'block';
+      } else {
+        fieldsContainer.style.display = 'none';
       }
     });
   });

@@ -1,7 +1,7 @@
 #modulos {
   display: flex; /* Alinha os itens em uma linha */
   flex-wrap: wrap; /* Permite quebrar a linha se os itens não couberem */
-  gap: 35px; /* Espaçamento entre os módulos */
+  gap: 10px; /* Espaçamento entre os módulos */
 }
 
 /* Módulos individuais */
@@ -11,7 +11,7 @@
   padding: 15px; /* Padding interno dos módulos */
   border: 1px solid #ccc; /* Borda para cada módulo */
   border-radius: 15px; /* Borda arredondada */
-  width: 23%; /* Largura de cada módulo */
+  width: 24%; /* Largura de cada módulo */
   background-color: #f9f9f9; /* Cor de fundo dos módulos */
   margin-top: 20px;
 }
@@ -84,11 +84,21 @@ input[type="checkbox"] {
   padding: 20px;
 }
 
+.container-redacoes-escolhidas {
+  background-color: gray;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
 .card-redacao {
-  width: 24%;
+  width: 19%;
   background-color: whitesmoke;
   padding: 0px;
-  margin-right: 10px;
+  margin-right: 13px;
   border-radius: 10px;
 }
 
@@ -98,7 +108,18 @@ input[type="checkbox"] {
   background-color: black;
   width: 70%;
   left: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
+}
+
+.img-redacao img {
+  min-height: 70%;
+  min-width: 70%;
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: cover;
 }
 
 .word-content {
