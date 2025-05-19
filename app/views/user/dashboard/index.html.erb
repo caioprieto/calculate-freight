@@ -15,11 +15,11 @@
           <i class="bi bi-play-fill text-white"></i>
         <% end %>
       </div>
-      <div class="curso-texto" style="margin-top: -50px; text-align: center; position: relative;">
+      <div class="curso-texto-assitindo" style="margin-top: -50px; text-align: center; position: relative;">
         <div class="progress-background">
           <div class="progress-fill" style="width: <%= @progress %>%;"></div>
         </div>
-        <h6 class="text-white"style="position: relative; z-index: 1;">Extensivo ENEM - <%= @progress %> %</h6>
+        <h6 class="text-white" style="position: relative; z-index: 1;">Extensivo ENEM - <%= @progress %> %</h6>
       </div>
     </div>
   <% end %>
@@ -37,18 +37,18 @@
     <button class="carousel-btn prev">&#10094;</button>
     <div class="carousel-container">
       <div class="carousel-track">
-        <% 12.times do |i| %>
+        <% @cursos.each do |curso| %>
           <div class="curso-card">
             <div class="curso-content">
-                <div class="curso-img" style="position: relative;">
-                  <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
-                    <%= link_to freights_path, class: 'play-button' do %>
-                      <i class="bi bi-play-fill text-white"></i>
-                    <% end %>
-                </div>
-              <div class="curso-texto" style="margin-top: -30px;">
-                <h6>Extensivo ENEM</h6>
-                <p>Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
+              <div class="curso-img" style="position: relative;">
+                <%= image_tag curso.imagem.variant(resize_to_limit: [3000, 3000]).processed, style: "border-radius: 10px;" %>
+
+                <%= link_to player_user_curso_path(curso), class: 'play-button' do %>
+                  <i class="bi bi-play-fill text-white"></i>
+                <% end %>
+              </div>
+              <div class="curso-texto w-100">
+                <h6><%= curso.name %></h6>
               </div>
             </div>
           </div>

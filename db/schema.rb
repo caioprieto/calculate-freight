@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_12_024701) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_19_133144) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -138,6 +138,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_024701) do
     t.index ["word_id"], name: "index_texts_on_word_id"
   end
 
+  create_table "user_cursos", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "curso_id", null: false
+    t.integer "progresso", default: 0, null: false
+    t.boolean "concluido", default: false, null: false
+    t.datetime "data_inicio"
+    t.index ["curso_id"], name: "index_user_cursos_on_curso_id"
+    t.index ["user_id", "curso_id"], name: "index_user_cursos_on_user_id_and_curso_id", unique: true
+    t.index ["user_id"], name: "index_user_cursos_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -185,4 +196,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_12_024701) do
   add_foreign_key "freights", "address", column: "address_origem_id"
   add_foreign_key "modulos", "cursos"
   add_foreign_key "texts", "words"
+  add_foreign_key "user_cursos", "cursos"
+  add_foreign_key "user_cursos", "users"
 end

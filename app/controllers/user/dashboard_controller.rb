@@ -3,6 +3,7 @@ class User::DashboardController < ApplicationController
 
   def index
     @progress = 3
+    @cursos = current_user.cursos
   end
 
   def search

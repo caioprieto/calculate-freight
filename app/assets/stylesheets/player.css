@@ -1,0 +1,61 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.full-width-container {
+  display: flex;
+  height: 100%; /* Ocupa toda a altura da viewport */
+  width: 100%;  /* Ocupa toda a largura da viewport */
+  overflow: hidden;
+  background-color: gray;
+}
+
+.right-panel {
+  width: 25%;
+  background-color: whitesmoke;
+  color: white;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.left-panel {
+  flex: 1;
+  background-color: black;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-player {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accordion-button:focus {
+  box-shadow: 0 2px 19px rgba(0, 0, 0, 0.1);
+  outline: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: white !important;
+  color: black !important;
+  box-shadow: 0 2px 19px rgba(0, 0, 0, 0.1);
+}
+
+.aula-link {
+  text-decoration: none;
+  color: gray
+}
+
+.aula-ativa {
+  font-weight: bold;
+  text-decoration: underline;
+}

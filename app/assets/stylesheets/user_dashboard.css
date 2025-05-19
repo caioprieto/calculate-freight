@@ -179,6 +179,12 @@ html, body {
 }
 
 .curso-texto {
+  margin-bottom: 5px;
+  margin-top: -50px;
+  text-align: center;
+}
+
+.curso-texto-assitindo {
   flex: 1;
   min-width: 200px;
 }
@@ -239,7 +245,7 @@ html, body {
   transition: transform 0.7s ease-in-out;
   display: flex;
   align-items: stretch;
-  gap: 20px;
+  gap: 15px;
   margin-top: -20px;
   margin-bottom: -20px;
 }
@@ -299,9 +305,10 @@ html, body {
 }
 
 .curso-card {
-  padding: 1.8rem;
+  width: 21%;
+  padding: 1.0rem;
   background-color: #f8f8f8;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  margin: 1rem auto;
+  margin: 0;
 }
