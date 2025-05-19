@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     get "settings", to: "settings#index"
     get "settings/search", to: "settings#search", as: :settings_search
 
+    get "explorar", to: "explorar#index"
+
     resources :cursos do
       member do
         get :player

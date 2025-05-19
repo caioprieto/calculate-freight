@@ -13,6 +13,10 @@ class Curso < ApplicationRecord
 
   validates :name, presence: true
 
+  scope :find_by_name, ->(term) {
+    where(name: term)
+  }
+
   def add_word(word_id)
     curso_words.create(curso_id: id, word_id: word_id)
   end
