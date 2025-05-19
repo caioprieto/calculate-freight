@@ -15,16 +15,15 @@
   <% end %>
 
   <div class="table-admin">
-    <table class="table table-bordered mt-4" style="width: 99%;">
+    <table class="table table-bordered table-sm mt-4" style="width: 99%;">
       <thead>
         <tr>
           <th style="width: 50px;">
             <input type="checkbox" id="select-all" />
           </th>
-          <th style="font-size: 17px; font-weight: 510;" scope="col">Nome do Curso</th>
-          <th style="font-size: 17px; font-weight: 510;" scope="col">Descrição</th>
-          <th style="font-size: 17px; font-weight: 510;" scope="col">Genêro Textual</th>
-          <th style="font-size: 17px; font-weight: 510;" scope="col"></th>
+          <th style="font-size: 15px; font-weight: 510; padding-left: 8px" scope="col">Nome do Curso</th>
+          <th style="font-size: 15px; font-weight: 510; padding-left: 8px" scope="col">Genêro Textual</th>
+          <th style="font-size: 15px; font-weight: 510; padding-left: 8px" scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -33,10 +32,9 @@
             <td>
               <%= check_box_tag "curso_ids[]", curso.id, false, class: "curso-checkbox" %>
             </td>
-            <td style="font-size: 15px; font-weight: 450;"><%= curso.name %></td>
-            <td style="font-size: 15px; font-weight: 450;"><%= curso.description %></td>
-            <td style="font-size: 15px; font-weight: 450;">Texto Dissertativo-Argumentativo</td>
-            <td style="font-size: 15px; font-weight: 450;">
+            <td style="font-size: 14px; font-weight: 450; padding-left: 8px; padding-top: 10px"><%= curso.name %></td>
+            <td style="font-size: 14px; font-weight: 450; padding-left: 8px; padding-top: 10px">Texto Dissertativo-Argumentativo</td>
+            <td style="font-size: 14px; font-weight: 450; padding-left: 8px;">
               <%= link_to edit_admin_curso_path(curso) do %>
                 <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
               <% end %>

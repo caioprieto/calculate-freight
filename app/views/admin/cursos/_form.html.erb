@@ -2,14 +2,7 @@
   <%= render "actions", f: form %>
   <%= render partial: "layouts/shared/errors", locals: { resource: @curso } %>
 
-  <label class="px-3 py-0 text-dark mt-1">
-    <input style="position: relative; top: 8px;" type="checkbox" id="toggle_fields" class="form-check-input me-2">
-    <span style="position: relative; top: 8px; font-weight: 600;">Campos</span>
-  </label>
-
-  <br>
-
-  <div id="form_container" style="display: none;">
+  <div id="form_container">
     <div class="row mt-3">
       <div class="col-6">
         <div>
@@ -32,7 +25,7 @@
     <div class="col-11">
       <div>
         <%= form.label "Descrição", class: "form-label fw-light" %>
-        <%= form.text_area :description, class: "form-control form-control-sm", rows: 1, style: "margin-top: -8px" %>
+        <%= form.text_area :description, class: "form-control form-control-sm", rows: 3, style: "margin-top: -8px" %>
       </div>
     </div>
   </div>

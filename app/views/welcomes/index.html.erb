@@ -28,23 +28,25 @@
     </nav>
 
     <div class="container">
-      <div class="card-welcome text-dark">
+      <div class="card-welcome">
         <div class="banner row">
           <div class="carousel-section mt-3">
             <div class="carousel-wrapper position-relative">
               <button class="carousel-btn prev">&#10094;</button>
               <div class="carousel-container">
                 <div class="carousel-track">
-                  <% 6.times do |i| %>
-                    <a href="/cursos/1/edit">
+                  <% @cursos.each do |curso| %>
+                    <a href="/cursos/<%= curso.id %>/edit">
                       <div class="curso-card">
                         <div class="curso-content">
                           <div class="curso-img">
-                            <img src="/images/livros.png" alt="Curso <%= i + 1 %>">
+                            <% if curso.imagem.present? %>
+                              <%= image_tag curso.imagem.variant(resize_to_limit: [3000, 3000]).processed, style: "border-radius: 10px" %>
+                            <% end %>
                           </div>
                           <div class="curso-texto">
-                            <h5 style="text-dark">5 LIVROS PARA AMPLIAR SEU REPERTÓRIO</h5>
-                            <p class="text-dark">Aprenda como conquistar a nota 1000 com técnicas de redação.</p>
+                            <h5 style="text-dark"><%= curso.name.upcase %></h5>
+                            <p class="text-dark"><%= simple_format(curso.description) %></p>
                           </div>
                         </div>
                       </div>
@@ -72,33 +74,21 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const track = document.querySelector('.carousel-track');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
     const container = document.querySelector('.carousel-container');
-    const cards = document.querySelectorAll('.curso-card');
 
-    let position = 0;
-    const cardWidth = cards[0].offsetWidth + 40; // 20 = gap/margin
+    let scrollAmount = 0;
+    const scrollStep = container.offsetWidth * 0.94;
 
-    // Adiciona evento a todos os botões "next"
-    document.querySelectorAll('.carousel-btn.next').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const maxScroll = track.scrollWidth - container.offsetWidth;
-        if (position + cardWidth < maxScroll) {
-          position += cardWidth;
-        } else {
-          position = maxScroll; // garante que vá até o limite, mas sem ultrapassar
-        }
-        track.style.transform = `translateX(-${position}px)`;
-      });
+    nextBtn.addEventListener('click', () => {
+      scrollAmount = Math.min(scrollAmount + scrollStep, track.scrollWidth - container.clientWidth);
+      track.style.transform = `translateX(-${scrollAmount}px)`;
     });
 
-    // Adiciona evento a todos os botões "prev"
-    document.querySelectorAll('.carousel-btn.prev').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (position > 0) {
-          position -= cardWidth;
-          track.style.transform = `translateX(-${position}px)`;
-        }
-      });
+    prevBtn.addEventListener('click', () => {
+      scrollAmount = Math.max(scrollAmount - scrollStep, 0);
+      track.style.transform = `translateX(-${scrollAmount}px)`;
     });
   });
 </script>

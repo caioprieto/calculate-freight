@@ -3,12 +3,11 @@
     <%= button_to (type == "add" ? add_word_admin_cursos_path : remove_word_admin_cursos_path),
                   method: :post,
                   params: { word_id: word.id, curso_id: @curso.id },
-                  class: "btn #{type == 'add' ? 'btn-primary' : 'btn-danger'} mb-3",
-                  style: "top: 10px; left: 10px; position: relative" do %>
+                  class: "btn #{type == 'add' ? 'btn-primary' : 'btn-danger'} mb-3 w-100 me-2" do %>
       <% if type == "add" %>
-        <i class="bi bi-plus-square-fill fs-5"></i>
+        <i class="bi bi-plus-square-fill fs-6"></i>
       <% else %>
-        <i class="bi bi-trash-fill fs-5"></i>
+        <i class="bi bi-trash-fill fs-6"></i>
       <% end %>
     <% end %>
 
