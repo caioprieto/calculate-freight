@@ -8,13 +8,14 @@ class Curso < ApplicationRecord
   has_many :aulas, through: :modulos
   has_many :user_cursos, dependent: :destroy
   has_many :users, through: :user_cursos
+  has_many :cart_cursos
 
   accepts_nested_attributes_for :modulos, allow_destroy: true, reject_if: :titulo_blank?
 
   validates :name, presence: true
 
   scope :find_by_name, ->(term) {
-    where(name: term)
+    where("name ILIKE ?", "%#{term}%")
   }
 
   def add_word(word_id)

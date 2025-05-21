@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
     get "explorar", to: "explorar#index"
 
+    get "carrinho", to: "carrinho#index"
+
     resources :cursos do
       member do
         get :player
@@ -41,6 +43,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :user_aulas
   resources :freights
   resources :cursos
   resources :videos

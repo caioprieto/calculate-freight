@@ -106,6 +106,10 @@ html, body {
   transform: scale(1.1);
 }
 
+.custom-btn {
+  margin-top: -10px;
+}
+
 .custom-btn a {
   transform: scale(1);
   border: none;

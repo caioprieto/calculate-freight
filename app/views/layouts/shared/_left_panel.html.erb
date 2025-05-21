@@ -11,6 +11,11 @@
         Explorar
       <% end %>
 
+      <%= link_to '/user/carrinho', class: "menu-link #{'active' if current_page?('/user/carrinho')}" do %>
+        <i class="bi bi-cart fs-4" style="margin-right: 10px"></i>
+        Meu carrinho
+      <% end %>
+
       <%= link_to '/user/dashboard', class: "menu-link #{'active' if current_page?('/user/dashboard')}" do %>
         <i class="bi bi-collection-play fs-4" style="margin-right: 10px"></i>
         Meus Cursos

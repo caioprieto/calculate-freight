@@ -21,10 +21,14 @@
             <div class="accordion-body">
               <ul class="list-group list-group-flush">
                 <% modulo.aulas.each do |aula| %>
+                  <% watched = current_user.user_aulas.exists?(aula_id: aula.id, watched: true) %>
                   <li class="list-group-item">
-                    <a href="#" class="aula-link" data-video-url="<%= aula.video.attached? ? url_for(aula.video) : "" %>">
-                      <%= aula.titulo %>
-                    </a>
+                    <div>
+                      <%= check_box_tag "watched_aula_#{aula.id}", aula.id, watched, class: "watched-checkbox", data: { aula_id: aula.id } %>
+                      <a href="#" class="aula-link" data-video-url="<%= aula.video.attached? ? url_for(aula.video) : "" %>">
+                        <%= aula.titulo %>
+                      </a>
+                    </div>
                   </li>
                 <% end %>
               </ul>
@@ -54,6 +58,29 @@
           videoPlayer.load();
           videoPlayer.play();
         }
+      });
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkboxes = document.querySelectorAll(".watched-checkbox");
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        const aulaId = checkbox.dataset.aulaId;
+        const watched = checkbox.checked;
+
+        fetch("/user_aulas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+          },
+          body: JSON.stringify({
+            aula_id: aulaId,
+            watched: watched
+          })
+        });
       });
     });
   });

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_20_170216) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_21_191520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -65,6 +65,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_170216) do
     t.index ["modulo_id"], name: "index_aulas_on_modulo_id"
   end
 
+  create_table "cart_cursos", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "curso_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_cursos_on_cart_id"
+    t.index ["curso_id"], name: "index_cart_cursos_on_curso_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "status", default: "pending", null: false
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "curso_words", force: :cascade do |t|
     t.integer "curso_id", null: false
     t.integer "word_id", null: false
@@ -81,6 +99,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_170216) do
     t.datetime "updated_at", null: false
     t.string "prova"
     t.string "tipo"
+    t.decimal "value"
+    t.integer "duration"
   end
 
   create_table "cursos_words", id: false, force: :cascade do |t|
@@ -141,6 +161,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_170216) do
     t.index ["word_id"], name: "index_texts_on_word_id"
   end
 
+  create_table "user_aulas", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "aula_id", null: false
+    t.boolean "watched", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aula_id"], name: "index_user_aulas_on_aula_id"
+    t.index ["user_id"], name: "index_user_aulas_on_user_id"
+  end
+
   create_table "user_cursos", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "curso_id", null: false
@@ -193,12 +223,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_170216) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "aulas", "modulos"
+  add_foreign_key "cart_cursos", "carts"
+  add_foreign_key "cart_cursos", "cursos"
+  add_foreign_key "carts", "users"
   add_foreign_key "curso_words", "cursos"
   add_foreign_key "curso_words", "words"
   add_foreign_key "freights", "address", column: "address_destino_id"
   add_foreign_key "freights", "address", column: "address_origem_id"
   add_foreign_key "modulos", "cursos"
   add_foreign_key "texts", "words"
+  add_foreign_key "user_aulas", "aulas"
+  add_foreign_key "user_aulas", "users"
   add_foreign_key "user_cursos", "cursos"
   add_foreign_key "user_cursos", "users"
 end

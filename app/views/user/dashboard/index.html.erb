@@ -5,11 +5,11 @@
   </h5>
 </div>
 
-<div class="container-continuar-assistindo mt-2">
-  <% 3.times do |i| %>
+<div class="container-continuar-assistindo">
+  <% if @last_curso.present? %>
     <div class="continuar-assistindo-content">
       <div class="continuar-assistindo-img" style="position: relative;">
-        <img src="/images/livros.png">
+          <%= image_tag @last_curso.imagem.variant(resize_to_limit: [2000, 2000]).processed, style: "border-radius: 10px" %>
 
         <%= link_to freights_path, class: 'play-button' do %>
           <i class="bi bi-play-fill text-white"></i>
@@ -32,7 +32,7 @@
   </h5>
 </div>
 
-<div class="carousel-section mt-4">
+<div class="carousel-section mt-3">
   <div class="carousel-wrapper position-relative">
     <button class="carousel-btn prev">&#10094;</button>
     <div class="carousel-container">
