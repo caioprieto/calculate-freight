@@ -10,13 +10,13 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.omniauthable? %>
+<%- if devise_mapping.omniauthable? && controller_name != 'registrations' %>
   <div class="button-google text-center">
     <div class="text-and-simbol">
       <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= button_to omniauth_authorize_path(resource_name, provider), method: :post, data: { turbo: false }, class: "btn btn-outline-dark bg-dark text-white google-input" do %>
-          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" style="width:20px; margin-right:10px;margin-bottom:5px;">
-          <span> Entrar com o Google </span>
+        <%= button_to omniauth_authorize_path(resource_name, provider), method: :post, data: { turbo: false }, class: "btn btn-outline-dark bg-dark google-input" do %>
+          <img src="/images/google.png" alt="Google logo" style="width:20px; margin-right:10px;margin-bottom:5px; background-color: transparent;">
+          <span class="text-white"> Entrar com o Google </span>
         <% end %>
       <% end %>
     </div>
@@ -31,22 +31,22 @@
   </div>
 <% end %>
 
+<%- if controller_name == 'registrations' %>
+  <div class="row">
+    <p class="text-center mt-4">Já possui conta?
+      <%= link_to "Entrar na conta", new_user_session_path, style: "margin-left: 10px; text-decoration: none;", class: "text-primary" %>
+    </p>
+  </div>
+<% end %>
+
 <style>
 .google-input {
   width: 100%;
   padding: 10px;
-  background-color: whitesmoke;
   color: black;
-  border: none;
-  border-radius: 0;
-  transition: none !important;
-  animation: none !important;
 }
 
-.google-btn:active {
-  background-color: whitesmoke;
-  color: inherit !important;
-  box-shadow: none !important;
-  outline: none !important;
+.button-google {
+  border-radius: 5px;
 }
 </style>

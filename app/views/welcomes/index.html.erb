@@ -19,8 +19,8 @@
           <a href="/">Iniciante</a>
         </nav>
         <div class="navbar-buttons" style="margin-right: -15px; display: flex; gap: 10px;">
-          <a href="/admin/dashboard" class="btn btn-light text-custom-nav">Quero me inscrever</a>
-          <a href="/user/dashboard" class="btn btn-dark text-custom-nav">Já sou aluno</a>
+          <a href="/users/sign_up" class="btn btn-light text-custom-nav">Quero me inscrever</a>
+          <a class="btn btn-dark text-custom-nav" onclick="showLoadingAndRedirect()">Já sou aluno</a>
         </div>
       </div>
 
@@ -63,6 +63,7 @@
         </div>
       </div>
     <div>
+
     <footer class="footer">
       <div class="container">
         <p class="text-white mt-3">&copy; 2025 Aprova Redação. Todos os direitos reservados.</p>
@@ -70,6 +71,10 @@
     </footer>
   </body>
 </html>
+
+<div class="loader" id="loadingOverlay">
+  <div class="spinner-loader"></div>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -91,4 +96,14 @@
       track.style.transform = `translateX(-${scrollAmount}px)`;
     });
   });
+
+  function showLoadingAndRedirect() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+
+    setTimeout(() => {
+      window.location.href = "/user/dashboard";
+      overlay.style.display = 'none';
+    }, 1000);
+  }
 </script>

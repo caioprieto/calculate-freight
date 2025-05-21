@@ -9,5 +9,10 @@
 
   <body>
     <%= yield %>
+    <%= javascript_include_tag 'main', defer: true %>
+
+    <div class="loader" id="loadingOverlay">
+      <div class="spinner-loader"></div>
+    </div>
   </body>
 </html>
