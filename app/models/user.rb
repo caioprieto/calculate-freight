@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_one :cart
 
+  validates :nome, :sobrenome, :cpf, presence: true
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data["email"]).first
@@ -40,6 +42,6 @@ class User < ApplicationRecord
 
     aulas_vistas = user_aulas.where(aula_id: total_aulas.map(&:id), watched: true)
 
-    ((aulas_vistas.count.to_f / total_aulas.count) * 100).round(2)
+    ((aulas_vistas.count.to_f / total_aulas.count) * 100).to_i
   end
 end

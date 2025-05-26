@@ -10,7 +10,9 @@
       <%= render 'infinite_text' %>
       <div class="container">
         <div class="logo">
-          <img src="/images/logo_preto.png" alt="Logo" style="margin-left: -25px; display: flex;">
+          <a href="/">
+            <img src="/images/logo_preto.png" alt="Logo" style="margin-left: -25px; display: flex;">
+          </a>
         </div>
         <nav class="menu">
           <a href="/">Quem somos</a>
@@ -19,7 +21,7 @@
           <a href="/">Iniciante</a>
         </nav>
         <div class="navbar-buttons" style="margin-right: -15px; display: flex; gap: 10px;">
-          <a href="/users/sign_up" class="btn btn-light text-custom-nav">Quero me inscrever</a>
+          <%= button_to "Quero me inscrever", new_user_registration_path, class: "btn btn-light text-custom-nav fw-light", method: :get %>
           <a class="btn btn-dark text-custom-nav" onclick="showLoadingAndRedirect()">Já sou aluno</a>
         </div>
       </div>
@@ -28,53 +30,135 @@
     </nav>
 
     <div class="container">
-      <div class="card-welcome">
-        <div class="banner row">
-          <div class="carousel-section mt-3">
-            <div class="carousel-wrapper position-relative">
-              <button class="carousel-btn prev">&#10094;</button>
-              <div class="carousel-container">
-                <div class="carousel-track">
-                  <% @cursos.each do |curso| %>
-                    <a href="/cursos/<%= curso.id %>/edit">
-                      <div class="curso-card">
-                        <div class="curso-content">
-                          <div class="curso-img">
-                            <% if curso.imagem.present? %>
-                              <%= image_tag curso.imagem.variant(resize_to_limit: [3000, 3000]).processed, style: "border-radius: 10px" %>
-                            <% end %>
-                          </div>
-                          <div class="curso-texto">
-                            <h5 style="text-dark"><%= curso.name.upcase %></h5>
-                            <p class="text-dark"><%= simple_format(curso.description) %></p>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  <% end %>
-                </div>
-              </div>
-              <button class="carousel-btn next">&#10095;</button>
-            </div>
-          </div>
-        </div>
+      <%= render 'carrosel' %>
+    </div>
 
-        <%= render 'alunos_aprovados'%>
+    <br>
+
+    <div class="beneficios">
+      <div class="beneficio">
+        <a class="text-dark" style="text-decoration: none;">
+          <i class="bi bi-person-vcard fs-1"></i>
+          <h3>Correções humanas</h3>
+          <p>Análises alinhadas ao ENEM e às principais bancas do Brasil: Fuvest, Unesp, Unicamp e UFPR.</p>
+        </a>
+      </div>
+      <div class="beneficio">
+        <a class="text-dark" style="text-decoration: none;">
+          <i class="bi bi-journal-text fs-1"></i>
+          <h3>Temas construtivos</h3>
+          <p>Análises alinhadas ao ENEM e às principais bancas do Brasil: Fuvest, Unesp, Unicamp e UFPR.</p>
+        </a>
+      </div>
+      <div class="beneficio">
+        <a class="text-dark" style="text-decoration: none;">
+          <i class="bi bi-camera-video fs-1"></i>
+          <h3>Repertório Expandido</h3>
+          <p>Análises alinhadas ao ENEM e às principais bancas do Brasil: Fuvest, Unesp, Unicamp e UFPR.</p>
+        </a>
+      </div>
+      <div class="beneficio">
+        <a class="text-dark" style="text-decoration: none;">
+          <i class="bi bi-clipboard-check fs-1"></i>
+          <h3>Resultados comprovados</h3>
+          <p>Análises alinhadas ao ENEM e às principais bancas do Brasil: Fuvest, Unesp, Unicamp e UFPR.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="vestibulares">
+      <h2> Vestibulares </h2>
+
+      <hr>
+      <div class="vestibular">
+        <div class="vestibular-card">
+          <a href="/" class="text-dark" style="text-decoration: none;">
+            <img src="/images/unicamp.jpg" alt="Login image" />
+          </a>
+        </div>
+        <div class="vestibular-card">
+          <a href="/" class="text-dark" style="text-decoration: none;">
+            <img src="/images/enem.jpg" alt="Login image" />
+          </a>
+        </div>
+        <div class="vestibular-card">
+          <a href="/" class="text-dark" style="text-decoration: none;">
+            <img src="/images/unesp.jpg" alt="Login image" />
+          </a>
+        </div>
+        <div class="vestibular-card">
+          <a href="/" class="text-dark" style="text-decoration: none;">
+            <img src="/images/usp.jpg" alt="Login image" />
+          </a>
         </div>
       </div>
-    <div>
+      <hr>
+    </div>
+
+
+    <div class="container-apresentacao mt-5">
+      <div class="apresentacao">
+        <div class="img">
+          <img class="" src="/images/van.png" alt="Login image" />
+        </div>
+        <div class="apresentacao-content mt-4">
+          <h1>Vanessa Curtulo Anadão</h1>
+          <h3>Experiência</h3>
+          <p>Há 25 anos, Álvaro Silas Uliani Martins dos Santos assessora clientes nacionais e estrangeiros em operações envolvendo fusões e aquisições em indústrias diversas. Auxilia fundos de investimento nacionais e internacionais na realização de investimentos em companhias brasileiras (private equity e venture capital), além de companhias brasileiras na captação de recursos junto a fundos de investimento nacionais e internacionais. Atua junto a clientes nacionais e internacionais na constituição de sociedades no Brasil, celebração de joint ventures e acordos de acionistas, reorganizações societárias e projetos envolvendo implementação de melhores práticas de governança corporativa.</p>
+          <h3>Formação Acadêmica</h3>
+          <p>Graduação em Direito pela Pontifícia Universidade Católica de São Paulo (PUC-SP) </p>
+        </div>
+      </div>
+    </div>
+
+    <br><br><br><br><br>
 
     <footer class="footer">
-      <div class="container">
-        <p class="text-white mt-3">&copy; 2025 Aprova Redação. Todos os direitos reservados.</p>
+      <div class="container footer-top">
+        <div class="logo-section">
+          <img src="/images/logo.png" alt="Aprova Total" class="logo" />
+          <p>Transformando sonhos em aprovações</p>
+        </div>
+        <div class="footer-links">
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-instagram fs-1"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-linkedin fs-1"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-facebook fs-1"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-youtube fs-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="contact-info">
+          <p><strong>Números Oficiais de Vendas:</strong> (19) 99246-0527 | (19) 99246-0527</p>
+        </div>
+        <div class="copyright">
+          <p>Copyright © 2025 Aprova Redação</p>
+        </div>
       </div>
     </footer>
+
+
+    <div class="loader" id="loadingOverlay">
+      <div class="spinner-loader"></div>
+    </div>
   </body>
 </html>
-
-<div class="loader" id="loadingOverlay">
-  <div class="spinner-loader"></div>
-</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -84,7 +168,7 @@
     const container = document.querySelector('.carousel-container');
 
     let scrollAmount = 0;
-    const scrollStep = container.offsetWidth * 0.94;
+    const scrollStep = container.offsetWidth * 1.01;
 
     nextBtn.addEventListener('click', () => {
       scrollAmount = Math.min(scrollAmount + scrollStep, track.scrollWidth - container.clientWidth);

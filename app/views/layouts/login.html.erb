@@ -20,12 +20,17 @@
   <body>
     <div class="login-container">
       <div class="left-panel">
-        <img src="/images/imagem_login.png" alt="Login image" />
+        <div class="image-container">
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <img src="/images/imagem_login.png" alt="Login image" />
+        </div>
       </div>
       <div class="right-panel">
         <div class="card-login">
           <div class="logo">
-            <img src="/images/logo_preto.png" alt="Logo">
+            <a href="/">
+              <img src="/images/logo_preto.png" alt="Logo">
+            </a>
           </div>
           <div class="content">
             <%= yield %>

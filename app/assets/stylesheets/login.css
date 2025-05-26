@@ -77,6 +77,12 @@ body {
 
 .logo img {
   height: 200px;
+  transition: transform 0.3s ease;
+}
+
+.logo a:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 .content {
@@ -106,4 +112,31 @@ body {
 
 .boolean {
   margin-top: 3px;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+#error_explanation {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  min-width: 50%;
+  z-index: 10;
+  font-size: 14px;
+  padding: 18px;
+}
+
+#error_explanation h2 {
+  font-size: 16px;
+}
+
+#error_explanation ul {
+  padding-left: 18px;
 }

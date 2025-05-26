@@ -2,16 +2,14 @@
 
 <div style="margin-top: 30px">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
     <div class="row">
       <div class="field col-6">
-        <%= f.label :nome, class: "form-label fw-light" %><br />
+        <%= f.label :nome, class: "form-label fw-light" %>
         <%= f.text_field :nome, autofocus: true, class: "form-control form-control-sm", style: "margin-top: -6px" %>
       </div>
 
       <div class="field col-6">
-        <%= f.label :sobrenome, class: "form-label fw-light" %><br />
+        <%= f.label :sobrenome, class: "form-label fw-light" %>
         <%= f.text_field :sobrenome, autofocus: true, class: "form-control form-control-sm", style: "margin-top: -6px" %>
       </div>
     </div>
@@ -22,7 +20,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :email, class: "form-label fw-light" %><br />
+      <%= f.label :email, class: "form-label fw-light" %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm", style: "margin-top: -6px" %>
     </div>
 
@@ -30,12 +28,12 @@
       <%= f.label "Senha", class: "form-label fw-light" %>
       <% if @minimum_password_length %>
       <em class="label">(8 carateres no mínimo)</em>
-      <% end %><br />
+      <% end %>
       <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm", style: "margin-top: -6px" %>
     </div>
 
     <div class="field">
-      <%= f.label "Confirmação de senha", class: "form-label fw-light" %><br />
+      <%= f.label "Confirmação de senha", class: "form-label fw-light" %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm", style: "margin-top: -6px"  %>
     </div>
 
