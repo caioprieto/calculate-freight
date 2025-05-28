@@ -1,1 +1,100 @@
-<h1> Caio </h1>
+<%= render partial: "layouts/shared/header" %>
+
+<div class="container-curso">
+  <div class="faixa">
+    <div class="content-curso text-dark mt-4">
+      <div class="curso-container d-flex flex-wrap justify-content-between">
+        <div class="curso-info">
+          <div class="meta">
+            <span class="badge fw-light">Mais vendidos ⭐</span>
+          </div>
+
+          <h1 class="mt-3"><%= @curso.name %></h1>
+          <p class="subtitle"><%= @curso.description %></p>
+          <p class="language">📅 Atualizado em <%= @curso.updated_at.strftime("%m/%Y") %></p>
+        </div>
+
+        <div class="curso-preview text-dark">
+          <div>
+            <%= image_tag @curso.imagem.variant(resize_to_limit: [1000, 1000]).processed, class: "curso-imagem" %>
+          </div>
+
+          <div class="compra-box text-dark">
+            <div class="preco">
+              <span class="preco-atual">R$ 25,90</span>
+              <span class="preco-antigo">R$ 80,90</span>
+              <p class="desconto">68% de desconto</p>
+              <p class="tempo-restante fs-6">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
+            </div>
+
+            <div style="display: flex; gap: 10px">
+              <%= form_with url: add_to_cart_path(@curso), method: :post, local: true do %>
+                <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
+                  <i class="bi bi-cart-plus-fill fs-3"></i>
+                <% end %>
+              <% end %>
+
+              <button class="btn-roxo btn-comprar fw-light">Comprar agora</button>
+            </div>
+
+            <div class="links-extra"></div>
+
+            <div class="cupom-box">
+              <p class="cupom-msg fs-6">O código de cupom <strong>247TM260525G2</strong> foi aplicado</p>
+              <input type="text" class="form-control" placeholder="Inserir cupom">
+              <button class="btn-aplicar btn-comprar fw-light">Aplicar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="accordion w-50" id="modulosAccordion">
+    <% @modulos.each_with_index do |modulo, index| %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="heading-<%= index %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= index %>" aria-expanded="false" aria-controls="collapse-<%= index %>">
+            <%= modulo.titulo %>
+          </button>
+        </h2>
+        <div id="collapse-<%= index %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= index %>">
+          <div class="accordion-body">
+            <ul class="list-group list-group-flush">
+              <% modulo.aulas.each do |aula| %>
+                <% watched = current_user.user_aulas.exists?(aula_id: aula.id, watched: true) %>
+                <li class="list-group-item">
+                  <div>
+                    <a style="text-decoration: none;" class="aula-link" data-video-url="<%= aula.video.attached? ? url_for(aula.video) : "" %>">
+                      <%= aula.titulo %>
+                    </a>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="loader" id="loadingOverlay">
+  <div class="spinner-loader"></div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+  function showLoadingAndRedirect() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+
+    setTimeout(() => {
+      window.location.href = "";
+      overlay.style.display = 'none';
+    }, 1000);
+  }
+</script>

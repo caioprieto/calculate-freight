@@ -43,6 +43,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :cart, only: [] do
+    post "add/:curso_id", to: "cart#add", as: :add_to
+    delete "remove/:curso_id", to: "cart#remove", as: :remove_from
+  end
+
   resources :user_aulas
   resources :freights
   resources :cursos

@@ -6,28 +6,7 @@
     <title>Aprova Redação</title>
   </head>
   <body>
-    <nav>
-      <%= render 'infinite_text' %>
-      <div class="container">
-        <div class="logo">
-          <a href="/">
-            <img src="/images/logo_preto.png" alt="Logo" style="margin-left: -25px; display: flex;">
-          </a>
-        </div>
-        <nav class="menu">
-          <a href="/">Quem somos</a>
-          <a href="/">Vestibulares</a>
-          <a href="/">Colegial</a>
-          <a href="/">Iniciante</a>
-        </nav>
-        <div class="navbar-buttons" style="margin-right: -15px; display: flex; gap: 10px;">
-          <%= button_to "Quero me inscrever", new_user_registration_path, class: "btn btn-light text-custom-nav fw-light", method: :get %>
-          <a class="btn btn-dark text-custom-nav" onclick="showLoadingAndRedirect()">Já sou aluno</a>
-        </div>
-      </div>
-
-      <hr class="custom-hr">
-    </nav>
+    <%= render partial: "layouts/shared/header" %>
 
     <div class="container">
       <%= render 'carrosel' %>
@@ -72,22 +51,22 @@
       <hr>
       <div class="vestibular">
         <div class="vestibular-card">
-          <a href="/" class="text-dark" style="text-decoration: none;">
+          <a href="/cursos/1/edit" class="text-dark" style="text-decoration: none;">
             <img src="/images/unicamp.jpg" alt="Login image" />
           </a>
         </div>
         <div class="vestibular-card">
-          <a href="/" class="text-dark" style="text-decoration: none;">
+          <a href="/cursos/2/edit" class="text-dark" style="text-decoration: none;">
             <img src="/images/enem.jpg" alt="Login image" />
           </a>
         </div>
         <div class="vestibular-card">
-          <a href="/" class="text-dark" style="text-decoration: none;">
+          <a href="/cursos/3/edit" class="text-dark" style="text-decoration: none;">
             <img src="/images/unesp.jpg" alt="Login image" />
           </a>
         </div>
         <div class="vestibular-card">
-          <a href="/" class="text-dark" style="text-decoration: none;">
+          <a href="/cursos/4/edit" class="text-dark" style="text-decoration: none;">
             <img src="/images/usp.jpg" alt="Login image" />
           </a>
         </div>
@@ -180,14 +159,4 @@
       track.style.transform = `translateX(-${scrollAmount}px)`;
     });
   });
-
-  function showLoadingAndRedirect() {
-    const overlay = document.getElementById('loadingOverlay');
-    overlay.style.display = 'flex';
-
-    setTimeout(() => {
-      window.location.href = "/user/dashboard";
-      overlay.style.display = 'none';
-    }, 1000);
-  }
 </script>

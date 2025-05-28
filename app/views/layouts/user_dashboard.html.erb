@@ -4,6 +4,7 @@
     <title>Crie ou logue na sua conta</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application" %>
     <%= stylesheet_link_tag "user_dashboard" %>
     <%= stylesheet_link_tag "user_redacoes" %>
     <%= stylesheet_link_tag "user_settings" %>
@@ -25,29 +26,23 @@
       <div class="right-panel">
         <div class="scrollable-content">
           <div class="container-right-panel">
-            <nav class="row">
-              <div class="col-5">
-                <%= form_with url: current_page?("/user/redacoes") ? user_redacoes_search_path : user_explorar_path, method: :get, local: true, class: "search-form" do %>
-                  <input
-                    type="text"
-                    name="query"
-                    placeholder="Qual <%= current_page?("/user/redacoes") ? "redação" : "curso" %> está procurando?"
-                    class="search-input"
-                  />
-                  <button type="submit" class="search-button">
-                    <i class="bi bi-search fs-4" style="margin-right: 10px"></i>
-                  </button>
-                <% end %>
-              </div>
-              <div class="col-4"></div>
-              <div class="col-3 custom-btn">
-                <a href="/user/settings" class="btn align-items-center">
-                  <i class="bi bi-person-circle fs-1 text-dark"></i>
-                  <span class="email-text">
-                    <%= current_user.nome.upcase %>
-                  </span>
-                </a>
-              </div>
+            <nav class="d-flex justify-between align-items-center">
+              <%= form_with url: current_page?("/user/redacoes") ? user_redacoes_search_path : user_explorar_path, method: :get, local: true, class: "search-form d-flex align-items-center" do %>
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="Qual <%= current_page?("/user/redacoes") ? "redação" : "curso" %> está procurando?"
+                  class="search-input"
+                />
+                <button type="submit" class="search-button ms-2">
+                  <i class="bi bi-search fs-4"></i>
+                </button>
+              <% end %>
+
+              <a href="/user/settings" class="btn d-flex align-items-center right">
+                <i class="bi bi-person-circle fs-1 text-dark me-2"></i>
+                <span class="email-text"><%= current_user.nome.upcase %></span>
+              </a>
             </nav>
 
             <%= yield %>

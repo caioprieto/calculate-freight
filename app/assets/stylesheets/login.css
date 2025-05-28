@@ -23,6 +23,7 @@ body {
 .right-panel {
   flex: 1;
   display: flex;
+  overflow-y: auto;
 }
 
 .card-login {
@@ -92,7 +93,6 @@ body {
 
 .text-custom-password {
   text-decoration: none;
-  margin-left: 50px;
   white-space: nowrap;
 }
 
@@ -112,11 +112,6 @@ body {
 
 .boolean {
   margin-top: 3px;
-}
-
-.image-container {
-  position: relative;
-  display: inline-block;
 }
 
 #error_explanation {

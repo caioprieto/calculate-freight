@@ -1,0 +1,151 @@
+<nav>
+  <div class="scroll" style="margin-bottom: -40px;">
+    <div class="scroll_container">
+      <% 8.times.each do |item| %>
+        <div class="scroll_item">10% OFF NA PRIMEIRA COMPRA</div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <a href="/">
+        <img src="/images/logo_preto.png" alt="Logo" style="margin-left: -25px; display: flex;">
+      </a>
+    </div>
+    <nav class="menu">
+      <a href="/">Quem somos</a>
+      <a href="/">Vestibulares</a>
+      <a href="/">Colegial</a>
+      <a href="/">Iniciante</a>
+    </nav>
+    <div class="navbar-buttons" style="margin-right: -5px; display: flex; gap: 10px; align-items: center;">
+      <% if current_user.present? %>
+        <!-- Ícone de Perfil com Dropdown -->
+        <div class="user-dropdown">
+          <!-- Ícone do usuário -->
+          <button class="user-dropdown-button" aria-label="Menu do usuário">
+            <i class="bi bi-person-circle user-icon fs-1"></i>
+          </button>
+
+          <!-- Dropdown -->
+          <div class="user-dropdown-menu">
+            <span style="font-weight: bold; padding: 10px; display: block"><%= current_user.nome %></span>
+            <hr style="margin: 0;">
+            <%= link_to 'Área do Aluno', user_dashboard_path %>
+            <%= link_to 'Configurações', user_settings_path %>
+            <%= link_to 'Sair', '#', onclick: "logout()" %>
+          </div>
+        </div>
+        <div class="position-relative">
+          <!-- BOTÃO DO CARRINHO -->
+          <div class="btn" id="cart-toggle" style="cursor: pointer; position: relative;">
+            <i class="bi bi-cart2 fs-1"></i>
+            <% if @cart.present? %>
+              <span class="bolinha fs-6 position-absolute top-0">
+                <%= @cart.cursos.count %>
+              </span>
+            <% end %>
+          </div>
+
+          <!-- MINI MODAL DO CARRINHO -->
+          <div id="cart-dropdown" class="card shadow position-absolute end-0 mt-2" style="width: 350px; display: none; z-index: 1000;">
+            <div class="card-body">
+              <h6 class="card-title">Carrinho</h6>
+              <hr>
+              <% if @cursos.present? %>
+                <ul class="list-group mb-3">
+                  <% @cursos.each do |curso| %>
+                    <li class="list-group-item d-flex align-items-center p-3">
+                      <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none;" class="text-dark d-flex w-100 select-curso">
+                        <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho" %>
+                        <div style="margin-left: 10px;">
+                          <h6 class="fw-light mt-1"><%= curso.name %><%= curso.name %><%= curso.name %></h6>
+                          <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
+                        </div>
+                      </a>
+                    </li>
+                  <% end %>
+                </ul>
+                <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn text-white w-100", style: "background-color:#1d1d1d;" %>
+              <% else %>
+                <p class="text-muted">Seu carrinho está vazio...</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%= button_to "Quero me inscrever", new_user_registration_path, class: "btn btn-light text-custom-nav fw-light", method: :get %>
+        <a class="btn btn-dark text-custom-nav" onclick="showLoadingAndRedirect()">Já sou aluno</a>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="loader" id="loadingOverlay">
+    <div class="spinner-loader"></div>
+  </div>
+
+  <hr class="custom-hr">
+</nav>
+
+<script>
+  function showLoadingAndRedirect() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+
+    setTimeout(() => {
+      window.location.href = "/user/dashboard";
+      overlay.style.display = 'none';
+    }, 1000);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("cart-toggle");
+    const dropdown = document.getElementById("cart-dropdown");
+
+    let timeout;
+
+    toggle.addEventListener("click", () => {
+      clearTimeout(timeout);
+      if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+      } else {
+        dropdown.style.display = "none";
+      }
+    });
+  });
+
+  function logout() {
+    fetch("/users/sign_out", {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+    }).then(() => {
+      window.location.href = "/";
+    }).catch((error) => {
+      console.error("Erro ao fazer logout:", error);
+    });
+  }
+</script>
+
+<style>
+.bolinha {
+  background-color:rgb(222, 222, 222);
+  color: black;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;   /* Centraliza horizontalmente */
+  align-items: center;       /* Centraliza verticalmente */
+  border-radius: 50%;
+  margin-left: 30px;
+  margin-top: 3px;
+}
+
+.bolinha {
+
+}
+</style>

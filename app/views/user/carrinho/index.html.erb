@@ -1,11 +1,61 @@
-<div class="full-width-container" style="display: flex; gap: 15px">
-  <% @cursos.each do |curso| %>
-    <div class="cursos-card mt-3 bg-white d-flex flex-column align-items-center">
-      <% if curso.imagem.attached? %>
-        <%= image_tag curso.imagem.variant(resize_to_limit: [1000, 1000]).processed %>
+<h5 class="mt-3" href="/">
+  <i class="bi bi-cart fs-4" style="margin-right: 10px"></i>
+  <span style="position: relative; top: -2px;">Carrinho</span>
+</h5>
+
+<div class="full-width-container d-flex flex-wrap" style="gap: 15px">
+  <% if @cursos.present? %>
+    <div class="full-width-container" style="display: flex; gap: 15px">
+      <% @cursos.each do |curso| %>
+        <div class="cursos-card mt-3 bg-white d-flex flex-column align-items-center">
+          <% if curso.imagem.attached? %>
+            <%= image_tag curso.imagem.variant(resize_to_limit: [1000, 1000]).processed %>
+          <% end %>
+          <h1 class="text-dark"><%= curso.name %></h1>
+          <p class="fw-light" style="margin-top: -15px; margin-bottom: 8px;">10x de R$ 15,99</p>
+        </div>
       <% end %>
-      <h1 class="text-dark"><%= curso.name %></h1>
-      <p class="fw-light" style="margin-top: -15px; margin-bottom: 8px;">10x de R$ 15,99</p>
     </div>
+
+    <div class="curso-container">
+      <div class="curso-info">
+        <div class="meta">
+          <span class="badge fw-light">Mais vendidos ⭐</span>
+        </div>
+
+        <div class="curso-preview text-dark">
+          <div class="compra-box text-dark">
+            <div class="preco">
+              <span class="preco-atual">R$ 25,90</span>
+              <span class="preco-antigo">R$ 80,90</span>
+              <p class="desconto">68% de desconto</p>
+              <p class="tempo-restante fs-6">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
+            </div>
+
+            <div style="display: flex; gap: 10px">
+              <%= form_with method: :post, local: true do %>
+                <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
+                  <i class="bi bi-cart-plus-fill fs-3"></i>
+                <% end %>
+              <% end %>
+
+              <button class="btn-roxo btn-comprar fw-light">Comprar agora</button>
+            </div>
+
+            <div class="links-extra"></div>
+
+            <div class="cupom-box">
+              <p class="cupom-msg fs-6">O código de cupom <strong>247TM260525G2</strong> foi aplicado</p>
+              <input type="text" class="form-control" placeholder="Inserir cupom">
+              <button class="btn-aplicar btn-comprar fw-light">Aplicar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% else %>
+    <hr class="w-25">
+    <p>Seu carrinho está vazio...</p>
   <% end %>
 </div>
