@@ -75,6 +75,7 @@ h1 {
 
 .subtitle {
   font-size: 18px;
+  width: 800px;
   margin: 10px 0;
   color: #6e6e6e;
 }
@@ -84,7 +85,7 @@ h1 {
 }
 
 .badge {
-  background-color: #0066ff;
+  background-color: #1d1d1d;
   color: white;
   padding: 5px 10px;
   border-radius: 50px;
@@ -110,16 +111,26 @@ h1 {
   margin: 1px auto;
 }
 
+.preco {
+  margin-top: 6px;
+}
+
 .preco-atual {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: lighter;
   color: #1c1c1c;
 }
 
-.preco-antigo {
+.preco-riscado {
   text-decoration: line-through;
   margin-left: 8px;
   color: #888;
+}
+
+.preco-antigo {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1c1c1c;
 }
 
 .tempo-restante {
@@ -137,6 +148,11 @@ h1 {
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-comprar:hover {
+  transform: scale(1.05);
 }
 
 .btn-carrinho {
@@ -145,12 +161,21 @@ h1 {
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-carrinho:hover {
+  transform: scale(1.1); /* Aumenta 20% */
+  color: rgb(0, 0, 0);
 }
 
 .btn-roxo {
   background-color: #1d1d1d;
   color: white;
   border: none;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
 }
 
 .btn-branco {
@@ -179,15 +204,6 @@ h1 {
   color: #555;
 }
 
-.cupom-box {
-  border-top: 1px solid #ccc;
-  padding-top: 15px;
-}
-
-.cupom-msg {
-  color: #666;
-  margin-bottom: 10px;
-}
 
 .cupom-box input {
   width: 100%;
@@ -214,6 +230,20 @@ h1 {
   border: none;
   cursor: pointer;
   padding: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.user-dropdown-button:hover {
+  transform: scale(1.25);
+}
+
+.cart-toggle i {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-toggle:hover i {
+  transform: scale(1.2);
 }
 
 .user-dropdown-menu {
@@ -303,4 +333,29 @@ h1 {
   font-weight: 600;
   font-size: 18px;
   margin-top: -5px;
+}
+
+.itens-curso {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 160px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.item i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #333;
+}
+
+.card-warning {
+  padding: 10px;
+  border-radius: 10px;
+  width: 50%;
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_21_191520) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_29_025730) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -155,6 +155,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_191520) do
     t.index ["curso_id"], name: "index_modulos_on_curso_id"
   end
 
+  create_table "pedidos", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "user_id", null: false
+    t.string "status", default: "pending", null: false
+    t.integer "cursos_count"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_pedidos_on_cart_id"
+    t.index ["user_id"], name: "index_pedidos_on_user_id"
+  end
+
   create_table "texts", force: :cascade do |t|
     t.integer "word_id", null: false
     t.text "content"
@@ -231,6 +243,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_191520) do
   add_foreign_key "freights", "address", column: "address_destino_id"
   add_foreign_key "freights", "address", column: "address_origem_id"
   add_foreign_key "modulos", "cursos"
+  add_foreign_key "pedidos", "carts"
+  add_foreign_key "pedidos", "users"
   add_foreign_key "texts", "words"
   add_foreign_key "user_aulas", "aulas"
   add_foreign_key "user_aulas", "users"

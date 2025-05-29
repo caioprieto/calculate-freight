@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
     get "carrinho", to: "carrinho#index"
 
+    post "gerar_pedido", to: "pedidos#gerar"
+
     resources :cursos do
       member do
         get :player
@@ -52,6 +54,7 @@ Rails.application.routes.draw do
   resources :freights
   resources :cursos
   resources :videos
+  resources :pedidos
 
   post "calcular_frete", to: "freights#calcular_frete"
   post "importar_fretes", to: "freights#importar_fretes"

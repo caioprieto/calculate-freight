@@ -3,59 +3,104 @@
   <span style="position: relative; top: -2px;">Carrinho</span>
 </h5>
 
-<div class="full-width-container d-flex flex-wrap" style="gap: 15px">
+<div class="full-width-container d-flex" style="gap: 50px;">
   <% if @cursos.present? %>
-    <div class="full-width-container" style="display: flex; gap: 15px">
+    <div style="flex-direction: column; gap: 15px; width: 50%; white-space: nowrap;">
       <% @cursos.each do |curso| %>
-        <div class="cursos-card mt-3 bg-white d-flex flex-column align-items-center">
+        <div class="cursos-card mt-4 bg-white d-flex flex-column align-items-center">
           <% if curso.imagem.attached? %>
             <%= image_tag curso.imagem.variant(resize_to_limit: [1000, 1000]).processed %>
           <% end %>
           <h1 class="text-dark"><%= curso.name %></h1>
           <p class="fw-light" style="margin-top: -15px; margin-bottom: 8px;">10x de R$ 15,99</p>
+          <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true, class: "w-100" do %>
+            <%= button_tag type: "submit", class: "btn btn-danger text-white p-0 w-100", style: "border-radius: 0px", onclick: "showLoadingAndRedirect()" do %>
+              <i class="bi bi-trash fs-5" style="font-weight: 2000"></i>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     </div>
 
     <div class="curso-container">
       <div class="curso-info">
-        <div class="meta">
-          <span class="badge fw-light">Mais vendidos ⭐</span>
-        </div>
-
-        <div class="curso-preview text-dark">
+        <div class="curso-preview mt-3 text-dark">
           <div class="compra-box text-dark">
-            <div class="preco">
-              <span class="preco-atual">R$ 25,90</span>
-              <span class="preco-antigo">R$ 80,90</span>
-              <p class="desconto">68% de desconto</p>
-              <p class="tempo-restante fs-6">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
+            <h5 href="/">
+              <i class="bi bi-clipboard fs-4" style="margin-right: 10px"></i>
+              <span style="position: relative; top: -2px;">Resumo  •  <%= @cursos.count %> Produtos</span>
+            </h5>
+            <div class="preco mt-3">
+              <% @cursos.each do |curso| %>
+                <div class="d-flex justify-content-between">
+                  <span class="preco-atual"><%= curso.name %></span>
+                  <span class="preco-antigo"><%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
+                </div>
+              <% end %>
             </div>
 
-            <div style="display: flex; gap: 10px">
-              <%= form_with method: :post, local: true do %>
-                <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
-                  <i class="bi bi-cart-plus-fill fs-3"></i>
+            <hr>
+
+            <div class="preco mt-3 d-flex justify-content-between">
+              <span class="preco-atual">Valor dos Produtos</span>
+              <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
+            </div>
+
+            <div style="width: 100%; margin-top: 5px">
+              <%= form_with url: user_gerar_pedido_path, method: :post, local: true do %>
+                <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-2" do %>
+                  Finalizar Compra
                 <% end %>
               <% end %>
-
-              <button class="btn-roxo btn-comprar fw-light">Comprar agora</button>
             </div>
 
-            <div class="links-extra"></div>
+            <div class="position-relative">
+              <!-- BOTÃO DO CARRINHO -->
+              <div class="btn-roxo btn-comprar fw-light p-2 cart-toggle" id="cart-toggle" style="cursor: pointer;">
+                Finalizar Compra
+              </div>
+            </div>
+          </div>
 
+          <div class="compra-box text-dark mt-3">
             <div class="cupom-box">
               <p class="cupom-msg fs-6">O código de cupom <strong>247TM260525G2</strong> foi aplicado</p>
               <input type="text" class="form-control" placeholder="Inserir cupom">
               <button class="btn-aplicar btn-comprar fw-light">Aplicar</button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
 
   <% else %>
-    <hr class="w-25">
-    <p>Seu carrinho está vazio...</p>
+    <div class="card-warning mt-2">
+      <p>Seu carrinho está vazio...</p>
+    </div>
   <% end %>
 </div>
+
+<!-- MODAL VERDADEIRO (usando estrutura Bootstrap) -->
+<div class="modal fade" id="cartModal" tabindex="-2" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg top-modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="bi bi-info-circle" style="font-size: 80px"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("cart-toggle").addEventListener("click", function () {
+      var cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+      cartModal.show();
+    });
+  });
+</script>

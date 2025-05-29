@@ -39,7 +39,7 @@
         </div>
         <div class="position-relative">
           <!-- BOTÃO DO CARRINHO -->
-          <div class="btn" id="cart-toggle" style="cursor: pointer; position: relative;">
+          <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative;">
             <i class="bi bi-cart2 fs-1"></i>
             <% if @cart.present? %>
               <span class="bolinha fs-6 position-absolute top-0">
@@ -58,7 +58,9 @@
                   <% @cursos.each do |curso| %>
                     <li class="list-group-item d-flex align-items-center p-3">
                       <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none;" class="text-dark d-flex w-100 select-curso">
-                        <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho" %>
+                        <% if curso.imagem.present? %>
+                          <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho" %>
+                        <% end %>
                         <div style="margin-left: 10px;">
                           <h6 class="fw-light mt-1"><%= curso.name %><%= curso.name %><%= curso.name %></h6>
                           <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
@@ -67,7 +69,12 @@
                     </li>
                   <% end %>
                 </ul>
-                <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn text-white w-100", style: "background-color:#1d1d1d;" %>
+
+              <div class="preco mt-3 d-flex justify-content-between">
+                <span class="preco-atual">Valor dos Produtos</span>
+                <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
+              </div>
+                <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d;" %>
               <% else %>
                 <p class="text-muted">Seu carrinho está vazio...</p>
               <% end %>
