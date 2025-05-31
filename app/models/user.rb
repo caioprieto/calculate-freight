@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :user_aulas
   has_many :watched_aulas, through: :user_aulas, source: :aula
 
+  has_many :pedidos
+
   has_one :cart
 
   validates :nome, :sobrenome, :cpf, presence: true

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: "welcomes#index"
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -56,6 +57,10 @@ Rails.application.routes.draw do
   resources :videos
   resources :pedidos
 
+  get "/success", to: "payments#success"
+  get "/cancel", to: "payments#cancel"
+
+  post "/create_checkout_session", to: "payments#create_checkout_session"
   post "calcular_frete", to: "freights#calcular_frete"
   post "importar_fretes", to: "freights#importar_fretes"
 end

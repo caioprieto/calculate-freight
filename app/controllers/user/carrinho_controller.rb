@@ -4,5 +4,6 @@ class User::CarrinhoController < ApplicationController
   def index
     @cart = current_user.cart
     @cursos = @cart.cursos
+    @code = params[:code]
   end
 end

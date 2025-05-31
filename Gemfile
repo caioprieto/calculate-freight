@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "rails", "~> 8.0.1"
 gem "propshaft"
-gem 'pg', '~> 1.5'
+gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
@@ -27,6 +27,9 @@ gem "devise"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "image_processing"
+gem "stripe"
+gem 'state_machines'
+gem 'state_machines-activerecord'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

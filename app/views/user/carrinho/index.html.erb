@@ -1,9 +1,9 @@
 <h5 class="mt-3" href="/">
-  <i class="bi bi-cart fs-4" style="margin-right: 10px"></i>
+  <i class="bi bi-cart fs-4" style="margin-right: 10px; margin-left: 22px"></i>
   <span style="position: relative; top: -2px;">Carrinho</span>
 </h5>
 
-<div class="full-width-container d-flex" style="gap: 50px;">
+<div class="full-width-container d-flex" style="gap: 70px; margin-left: 22px">
   <% if @cursos.present? %>
     <div style="flex-direction: column; gap: 15px; width: 50%; white-space: nowrap;">
       <% @cursos.each do |curso| %>
@@ -25,7 +25,7 @@
     <div class="curso-container">
       <div class="curso-info">
         <div class="curso-preview mt-3 text-dark">
-          <div class="compra-box text-dark">
+          <div class="pagar-box text-dark">
             <h5 href="/">
               <i class="bi bi-clipboard fs-4" style="margin-right: 10px"></i>
               <span style="position: relative; top: -2px;">Resumo  •  <%= @cursos.count %> Produtos</span>
@@ -46,23 +46,21 @@
               <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
             </div>
 
-            <div style="width: 100%; margin-top: 5px">
-              <%= form_with url: user_gerar_pedido_path, method: :post, local: true do %>
-                <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-2" do %>
-                  Finalizar Compra
+            <div style="width: 100%; margin-top: 20px">
+              <%= form_with url: create_checkout_session_path, method: :post, local: true do %>
+                <%= hidden_field_tag :cart_id, @cart.id %>
+                <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-2 d-flex align-items-center gap-2 justify-content-center" do %>
+                  Cartão de Crédito/Débito
                 <% end %>
               <% end %>
             </div>
 
-            <div class="position-relative">
-              <!-- BOTÃO DO CARRINHO -->
-              <div class="btn-roxo btn-comprar fw-light p-2 cart-toggle" id="cart-toggle" style="cursor: pointer;">
-                Finalizar Compra
-              </div>
-            </div>
+            <button class="btn-outline-dark btn-pix fw-light d-flex align-items-center p-2 mt-1 justify-content-center">
+              Gerar Pix QRCode
+            </button>
           </div>
 
-          <div class="compra-box text-dark mt-3">
+          <div class="pagar-box text-dark mt-3">
             <div class="cupom-box">
               <p class="cupom-msg fs-6">O código de cupom <strong>247TM260525G2</strong> foi aplicado</p>
               <input type="text" class="form-control" placeholder="Inserir cupom">
@@ -86,21 +84,62 @@
   <div class="modal-dialog modal-lg top-modal">
     <div class="modal-content">
       <div class="modal-body">
-        <div class="text-center">
-          <i class="bi bi-info-circle" style="font-size: 80px"></i>
+        <!-- SPINNER LOADER -->
+        <div class="loader" id="loadingOverlay" style="display: flex;">
+          <div class="spinner-loader"></div>
+        </div>
+
+        <div id="infoIcon" style="text-align: center;">
+          <i class="bi bi-info-circle" style="font-size: 80px;"></i>
+        </div>
+
+        <!-- ÍCONE DE SUCESSO -->
+        <div id="successIcon" style="display: none; text-align: center;">
+          <i class="bi bi-check-circle-fill text-success" style="font-size: 80px; animation: zoomIn 0.6s ease;"></i>
+          <h4 class="text-success">PEDIDO REALIZADO COM SUCESSO!</h4>
+
+          <p class="fw-light fs-6 w-75 mx-auto mt-2">
+            Seu pedido foi concluído, assim que o pagamento for confirmado um e-mail será disparado para sua conta com as devidas instruções.
+          </p>
+          <p class="mt-3 fw-light">Código do Pedido: <strong class="fw-bold"><%= @code %><strong> </p>
+
+          <div style="width: 100%;">
+            <%= link_to root_path, class: "btn btn-dark fw-light mt-2 w-50" do %>
+              Ir para os meus pedidos
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<br><br><br><br><br><br>
+<br><br>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("cart-toggle").addEventListener("click", function () {
-      var cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("show_modal") === "true") {
+      const cartModalElement = document.getElementById('cartModal');
+      const cartModal = new bootstrap.Modal(cartModalElement);
+
       cartModal.show();
-    });
+
+      // Quando o modal abrir, começa o loading
+      cartModalElement.addEventListener('shown.bs.modal', function () {
+        const loader = document.getElementById("loadingOverlay");
+        const successIcon = document.getElementById("successIcon");
+
+        loader.style.display = "flex";
+        successIcon.style.display = "none";
+
+        setTimeout(() => {
+          loader.style.display = "none";
+          successIcon.style.display = "block";
+          infoIcon.style.display = "none";
+        }, 5000);
+      }, { once: true });
+    }
   });
 </script>
+

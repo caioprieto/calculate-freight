@@ -111,6 +111,15 @@ h1 {
   margin: 1px auto;
 }
 
+.pagar-box {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 420px;
+  margin: 1px auto;
+}
+
 .preco {
   margin-top: 6px;
 }
@@ -152,7 +161,22 @@ h1 {
 }
 
 .btn-comprar:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
+}
+
+.btn-pix {
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+}
+
+.btn-pix:hover {
+  transform: scale(1.03);
+  color: white;
+  background-color: #1d1d1d;
 }
 
 .btn-carrinho {
