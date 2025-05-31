@@ -333,6 +333,11 @@ nav.d-flex {
   box-shadow: 0 4px 10px rgba(1,1, 1, 0.4);
   width: 100%;
   border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cursos-card:hover {
+  transform: scale(1.05);
 }
 
 .cursos-card img {
@@ -340,7 +345,7 @@ nav.d-flex {
   height: 120px;
   object-fit: cover;
   object-position: center;
-  filter: blur(4px);
+  filter: blur(2px);
 }
 
 .cursos-card h1 {
@@ -395,4 +400,32 @@ nav.d-flex {
   border-left: solid 8px rgba(0,0,0,.1);
 
   animation: 1.5s linear infinite spin;
+}
+
+.scroll {
+  overflow: hidden;
+  background-color: black;
+}
+
+.scroll_container {
+  display: flex;
+  width: max-content;
+  animation: scrollInfinito 30s linear infinite;
+}
+
+.scroll_item {
+  color: white;
+  font-size: 17px;
+  /* white-scape: Comando muito importante, permite com que o item nunca quebre a linha para baixo no caso do 'nowrap' */
+  white-space: nowrap;
+  padding-right: 200px;
+}
+
+@keyframes scrollInfinito {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

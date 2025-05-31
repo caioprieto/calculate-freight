@@ -20,6 +20,10 @@ module StateMachines
           pedido.liberar_curso
           pedido.finalizar
         end
+
+        after_transition to: :finalizado do |pedido|
+          pedido.cart.clear_data
+        end
       end
     end
   end

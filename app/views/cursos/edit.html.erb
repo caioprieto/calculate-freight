@@ -1,6 +1,21 @@
 <%= render partial: "layouts/shared/header" %>
 
 <div class="container-curso">
+  <% if flash[:alert] %>
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
+      <%= flash[:alert]%>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
+      <%= flash[:notice] %>
+      <%= @mostrar_biblioteca %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
   <div class="faixa">
     <div class="content-curso text-dark mt-4">
       <div class="curso-container d-flex flex-wrap justify-content-between">

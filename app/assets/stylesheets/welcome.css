@@ -169,8 +169,9 @@ footer.footer {
 }
 
 .carousel-section {
-  width: 100%;
+  width: 95%;
   min-height: 300px;
+  margin-left: 30px;
 }
 
 .carousel-wrapper {
@@ -484,7 +485,7 @@ footer.footer {
 
 .logo {
   width: 150px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .app-buttons img {

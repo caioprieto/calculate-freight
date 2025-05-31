@@ -9,4 +9,8 @@ class Cart < ApplicationRecord
   def total
     cursos.sum(:value)
   end
+
+  def clear_data
+    cart_cursos.destroy_all
+  end
 end

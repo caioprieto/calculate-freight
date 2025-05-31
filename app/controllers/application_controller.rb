@@ -4,7 +4,12 @@ class ApplicationController < ActionController::Base
   before_action :set_cart, if: -> { current_user.present? }
 
   def set_cart
-    @cart = current_user.cart
-    @cursos = @cart.cursos
+    if current_user.cart.present?
+      @cart = current_user.cart
+      @cursos = @cart.cursos
+    else
+      @cart = Cart.create(user: current_user)
+      @cursos = @cart.cursos
+    end
   end
 end
