@@ -52,7 +52,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:nome, :sobrenome, :cpf, :email)
+    params.require(:user).permit(:nome, :sobrenome, :imagem)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

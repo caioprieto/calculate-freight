@@ -3,19 +3,19 @@
   <span style="position: relative; top: -2px;">Carrinho</span>
 </h5>
 
-<div class="full-width-container d-flex" style="gap: 70px; margin-left: 22px">
+<div class="full-width-container d-flex" style="gap: 70px; margin-left: 22px; margin-top: -12px">
   <% if @cursos.present? %>
     <div style="flex-direction: column; gap: 15px; width: 50%; white-space: nowrap;">
       <% @cursos.each do |curso| %>
-        <div class="cursos-card mt-4 bg-white d-flex flex-column align-items-center">
+        <div class="carrinho-cursos-card mt-4 bg-white d-flex flex-column align-items-center">
           <% if curso.imagem.attached? %>
             <%= image_tag curso.imagem.variant(resize_to_limit: [1000, 1000]).processed %>
           <% end %>
           <h1 class="text-dark"><%= curso.name %></h1>
           <p class="fw-light" style="margin-top: -15px; margin-bottom: 8px;">10x de R$ 15,99</p>
           <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true, class: "w-100" do %>
-            <%= button_tag type: "submit", class: "btn btn-danger text-white p-0 w-100", style: "border-radius: 0px", onclick: "showLoadingAndRedirect()" do %>
-              <i class="bi bi-trash fs-5" style="font-weight: 2000"></i>
+            <%= button_tag type: "submit", class: "btn btn-danger text-white w-100", style: "border-radius: 0px; padding: 0", onclick: "showLoadingAndRedirect()" do %>
+              <i class="icon-lixeira bi bi-trash fs-4" style="font-weight: 2000"></i>
             <% end %>
           <% end %>
         </div>
@@ -24,7 +24,7 @@
 
     <div class="curso-container">
       <div class="curso-info">
-        <div class="curso-preview mt-3 text-dark">
+        <div class="curso-preview mt-4 text-dark">
           <div class="pagar-box text-dark">
             <h5 href="/">
               <i class="bi bi-clipboard fs-4" style="margin-right: 10px"></i>
@@ -50,12 +50,14 @@
               <%= form_with url: create_checkout_session_path, method: :post, local: true do %>
                 <%= hidden_field_tag :cart_id, @cart.id %>
                 <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-2 d-flex align-items-center gap-2 justify-content-center" do %>
+                  <i class="bi bi-credit-card-fill fs-3"></i>
                   Cartão de Crédito/Débito
                 <% end %>
               <% end %>
             </div>
 
-            <button class="btn-outline-dark btn-pix fw-light d-flex align-items-center p-2 mt-1 justify-content-center">
+            <button class="btn-dark btn-pix fw-light d-flex align-items-center p-2 mt-1 justify-content-center">
+              <i class="bi bi-qr-code-scan fs-3 mx-1"></i>
               Gerar Pix QRCode
             </button>
           </div>
@@ -104,7 +106,7 @@
           <p class="mt-3 fw-light">Código do Pedido: <strong class="fw-bold"><%= @code %><strong> </p>
 
           <div style="width: 100%;">
-            <%= link_to root_path, class: "btn btn-dark fw-light mt-2 w-50" do %>
+            <%= link_to user_pedidos_path, class: "btn btn-dark fw-light mt-2 w-50" do %>
               Ir para os meus pedidos
             <% end %>
           </div>

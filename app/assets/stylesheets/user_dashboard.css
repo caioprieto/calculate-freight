@@ -189,6 +189,7 @@ nav.d-flex {
   display: flex;
   width: 600px;
   gap: 10px;
+  margin-bottom: 40px;
 }
 
 .curso-texto {
@@ -268,7 +269,7 @@ nav.d-flex {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 1);
+  background: rgb(0, 0, 0);
   color: white;
   border: none;
   border-radius: 50%;
@@ -329,28 +330,108 @@ nav.d-flex {
   margin: 0;
 }
 
+.carrinho-cursos-card {
+  box-shadow: 0 4px 10px rgba(1,1, 1, 0.4);
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carrinho-cursos-card:hover {
+  transform: scale(1.05);
+  z-index: 10;
+  position: relative;
+}
+
+.carrinho-cursos-card:hover img {
+  filter: blur(0px);
+}
+
+.carrinho-cursos-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  object-position: center center;
+  filter: blur(4px);
+  transition: filter 0.5s ease-in-out;
+}
+
+.carrinho-cursos-card h1 {
+  font-size: 17px;
+  padding: 8px;
+}
+
 .cursos-card {
   box-shadow: 0 4px 10px rgba(1,1, 1, 0.4);
+  background-color: whitesmoke;
   width: 100%;
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
 }
 
 .cursos-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.2);
+  z-index: 10;
+  position: relative;
+}
+
+.cursos-card:hover img {
+  filter: blur(0px);
 }
 
 .cursos-card img {
   width: 100%;
-  height: 120px;
+  height: 150px;
   object-fit: cover;
   object-position: center;
-  filter: blur(2px);
+  object-position: center center;
+  filter: blur(5px);
+  transition: filter 0.5s ease-in-out;
 }
 
 .cursos-card h1 {
   font-size: 17px;
   padding: 8px;
+}
+
+.meus-cursos-card {
+  box-shadow: 0 4px 10px rgba(1,1, 1, 0.4);
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.meus-cursos-card:hover {
+  transform: scale(1.06);
+}
+
+.meus-cursos-card:hover img {
+  filter: blur(0px);
+}
+
+.meus-cursos-card:hover i {
+  transform: scale(1.2);
+}
+
+.meus-cursos-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(2px);
+}
+
+.meus-cursos-card h1 {
+  font-size: 17px;
+  padding: 8px;
+}
+
+.meus-cursos-card i {
+  transition: transform 0.3s ease-in-out;
+  margin-left: 2px;
+  margin-top: -1px;
 }
 
 .modal-backdrop.show {

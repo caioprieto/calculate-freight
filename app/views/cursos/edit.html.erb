@@ -1,17 +1,16 @@
 <%= render partial: "layouts/shared/header" %>
 
 <div class="container-curso">
-  <% if flash[:alert] %>
+  <% if flash[:alerta] %>
     <div class="alert alert-danger alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
-      <%= flash[:alert]%>
+      <%= flash[:alerta]%>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
 
-  <% if flash[:notice] %>
+  <% if flash[:noticia] %>
     <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
-      <%= flash[:notice] %>
-      <%= @mostrar_biblioteca %>
+      <%= flash[:noticia] %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
@@ -56,7 +55,7 @@
 
               <div class="w-100 p-1">
                 <%= form_with url: add_to_cart_path(@curso, redirect: true), method: :post, local: true do %>
-                  <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light", onclick: "showLoadingRedirect()" do %>
+                  <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-3 mt-1", onclick: "showLoadingRedirect()" do %>
                     Comprar agora
                   <% end %>
                 <% end %>
@@ -132,14 +131,11 @@
         </h2>
         <div id="collapse-<%= index %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= index %>">
           <div class="accordion-body">
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush" style="gap: 10px">
               <% modulo.aulas.each do |aula| %>
-                <% watched = current_user.user_aulas.exists?(aula_id: aula.id, watched: true) %>
-                <li class="list-group-item">
-                  <div>
-                    <a style="text-decoration: none;" class="aula-link" data-video-url="<%= aula.video.attached? ? url_for(aula.video) : "" %>">
-                      <%= aula.titulo %>
-                    </a>
+                <li class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
+                  <div style="text-decoration: none; padding: 1px" class="fw-light">
+                    <%= aula.titulo %>
                   </div>
                 </li>
               <% end %>

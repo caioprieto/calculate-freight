@@ -112,7 +112,7 @@ h1 {
 }
 
 .pagar-box {
-  background: white;
+  background: whitesmoke;
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -169,19 +169,19 @@ h1 {
   width: 100%;
   border: none;
   border-radius: 5px;
-  background-color: gray;
+  background-color: #77B6A8;
   color: white;
 }
 
 .btn-pix:hover {
   transform: scale(1.03);
   color: white;
-  background-color: #1d1d1d;
+  background-color: #77B6A8;
 }
 
 .btn-carrinho {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 9px;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
@@ -382,4 +382,19 @@ h1 {
   padding: 10px;
   border-radius: 10px;
   width: 50%;
+}
+
+.add-to-cart-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.add-to-cart-btn i {
+  transition: color 0.2s;
+}
+
+.add-to-cart-btn:hover i {
+  color: #0a58ca;
 }

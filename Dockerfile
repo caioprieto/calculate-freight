@@ -18,7 +18,4 @@ RUN bundle install
 # Copiar todo o projeto
 COPY . .
 
-# Precompilar assets, se necessário (remova se não usar)
-RUN bundle exec rake assets:precompile
-
 CMD ["rails", "server", "-b", "0.0.0.0"]

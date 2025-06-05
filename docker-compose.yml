@@ -4,9 +4,9 @@ services:
   db:
     image: postgres:14
     environment:
-      POSTGRES_USER: caioprieto
-      POSTGRES_PASSWORD: ca23io04
-      POSTGRES_DB: myapp_development
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
@@ -22,8 +22,8 @@ services:
     depends_on:
       - db
     environment:
-      RAILS_ENV: development
-      DATABASE_URL: postgres://caioprieto:ca23io04@db:5432/myapp_development
+      RAILS_ENV: ${RAILS_ENV}
+      DATABASE_URL: ${DATABASE_URL}
 
 volumes:
   db_data:

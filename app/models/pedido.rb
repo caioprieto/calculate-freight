@@ -12,6 +12,10 @@ class Pedido < ApplicationRecord
 
   attr_readonly :cart_id, :user_id
 
+  scope :find_by_code, ->(code) {
+    where("code ILIKE ?", "%#{code}%")
+  }
+
   def liberar_curso
     cart.cursos.each do |curso|
       UserCurso.create(user_id: user_id, curso_id: curso.id, data_inicio: Time.zone.now)

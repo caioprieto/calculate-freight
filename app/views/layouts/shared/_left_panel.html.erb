@@ -6,6 +6,11 @@
 <div style="margin-left: 25px; margin-top: -10px; width: 235px">
   <div class="row">
     <nav class="menu">
+      <%= link_to '/', class: "menu-link" do %>
+        <i class="bi bi-house fs-4" style="margin-right: 10px"></i>
+        Home
+      <% end %>
+
       <%= link_to '/user/explorar', class: "menu-link #{'active' if current_page?('/user/explorar')}" do %>
         <i class="bi bi-search fs-4" style="margin-right: 10px"></i>
         Explorar
@@ -14,6 +19,11 @@
       <%= link_to '/user/carrinho', class: "menu-link #{'active' if current_page?('/user/carrinho')}" do %>
         <i class="bi bi-cart fs-4" style="margin-right: 10px"></i>
         Meu carrinho
+      <% end %>
+
+      <%= link_to '/user/pedidos', class: "menu-link #{'active' if current_page?('/user/pedidos')}" do %>
+        <i class="bi bi-receipt fs-4" style="margin-right: 10px"></i>
+        Meus Pedidos
       <% end %>
 
       <%= link_to '/user/dashboard', class: "menu-link #{'active' if current_page?('/user/dashboard')}" do %>

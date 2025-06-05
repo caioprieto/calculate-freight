@@ -1,24 +1,12 @@
-# README
+# Aprova Redação
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby ruby 2.7.6p219
+* Rails 7.0.8.6
+* PostgreSQL
+* Front-end HTML, CSS, e JS
+* Gems Principais: Rspec, Puma, StateMachine, Stripe, Devise
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Subir o server: http://localhost:3000
+   - docker-compose run --service-ports web
+# Subir console:
+   - docker-compose run web rails c

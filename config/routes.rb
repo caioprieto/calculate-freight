@@ -31,11 +31,9 @@ Rails.application.routes.draw do
     get "redacoes/search", to: "redacoes#search", as: :redacoes_search
 
     get "settings", to: "settings#index"
-    get "settings/search", to: "settings#search", as: :settings_search
-
     get "explorar", to: "explorar#index"
-
     get "carrinho", to: "carrinho#index"
+    get "pedidos", to: "pedidos#index"
 
     post "gerar_pedido", to: "pedidos#gerar"
 

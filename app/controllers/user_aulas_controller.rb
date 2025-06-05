@@ -4,6 +4,10 @@ class UserAulasController < ApplicationController
     user_aula.watched = params[:watched]
     user_aula.save
 
+    curso_id = user_aula.aula.modulo.curso_id
+    user_curso = user_aula.user.user_cursos.where(curso_id: curso_id).first
+    user_curso.recalculate_progress
+
     head :ok
   end
 end

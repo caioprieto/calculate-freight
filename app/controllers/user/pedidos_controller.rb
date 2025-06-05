@@ -1,5 +1,8 @@
 class User::PedidosController < ApplicationController
-  def gerar
-    debugger
+  layout "user_dashboard"
+
+  def index
+    @user = current_user
+    @pedidos = @user.pedidos
   end
 end
