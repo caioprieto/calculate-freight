@@ -13,7 +13,7 @@
   border-radius: 15px; /* Borda arredondada */
   width: 24%; /* Largura de cada módulo */
   background-color: #f9f9f9; /* Cor de fundo dos módulos */
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .modulo button {
@@ -56,8 +56,8 @@ input[type="checkbox"] {
 .preview_card {
   padding: 10px;
   width: 100%;
-  background-color: rgba(128, 128, 128, 0.411);
-  border-radius: 10px;
+  background-color: rgba(201, 201, 201, 0.411);
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   text-align: left;
@@ -85,8 +85,8 @@ input[type="checkbox"] {
 }
 
 .container-redacoes-escolhidas {
-  background-color: gray;
-  border-radius: 10px;
+  background-color: rgba(201, 201, 201, 0.411);
+  border-radius: 5px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -112,6 +112,7 @@ input[type="checkbox"] {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: 15px;
 }
 
 .img-redacao img {

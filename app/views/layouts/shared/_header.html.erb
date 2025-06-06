@@ -62,7 +62,7 @@
                           <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho" %>
                         <% end %>
                         <div style="margin-left: 10px;">
-                          <h6 class="fw-light mt-1"><%= curso.name %><%= curso.name %><%= curso.name %></h6>
+                          <h6 class="fw-light mt-3"><%= curso.name %></h6>
                           <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
                         </div>
                       </a>
@@ -74,7 +74,7 @@
                 <span class="preco-atual">Valor dos Produtos</span>
                 <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
               </div>
-                <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d;" %>
+                <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d; border-radius: 5px" %>
               <% else %>
                 <p class="text-muted">Seu carrinho está vazio...</p>
               <% end %>

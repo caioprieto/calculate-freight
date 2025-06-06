@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :user_cursos, dependent: :destroy
   has_many :cursos, through: :user_cursos
 
-  has_many :user_aulas
+  has_many :user_aulas, dependent: :destroy
   has_many :watched_aulas, through: :user_aulas, source: :aula
 
   has_many :pedidos

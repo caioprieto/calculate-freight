@@ -1,5 +1,6 @@
 class Admin::CursosController < AdminsBackofficeController
   before_action :set_curso, only: %i[edit update]
+
   def index
     @cursos = Curso.all
   end
@@ -17,7 +18,11 @@ class Admin::CursosController < AdminsBackofficeController
     end
   end
 
-  def edit; end
+  def edit
+    if @curso.present? && @curso.aulas.present?
+      @redacoes = Word.where(id: @curso.aulas.where.not(word_id: nil).pluck(:word_id))
+    end
+  end
 
   def update
     if params[:curso][:remove_imagem] == "1"
@@ -64,7 +69,7 @@ class Admin::CursosController < AdminsBackofficeController
       modulos_attributes: [
         :id, :titulo, :description, :_destroy,
         aulas_attributes: [
-          :id, :titulo, :description, :video, :_destroy
+          :id, :titulo, :description, :video, :word_id, :_destroy
         ]
       ]
     )

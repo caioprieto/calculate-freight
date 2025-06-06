@@ -2,12 +2,16 @@ class Curso < ApplicationRecord
   attr_accessor :remove_imagem
 
   has_one_attached :imagem
+
   has_many :curso_words, class_name: "CursoWord"
   has_many :words, through: :curso_words
+
   has_many :modulos, class_name: "Modulo", inverse_of: :curso, dependent: :destroy
   has_many :aulas, through: :modulos
+
   has_many :user_cursos, dependent: :destroy
   has_many :users, through: :user_cursos
+
   has_many :cart_cursos
 
   accepts_nested_attributes_for :modulos, allow_destroy: true, reject_if: :titulo_blank?

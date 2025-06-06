@@ -42,39 +42,4 @@
     document.getElementById('remove_imagem_field').value = "1";
     document.getElementById('imagem_label_text').innerText = "Escolher Capa";
   }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggleModulos = document.getElementById('toggle_modulos');
-    const toggleRedacoes = document.getElementById('toggle_redacoes');
-
-    const containerModulos = document.getElementById('container_modulos');
-    const containerRedacoes = document.getElementById('container_redacoes');
-    const containerRedacoesEscolhidas = document.getElementById('container_redacoes_escolhidas');
-
-    toggleRedacoes.addEventListener('change', function () {
-      containerRedacoes.style.display = this.checked ? 'flex' : 'none';
-      containerRedacoesEscolhidas.style.display = this.checked ? 'flex' : 'none';
-    });
-
-    window.addEventListener('DOMContentLoaded', function () {
-      containerModulos.style.display = toggleModulos.checked ? 'block' : 'none';
-    });
-
-    toggleModulos.addEventListener('change', function () {
-      containerModulos.style.display = this.checked ? 'block' : 'none';
-    });
-
-    window.addEventListener('DOMContentLoaded', function () {
-      containerModulos.style.display = toggleModulos.checked ? 'block' : 'none';
-    });
-
-    document.getElementById('toggle_preview').addEventListener('change', function() {
-      const previewContainer = document.getElementById('preview_container');
-      if (this.checked) {
-        previewContainer.style.display = 'block';
-      } else {
-        previewContainer.style.display = 'none';
-      }
-    });
-  });
 </script>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_31_180239) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_05_190902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -62,7 +62,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_180239) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "word_id"
     t.index ["modulo_id"], name: "index_aulas_on_modulo_id"
+    t.index ["word_id"], name: "index_aulas_on_word_id"
   end
 
   create_table "cart_cursos", force: :cascade do |t|
@@ -236,6 +238,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_180239) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "aulas", "modulos"
+  add_foreign_key "aulas", "words"
   add_foreign_key "cart_cursos", "carts"
   add_foreign_key "cart_cursos", "cursos"
   add_foreign_key "carts", "users"
