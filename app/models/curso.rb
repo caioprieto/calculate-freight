@@ -13,6 +13,7 @@ class Curso < ApplicationRecord
   has_many :users, through: :user_cursos
 
   has_many :cart_cursos
+  has_many :user_aulas
 
   accepts_nested_attributes_for :modulos, allow_destroy: true, reject_if: :titulo_blank?
 

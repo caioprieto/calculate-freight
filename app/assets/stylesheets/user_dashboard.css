@@ -157,6 +157,13 @@ nav.d-flex {
   width: 200px;
 }
 
+.container-continuar-assistindo {
+  display: flex;
+  width: 97%;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
 .continuar-assistindo-content {
   margin-top: 10px;
   display: flex;
@@ -164,7 +171,20 @@ nav.d-flex {
   gap: 3rem;
   flex-wrap: wrap;
   margin-bottom: -20px;
-  width: 500px;
+  width: 100%;
+}
+
+.continuar-assistindo-img {
+  width: 100%;
+}
+
+.continuar-assistindo-img img {
+  width: 44%;
+  height: 200px;
+  opacity: 50%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
 }
 
 .curso-img img {
@@ -174,22 +194,6 @@ nav.d-flex {
   object-fit: cover;
   object-position: center;
   margin-top: -10px;
-}
-
-.continuar-assistindo-img img {
-  width: 500px;
-  height: 200px;
-  opacity: 50%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-
-.container-continuar-assistindo {
-  display: flex;
-  width: 600px;
-  gap: 10px;
-  margin-bottom: 40px;
 }
 
 .curso-texto {
@@ -267,7 +271,7 @@ nav.d-flex {
 .play-button {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 23%;
   transform: translate(-50%, -50%);
   background: rgb(0, 0, 0);
   color: white;
@@ -305,7 +309,7 @@ nav.d-flex {
   position: absolute;
   top: 50%;
   left: 0;
-  width: 100%;
+  width: 44%;
   height: 35px;
   background-color: gray;
   border-radius: 8px;
@@ -314,8 +318,8 @@ nav.d-flex {
 }
 
 .progress-fill {
-  height: 100%;
-  width: 100%;
+  height: 44%;
+  width: 44%;
   background-color: black;
   border-radius: 8px;
   transition: width 0.4s;

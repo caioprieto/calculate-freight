@@ -83,7 +83,7 @@
         </div>
       <% else %>
         <%= button_to "Quero me inscrever", new_user_registration_path, class: "btn btn-light text-custom-nav fw-light", method: :get %>
-        <a class="btn btn-dark text-custom-nav" onclick="showLoadingAndRedirect()">Já sou aluno</a>
+        <a class="btn btn-dark text-custom-nav" onclick="showLoadingAndRedirectUser()">Já sou aluno</a>
       <% end %>
     </div>
   </div>
@@ -96,7 +96,7 @@
 </nav>
 
 <script>
-  function showLoadingAndRedirect() {
+  function showLoadingAndRedirectUser() {
     const overlay = document.getElementById('loadingOverlay');
     overlay.style.display = 'flex';
 

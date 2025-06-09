@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_05_190902) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_09_190727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -182,7 +182,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_190902) do
     t.boolean "watched", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "curso_id", null: false
     t.index ["aula_id"], name: "index_user_aulas_on_aula_id"
+    t.index ["curso_id"], name: "index_user_aulas_on_curso_id"
     t.index ["user_id"], name: "index_user_aulas_on_user_id"
   end
 
@@ -192,6 +194,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_190902) do
     t.integer "progresso", default: 0, null: false
     t.boolean "concluido", default: false, null: false
     t.datetime "data_inicio"
+    t.integer "total_aulas", default: 0
+    t.integer "total_aulas_vistas", default: 0
     t.index ["curso_id"], name: "index_user_cursos_on_curso_id"
     t.index ["user_id", "curso_id"], name: "index_user_cursos_on_user_id_and_curso_id", unique: true
     t.index ["user_id"], name: "index_user_cursos_on_user_id"
@@ -251,6 +255,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_190902) do
   add_foreign_key "pedidos", "users"
   add_foreign_key "texts", "words"
   add_foreign_key "user_aulas", "aulas"
+  add_foreign_key "user_aulas", "cursos"
   add_foreign_key "user_aulas", "users"
   add_foreign_key "user_cursos", "cursos"
   add_foreign_key "user_cursos", "users"

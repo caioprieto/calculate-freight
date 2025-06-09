@@ -29,22 +29,4 @@ class User < ApplicationRecord
   def set_admin
     update(admin: true)
   end
-
-  def last_curso
-    return if user_aulas.blank?
-
-    user_aulas.order(:updated_at).last.aula.modulo.curso
-  end
-
-  def progress(curso)
-    return if curso.blank?
-
-    total_aulas = curso.modulos.includes(:aulas).flat_map(&:aulas)
-
-    return 0 if total_aulas.empty?
-
-    aulas_vistas = user_aulas.where(aula_id: total_aulas.map(&:id), watched: true)
-
-    ((aulas_vistas.count.to_f / total_aulas.count) * 100).to_i
-  end
 end

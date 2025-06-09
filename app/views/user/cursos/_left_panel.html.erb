@@ -1,0 +1,70 @@
+<div class="player-navbar d-flex align-items-center" style="gap: 15px">
+  <div class="navbar-left d-flex align-items-center p-2">
+    <a href="/user/dashboard">
+      <img src="/images/logo.png" alt="Logo" class="navbar-logo" />
+    </a>
+  </div>
+
+  <div class="vertical-line"></div>
+
+  <a href="/cursos/<%= @curso.id%>/edit" class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
+    <span class="course-title"><%= @curso.name %></span>
+  </a>
+
+  <div class="navbar-right d-flex gap-2">
+    <%# Botão Progresso %>
+    <div class="btn btn-outline-dark text-white progress-button" id="progress-button" style="cursor: pointer; position: relative;">
+      <i class="bi bi-trophy fs-4 me-1"></i>
+      <span style="position: relative; top: -4px;">Seu progresso</span>
+    </div>
+
+    <div class="btn btn-outline-dark text-white compartilhar-button" id="compartilhar-button" style="cursor: pointer; position: relative;">
+      <i class="bi bi-share fs-4 me-1"></i>
+      <span style="position: relative; top: -4px;">Compartilhar</span>
+    </div>
+
+    <div class="btn btn-outline-dark text-white p-1 settings-button" id="settings-button" style="cursor: pointer; position: relative;">
+      <i class="bi bi-three-dots-vertical fs-4"></i>
+    </div>
+  </div>
+</div>
+
+<div id="progress-dropdown" class="card progress-dropdown" style="width: 100%;">
+  <div class="arrow-up"></div>
+  <div class="card-body">
+    <h6 style="margin-top: -9px"><%= @user_curso.total_aulas_vistas %> de <%= @user_curso.total_aulas %> concluído! Conclua o curso para obter o seu certificado</h6>
+  </div>
+</div>
+
+<div class="video-player-container">
+  <div class="video-title-overlay" id="aulaAtivaTitulo">Nome da Aula</div>
+  <div class="video-player">
+    <video id="videoPlayer" controls disablePictureInPicture controlsList="nodownload noremoteplayback">
+      <source id="videoSource" src="" type="video/mp4">
+      Seu navegador não suporta vídeo
+    </video>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("progress-button");
+    const dropdown = document.getElementById("progress-dropdown");
+
+    let isOpen = false;
+
+    button.addEventListener("click", () => {
+      if (!isOpen) {
+        // Mostrar e iniciar animação
+        dropdown.classList.add("visible");
+        setTimeout(() => dropdown.classList.add("open"), 10);
+      } else {
+        // Fechar animação e depois esconder
+        dropdown.classList.remove("open");
+        setTimeout(() => dropdown.classList.remove("visible"), 400); // 400ms = tempo da transição
+      }
+
+      isOpen = !isOpen;
+    });
+  });
+</script>

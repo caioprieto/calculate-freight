@@ -3,9 +3,7 @@ class User::DashboardController < ApplicationController
 
   def index
     @cursos = current_user.cursos
-    @user_cursos = current_user.user_cursos
-    @last_curso = current_user.last_curso
-    @progress = current_user.progress(@last_curso)
+    @user_cursos = current_user.user_cursos.order(progresso: :desc)
   end
 
   def search
