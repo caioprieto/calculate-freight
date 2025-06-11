@@ -60,4 +60,25 @@
       });
     });
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const videoPlayer = document.getElementById("videoPlayer");
+    const links = Array.from(document.querySelectorAll(".aula-link"));
+
+    videoPlayer.addEventListener("ended", () => {
+      const currentLink = document.querySelector(".aula-link.aula-ativa");
+
+      if (!currentLink) return;
+
+      const currentIndex = links.indexOf(currentLink);
+      const nextLink = links[currentIndex + 1];
+
+      if (nextLink) {
+        nextLink.click();
+      } else {
+        console.log("Fim do curso ou não há próxima aula.");
+      }
+    });
+  });
+
 </script>

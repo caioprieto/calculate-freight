@@ -69,6 +69,10 @@ html, body {
   width: 78%;
 }
 
+.menu a.active {
+  font-weight: 600;
+}
+
 .custom-hr {
   color: white;
   width: 200px;
@@ -78,8 +82,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 500px;
-  max-width: 500px;
+  width: 100%;
   background-color: #ffffff;
   border: 2px solid #ccc;
   border-radius: 10px;
@@ -292,12 +295,13 @@ nav.d-flex {
 }
 
 .email-text {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: black;
   position: relative;
-  left: 0px;
   white-space: nowrap;
+  bottom: 8px;
+  left: 2px;
 }
 
 .right {
@@ -340,6 +344,7 @@ nav.d-flex {
   width: 100%;
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
+  height: 125px
 }
 
 .carrinho-cursos-card:hover {
@@ -353,13 +358,13 @@ nav.d-flex {
 }
 
 .carrinho-cursos-card img {
-  width: 100%;
-  height: 150px;
+  width: 25%;
+  height: 85%;
   object-fit: cover;
-  object-position: center;
-  object-position: center center;
-  filter: blur(4px);
+  filter: blur(1.5px);
   transition: filter 0.5s ease-in-out;
+  border-radius: 5px;
+  margin-left: 20px;
 }
 
 .carrinho-cursos-card h1 {
@@ -376,7 +381,7 @@ nav.d-flex {
 }
 
 .cursos-card:hover {
-  transform: scale(1.2);
+  transform: scale(1.05);
   z-index: 10;
   position: relative;
 }
@@ -391,7 +396,7 @@ nav.d-flex {
   object-fit: cover;
   object-position: center;
   object-position: center center;
-  filter: blur(5px);
+  filter: blur(3px);
   transition: filter 0.5s ease-in-out;
 }
 

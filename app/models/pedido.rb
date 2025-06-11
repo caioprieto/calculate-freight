@@ -16,9 +16,13 @@ class Pedido < ApplicationRecord
     where("code ILIKE ?", "%#{code}%")
   }
 
-  def liberar_curso
+  def liberar_cursos_redacoes
     cart.cursos.each do |curso|
       UserCurso.create(user_id: user_id, curso_id: curso.id, data_inicio: Time.zone.now)
+
+      curso.words.each do |word|
+        UserWord.create(user_id: user_id, word_id: word.id)
+      end
     end
   end
 

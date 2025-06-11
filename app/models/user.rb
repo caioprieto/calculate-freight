@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :user_cursos, dependent: :destroy
   has_many :cursos, through: :user_cursos
 
+  has_many :user_words, dependent: :destroy
+  has_many :words, through: :user_words
+
   has_many :user_aulas, dependent: :destroy
   has_many :watched_aulas, through: :user_aulas, source: :aula
 

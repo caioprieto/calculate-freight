@@ -3,7 +3,7 @@ class User::CarrinhoController < ApplicationController
 
   def index
     @cart = current_user.cart
-    @cursos = @cart.cursos
+    @cursos = @cart.cursos.order(value: :desc)
     @code = params[:code]
   end
 end

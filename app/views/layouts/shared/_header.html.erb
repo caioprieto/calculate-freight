@@ -30,6 +30,7 @@
 
           <!-- Dropdown -->
           <div class="user-dropdown-menu">
+            <div class="arrow-up"></div>
             <span style="font-weight: bold; padding: 10px; display: block"><%= current_user.nome %></span>
             <hr style="margin: 0;">
             <%= link_to 'Área do Aluno', user_dashboard_path %>
@@ -42,28 +43,35 @@
           <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative;">
             <i class="bi bi-cart2 fs-1"></i>
             <% if @cart.present? %>
-              <span class="bolinha fs-6 position-absolute top-0">
+              <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 500">
                 <%= @cart.cursos.count %>
               </span>
             <% end %>
           </div>
 
           <!-- MINI MODAL DO CARRINHO -->
-          <div id="cart-dropdown" class="card shadow position-absolute end-0 mt-2" style="width: 350px; display: none; z-index: 1000;">
+          <div id="cart-dropdown" class="card shadow position-absolute end-0 mt-2" style="width: 400px; display: none; z-index: 1000;">
             <div class="card-body">
               <h6 class="card-title">Carrinho</h6>
               <hr>
               <% if @cursos.present? %>
                 <ul class="list-group mb-3">
                   <% @cursos.each do |curso| %>
-                    <li class="list-group-item d-flex align-items-center p-3">
+                    <li class="list-group-item d-flex align-items-center p-2">
                       <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none;" class="text-dark d-flex w-100 select-curso">
                         <% if curso.imagem.present? %>
-                          <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho" %>
+                          <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho border" %>
                         <% end %>
-                        <div style="margin-left: 10px;">
-                          <h6 class="fw-light mt-3"><%= curso.name %></h6>
+                        <div style="margin-left: 10px; width: 75%">
+                          <h6 class="fw-light mt-1"><%= curso.name %></h6>
                           <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
+                        </div>
+                        <div>
+                          <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true do %>
+                            <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 mt-0", style: "border-radius: 5px;" do %>
+                              <i class="icon-lixeira bi bi-trash fs-5" style="font-weight: 2000"></i>
+                            <% end %>
+                          <% end %>
                         </div>
                       </a>
                     </li>
@@ -137,22 +145,3 @@
     });
   }
 </script>
-
-<style>
-.bolinha {
-  background-color:rgb(222, 222, 222);
-  color: black;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;   /* Centraliza horizontalmente */
-  align-items: center;       /* Centraliza verticalmente */
-  border-radius: 50%;
-  margin-left: 30px;
-  margin-top: 3px;
-}
-
-.bolinha {
-
-}
-</style>

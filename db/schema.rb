@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_09_190727) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_10_173308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -201,6 +201,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_09_190727) do
     t.index ["user_id"], name: "index_user_cursos_on_user_id"
   end
 
+  create_table "user_words", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "word_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_words_on_user_id"
+    t.index ["word_id"], name: "index_user_words_on_word_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -259,4 +268,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_09_190727) do
   add_foreign_key "user_aulas", "users"
   add_foreign_key "user_cursos", "cursos"
   add_foreign_key "user_cursos", "users"
+  add_foreign_key "user_words", "users"
+  add_foreign_key "user_words", "words"
 end

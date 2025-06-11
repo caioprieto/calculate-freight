@@ -3,9 +3,9 @@
   <span style="position: relative; top: -2px;">Explorar</span>
 </h5>
 
-<div class="full-width-container d-flex flex-wrap" style="display: flex; gap: 15px; width: 97%; margin-left: 17px">
-  <% @cursos.each do |curso| %>
-      <a href="/cursos/<%= curso.id %>/edit" class="cursos-card mt-3 d-flex flex-column align-items-center text-center text-dark" style="flex: 1 1 24%; max-width: 19%; min-width: 200px; text-decoration: none">
+<div class="full-width-container d-flex flex-wrap" style="display: flex; gap: 15px; width: 88%; margin-left: 17px">
+  <% @all_cursos.each do |curso| %>
+      <a href="/cursos/<%= curso.id %>/edit" class="cursos-card mt-3 d-flex flex-column align-items-center text-center text-dark" style="flex: 1 1 50%; max-width: 49.2%; min-width: 200px; text-decoration: none">
         <% if curso.imagem.attached? %>
           <%= image_tag curso.imagem.variant(resize_to_limit: [1000, 1000]).processed %>
         <% end %>

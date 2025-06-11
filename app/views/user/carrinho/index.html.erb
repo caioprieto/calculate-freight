@@ -3,18 +3,22 @@
   <span style="position: relative; top: -2px;">Carrinho</span>
 </h5>
 
-<div class="full-width-container d-flex" style="gap: 70px; margin-left: 22px; margin-top: -12px">
+<div class="full-width-container d-flex" style="gap: 20px; margin-left: 22px; margin-top: -12px">
   <% if @cursos.present? %>
-    <div style="flex-direction: column; gap: 15px; width: 50%; white-space: nowrap;">
+    <div style="flex-direction: column; gap: 15px; width: 58%; white-space: nowrap;">
       <% @cursos.each do |curso| %>
-        <div class="carrinho-cursos-card mt-4 bg-white d-flex flex-column align-items-center">
+        <div class="carrinho-cursos-card mt-4 bg-white d-flex align-items-center">
           <% if curso.imagem.attached? %>
-            <%= image_tag curso.imagem.variant(resize_to_limit: [1000, 1000]).processed %>
+            <%= image_tag curso.imagem.variant(resize_to_fill: [1000, 1000]).processed %>
           <% end %>
-          <h1 class="text-dark"><%= curso.name %></h1>
-          <p class="fw-light" style="margin-top: -15px; margin-bottom: 8px;">10x de R$ 15,99</p>
-          <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true, class: "w-100" do %>
-            <%= button_tag type: "submit", class: "btn btn-danger text-white w-100", style: "border-radius: 0px; padding: 0", onclick: "showLoadingAndRedirect()" do %>
+          <div class="ms-5 w-75">
+            <h1 class="fw-light text-dark p-0 m-0 ms-2"><%= curso.name %></h1>
+            <p class="ms-2 p-0 m-0" style="font-weight: 500"><%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></p>
+            <p class="ms-2 text-secondary p-1 m-0" style="font-size: 12px"><%= curso.modulos.count %> Módulos • <%= curso.aulas.count %> Aulas • Duração Total: 20h 34min</p>
+          </div>
+
+          <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true do %>
+            <%= button_tag type: "submit", class: "btn btn-danger text-white p-1", style: "border-radius: 5px; margin-right: 20px", onclick: "showLoadingAndRedirect()" do %>
               <i class="icon-lixeira bi bi-trash fs-4" style="font-weight: 2000"></i>
             <% end %>
           <% end %>
@@ -22,13 +26,13 @@
       <% end %>
     </div>
 
-    <div class="curso-container">
+    <div class="curso-container" style="width: 30%;">
       <div class="curso-info">
         <div class="curso-preview mt-4 text-dark">
           <div class="pagar-box text-dark">
             <h5 href="/">
               <i class="bi bi-clipboard fs-4" style="margin-right: 10px"></i>
-              <span style="position: relative; top: -2px;">Resumo  •  <%= @cursos.count %> Produtos</span>
+              <span style="position: relative; top: -2px; font-size: 18px">Resumo  •  <%= @cursos.count %> Produtos</span>
             </h5>
             <div class="preco mt-3">
               <% @cursos.each do |curso| %>
@@ -144,4 +148,3 @@
     }
   });
 </script>
-

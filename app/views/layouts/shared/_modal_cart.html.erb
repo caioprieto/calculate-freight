@@ -1,0 +1,38 @@
+<div id="cart-modal" class="card shadow position-absolute end-0 mt-2" style="width: 400px; display: none; z-index: 1000;">
+  <div class="card-body">
+    <h6 class="card-title">Carrinho</h6>
+    <hr>
+    <% if @cursos.present? %>
+      <ul class="list-group mb-3">
+        <% @cursos.each do |curso| %>
+          <li class="list-group-item d-flex align-items-center p-2">
+            <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none;" class="text-dark d-flex w-100 select-curso">
+              <% if curso.imagem.present? %>
+                <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho border" %>
+              <% end %>
+              <div style="margin-left: 10px; width: 75%">
+                <h6 class="fw-light mt-1"><%= curso.name %></h6>
+                <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
+              </div>
+              <div>
+                <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true do %>
+                  <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 mt-0", style: "border-radius: 5px;" do %>
+                    <i class="icon-lixeira bi bi-trash fs-5" style="font-weight: 2000"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+
+    <div class="preco mt-3 d-flex justify-content-between">
+      <span class="preco-atual">Valor dos Produtos</span>
+      <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
+    </div>
+      <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d; border-radius: 5px" %>
+    <% else %>
+      <p class="text-muted">Seu carrinho está vazio...</p>
+    <% end %>
+  </div>
+</div>

@@ -16,6 +16,7 @@ class CartController < ApplicationController
   def remove
     @cart.cart_cursos.where(curso_id: params[:curso_id]).last.destroy
 
-    redirect_to user_carrinho_path
+    redirect_back fallback_location: root_path, allow_other_host: false
+    flash[:alerta] = "Curso removido do carrinho com sucesso!"
   end
 end

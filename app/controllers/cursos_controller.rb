@@ -1,5 +1,6 @@
 class CursosController < ApplicationController
   skip_before_action :authenticate_user!, only: :edit
+  layout "application"
   def index
   end
 

@@ -17,7 +17,7 @@ module StateMachines
         end
 
         after_transition to: :confirmado do |pedido|
-          pedido.liberar_curso
+          pedido.liberar_cursos_redacoes
           pedido.finalizar
         end
 

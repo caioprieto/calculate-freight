@@ -1,4 +1,6 @@
 class Modulo < ApplicationRecord
+  delegate :id, to: :curso, prefix: true, allow_nil: true
+
   belongs_to :curso, class_name: "Curso", inverse_of: :modulos
   has_many :aulas, inverse_of: :modulo, dependent: :destroy
 

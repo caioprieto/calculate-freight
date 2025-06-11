@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get "dashboard", to: "dashboard#index"
 
-    resources :redacoes
+    resources :words
 
     resources :cursos do
       collection do
@@ -40,6 +40,12 @@ Rails.application.routes.draw do
     resources :cursos do
       member do
         get :player
+      end
+    end
+
+    resources :words do
+      member do
+        get :proposta
       end
     end
   end

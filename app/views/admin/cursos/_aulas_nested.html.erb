@@ -12,6 +12,7 @@
   <div class="mb-3">
     <%= f.label :word_id, "Redação (Opcional)", class: "form-label fw-light" %>
     <div class="d-flex">
+      <%= f.hidden_field :word_id, value: nil %>
       <%= f.collection_select :word_id, Word.all, :id, :tema,
         { prompt: "Nenhuma" },
         { class: "form-select form-select-sm select2-redacao", style: "margin-top: -8px" } %>

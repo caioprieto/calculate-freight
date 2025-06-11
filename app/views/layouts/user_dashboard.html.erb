@@ -32,25 +32,75 @@
         <div class="scrollable-content">
           <div class="container-right-panel">
             <nav class="d-flex align-items-center justify-content-between px-3 py-2">
-              <div class="d-flex align-items-center" style="gap: 34px; width: 100%;">
-                <%= form_with url: current_page?("/user/redacoes") ? user_redacoes_search_path : user_explorar_path, method: :get, local: true, class: "search-form d-flex align-items-center" do %>
-                  <input
-                    type="text"
-                    name="query"
-                    placeholder="Qual <%= current_page?("/user/redacoes") ? "redação" : "curso" %> está procurando?"
-                    class="search-input"
-                  />
-                  <button type="submit" class="search-button">
-                    <i class="bi bi-search fs-4"></i>
-                  </button>
-                <% end %>
+              <div class="d-flex justify-content-between align-items-center" style="width: 90%">
+                <!-- Grupo esquerdo: Barra de busca -->
+                <div class="d-flex align-items-center" style="gap: 20px; width: 55%">
+                  <%= form_with url: current_page?("/user/redacoes") ? user_redacoes_search_path : user_explorar_path, method: :get, local: true, class: "search-form d-flex align-items-center" do %>
+                    <input
+                      type="text"
+                      name="query"
+                      placeholder="Qual <%= current_page?("/user/redacoes") ? "redação" : "curso" %> está procurando?"
+                      class="search-input"
+                    />
+                    <button type="submit" class="search-button">
+                      <i class="bi bi-search fs-4"></i>
+                    </button>
+                  <% end %>
+                </div>
 
-                <a href="/user/settings" class="btn d-flex align-items-center">
-                  <i class="bi bi-person-circle fs-1 text-dark me-2"></i>
-                  <span class="email-text"><%= current_user.nome.upcase %></span>
-                </a>
+                <!-- Grupo direito: Botões usuário, carrinho e notificação -->
+                <div class="d-flex align-items-center" style="gap: 15px;">
+                  <!-- Carrinho -->
+                  <div class="position-relative">
+                    <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative;">
+                      <i class="bi bi-cart2 fs-2"></i>
+                      <% if @cart.present? %>
+                        <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 500">
+                          <%= @cart.cursos.count %>
+                        </span>
+                      <% end %>
+                    </div>
+                    <%= render partial: "layouts/shared/modal_cart" %>
+                  </div>
+
+                  <!-- Notificação -->
+                  <div class="position-relative me-1">
+                    <div class="btn notify-toggle" id="notify-toggle" style="cursor: pointer; position: relative;">
+                      <i class="bi bi-bell fs-2"></i>
+                      <% if @cart.present? %>
+                        <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 500">
+                          <%= @cart.cursos.count %>
+                        </span>
+                      <% end %>
+                    </div>
+                    <%= render partial: "layouts/shared/modal_notify" %>
+                  </div>
+
+                  <!-- BOTÃO DO ÚSUARIO -->
+                  <div class="user-dropdown">
+                    <button class="user-dropdown-button" aria-label="Menu do usuário">
+                      <i class="bi bi-person-circle user-icon fs-2"></i>
+                      <span class="email-text"><%= current_user.nome.upcase %></span>
+                    </button>
+
+                    <div class="user-dropdown-menu">
+                      <div class="arrow-up"></div>
+                      <span style="font-weight: bold; padding: 10px; display: block">Área do Aluno</span>
+                      <hr style="margin: 0;">
+                      <%= link_to 'Voltar para Home', root_path, onclick: "logout()" %>
+                      <%= link_to 'Sair', '#', onclick: "logout()" %>
+                    </div>
+                  </div>
+                </div>
               </div>
+
             </nav>
+
+            <% if params[:query].present? %>
+              <div class="search-label px-3 py-2 rounded text-dark fw-light" style="font-size: 17px; margin-left: 7px; width: 100%;">
+                Resultado da busca por: "<strong><%= params[:query] %></strong>"
+              </div>
+            <% end %>
 
             <%= yield %>
           </div>
@@ -59,3 +109,38 @@
     </div>
   </body>
 </html>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("cart-toggle");
+    const dropdown = document.getElementById("cart-modal");
+
+    let timeout;
+
+    toggle.addEventListener("click", () => {
+      clearTimeout(timeout);
+      if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+      } else {
+        dropdown.style.display = "none";
+      }
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("notify-toggle");
+    const dropdown = document.getElementById("notify-modal");
+
+    let timeout;
+
+    toggle.addEventListener("click", () => {
+      clearTimeout(timeout);
+      if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+      } else {
+        dropdown.style.display = "none";
+      }
+    });
+  });
+</script>

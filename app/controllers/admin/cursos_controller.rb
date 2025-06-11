@@ -47,20 +47,6 @@ class Admin::CursosController < AdminsBackofficeController
     end
   end
 
-  def add_word
-    @curso = Curso.find(params[:curso_id])
-    @curso.add_word(params[:word_id])
-
-    redirect_to edit_admin_curso_path(@curso)
-  end
-
-  def remove_word
-    @curso = Curso.find(params[:curso_id])
-    @curso.curso_words.where(word_id: params[:word_id]).destroy_all
-
-    redirect_to edit_admin_curso_path(@curso)
-  end
-
   private
 
   def curso_params

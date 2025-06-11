@@ -1,0 +1,38 @@
+<div class="navbar d-flex align-items-center w-100" style="gap: 15px">
+  <div class="navbar-left d-flex align-items-center">
+    <a href="/user/redacoes">
+      <img src="/images/logo.png" alt="Logo" class="navbar-logo" />
+    </a>
+  </div>
+
+  <div class="vertical-line"></div>
+
+  <a class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
+    <span class="course-title"><%= @word.tema %></span>
+  </a>
+
+  <div class="navbar-right d-flex gap-2">
+    <%# Botão Progresso %>
+    <div class="btn btn-outline-dark text-white" style="cursor: pointer; position: relative;">
+      <i class="bi bi-trophy fs-4 me-1"></i>
+      <span style="position: relative; top: -4px;">Seu progresso</span>
+    </div>
+
+    <div class="btn btn-outline-dark text-white compartilhar-button" id="compartilhar-button" style="cursor: pointer; position: relative;">
+      <i class="bi bi-share fs-4 me-1"></i>
+      <span style="position: relative; top: -4px;">Compartilhar</span>
+    </div>
+
+    <div class="btn btn-outline-dark text-white p-1 settings-button" id="settings-button" style="cursor: pointer; position: relative;">
+      <i class="bi bi-three-dots-vertical fs-4"></i>
+    </div>
+  </div>
+</div>
+
+<div class="video-border-overlay"></div>
+
+<% if @word.pdf_file.attached? %>
+  <div class="pdf-container">
+    <iframe src="<%= rails_blob_path(@word.pdf_file, disposition: 'inline') %>" type="application/pdf"></iframe>
+  </div>
+<% end %>

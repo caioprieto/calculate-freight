@@ -1,43 +1,43 @@
 <div class="row">
-  <a href="/">
+  <a href="">
     <img src="/images/logo.png" style="width: 200px; height: 200px; margin-top: -50px; margin-left: 15px">
   </a>
 </div>
-<div style="margin-left: 25px; margin-top: -10px; width: 235px">
+<div style="margin-left: 25px; margin-top: -25px; width: 235px; height: 83%">
   <div class="row">
-    <nav class="menu">
+    <nav class="menu fw-light">
       <%= link_to '/', class: "menu-link" do %>
-        <i class="bi bi-house fs-4" style="margin-right: 10px"></i>
+        <i class="bi bi-house fs-5" style="margin-right: 10px"></i>
         Home
       <% end %>
 
       <%= link_to '/user/explorar', class: "menu-link #{'active' if current_page?('/user/explorar')}" do %>
-        <i class="bi bi-search fs-4" style="margin-right: 10px"></i>
+        <i class="bi bi-search fs-5" style="margin-right: 10px"></i>
         Explorar
       <% end %>
 
       <%= link_to '/user/carrinho', class: "menu-link #{'active' if current_page?('/user/carrinho')}" do %>
-        <i class="bi bi-cart fs-4" style="margin-right: 10px"></i>
+        <i class="bi bi-cart fs-5" style="margin-right: 10px"></i>
         Meu carrinho
       <% end %>
 
       <%= link_to '/user/pedidos', class: "menu-link #{'active' if current_page?('/user/pedidos')}" do %>
-        <i class="bi bi-receipt fs-4" style="margin-right: 10px"></i>
+        <i class="bi bi-receipt fs-5" style="margin-right: 10px"></i>
         Meus Pedidos
       <% end %>
 
       <%= link_to '/user/dashboard', class: "menu-link #{'active' if current_page?('/user/dashboard')}" do %>
-        <i class="bi bi-collection-play fs-4" style="margin-right: 10px"></i>
+        <i class="bi bi-collection-play fs-5" style="margin-right: 10px"></i>
         Meus Cursos
       <% end %>
 
       <%= link_to '/user/redacoes', class: "menu-link #{'active' if current_page?('/user/redacoes')}" do %>
-        <i class="bi bi-book fs-4" style="margin-right: 10px"></i>
+        <i class="bi bi-book fs-5" style="margin-right: 10px"></i>
         Minhas Redações
       <% end %>
 
       <%= link_to '/user/settings', class: "menu-link #{'active' if current_page?('/user/settings')}" do %>
-        <i class="bi bi-gear-wide-connected fs-4" style="margin-right: 10px"></i>
+        <i class="bi bi-gear-wide-connected fs-5" style="margin-right: 10px;"></i>
         Configurações
       <% end %>
     </nav>

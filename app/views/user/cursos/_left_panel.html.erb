@@ -30,15 +30,17 @@
 </div>
 
 <div id="progress-dropdown" class="card progress-dropdown" style="width: 100%;">
-  <div class="arrow-up"></div>
   <div class="card-body">
     <h6 style="margin-top: -9px"><%= @user_curso.total_aulas_vistas %> de <%= @user_curso.total_aulas %> concluído! Conclua o curso para obter o seu certificado</h6>
   </div>
 </div>
 
 <div class="video-player-container">
-  <div class="video-title-overlay" id="aulaAtivaTitulo">Nome da Aula</div>
+  <div class="video-title-overlay" id="aulaAtivaTitulo"></div>
+
   <div class="video-player">
+    <div class="video-border-overlay"></div>
+
     <video id="videoPlayer" controls disablePictureInPicture controlsList="nodownload noremoteplayback">
       <source id="videoSource" src="" type="video/mp4">
       Seu navegador não suporta vídeo
