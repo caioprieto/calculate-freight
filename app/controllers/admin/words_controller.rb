@@ -25,9 +25,17 @@ class Admin::WordsController < AdminsBackofficeController
     end
   end
 
+  def new 
+    @word = Word.new
+  end
+  def create
+    @word = Word.create(word_params)
+
+  end
   private
 
   def word_params
-    params.require(:word).permit(:pdf_file, :tema)
+    params.require(:word).permit(:pdf_file, :tema, :word_type)
   end
+  
 end
