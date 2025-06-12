@@ -8,6 +8,81 @@
   </div>
 </div>
 
+<style>
+  #loadingOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    pointer-events: auto;
+  }
+
+  .video-player, video:fullscreen {
+    position: relative !important;
+  }
+
+  .loading-content {
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+
+  .spinner {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-90deg);
+  }
+
+  .spinner .path {
+  stroke: white;
+  stroke-linecap: round;
+  stroke-dasharray: 126; /* 2πr = 2 * π * 20 ≈ 126 */
+  stroke-dashoffset: 126;
+  animation: fillCircle 10s linear forwards;
+  }
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .countdown-timer {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fillCircle {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const links = document.querySelectorAll(".aula-link");
@@ -64,21 +139,56 @@
   document.addEventListener("DOMContentLoaded", () => {
     const videoPlayer = document.getElementById("videoPlayer");
     const links = Array.from(document.querySelectorAll(".aula-link"));
+    const overlay = document.getElementById("loadingOverlay");
+    const skipButton = document.getElementById("skipButton");
+    const countdownTimer = document.getElementById("countdownTimer");
+    const spinner = document.querySelector(".spinner");
+    const path = document.querySelector(".spinner .path");
 
     videoPlayer.addEventListener("ended", () => {
       const currentLink = document.querySelector(".aula-link.aula-ativa");
-
       if (!currentLink) return;
 
       const currentIndex = links.indexOf(currentLink);
       const nextLink = links[currentIndex + 1];
+      if (!nextLink) return;
 
-      if (nextLink) {
+      let countdown = 10;
+      let intervalId;
+      let timeoutId;
+
+      function goToNextAula() {
+        clearTimeout(timeoutId);
+        clearInterval(intervalId);
+        overlay.style.display = "none";
+        resetAnimation();
+
+        const checkbox = currentLink.closest("li").querySelector(".watched-checkbox");
+        if (checkbox && !checkbox.checked) checkbox.click();
+
         nextLink.click();
-      } else {
-        console.log("Fim do curso ou não há próxima aula.");
       }
+
+      function resetAnimation() {
+        path.style.animation = 'none';
+        void path.offsetWidth; // força reflow
+        path.style.animation = '';
+      }
+
+      overlay.style.display = "flex";
+      countdownTimer.textContent = `Próxima aula em ${countdown}s`;
+
+      intervalId = setInterval(() => {
+        countdown -= 1;
+        if (countdown <= 0) {
+          clearInterval(intervalId);
+        } else {
+          countdownTimer.textContent = `Próxima aula em ${countdown}s`;
+        }
+      }, 1000);
+
+      timeoutId = setTimeout(goToNextAula, countdown * 1000);
+      skipButton.onclick = goToNextAula;
     });
   });
-
 </script>

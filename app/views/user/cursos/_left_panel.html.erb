@@ -1,6 +1,7 @@
 <div class="player-navbar d-flex align-items-center" style="gap: 15px">
   <div class="navbar-left d-flex align-items-center p-2">
-    <a href="/user/dashboard">
+    <a href="/user/dashboard" class="text-white d-flex" style="text-decoration: none;">
+      <i class="bi bi-box-arrow-left" style="margin-top: 37px; margin-right: 10px; font-size: 45px"></i>
       <img src="/images/logo.png" alt="Logo" class="navbar-logo" />
     </a>
   </div>
@@ -45,6 +46,20 @@
       <source id="videoSource" src="" type="video/mp4">
       Seu navegador não suporta vídeo
     </video>
+
+    <div id="loadingOverlay" style="display: none;">
+      <div class="loading-content">
+        <svg class="spinner" viewBox="0 0 50 50">
+          <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="4"/>
+        </svg>
+
+        <button id="skipButton" class="play-button">
+          <i class="bi bi-play-fill"></i>
+        </button>
+
+        <div id="countdownTimer" class="countdown-timer">5s</div>
+      </div>
+    </div>
   </div>
 </div>
 

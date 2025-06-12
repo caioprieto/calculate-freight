@@ -1,0 +1,29 @@
+<%= form_with(model: [:admin, @word], local: true, html: { class: "curso-form" }) do |form| %>
+  <div class="w-50">
+    <%= form.label "Tema", class: "form-label fw-light" %>
+    <%= form.text_field :tema, class: "form-control", class: "form-control form-control-sm", style: "margin-top: -8px" %>
+  </div>
+
+  <div class="w-50">
+    <%= form.label :prova, "Prova", class: "form-label fw-light" %>
+    <div class="d-flex align-items-center" style="gap: 5px;">
+      <%= form.select :word_type, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @word.word_type), {}, class: "form-select form-select-sm select2-prova", style: "margin-top: -8px" %>
+      <button type="button" class="btn btn-sm btn-danger" id="limpar-prova" title="Limpar seleção" style="margin-top: -8px">
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <%# Voltar %>
+  <a href="/admin/words" class="btn btn-secondary px-3 py-1" style="border-radius: 10px">
+    <i class="bi bi-box-arrow-left fs-4 me-1"></i>
+    <span style="position: relative; top: -4px; font-weight: 600">Voltar</span>
+  </a>
+
+  <%# Salvar %>
+  <%= form.button type: "submit", class: "btn btn-success px-3 py-0", style: "border-radius: 10px" do %>
+    <i class="bi bi-check-circle-fill fs-4 me-1"></i>
+    <span style="position: relative; top: -4px; font-weight: 600">Salvar</span>
+  <% end %>
+
+<% end %>

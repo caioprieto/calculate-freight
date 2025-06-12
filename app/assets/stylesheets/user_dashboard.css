@@ -377,6 +377,7 @@ nav.d-flex {
   background-color: whitesmoke;
   width: 100%;
   border-radius: 10px;
+  height: 140px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -391,13 +392,12 @@ nav.d-flex {
 }
 
 .cursos-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  object-position: center;
-  object-position: center center;
-  filter: blur(3px);
+  width: 30%;
+  height: 90%;
+  object-fit: scale-down;
+  filter: blur(1.5px);
   transition: filter 0.5s ease-in-out;
+  border-radius: 10px;
 }
 
 .cursos-card h1 {
@@ -406,7 +406,6 @@ nav.d-flex {
 }
 
 .meus-cursos-card {
-  box-shadow: 0 4px 10px rgba(1,1, 1, 0.4);
   width: 100%;
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
@@ -426,10 +425,10 @@ nav.d-flex {
 
 .meus-cursos-card img {
   width: 100%;
-  height: 150px;
+  height: 250px;
   object-fit: cover;
-  object-position: center;
-  filter: blur(2px);
+  filter: blur(1.3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .meus-cursos-card h1 {
@@ -518,4 +517,16 @@ nav.d-flex {
   100% {
     transform: translateX(-50%);
   }
+}
+
+.card-filter {
+  box-shadow: 0 4px 10px rgba(1,1, 1, 0.4);
+  background-color: whitesmoke;
+  width: 100%;
+  border-radius: 10px;
+  height: 135px;
+}
+
+.form-switch .form-check-input {
+  transform: scale(1.3); /* Aumenta proporcionalmente */
 }

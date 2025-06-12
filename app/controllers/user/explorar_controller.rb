@@ -5,7 +5,7 @@ class User::ExplorarController < ApplicationController
     @all_cursos = Curso.all
 
     if params[:query].present?
-      @cursos = Curso.find_by_name(params[:query])
+      @all_cursos = Curso.find_by_name(params[:query])
     end
   end
 end

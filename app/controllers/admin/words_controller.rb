@@ -3,6 +3,14 @@ class Admin::WordsController < AdminsBackofficeController
     @redacoes = Word.all
   end
 
+  def new
+    @word = Word.new
+  end
+
+  def create
+    Word.create(tema: params[:word][:tema], word_type: params[:word][:word_type])
+  end
+
   def edit
     @word = Word.find(params[:id])
   end
