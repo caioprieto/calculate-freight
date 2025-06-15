@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_10_173308) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_15_041726) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -206,6 +206,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_10_173308) do
     t.bigint "word_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "concluido", default: false
+    t.datetime "data_conclusao"
     t.index ["user_id"], name: "index_user_words_on_user_id"
     t.index ["word_id"], name: "index_user_words_on_word_id"
   end

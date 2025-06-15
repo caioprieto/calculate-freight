@@ -32,4 +32,10 @@ class User < ApplicationRecord
   def set_admin
     update(admin: true)
   end
+
+  def admin?
+    return true if admin
+
+    false
+  end
 end

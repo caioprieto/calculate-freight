@@ -2,10 +2,9 @@ class User::RedacoesController < ApplicationController
   layout "user_dashboard"
 
   def index
-    @redacoes = current_user.words
+    @user_words = current_user.user_words.limit(8)
   end
 
   def search
-    debugger
   end
 end

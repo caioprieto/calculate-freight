@@ -6,7 +6,6 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application" %>
     <%= stylesheet_link_tag "user_dashboard" %>
-    <%= stylesheet_link_tag "user_redacoes" %>
     <%= stylesheet_link_tag "user_settings" %>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -100,7 +99,8 @@
                       <div class="arrow-up"></div>
                       <span style="font-weight: bold; padding: 10px; display: block">Área do Aluno</span>
                       <hr style="margin: 0;">
-                      <%= link_to 'Voltar para Home', root_path, onclick: "logout()" %>
+                      <%= link_to 'Voltar para Home', root_path %>
+                      <%= link_to 'Painel do Admin', admin_dashboard_path, if: "#{current_user.admin?}" %>
                       <%= link_to 'Sair', '#', onclick: "logout()" %>
                     </div>
                   </div>
@@ -156,4 +156,20 @@
       }
     });
   });
+
+
+  function logout() {
+    fetch("/users/sign_out", {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+    }).then(() => {
+      window.location.href = "/";
+    }).catch((error) => {
+      console.error("Erro ao fazer logout:", error);
+    });
+  }
 </script>

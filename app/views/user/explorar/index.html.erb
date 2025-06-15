@@ -16,12 +16,17 @@
           <p class="ms-2 p-0 m-0 mt-1" style="font-weight: 300; font-size: 13px; width: 97%;"><%= curso.description %></p>
           <p class="ms-2 text-secondary p-0 m-0 w-75 mt-1" style="font-weight: 500; font-size: 12px"><%= curso.modulos.count %> Módulos • <%= curso.aulas.count %> Aulas • Duração Total: 20h 34min</p>
         </div>
+        <%= form_with url: add_to_cart_path(curso), method: :post, local: true do %>
+          <%= button_tag type: "submit", class: "btn btn-dark text-white p-1", style: "border-radius: 5px; margin-right: 10px; margin-top: -85px", onclick: "showLoadingAndRedirect()" do %>
+            <i class="bi bi-cart-plus fs-4" style="font-weight: 2000"></i>
+          <% end %>
+        <% end %>
       </a>
     <% end %>
   </div>
 
-  <div style="width: 27%;">
-    <div class="card-filter mt-3 bg-white p-2" style="min-height: 97.4%">
+  <div style="width: 27.5%;">
+    <div class="card-filter mt-3 bg-white p-2" style="min-height: 97.7%">
       <h5 class="mt-3">
         <i class="bi bi-search fs-4" style="margin-right: 10px; margin-left: 22px"></i>
         <span style="position: relative; top: -2px;">Filtros rápidos</span>
@@ -87,7 +92,12 @@
         </div>
       <% end %>
     </div>
+    <br>
   </div>
+</div>
+
+<div class="loader" id="loadingOverlay">
+  <div class="spinner-loader"></div>
 </div>
 
 <script>
@@ -128,5 +138,15 @@
       });
     }
   });
+
+  function showLoadingAndRedirect() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+
+    setTimeout(() => {
+      window.location.href = "";
+      overlay.style.display = 'none';
+    }, 1000);
+  }
 
 </script>

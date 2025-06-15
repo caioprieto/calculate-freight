@@ -14,6 +14,7 @@
       <tr>
         <th style="font-size: 17px; font-weight: 510;" scope="col">Tema</th>
         <th style="font-size: 17px; font-weight: 510;" scope="col">Tipo da Prova</th>
+        <th style="font-size: 17px; font-weight: 510;" scope="col">Data de criação</th>
         <th style="font-size: 17px; font-weight: 510;" scope="col">Genêro Textual</th>
         <th style="font-size: 17px; font-weight: 510;" scope="col"></th>
       </tr>
@@ -23,6 +24,7 @@
         <tr>
           <td style="font-size: 15px; font-weight: 450;"><%= redacao.tema %></td>
           <td style="font-size: 15px; font-weight: 450;"><%= redacao.word_type.upcase %></td>
+          <td style="font-size: 15px; font-weight: 450;">  <%= redacao.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %> </td>
           <td style="font-size: 15px; font-weight: 450;">Texto Dissertativo-Argumentativo</td>
           <td style="font-size: 15px; font-weight: 450;">
             <%= link_to edit_admin_word_path(redacao) do %>

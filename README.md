@@ -7,6 +7,8 @@
 * Gems Principais: Rspec, Puma, StateMachine, Stripe, Devise
 
 # Subir o server: http://localhost:3000
-   - docker-compose run --service-ports web
+   docker-compose run --service-ports web
 # Subir console:
-   - docker-compose run web rails c
+   docker-compose run web rails c
+# Obter permissão nas migrations ou arquivos gerados:
+   sudo chown -R $(whoami):$(whoami) /home/cprieto/projects/caioprieto/calculate-freight/freight_calculate_api

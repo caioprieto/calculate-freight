@@ -3,13 +3,13 @@
   <span style="position: relative; top: -2px;">Meus Pedidos</span>
 </h5>
 
-<div style="flex-direction: column; gap: 15px; width: 88%; white-space: nowrap; margin-left: 22px">
+<div style="flex-direction: column; gap: 0px; width: 95%; white-space: nowrap; margin-left: 22px">
   <% @pedidos.each do |pedido| %>
-    <div class="carrinho-cursos-card mt-4 bg-white d-flex align-items-center">
-      <div class="ms-5 w-75">
-        <h1 class="fw-light text-dark p-0 m-0 ms-2"><strong>Codígo:</strong> <%= pedido.code %></h1>
-        <p class="ms-2 p-0 m-0" style="font-weight: 500"><%= pedido.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></p>
-        <p class="ms-2 text-secondary p-1 m-0" style="font-size: 12px"><%= pedido.cursos_count %> Cursos • Status: <strong><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong> • Valor Total: </strong> <%= number_to_currency(pedido.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></p>
+    <div class="carrinho-cursos-card mt-3 bg-white d-flex align-items-center" style="padding: 0px; height: 95px">
+      <div class="ms-2 w-75">
+        <p class="ms-2 p-0 m-0 mt-3" style="font-weight: 600"><%= pedido.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></p>
+        <h1 class="fw-light text-dark p-0 m-0 ms-2 mt-1" style="font-size: 15px"><strong style="font-weight: 600">Codígo:</strong> <%= pedido.code %></h1>
+        <p class="ms-2 text-secondary p-0 mt-2" style="font-size: 12px"><%= pedido.cursos_count %> Cursos • Status: <strong><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong> • Valor Total: </strong> <%= number_to_currency(pedido.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></p>
       </div>
     </div>
   <% end %>

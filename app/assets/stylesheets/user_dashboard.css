@@ -13,15 +13,15 @@ html, body {
 }
 
 .left-panel {
-  width: 300px;
-  background-color: black;
+  width: 260px;
+  background-color: rgba(0, 0, 0, 0.94);
   padding: 20px;
   box-sizing: border-box;
 }
 
 .right-panel {
   flex: 1;
-  background-color: #f8f9fa;
+  background-color: rgba(0, 0, 0, 0.94);
   padding: 20px;
   box-sizing: border-box;
   overflow: hidden;
@@ -348,7 +348,7 @@ nav.d-flex {
 }
 
 .carrinho-cursos-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   z-index: 10;
   position: relative;
 }
@@ -377,12 +377,13 @@ nav.d-flex {
   background-color: whitesmoke;
   width: 100%;
   border-radius: 10px;
-  height: 140px;
+  height: 155px;
   transition: transform 0.3s ease-in-out;
+  padding: 5px;
 }
 
 .cursos-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   z-index: 10;
   position: relative;
 }
@@ -392,7 +393,7 @@ nav.d-flex {
 }
 
 .cursos-card img {
-  width: 30%;
+  width: 23%;
   height: 90%;
   object-fit: scale-down;
   filter: blur(1.5px);
@@ -420,13 +421,13 @@ nav.d-flex {
 }
 
 .meus-cursos-card:hover i {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .meus-cursos-card img {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: 170px;
+  object-fit: scale-down;
   filter: blur(1.3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -441,6 +442,103 @@ nav.d-flex {
   margin-left: 2px;
   margin-top: -1px;
 }
+
+
+
+
+
+
+.redacoes-card {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.redacoes-card:hover {
+  transform: scale(1.06);
+}
+
+.redacoes-card:hover img {
+  filter: blur(0px);
+}
+
+.redacoes-card:hover i {
+  transform: scale(1.15);
+}
+
+.redacoes-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  filter: blur(1.3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.redacoes-card h1 {
+  font-size: 17px;
+  padding: 8px;
+}
+
+.redacoes-card i {
+  transition: transform 0.3s ease-in-out;
+  margin-left: 2px;
+  margin-top: -1px;
+}
+
+
+
+
+
+
+.continuar-curso-card {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.continuar-curso-card:hover {
+  transform: scale(1.02);
+}
+
+.continuar-curso-card:hover img {
+  filter: blur(0px);
+}
+
+.continuar-curso-card:hover i {
+  transform: scale(1.15);
+}
+
+.continuar-curso-card img {
+  width: 100%;
+  height: 190px;
+  filter: blur(1.3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.scale-down {
+  object-fit: scale-down;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.continuar-curso-card h1 {
+  font-size: 17px;
+  padding: 8px;
+}
+
+.continuar-curso-card i {
+  transition: transform 0.3s ease-in-out;
+  margin-left: 2px;
+  margin-top: -1px;
+}
+
+
+
+
+
+
 
 .modal-backdrop.show {
   z-index: 1040;

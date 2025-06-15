@@ -146,6 +146,12 @@
     const path = document.querySelector(".spinner .path");
 
     videoPlayer.addEventListener("ended", () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch((err) => {
+          console.warn("Erro ao sair do fullscreen:", err);
+        });
+      }
+
       const currentLink = document.querySelector(".aula-link.aula-ativa");
       if (!currentLink) return;
 

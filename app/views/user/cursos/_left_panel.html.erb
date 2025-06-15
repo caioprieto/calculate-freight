@@ -1,7 +1,7 @@
 <div class="player-navbar d-flex align-items-center" style="gap: 15px">
   <div class="navbar-left d-flex align-items-center p-2">
     <a href="/user/dashboard" class="text-white d-flex" style="text-decoration: none;">
-      <i class="bi bi-box-arrow-left" style="margin-top: 37px; margin-right: 10px; font-size: 45px"></i>
+      <i class="bi bi-box-arrow-left" style="margin-top: 44px; margin-right: 10px; font-size: 38px"></i>
       <img src="/images/logo.png" alt="Logo" class="navbar-logo" />
     </a>
   </div>
@@ -13,19 +13,29 @@
   </a>
 
   <div class="navbar-right d-flex gap-2">
-    <%# Botão Progresso %>
-    <div class="btn btn-outline-dark text-white progress-button" id="progress-button" style="cursor: pointer; position: relative;">
+    <!-- Botão Progresso -->
+    <div class="btn btn-outline-dark text-white progress-button" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#progressModal">
       <i class="bi bi-trophy fs-4 me-1"></i>
       <span style="position: relative; top: -4px;">Seu progresso</span>
     </div>
 
-    <div class="btn btn-outline-dark text-white compartilhar-button" id="compartilhar-button" style="cursor: pointer; position: relative;">
+    <!-- Botão Compartilhar -->
+    <div class="btn btn-outline-dark text-white compartilhar-button" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#compartilharModal">
       <i class="bi bi-share fs-4 me-1"></i>
       <span style="position: relative; top: -4px;">Compartilhar</span>
     </div>
 
-    <div class="btn btn-outline-dark text-white p-1 settings-button" id="settings-button" style="cursor: pointer; position: relative;">
-      <i class="bi bi-three-dots-vertical fs-4"></i>
+    <!-- Botão Configurações -->
+    <div class="settings-dropdown">
+      <button class="btn btn-outline-dark settings-dropdown-button p-2 text-white" aria-label="Menu de configurações" id="settingsDropdownToggle">
+        <i class="bi bi-three-dots-vertical fs-4"></i>
+      </button>
+
+      <div class="settings-dropdown-menu" id="settingsDropdownMenu">
+        <div class="arrow-up"></div>
+        <%= link_to 'Editar Conta', edit_user_registration_path %>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+      </div>
     </div>
   </div>
 </div>
@@ -63,6 +73,78 @@
   </div>
 </div>
 
+<!-- MODAL DE PROGRESSO -->
+<div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="progressModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="progressModalLabel">Seu Progresso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+
+      <div class="modal-body d-flex mt-3" style="gap: 40px">
+        <div style="width: 50%; height: 100%">
+          <canvas id="progressChart" class="text-center" style="width: 90%; height: 50%;"></canvas>
+          <p class="mt-3 fs-6 mx-3 text-success">Você já assistiu <strong><%= @user_curso.progresso %>%</strong></p>
+        </div>
+        <div style="width: 50%;">
+          <div class="w-100 d-flex">
+            <p class="mt-3 fs-2"><%= @user_curso.total_aulas_vistas %>/<%= @user_curso.total_aulas %></p>
+            <p class="mt-4 fs-5 mx-2 text-secondary"> Aulas</p>
+          </div>
+          <div class="w-100 d-flex">
+            <p class="mt-3 fs-2"><%= @user_curso.total_aulas_vistas %>/<%= @user_curso.total_aulas %></p>
+            <p class="mt-4 fs-5 mx-2 text-secondary"> Redações</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Compartilhar -->
+<div class="modal fade" id="compartilharModal" tabindex="-1" aria-labelledby="compartilharModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="progressModalLabel">Compartilhar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-2">
+          <input type="text" id="shareLink" class="form-control" readonly value="http://localhost:3000/cursos/<%= @curso.id %>/edit">
+          <button class="btn btn-dark" id="copyBtn">Copiar</button>
+        </div>
+        <div id="copyFeedback" class="text-muted small" style="display: none;">Link copiado</div>
+
+        <div class="footer-links d-flex mt-3 mx-1" style="gap: 25px">
+          <div class="icon-footer">
+            <a href="" class="text-dark" style="text-decoration: none;">
+              <i class="bi bi-instagram fs-1"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-dark" style="text-decoration: none;">
+              <i class="bi bi-linkedin fs-1"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-dark" style="text-decoration: none;">
+              <i class="bi bi-facebook fs-1"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-dark" style="text-decoration: none;">
+              <i class="bi bi-youtube fs-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const button = document.getElementById("progress-button");
@@ -84,4 +166,72 @@
       isOpen = !isOpen;
     });
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("settingsDropdownToggle");
+    const dropdownMenu = document.getElementById("settingsDropdownMenu");
+
+    toggleButton.addEventListener("click", function (e) {
+      e.stopPropagation(); // evita fechar na hora de abrir
+      dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!dropdownMenu.contains(e.target) && e.target !== toggleButton) {
+        dropdownMenu.style.display = "none";
+      }
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+      const modal = document.getElementById('progressModal');
+      const progresso = <%= @user_curso.progresso || 0 %>;
+
+      if (!modal) return; // Evita erro se modal não estiver presente
+
+      modal.addEventListener('shown.bs.modal', function () {
+        const ctx = document.getElementById('progressChart').getContext('2d');
+
+        if (window.myProgressChart) {
+          window.myProgressChart.destroy();
+        }
+
+        window.myProgressChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Assistido', 'Restante'],
+            datasets: [{
+              data: [progresso, 100 - progresso],
+              backgroundColor: ['#4CAF50', '#e0e0e0'],
+              borderWidth: 0
+            }]
+          },
+          options: {
+            cutout: '70%',
+            responsive: false,
+            plugins: {
+              legend: { display: false }
+            }
+          }
+        });
+      });
+    }, 100); // pequeno delay pra garantir que o modal foi renderizado
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const copyBtn = document.getElementById("copyBtn");
+    const shareLink = document.getElementById("shareLink");
+    const copyFeedback = document.getElementById("copyFeedback");
+
+    copyBtn.addEventListener("click", () => {
+      shareLink.select();
+      document.execCommand("copy");
+      copyFeedback.style.display = "block";
+      setTimeout(() => {
+        copyFeedback.style.display = "none";
+      }, 2000);
+    });
+  });
+
 </script>
