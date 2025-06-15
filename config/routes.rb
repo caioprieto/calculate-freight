@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
+  devise_for :admins, skip: [ :registrations ], path: "admin", controllers: { sessions: "admins/sessions" }, path_names: {
+    sign_in: "login",
+    sign_out: "logout"
+  }
+
   namespace :admin do
     get "dashboard", to: "dashboard#index"
 
