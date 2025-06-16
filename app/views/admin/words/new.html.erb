@@ -1,9 +1,164 @@
 <%= form_with(model: [:admin, @word], local: true, html: { class: "curso-form" }) do |form| %>
-  <%= form.text_field :tema %>
-  <%= form.file_field :pdf_file %>
-  <%= form.label :word_type, "Prova", class: "form-label fw-light" %>
-  <%= form.select :word_type, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @word.word_type), {}, class: "form-select form-select-sm", style: "margin-top: -8px" %>
-  <%= form.submit "Salvar" %>
+  
+  <div class="form-box mt-10">
+    <h1>Adicionar Tema de Dissertação</h1>
+    <form>
+
+      <div class="form-group">
+        <label for="titulo">Tema</label>
+        <input type="text" id="titulo" name="titulo" placeholder="O impacto das redes sociais na educação">
+      </div>
+
+      <div class="form-group">
+        <label for="word_type">Tipo de Prova</label>
+        <select id="word_type" name="word_type" class="select-sm">
+          <option value="enem">Enem</option>
+          <option value="usp">Fuvest</option>
+          <option value="unicamp">Unicamp</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="pdf_file">Arquivo PDF</label>
+        <input type="file" id="pdf_file" name="pdf_file">
+      </div>
+
+      <div class="form-group">
+        <label for="imagem">Imagem ilustrativa</label>
+        <input type="file" id="imagem" name="imagem">
+      </div>
+
+      <div class="form-group">
+        <label for="texto_motivador">Texto motivador</label>
+        <textarea id="texto_motivador" name="texto_motivador" rows="4" placeholder="Escreva um parágrafo introdutório ou motivacional..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Links úteis</label>
+        <div id="links-container">
+          <div class="flex">
+            <input type="text" name="links[]" placeholder="Link 1">
+            <button type="button" class="link-remove" onclick="this.parentElement.remove()">🗑️</button>
+          </div>
+          <div class="flex">
+            <input type="text" name="links[]" placeholder="Link 2">
+            <button type="button" class="link-remove" onclick="this.parentElement.remove()">🗑️</button>
+          </div>
+        </div>
+        <button type="button" class="add-link mt-2" onclick="adicionarLink()">+ Adicionar link</button>
+      </div>
+
+      <button type="submit" class="submit-btn">Salvar Tema</button>
+    </form>
+  </div>
+
+  <script>
+    function adicionarLink() {
+      const container = document.getElementById('links-container');
+      const div = document.createElement('div');
+      div.className = 'flex';
+      div.innerHTML = `
+        <input type="text" name="links[]" placeholder="Novo Link">
+        <button type="button" class="link-remove" onclick="this.parentElement.remove()">🗑️</button>
+      `;
+      container.appendChild(div);
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f3f4f6;
+      padding: 2rem;
+    }
+
+    .form-box {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+          }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .select-sm {
+      font-size: 0.875rem;
+      padding: 0.4rem 0.6rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #2563eb;
+      color: white;
+      padding: 0.75rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #1d4ed8;
+    }
+
+    .flex {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .link-remove {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      color: #9ca3af;
+      cursor: pointer;
+    }
+
+    .link-remove:hover {
+      color: #dc2626;
+    }
+
+    .add-link {
+      color: #2563eb;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .mt-2 {
+      margin-top: 0.5rem;
+    }
+
+    .mt-10 {
+      margin-top: 2.5rem;
+    }
+  </style>
+
 <% end %>
-
-

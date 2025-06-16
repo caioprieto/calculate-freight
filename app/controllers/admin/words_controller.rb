@@ -35,7 +35,7 @@ class Admin::WordsController < AdminsBackofficeController
   private
 
   def word_params
-    params.require(:word).permit(:pdf_file, :tema, :word_type)
+    params.permit(:pdf_file, :tema, :word_type, :introducao)
   end
   
 end
