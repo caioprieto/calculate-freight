@@ -12,3 +12,5 @@
    docker-compose run web rails c
 # Obter permissão nas migrations ou arquivos gerados:
    sudo chown -R $(whoami):$(whoami) /home/cprieto/projects/caioprieto/calculate-freight/freight_calculate_api
+# Criar admin - Rodar no console
+   Admin.create(email: "aprovaredacao@gmail.com", password: "123321")

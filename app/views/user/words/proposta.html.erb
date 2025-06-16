@@ -31,8 +31,41 @@
 
 <div class="video-border-overlay"></div>
 
-<% if @word.pdf_file.attached? %>
-  <div class="pdf-container">
-    <iframe src="<%= rails_blob_path(@word.pdf_file, disposition: 'inline') %>" type="application/pdf"></iframe>
+<div class="d-flex w-100 bg-white" style="margin-top: 8px;">
+  <% if @word.pdf_file.attached? %>
+    <div class="pdf-container">
+      <iframe src="<%= rails_blob_path(@word.pdf_file, disposition: 'inline') %>" type="application/pdf"></iframe>
+    </div>
+  <% end %>
+
+  <div class="chat-wrapper bg-dark">
+    <h6 class="fw-bold mb-2 text-white">Chat com o Admin</h6>
+
+    <div id="chat-messages" class="messages">
+      <% @messages.each do |message| %>
+        <div class="mb-2 <%= message.dono_type == 'Admin' ? 'text-end' : 'text-start' %>">
+          <span class="badge <%= message.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
+            <%= message.dono_type == 'Admin' ? 'Admin' : 'Você' %>
+          </span>
+          <div class="d-inline-block p-2 rounded border mt-1 text-white">
+            <%= message.content %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_with url: user_word_chat_messages_path(@word, @chat),
+                model: Message.new,
+                local: true,
+                html: { id: "messageForm", class: "chat-input" } do |f| %>
+      <div class="input-group">
+        <%= f.text_field :content,
+                        class: "form-control",
+                        placeholder: "Digite sua mensagem..." %>
+        <button class="btn btn-light" type="submit">Enviar</button>
+      </div>
+    <% end %>
   </div>
-<% end %>
+
+</div>
+

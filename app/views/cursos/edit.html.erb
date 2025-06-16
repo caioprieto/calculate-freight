@@ -45,7 +45,33 @@
             </div>
 
             <div style="display: flex; gap: 10px">
-              <% if current_user.user_cursos.where(curso_id: @curso.id).blank? %>
+              <% if current_user.present? %>
+                <% if current_user.user_cursos.where(curso_id: @curso.id).blank? %>
+                  <div class="">
+                    <%= form_with url: add_to_cart_path(@curso), method: :post, local: true do %>
+                      <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
+                        <i class="bi bi-cart-plus-fill fs-3"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
+
+                  <div class="w-100 p-1">
+                    <%= form_with url: add_to_cart_path(@curso, redirect: true), method: :post, local: true do %>
+                      <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-3 mt-1", onclick: "showLoadingRedirect()" do %>
+                        Comprar agora
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="w-100 p-1">
+                    <%= form_with url: player_user_curso_path(@curso), method: :get, local: true do %>
+                      <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-3 mt-1" do %>
+                        Ir para o Curso
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
                 <div class="">
                   <%= form_with url: add_to_cart_path(@curso), method: :post, local: true do %>
                     <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
@@ -61,14 +87,6 @@
                     <% end %>
                   <% end %>
                 </div>
-              <% else %>
-                <div class="w-100 p-1">
-                  <%= form_with url: player_user_curso_path(@curso), method: :get, local: true do %>
-                    <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-3 mt-1" do %>
-                      Ir para o Curso
-                    <% end %>
-                  <% end %>
-                </div>
               <% end %>
             </div>
 
@@ -76,7 +94,7 @@
 
             <div class="cupom-box">
               <p class="cupom-msg fs-6">O código de cupom <strong>247TM260525G2</strong> foi aplicado</p>
-              <input type="text" class="form-control" placeholder="Inserir cupom">
+              <input type="text" class="form-control" placeholder="Inserir cupom" disabled>
               <button class="btn-aplicar btn-comprar fw-light">Aplicar</button>
             </div>
           </div>

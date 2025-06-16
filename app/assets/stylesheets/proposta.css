@@ -75,20 +75,62 @@ body {
 }
 
 .pdf-container {
-  position: absolute;
-  top: 150px; /* abaixo da navbar */
-  left: 40px;
-  right: 0;
-  bottom: 0;
   z-index: 999; /* acima do .video-border-overlay que está com z-index: 2 */
   background-color: white;
   overflow: hidden;
   width: 45%;
-  height: 80%;
+  height: 80vh;
+  margin-top: 40px;
+  margin-left: 35px;
 }
 
 .pdf-container iframe {
   width: 100%;
   height: 100%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* -- Chat fixo no lado direito da tela ------------------------------- */
+.chat-wrapper {
+  z-index: 999;
+  width: 50%;                /* ajuste ao gosto */
+  height: calc(100vh - 600px); /* altura total menos o navbar */
+
+  /* layout interno */
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 10px;
+  overflow: hidden;          /* não deixa nada vazar */
+  border-radius: 6px;
+  margin-left: 30px;
+  margin-top: 39px;
+}
+
+/* -- Lista de mensagens --------------------------------------------- */
+.chat-wrapper .messages {
+  flex: 1 1 auto;            /* ocupa todo o espaço disponível */
+  overflow-y: auto;          /* só ela rola */
+  padding-right: 4px;        /* espaço pro scrollbar */
+}
+
+/* -- Formulário (campo + botão) sempre visível ---------------------- */
+.chat-wrapper .chat-input {
+  position: sticky;          /* “cola” dentro do wrapper */
+  bottom: 0;                 /* gruda no fundo do wrapper */
+  background: #212529;       /* mesma cor do wrapper */
+  padding-top: .5rem;
+}
+
+/* opcional: some bordas e cores de fundo só pra ficar bonito */
+.chat-wrapper .input-group .form-control {
+  background: #343a40;
+  color: #fff;
+  border: none;
+}
+.chat-wrapper .input-group .form-control::placeholder {
+  color: #adb5bd;
+}
+.chat-wrapper .input-group .btn {
+  border: none;
 }

@@ -52,6 +52,10 @@ Rails.application.routes.draw do
       member do
         get :proposta
       end
+
+      resources :chats do
+        resources :messages
+      end
     end
   end
 

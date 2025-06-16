@@ -42,8 +42,8 @@
       </div>
 
       <div class="col-3">
-        <%= form.label :tipo, "Tipo", class: "form-label fw-light" %>
-        <%= form.select :tipo, options_for_select([["Texto Dissertativo/Argumentativo", "padrao"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.tipo), {}, class: "form-select form-select-sm select", style: "margin-top: -8px" %>
+        <%= form.label :value, "Valor Total", class: "form-label fw-light" %>
+        <%= form.number_field :value, class: "form-control form-control-sm", style: "margin-top: -8px" %>
       </div>
     </div>
 

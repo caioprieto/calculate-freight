@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_15_053345) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_15_062808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -97,6 +97,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_15_053345) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.bigint "user_word_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_word_id"], name: "index_chats_on_user_word_id"
+  end
+
   create_table "curso_words", force: :cascade do |t|
     t.integer "curso_id", null: false
     t.integer "word_id", null: false
@@ -156,6 +163,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_15_053345) do
     t.integer "address_destino_id", null: false
     t.index ["address_destino_id"], name: "index_freights_on_address_destino_id"
     t.index ["address_origem_id"], name: "index_freights_on_address_origem_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chat_id"
+    t.string "dono_type"
+    t.bigint "dono_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["dono_type", "dono_id"], name: "index_messages_on_dono"
   end
 
   create_table "modulos", force: :cascade do |t|
@@ -269,10 +287,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_15_053345) do
   add_foreign_key "cart_cursos", "carts"
   add_foreign_key "cart_cursos", "cursos"
   add_foreign_key "carts", "users"
+  add_foreign_key "chats", "user_words"
   add_foreign_key "curso_words", "cursos"
   add_foreign_key "curso_words", "words"
   add_foreign_key "freights", "address", column: "address_destino_id"
   add_foreign_key "freights", "address", column: "address_origem_id"
+  add_foreign_key "messages", "chats"
   add_foreign_key "modulos", "cursos"
   add_foreign_key "pedidos", "carts"
   add_foreign_key "pedidos", "users"

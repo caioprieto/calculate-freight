@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :watched_aulas, through: :user_aulas, source: :aula
 
   has_many :pedidos
+  has_many :messages, as: :dono, class_name: "::Message"
 
   validates :nome, :sobrenome, :cpf, presence: true
 
