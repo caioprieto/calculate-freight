@@ -1,6 +1,2 @@
-<%= form_with(model: [:admin, @word], local: true, html: { class: "curso-form" }) do |form| %>
-  <%= form.text_field :tema %>
-  <%= form.file_field :pdf_file %>
-  <%= form.submit "Salvar" %>
-<% end %>
+<%= render 'form', word: @word, type: "" %>
 

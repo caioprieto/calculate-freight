@@ -1,0 +1,161 @@
+<%= form_with(model: [:admin, word], local: true, html: { class: "curso-form" }) do |form| %>
+  <div class="form-box mt-2">
+    <h4 style="margin-top: 3px;">
+      <i class="bi bi-book fs-4" style="margin-right: 10px"></i>
+      <%= type == "new" ? "Adicionar nova redação" : "Editar Redação - #{word.id}" %>
+    </h4>
+    <% if flash[:alerta] %>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
+      <%= flash[:alerta]%>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% end %>    
+    <div class="form-group">
+      <%= form.label :tema, "Tema", style: "margin-top: 30px;" %>
+      <%= form.text_field :tema, placeholder: "O impacto das redes sociais na educação", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :word_type, "Tipo de Prova" %>
+      <%= form.select :word_type, [["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], {}, class: "form-control select-sm" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :pdf_file, "Arquivo PDF" %>
+      <%= form.file_field :pdf_file, class: "form-control" %>
+    </div>
+    <% if word.pdf_file.attached? %>
+      <div class="pdf-container">
+        <iframe src="<%= rails_blob_path(word.pdf_file, disposition: 'inline') %>" type="application/pdf"></iframe>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= form.label :imagem, "Imagem ilustrativa" %>
+      <%= form.file_field :imagem, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :introducao, "Texto motivador" %>
+      <%= form.text_area :introducao, rows: 4, placeholder: "Escreva um parágrafo introdutório ou motivacional...", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <label>Links úteis</label>
+      <div id="links-container">
+        <div class="flex">
+          <input type="text" name="links[]" placeholder="Link 1" class="form-control">
+          <button type="button" class="link-remove" onclick="this.parentElement.remove()">🗑️</button>
+        </div>
+      </div>
+      <button type="button" class="add-link mt-2" onclick="adicionarLink()">+ Adicionar link</button>
+    </div>
+
+    <%= form.submit "Salvar Tema", class: "submit-btn" %>
+
+    <%# Dentro do form ou fora dele, mas ainda na mesma view: %>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .form-box {
+    max-width: 99%;
+    margin: 1rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    background-color: whitesmoke;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="text"],
+  input[type="file"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .select-sm {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background-color: #198754;
+    color: white;
+    padding: 0.75rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background-color: #157347;
+  }
+
+  .flex {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .link-remove {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #9ca3af;
+    cursor: pointer;
+  }
+
+  .link-remove:hover {
+    color: #dc2626;
+  }
+
+  .add-link {
+    color: #2563eb;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .mt-2 {
+    margin: 0.5rem 0;
+  }
+
+  .mt-10 {
+    margin-top: 2.5rem;
+  }
+</style>
+
+  </div>
+
+  <script>
+    function adicionarLink() {
+      const container = document.getElementById('links-container');
+      const div = document.createElement('div');
+      div.className = 'flex';
+      div.innerHTML = `
+        <input type="text" name="links[]" placeholder="Novo Link" class="form-control">
+        <button type="button" class="link-remove" onclick="this.parentElement.remove()">🗑️</button>
+      `;
+      container.appendChild(div);
+    }
+  </script>
+<% end %>

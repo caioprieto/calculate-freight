@@ -8,34 +8,30 @@ class Admin::WordsController < AdminsBackofficeController
   end
 
   def create
-    Word.create(tema: params[:word][:tema], word_type: params[:word][:word_type])
+    if @word = Word.create(word_params)
+      redirect_to admin_words_path
+    end
   end
 
   def edit
     @word = Word.find(params[:id])
   end
-
+  
   def update
     @word = Word.find(params[:id])
 
     if @word.update(word_params)
+      flash[:alerta] = "REDAÇÃO ALTERADA COM SUCESSO"
       redirect_to edit_admin_word_path(@word), notice: "Curso atualizado com sucesso!"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  def new 
-    @word = Word.new
-  end
-  def create
-    @word = Word.create(word_params)
-
-  end
   private
 
   def word_params
-    params.permit(:pdf_file, :tema, :word_type, :introducao)
+    params.require(:word).permit(:pdf_file, :tema, :word_type, :introducao)
   end
   
 end
