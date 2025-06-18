@@ -88,28 +88,54 @@
     const links = document.querySelectorAll(".aula-link");
     const videoPlayer = document.getElementById("videoPlayer");
     const videoSource = document.getElementById("videoSource");
+    const redacaoOverlay = document.getElementById("redacaoOverlay");
+    const btnRedacao = document.getElementById("btnRedacao");
+    const btnProximaVideo = document.getElementById("btnProximaVideo");
 
     links.forEach(link => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
+
+        redacaoOverlay.style.display = "none";
+
         const videoUrl = link.dataset.videoUrl;
+        const wordId = link.href.match(/\/user\/words\/(\d+)\/proposta/)?.[1]; // extrai ID da redação
+
+        links.forEach(l => l.classList.remove("aula-ativa"));
+        links.forEach(l => l.closest(".list-group-item").classList.remove("test-list"));
+        link.classList.add("aula-ativa");
+        link.closest(".list-group-item").classList.add("test-list");
+
         if (videoUrl) {
-          links.forEach(l => l.classList.remove("aula-ativa"));
-          links.forEach(l => l.closest(".list-group-item").classList.remove("test-list"));
-
-          link.classList.add("aula-ativa");
-          link.closest(".list-group-item").classList.add("test-list");
-
+          // AULA COM VÍDEO
           videoSource.src = videoUrl;
           videoPlayer.load();
           videoPlayer.play();
+          redacaoOverlay.style.display = "none";
+        } else if (wordId) {
+          // AULA COM REDAÇÃO
+          videoSource.src = "";
+          videoPlayer.load();
+          videoPlayer.pause();
+          redacaoOverlay.style.display = "flex";
 
-          const aulaTitulo = link.textContent;
-          document.getElementById("aulaAtivaTitulo").textContent = aulaTitulo
+          btnRedacao.href = `/user/words/${wordId}/proposta`;
+
+          btnProximaVideo.onclick = () => {
+            const currentIndex = Array.from(links).indexOf(link);
+            const nextLink = links[currentIndex + 1];
+            redacaoOverlay.style.display = "none";
+            if (nextLink) nextLink.click();
+          };
         }
+
+        const aulaTitulo = link.textContent;
+        const tituloEl = document.getElementById("aulaAtivaTitulo");
+        if (tituloEl) tituloEl.textContent = aulaTitulo;
       });
     });
   });
+
 
   document.addEventListener("DOMContentLoaded", () => {
     const checkboxes = document.querySelectorAll(".watched-checkbox");

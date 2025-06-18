@@ -31,7 +31,7 @@
         <i class="bi bi-three-dots-vertical fs-4"></i>
       </button>
 
-      <div class="settings-dropdown-menu" id="settingsDropdownMenu">
+      <div class="settings-dropdown-menu" id="settingsDropdownMenu" style="z-index: 1101">
         <div class="arrow-up"></div>
         <%= link_to 'Editar Conta', edit_user_registration_path %>
         <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
@@ -70,11 +70,26 @@
         <div id="countdownTimer" class="countdown-timer">5s</div>
       </div>
     </div>
+
+    <div id="redacaoOverlay" style="display: none; position: absolute; inset: 0; background: rgba(141, 141, 141, 0.85); z-index: 1100; align-items: center; justify-content: center; flex-direction: column; color: white;">
+      <h3>Esta aula é uma redação</h3>
+      <div style="margin-top: 10px;">
+        <a id="btnRedacao" class="btn btn-primary w-100 mb-2 shadow">
+          <i class="bi bi-book fs-6"></i>
+          <span style="margin-top: -10px; margin-left: 3px">Ir para redação</span>
+        </a>
+        <button id="btnProximaVideo" class="btn btn-dark w-100 shadow">
+          <i class="bi bi-play-circle fs-6"></i>
+          <span style="margin-top: -10px; margin-left: 3px">Próximo vídeo</span>
+        </button>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <!-- MODAL DE PROGRESSO -->
-<div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="progressModalLabel" aria-hidden="true">
+<div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="progressModalLabel" aria-hidden="true" style="z-index: 1101">
   <div class="modal-dialog modal-md">
     <div class="modal-content p-3">
       <div class="modal-header">
@@ -104,7 +119,7 @@
 
 
 <!-- Modal Compartilhar -->
-<div class="modal fade" id="compartilharModal" tabindex="-1" aria-labelledby="compartilharModalLabel" aria-hidden="true">
+<div class="modal fade" id="compartilharModal" tabindex="-1" aria-labelledby="compartilharModalLabel" aria-hidden="true" style="z-index: 1101">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">

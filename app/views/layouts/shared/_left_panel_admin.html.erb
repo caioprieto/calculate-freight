@@ -3,23 +3,33 @@
     <img src="/images/logo.png" style="width: 200px; height: 200px; margin-top: -50px; margin-left: 15px">
   </a>
 </div>
-<div style="margin-left: 25px; margin-top: -10px; width: 235px">
+<div style="margin-left: 25px; margin-top: -25px; width: 235px">
   <div class="row">
-    <nav class="menu">
-      <a href="/admin/dashboard">
-        <i class="bi bi-border-all fs-4" style="margin-right: 10px"></i>
+    <nav class="menu fw-light">
+      <%= link_to "/admin/dashboard", class: "menu-link #{'active' if current_page?('/admin/dashboard')}" do %>
+        <i class="bi bi-border-all fs-5" style="margin-right: 10px"></i>
         Dashboard
-      </a>
+      <% end %>
 
-      <a href="/admin/words">
-        <i class="bi bi-book fs-4" style="margin-right: 10px"></i>
+      <%= link_to "/admin/words", class: "menu-link #{'active' if current_page?('/admin/words')}" do %>
+        <i class="bi bi-book fs-5" style="margin-right: 10px"></i>
         Redações
-      </a>
+      <% end %>
 
-      <a href="/admin/cursos">
-        <i class="bi bi-play-btn fs-4" style="margin-right: 10px"></i>
+      <%= link_to "/admin/cursos", class: "menu-link #{'active' if current_page?('/admin/cursos')}" do %>
+        <i class="bi bi-play-btn fs-5" style="margin-right: 10px"></i>
         Cursos
-      </a>
+      <% end %>
+
+      <%= link_to "/admin/users", class: "menu-link #{'active' if current_page?('/admin/users')}" do %>
+        <i class="bi bi-person fs-5" style="margin-right: 10px"></i>
+        Usuários
+      <% end %>
+
+      <%= link_to "/admin/alunos", class: "menu-link #{'active' if current_page?('/admin/alunos')}" do %>
+        <i class="bi bi-mortarboard fs-5" style="margin-right: 10px"></i>
+        Alunos
+      <% end %>
     </nav>
   </div>
 </div>

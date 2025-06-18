@@ -12,6 +12,7 @@ class Admin::CursosController < AdminsBackofficeController
   def create
     @curso = Curso.new(curso_params)
     if @curso.save!
+      flash[:alert] = "Curso criado com sucesso!"
       render :edit, notice: "Curso criado com sucesso!"
     else
       render :new, status: :unprocessable_entity
@@ -30,6 +31,7 @@ class Admin::CursosController < AdminsBackofficeController
     end
 
     if @curso.update(curso_params)
+      flash[:alert] = "Curso atualizado com sucesso!"
       redirect_to edit_admin_curso_path(@curso), notice: "Curso atualizado com sucesso!"
     else
       render :edit, status: :unprocessable_entity

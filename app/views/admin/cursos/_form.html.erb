@@ -1,9 +1,16 @@
 <%= form_with(model: [:admin, @curso], local: true, html: { class: "curso-form" }) do |form| %>
+  <h4 style="margin-top: 3px;">
+    <i class="bi bi-play-btn-fill text-dark fs-4" style="margin-right: 10px"></i>
+    Novo Curso
+  </h4>
   <%= render "actions", f: form %>
-  <%= render partial: "layouts/shared/errors", locals: { resource: @curso } %>
+  <div style="width: 100%">
+    <%= render partial: "layouts/shared/errors", locals: { resource: @curso } %>
+    <%= render partial: "layouts/shared/alert" %>
+  </div>
 
   <% if @curso.id.present? %>
-    <div class="mt-4" style="width: 91.7%">
+    <div class="mt-4" style="width: 100%">
       <div class="preview_card">
         <% if @curso.imagem.attached? %>
           <div class="img">
@@ -31,7 +38,7 @@
         </div>
       </div>
 
-      <div class="col-2">
+      <div class="col-4">
         <%= form.label :prova, "Prova", class: "form-label fw-light" %>
         <div class="d-flex align-items-center" style="gap: 5px;">
           <%= form.select :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @curso.prova), {}, class: "form-select form-select-sm select2-prova", style: "margin-top: -8px" %>
@@ -41,13 +48,13 @@
         </div>
       </div>
 
-      <div class="col-3">
+      <div class="col-2">
         <%= form.label :value, "Valor Total", class: "form-label fw-light" %>
         <%= form.number_field :value, class: "form-control form-control-sm", style: "margin-top: -8px" %>
       </div>
     </div>
 
-    <div class="col-11">
+    <div class="col-12">
       <div>
         <%= form.label "Descrição", class: "form-label fw-light" %>
         <%= form.text_area :description, class: "form-control form-control-sm", rows: 3, style: "margin-top: -8px" %>
@@ -63,7 +70,7 @@
       </h5>
     </div>
 
-    <div id="container_redacoes_escolhidas" class="container-redacoes-escolhidas col-11 mt-2">
+    <div id="container_redacoes_escolhidas" class="container-redacoes-escolhidas col-12 mt-2">
       <% @redacoes.each do |word| %>
         <div class="card-redacao mb-2">
           <div class="img-redacao">
@@ -89,7 +96,7 @@
     </h5>
   </div>
 
-  <div id="container_modulos" style="width: 93%">
+  <div id="container_modulos" style="width: 100%">
     <div id="modulos">
       <%= form.fields_for :modulos do |modulo_fields| %>
         <%= render "modulos_nested", f: modulo_fields %>

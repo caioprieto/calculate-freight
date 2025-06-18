@@ -3,7 +3,7 @@ class Curso < ApplicationRecord
 
   has_one_attached :imagem
 
-  has_many :curso_words, class_name: "CursoWord"
+  has_many :curso_words, class_name: "CursoWord", dependent: :destroy
   has_many :words, through: :curso_words
 
   has_many :modulos, class_name: "Modulo", inverse_of: :curso, dependent: :destroy

@@ -523,6 +523,7 @@ footer.footer {
   background: rgba(255, 255, 255, 0.767);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
+  margin-top: -45px;
 }
 
 .apresentacao{

@@ -1,0 +1,70 @@
+<div class="admin-chat-container">
+  <!-- Sidebar esquerda -->
+  <aside class="chat-sidebar">
+    <h4>Conversas</h4>
+    <div id="chatList">
+      <% @alunos.each do |aluno| %>
+        <% chats = aluno.user_words.collect(&:chat).compact %>
+        <% messages = chats.collect(&:messages).flatten.map { |m| { content: m.content, created_at: m.created_at } } %>
+
+        <div class="chat-item" data-user-name="<%= aluno.nome %>" data-messages='<%= messages.to_json %>'>
+          <strong><%= aluno.nome %> </strong><br>
+          <small><%= chats.last.messages.last&.content %></small>
+        </div>
+      <% end %>
+    </div>
+  </aside>
+
+  <!-- Conteúdo do chat -->
+  <main class="chat-main">
+    <header class="chat-header" id="chatHeader" style="display: none;">
+      <h5></h5>
+    </header>
+
+    <section class="chat-messages" id="chatMessages" style="display: none;"></section>
+    </section>
+
+    <footer class="chat-input" id="chatInput" style="display: none;">
+      <%= form_with url: '', model: Message.new, local: true do |f| %>
+        <div class="input-group w-100">
+          <%= f.text_field :content,
+                class: "form-control",
+                placeholder: "Digite sua mensagem..." %>
+          <%= f.submit "Enviar", class: "btn btn-dark text-white" %>
+        </div>
+      <% end %>
+    </footer>
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.chat-item').forEach(item => {
+  item.addEventListener('click', () => {
+    // Remover classe 'active' dos outros
+    document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+
+    // Limpar mensagens antigas
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.innerHTML = '';
+
+    // Mostrar nome do usuário no header
+    const userName = item.getAttribute('data-user-name');
+    document.querySelector('.chat-header h5').textContent = userName;
+
+    // Recuperar e exibir mensagens
+    const messages = JSON.parse(item.getAttribute('data-messages'));
+    messages.forEach(msg => {
+      const div = document.createElement('div');
+      div.className = 'message admin'; // você pode ajustar se quiser alternar sender
+      div.textContent = `${msg.content} (${msg.created_at})`;
+      chatMessages.appendChild(div);
+    });
+
+    // Mostrar a área de mensagens
+    chatMessages.style.display = 'block';
+    document.getElementById('chatInput').style.display = 'block';
+    document.getElementById('chatHeader').style.display = 'block';
+  });
+});
+</script>

@@ -14,7 +14,6 @@ class Aula < ApplicationRecord
   after_save :update_words, if: :saved_change_to_word_id?
 
   def update_words
-    debugger
     old_word_id = word_id_before_last_save
     new_word_id = word_id
 

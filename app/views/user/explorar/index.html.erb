@@ -1,3 +1,10 @@
+<% if flash[:noticia] %>
+  <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="margin-top: 9px; margin-left: 17px; width: 95.5%">
+    <%= flash[:noticia] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
 <h5 class="mt-3" href="/">
   <i class="bi bi-search fs-4" style="margin-right: 10px; margin-left: 22px"></i>
   <span style="position: relative; top: -2px;">Explorar</span>
@@ -6,22 +13,51 @@
 <div class="full-width-container d-flex flex-wrap" style="display: flex; gap: 20px; width: 100%; margin-left: 17px; margin-top: -8px;">
   <div style="flex-direction: column; width: 66.5%;">
     <% @all_cursos.each do |curso| %>
-      <a href="/cursos/<%= curso.id %>/edit" class="cursos-card mt-3 bg-white d-flex align-items-center" style="text-decoration: none; color: black">
-        <% if curso.imagem.attached? %>
-          <%= image_tag curso.imagem.variant(resize_to_fill: [200, 200]).processed, style: "border-radius: 20px" %>
-        <% end %>
-        <div class="w-75" style="margin-left: -20px;">
-          <h1 class="fw-light text-dark p-0 m-0 ms-2 w-75" style="font-weight: 500;"><%= curso.name %></h1>
+      <!-- AGORA o card é uma <div>, não um <a> -->
+      <div class="cursos-card mt-3 bg-white d-flex align-items-center" style="text-decoration: none; color: black; position: relative;">
+
+        <!-- IMAGEM + OVERLAY -->
+        <div class="img-wrapper" style="position: relative; margin-left: -5px;">
+          <% if curso.imagem.attached? %>
+            <%= image_tag curso.imagem.variant(resize_to_fill: [200, 200]).processed, loading: "lazy" %>
+          <% end %>
+
+          <!-- Overlay/link só aparece no hover -->
+          <%= link_to "Ver detalhes", edit_curso_path(curso), class: "overlay-link fw-bold text-white text-decoration-none" %>
+        </div>
+
+        <!-- DADOS DO CURSO -->
+        <div class="w-75" style="margin-left: -5px;">
+          <div class="d-flex align-items-center ms-2">
+            <h1 class="fw-light text-dark p-0 m-0 me-3" style="font-weight: 500;"><%= curso.name %></h1>
+
+            <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
+              <span style="margin-top: 3px; background-color: #28a745; color: white; font-size: 11px; padding: 3px 8px; border-radius: 12px;">
+                Comprado
+              </span>
+            <% end %>
+          </div>
+
           <p class="ms-2 p-0 m-0 w-75" style="font-weight: 500"><%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></p>
           <p class="ms-2 p-0 m-0 mt-1" style="font-weight: 300; font-size: 13px; width: 97%;"><%= curso.description %></p>
           <p class="ms-2 text-secondary p-0 m-0 w-75 mt-1" style="font-weight: 500; font-size: 12px"><%= curso.modulos.count %> Módulos • <%= curso.aulas.count %> Aulas • Duração Total: 20h 34min</p>
         </div>
-        <%= form_with url: add_to_cart_path(curso), method: :post, local: true do %>
-          <%= button_tag type: "submit", class: "btn btn-dark text-white p-1", style: "border-radius: 5px; margin-right: 10px; margin-top: -85px", onclick: "showLoadingAndRedirect()" do %>
-            <i class="bi bi-cart-plus fs-4" style="font-weight: 2000"></i>
+
+        <% if current_user.cart.cart_cursos.where(curso_id: curso.id).present? %>
+          <%= button_tag class: "btn btn-success text-white p-1", style: "border-radius: 5px; margin-left: 25px; margin-top: -65px" do %>
+            <i class="bi bi-cart-check fs-4"></i>
+          <% end %>
+        <% elsif current_user.user_cursos.where(curso_id: curso.id).present? %>
+          <!-- nenhum botão extra aqui -->
+        <% else %>
+          <%= form_with url: add_to_cart_path(curso), method: :post, local: true do %>
+            <%= button_tag type: "submit", class: "btn btn-dark text-white p-1", style: "border-radius: 5px; margin-left: 25px; margin-top: -65px", onclick: "showLoadingAndRedirect()" do %>
+              <i class="bi bi-cart-plus fs-4"></i>
+            <% end %>
           <% end %>
         <% end %>
-      </a>
+
+      </div>
     <% end %>
   </div>
 

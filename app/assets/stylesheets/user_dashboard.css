@@ -380,6 +380,7 @@ nav.d-flex {
   height: 155px;
   transition: transform 0.3s ease-in-out;
   padding: 5px;
+  overflow: hidden;
 }
 
 .cursos-card:hover {
@@ -393,8 +394,8 @@ nav.d-flex {
 }
 
 .cursos-card img {
-  width: 23%;
-  height: 90%;
+  width: 80%;
+  height: 50%;
   object-fit: scale-down;
   filter: blur(1.5px);
   transition: filter 0.5s ease-in-out;
@@ -627,4 +628,34 @@ nav.d-flex {
 
 .form-switch .form-check-input {
   transform: scale(1.3); /* Aumenta proporcionalmente */
+}
+
+/* contêiner da imagem */
+.img-wrapper {
+  overflow: hidden;             /* evita que o overlay ultrapasse a borda */
+  cursor: pointer;
+  border-radius: 0;
+}
+
+/* link overlay – inicialmente invisível */
+.overlay-link {
+  position: absolute;
+  inset: 0;                     /* top/right/bottom/left = 0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  font-size: 15px;
+  letter-spacing: 0.1px;
+  width: 80%;
+  height: 97.9%;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+/* ao passar o mouse no contêiner .img-wrapper, mostra o overlay */
+.img-wrapper:hover .overlay-link {
+  opacity: 1;
 }

@@ -94,7 +94,7 @@ body {
 .chat-wrapper {
   z-index: 999;
   width: 50%;                /* ajuste ao gosto */
-  height: calc(100vh - 600px); /* altura total menos o navbar */
+  height: 70%;/* altura total menos o navbar */
 
   /* layout interno */
   display: flex;

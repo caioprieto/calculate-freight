@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: "welcomes#index"
 
+  get "/apresentacao", to: "welcomes#apresentacao"
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -14,8 +16,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "dashboard", to: "dashboard#index"
+    get "alunos", to: "alunos#index"
 
     resources :words
+    resources :messages, only: [ :create ]
+
+    resources :users do
+      member do
+        patch :toggle_active
+      end
+    end
 
     resources :cursos do
       collection do

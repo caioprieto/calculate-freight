@@ -1,0 +1,60 @@
+<h4 style="margin-top: 3px;">
+  <i class="bi bi-person fs-4" style="margin-right: 10px"></i>
+  Usuários
+</h4>
+
+<div class="table-admin">
+  <table class="table table-bordered table-sm mt-4 text-center" style="width: 97%;">
+    <thead>
+      <tr>
+        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">Nome</th>
+        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">CPF</th>
+        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">E-mail</th>
+        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">Ativo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td class="p-2" style="font-size: 16px; font-weight: 350;"><p class="mt-3"><%= user.nome %></p></td>
+          <td class="p-2" style="font-size: 16px; font-weight: 350;"><p class="mt-3"><%= user.cpf %></p></td>
+          <td class="p-2" style="font-size: 16px; font-weight: 350;"><p class="mt-3"><%= user.email %></p></td>
+          <td class="p-3" style="font-size: 16px; font-weight: 350;">
+            <div class="boolean d-flex align-items-center">
+              <label class="field toggle-switch" style="">
+                <input type="checkbox"
+                      class="user-toggle"
+                      data-user-id="<%= user.id %>"
+                      <%= "checked" if user.active? %> >
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggles = document.querySelectorAll(".user-toggle");
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener("change", () => {
+        const userId = toggle.dataset.userId;
+        const isChecked = toggle.checked;
+
+        fetch(`/admin/users/${userId}/toggle_active`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+          },
+          body: JSON.stringify({})
+        })
+        .then(response => response.json())
+      });
+    });
+  });
+</script>
