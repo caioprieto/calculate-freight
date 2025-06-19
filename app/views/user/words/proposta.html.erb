@@ -1,4 +1,4 @@
-<div class="navbar d-flex align-items-center w-100" style="gap: 15px">
+<div class="navbar d-flex align-items-center w-100" style="gap: 5px;">
   <div class="navbar-left d-flex align-items-center">
     <a href="/user/redacoes">
       <img src="/images/logo.png" alt="Logo" class="navbar-logo" />
@@ -12,19 +12,30 @@
   </a>
 
   <div class="navbar-right d-flex gap-2">
-    <%# Botão Progresso %>
-    <div class="btn btn-outline-dark text-white" style="cursor: pointer; position: relative;">
+    <%# Botão Download %>
+    <div class="btn btn-success text-white" style="cursor: pointer; position: relative;">
+      <i class="bi bi-download fs-4 me-1"></i>
+      <span style="position: relative; top: -3px;">Baixar o PDF</span>
+    </div>
+
+    <!-- Botão Progresso -->
+    <div class="btn btn-outline-dark text-white progress-button" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#progressModal">
       <i class="bi bi-trophy fs-4 me-1"></i>
       <span style="position: relative; top: -4px;">Seu progresso</span>
     </div>
 
-    <div class="btn btn-outline-dark text-white compartilhar-button" id="compartilhar-button" style="cursor: pointer; position: relative;">
-      <i class="bi bi-share fs-4 me-1"></i>
-      <span style="position: relative; top: -4px;">Compartilhar</span>
-    </div>
+    <div class="settings-dropdown">
+      <button class="btn btn-outline-dark settings-dropdown-button p-2 text-white" aria-label="Menu de configurações" id="settingsDropdownToggle">
+        <i class="bi bi-three-dots-vertical fs-4"></i>
+      </button>
 
-    <div class="btn btn-outline-dark text-white p-1 settings-button" id="settings-button" style="cursor: pointer; position: relative;">
-      <i class="bi bi-three-dots-vertical fs-4"></i>
+      <div class="settings-dropdown-menu" id="settingsDropdownMenu" style="z-index: 1101">
+        <div class="arrow-up"></div>
+        <%= link_to '' do %>
+          <i class="bi bi-gift fs-6" style="margin-right: 10px;"></i>
+          Enviar presente
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
@@ -39,7 +50,7 @@
   <% end %>
 
   <div class="chat-wrapper bg-dark">
-    <h6 class="fw-bold mb-2 text-white">Chat com o Admin</h6>
+    <h6 class="fw-light mb-2 text-white">Chat com o Professor</h6>
 
     <div id="chat-messages" class="messages">
       <% @messages.each do |message| %>
@@ -66,6 +77,22 @@
       </div>
     <% end %>
   </div>
-
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("settingsDropdownToggle");
+    const dropdownMenu = document.getElementById("settingsDropdownMenu");
+
+    toggleButton.addEventListener("click", function (e) {
+      e.stopPropagation(); // evita fechar na hora de abrir
+      dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!dropdownMenu.contains(e.target) && e.target !== toggleButton) {
+        dropdownMenu.style.display = "none";
+      }
+    });
+  });
+</script>

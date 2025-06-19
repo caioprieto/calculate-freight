@@ -44,7 +44,7 @@
               <p class="tempo-restante fs-6">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
             </div>
 
-            <div style="display: flex; gap: 10px">
+            <div style="display: flex; gap: 4px">
               <% if current_user.present? %>
                 <% if current_user.user_cursos.where(curso_id: @curso.id).blank? %>
                   <div class="">
@@ -93,9 +93,11 @@
             <div class="links-extra"></div>
 
             <div class="cupom-box">
-              <p class="cupom-msg fs-6">O código de cupom <strong>247TM260525G2</strong> foi aplicado</p>
-              <input type="text" class="form-control" placeholder="Inserir cupom" disabled>
-              <button class="btn-aplicar btn-comprar fw-light">Aplicar</button>
+              <p class="cupom-msg fs-6">Esse produto é um presente? </p>
+              <%# <input type="text" class="form-control" placeholder="Inserir cupom" disabled> %>
+              <button style="margin-top: -20px;" class="btn-aplicar btn-comprar fw-light">Sim</button>
+              <br>
+              <button style="margin-top: 4px;" class="btn-presente fw-light">Não</button>
             </div>
           </div>
 
@@ -123,7 +125,7 @@
       </div>
       <div class="item">
         <i class="bi bi-book fs-3"></i>
-        <span class="fs-6" style="white-space: nowrap;">5 redações</span>
+        <span class="fs-6" style="white-space: nowrap;"><%= @curso.words.count %> <%= @curso.words.count == 1 ? "Redação" : "Redações" %></span>
       </div>
       <div class="item">
         <i class="bi bi-trophy fs-3"></i>
@@ -185,13 +187,13 @@
   <div class="spinner-loader"></div>
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 
 <footer class="footer">
   <div class="container footer-top">
     <div class="logo-section">
       <img src="/images/logo.png" alt="Aprova Total" class="logo" />
-      <p>Transformando sonhos em aprovações</p>
+      <%# <p>Transformando sonhos em aprovações</p> %>
     </div>
     <div class="footer-links">
       <div class="icon-footer">
@@ -247,4 +249,29 @@
       overlay.style.display = 'none';
     }, 2000);
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".boolean-toggle").forEach((el) => {
+      el.addEventListener("click", () => {
+        const taskId = el.dataset.id;
+        const currentValue = el.dataset.approved === "true";
+        const newValue = !currentValue;
+
+        // Atualiza visualmente
+        el.classList.toggle("true", newValue);
+        el.dataset.approved = newValue;
+
+        // Envia para backend
+        fetch(`/toggle_approved`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+          },
+          body: JSON.stringify({ approved: newValue })
+        });
+      });
+    });
+  });
+
 </script>

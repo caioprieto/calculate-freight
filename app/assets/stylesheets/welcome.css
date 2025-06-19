@@ -18,6 +18,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: whitesmoke;
 }
 
 .container {
@@ -193,7 +194,7 @@ footer.footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: -70px;
+    margin-top: -70px !important;
   }
 
   .scroll_item {
@@ -216,7 +217,7 @@ footer.footer {
   .text-custom-nav {
     font-size: 15px;
     padding: 8px;
-    margin-top: 3px;
+    margin-top: -10px;
   }
 
   .carousel-section .carousel-image {
@@ -261,13 +262,14 @@ footer.footer {
   }
 
   .vestibulares {
-    margin-top: -65px !important;
+    margin-top: -60px !important;
   }
 
   .vestibular {
     gap: 10px !important;
     justify-content: center;
     flex-wrap: wrap;
+    margin-right: 10px !important;
   }
 
   .vestibular-card img {
@@ -285,6 +287,39 @@ footer.footer {
   .navbar-buttons {
     margin-top: 4px !important;
   }
+
+  .mobile-logo {
+    width: 160px !important;
+    height: 160px !important;
+    margin-left: 15px !important;
+    margin-top: 40px !important;
+  }
+
+  .footer-links {
+    gap: 15px !important;
+    margin-top: 25px !important;
+    margin-right: 20px !important;
+  }
+
+  .footer-bottom {
+    margin-top: -30px !important;
+  }
+
+  .contact-info p, .copyright {
+    font-size: 12px !important;
+  }
+
+  .footer {
+    margin-top: -20px !important;
+  }
+
+  .margin-top-footer {
+    margin-top: -50px !important;
+  }
+}
+
+.no-margin-top {
+  margin-top: -50px !important;
 }
 
 .cart-card {
@@ -561,21 +596,10 @@ footer.footer {
 .footer {
   background-color: #000;
   color: #fff;
-  padding: 40px 20px;
   font-family: Arial, sans-serif;
 }
 
-.footer-top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  border-bottom: 1px solid #333;
-  padding-bottom: 30px;
-  padding-left: 30px;
-}
-
 .logo-section {
-  margin-top: -90px;
   transition: transform 0.3s ease;
 }
 
@@ -590,14 +614,13 @@ footer.footer {
 }
 
 .logo-section img{
-  width: 250px;
-  height: 250px;
+  width: 280px;
+  height: 280px;
 }
 
 .logo-section p {
-  margin-top: -90px;
   margin-left: 10px;
-  font-size: 15px;
+  font-size: 20px;
   color: rgb(1, 163, 238);
 }
 
@@ -619,7 +642,7 @@ footer.footer {
 
 .footer-bottom {
   text-align: center;
-  margin-top: 30px;
+  margin-top: -50px;
 }
 
 .contact-info p, .copyright {

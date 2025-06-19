@@ -5,9 +5,9 @@
   </h5>
 </div>
 
-<div class="full-width-container d-flex flex-wrap mt-3" style="gap: 10px; width: 100%; margin-left: 17px;">
+<div class="full-width-container d-flex flex-wrap mt-3" style="gap: 15px; width: 100%; margin-left: 17px;">
   <% @continuar_cursos.each do |user_curso| %>
-    <div class="d-flex flex-column align-items-center" style="flex: 1 1 20%; max-width: 47.3%; min-width: 200px; border-radius: 10px">
+    <div class="d-flex flex-column align-items-center" style="flex: 1 1 20%; max-width: 47.5%; min-width: 200px; border-radius: 10px">
       <a href="/user/cursos/<%= user_curso.curso.id %>/player" class="continuar-curso-card bg-white d-flex flex-column align-items-center text-dark" style="width: 100%; text-decoration: none;">
         <div class="meus-cursos-img position-relative" style="width: 100%; border-radius: 10px">
           <% if user_curso.curso.imagem.attached? %>

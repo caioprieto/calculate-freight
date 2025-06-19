@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get "dashboard", to: "dashboard#index"
     get "alunos", to: "alunos#index"
+    get "pedidos", to: "pedidos#index"
+    get "pagamento", to: "pedidos#index"
 
     resources :words
     resources :messages, only: [ :create ]

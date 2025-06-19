@@ -79,7 +79,7 @@ body {
   background-color: white;
   overflow: hidden;
   width: 45%;
-  height: 80vh;
+  height: 75vh;
   margin-top: 40px;
   margin-left: 35px;
 }
@@ -94,7 +94,7 @@ body {
 .chat-wrapper {
   z-index: 999;
   width: 50%;                /* ajuste ao gosto */
-  height: 70%;/* altura total menos o navbar */
+  height: 40vh;/* altura total menos o navbar */
 
   /* layout interno */
   display: flex;
@@ -133,4 +133,50 @@ body {
 }
 .chat-wrapper .input-group .btn {
   border: none;
+}
+
+.settings-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.settings-dropdown-button:hover {
+  transform: scale(1.05);
+}
+
+.settings-dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+.settings-dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.settings-dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.arrow-up {
+  position: absolute;
+  top: -10px;
+  right: 13px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid white;
+  z-index: 1001;
 }

@@ -1,5 +1,5 @@
 <div class="row">
-  <a href="/">
+  <a href="">
     <img src="/images/logo.png" style="width: 200px; height: 200px; margin-top: -50px; margin-left: 15px">
   </a>
 </div>
@@ -29,6 +29,16 @@
       <%= link_to "/admin/alunos", class: "menu-link #{'active' if current_page?('/admin/alunos')}" do %>
         <i class="bi bi-mortarboard fs-5" style="margin-right: 10px"></i>
         Alunos
+      <% end %>
+
+      <%= link_to "/admin/pedidos", class: "menu-link #{'active' if current_page?('/admin/pedidos')}" do %>
+        <i class="bi bi-bag fs-5" style="margin-right: 10px"></i>
+        Pedidos
+      <% end %>
+
+      <%= link_to "/admin/pagamento", class: "menu-link #{'active' if current_page?('/admin/pagamento')}" do %>
+        <i class="bi bi-cash fs-5" style="margin-right: 10px"></i>
+        Pagamento
       <% end %>
     </nav>
   </div>
