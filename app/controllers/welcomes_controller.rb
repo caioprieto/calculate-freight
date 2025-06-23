@@ -8,6 +8,9 @@ class WelcomesController < ApplicationController
   def apresentacao
   end
 
+  def acesso_livre
+  end
+
   private
 
   def set_cursos

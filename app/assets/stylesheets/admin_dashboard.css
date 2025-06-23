@@ -167,7 +167,7 @@ input[type="checkbox"] {
 .admin-chat-container {
   display: grid;
   grid-template-columns: 300px 1fr 20px;
-  height: 70vh;
+  height: 83vh;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -176,7 +176,7 @@ input[type="checkbox"] {
   padding: 1rem;
   border-right: 1px solid #ccc;
   overflow-y: auto;
-  height: 70vh;
+  height: 83vh;
 }
 
 .chat-item {
@@ -187,18 +187,20 @@ input[type="checkbox"] {
   padding-left: 30px;
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
   background: whitesmoke;
+  font-weight: 350;
 }
 
 .chat-item.active {
-  background: #e0e0e0;
-  font-weight: 300;
+  background-color: #000000d9;
+  color: white;
+  font-weight: 350;
 }
 
 .chat-main {
   display: flex;
   flex-direction: column;
   background: #fff;
-  height: 70vh;
+  height: 83vh;
 }
 
 .chat-header {
@@ -209,7 +211,7 @@ input[type="checkbox"] {
 .chat-messages {
   padding: 1rem;
   overflow-y: auto;
-  height: 70vh;
+  height: 83vh;
 }
 
 .message {
@@ -256,4 +258,47 @@ input[type="checkbox"] {
   border-radius: 0 0.25rem 0.25rem 0;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.table-admin {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: -10px;
+  overflow-x: auto;
+  background-color: whitesmoke;
+}
+
+.table-admin table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+}
+
+.table-admin th,
+.table-admin td {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.table-admin thead th {
+  background-color: #000000d9;
+  font-weight: 500;
+  color: #dedede;
+  font-size: 16px;
+}
+
+.table-admin tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.2s ease;
+}
+
+.table-admin td:last-child i {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.table-admin td:last-child i:hover {
+  color: #0d6efd;
 }

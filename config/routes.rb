@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: "welcomes#index"
 
   get "/apresentacao", to: "welcomes#apresentacao"
+  get "/acesso_livre", to: "welcomes#acesso_livre"
 
   devise_for :users, controllers: {
     sessions: "users/sessions",

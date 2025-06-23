@@ -7,19 +7,19 @@
   <table class="table table-bordered table-sm mt-4 text-center" style="width: 97%;">
     <thead>
       <tr>
-        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">Nome</th>
-        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">CPF</th>
-        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">E-mail</th>
-        <th style="font-size: 17px; font-weight: 510;" class="p-2" scope="col">Ativo</th>
+        <th class="p-2" scope="col">Nome</th>
+        <th class="p-2" scope="col">CPF</th>
+        <th class="p-2" scope="col">E-mail</th>
+        <th class="p-2" scope="col">Ativo</th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td class="p-2" style="font-size: 16px; font-weight: 350;"><p class="mt-3"><%= user.nome %></p></td>
-          <td class="p-2" style="font-size: 16px; font-weight: 350;"><p class="mt-3"><%= user.cpf %></p></td>
-          <td class="p-2" style="font-size: 16px; font-weight: 350;"><p class="mt-3"><%= user.email %></p></td>
-          <td class="p-3" style="font-size: 16px; font-weight: 350;">
+          <td class="p-2"><p class="mt-3"><%= user.nome %></p></td>
+          <td class="p-2"><p class="mt-3"><%= user.cpf %></p></td>
+          <td class="p-2"><p class="mt-3"><%= user.email %></p></td>
+          <td class="p-2">
             <div class="boolean d-flex align-items-center">
               <label class="field toggle-switch" style="">
                 <input type="checkbox"

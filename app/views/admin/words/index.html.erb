@@ -8,25 +8,25 @@
   <span style="margin-top: -10px; position: relative; top: -4px; font-weight: 600">Criar tema</span>
 </a>
 
-<div>
+<div class="table-admin">
   <table class="table table-bordered mt-4" style="width: 99%;">
     <thead>
       <tr>
-        <th style="font-size: 17px; font-weight: 510;" scope="col">Tema</th>
-        <th style="font-size: 17px; font-weight: 510;" scope="col">Tipo da Prova</th>
-        <th style="font-size: 17px; font-weight: 510;" scope="col">Data de criação</th>
-        <th style="font-size: 17px; font-weight: 510;" scope="col">Genêro Textual</th>
-        <th style="font-size: 17px; font-weight: 510;" scope="col"></th>
+        <th scope="col">Tema</th>
+        <th scope="col">Tipo da Prova</th>
+        <th scope="col">Data de criação</th>
+        <th scope="col">Genêro Textual</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <% @redacoes.each do |redacao| %>
         <tr>
-          <td style="font-size: 15px; font-weight: 450;"><%= redacao.tema %></td>
-          <td style="font-size: 15px; font-weight: 450;"><%= redacao.word_type.upcase %></td>
-          <td style="font-size: 15px; font-weight: 450;">  <%= redacao.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %> </td>
-          <td style="font-size: 15px; font-weight: 450;">Texto Dissertativo-Argumentativo</td>
-          <td style="font-size: 15px; font-weight: 450;">
+          <td><%= redacao.tema %></td>
+          <td><%= redacao.word_type.upcase %></td>
+          <td>  <%= redacao.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %> </td>
+          <td>Texto Dissertativo-Argumentativo</td>
+          <td>
             <%= link_to edit_admin_word_path(redacao) do %>
               <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
             <% end %>
