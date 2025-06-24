@@ -1,5 +1,5 @@
 class WelcomesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index apresentacao]
+  skip_before_action :authenticate_user!, only: %i[index apresentacao acesso_livre]
 
   def index
     set_cursos

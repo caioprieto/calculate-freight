@@ -1,10 +1,9 @@
 class CursosController < ApplicationController
-  skip_before_action :authenticate_user!, only: :edit
+  skip_before_action :authenticate_user!, only: %i[index edit]
   layout "application"
   def index
-  end
-
-  def new
+    @prova = params[:prova]
+    @cursos = Curso.where(prova: @prova)
   end
 
   def edit

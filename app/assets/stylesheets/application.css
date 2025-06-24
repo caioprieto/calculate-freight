@@ -162,6 +162,14 @@ h1 {
   transform: scale(1.03);
 }
 
+.hover {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover:hover {
+  transform: scale(1.03);
+}
+
 .btn-pix {
   transition: transform 0.3s ease-in-out;
   width: 100%;

@@ -1,1 +1,219 @@
-<h1> Novo </h1>
+<%= render partial: "layouts/shared/header" %>
+
+<div class="container-curso">
+  <% if flash[:alerta] %>
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
+      <%= flash[:alerta]%>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <% if flash[:noticia] %>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
+      <%= flash[:noticia] %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <div class="faixa" style="height: 390px;">
+    <div class="content-curso text-dark mt-4">
+      <div class="curso-container d-flex flex-wrap justify-content-between">
+        <div class="curso-info" style="width: 65%;">
+          <h3 class="mt-3"></h3>
+          <p class="subtitle"></p>
+          <p style="font-weight: 600;"> Seu caminho para a redação perfeita e aprovação nos melhores cursos do país! </p>
+          <p class="language">📅 Atualizado em</p>
+        </div>
+
+        <div class="curso-preview text-dark">
+          <div>
+            <% if @prova == "unicamp" %>
+              <img src="/images/unicamp.jpg" alt="Login image" class="curso-imagem" />
+            <% end %>
+          </div>
+
+          <div class="compra-box text-dark">
+            <div class="cupom-box">
+              <p class="cupom-msg fs-6">Esse produto é um presente? </p>
+              <%# <input type="text" class="form-control" placeholder="Inserir cupom" disabled> %>
+              <button style="margin-top: -20px;" class="btn-aplicar btn-comprar fw-light">Sim</button>
+              <br>
+              <button style="margin-top: 4px;" class="btn-presente fw-light">Não</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-1 g-4 mt-3">
+  <% @cursos.each do |course| %>
+    <div class="col align-items-center justify-content-center">
+      <div class="container card shadow mb-2 rounded-4 w-100 hover">
+        <a href="/cursos/<%= course.id %>/edit" style="text-decoration: none; color: black">
+          <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+              <%= image_tag course.imagem, class: "", alt: course.name, style: "max-height: 200px; object-fit: scale-down" %>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="font-weight: 350"><%= course.name %></h5>
+                <strong class="mb-5" style="font-size: 18px; font-weight: 600;" >R$ <%= number_with_precision(course.value, precision: 2) %></strong>
+                <span class="preco-riscado">R$ 199,99</span>
+
+                <div class="mt-2">
+                  <span class="badge bg-success p-2" style="font-size: 13px; font-weight: 400;">Comprado ✅</span>
+                  <span class="badge p-2" style="font-size: 13px; font-weight: 400;">Mais vendidos ⭐</span>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-file-play fs-5 me-2"></i>
+                      <span class="small">20 horas de vídeo</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-phone fs-5 me-2"></i>
+                      <span class="small">Acesso no dispositivo móvel e na TV</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-trophy fs-5 me-2"></i>
+                      <span class="small">Certificado de conclusão</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-file-earmark-arrow-down fs-5 me-2"></i>
+                      <span class="small"><%= course.words.count %> redações disponíveis para download</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-pen fs-5 me-2"></i>
+                      <span class="small">Correções aprofundadas e dinâmicas</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-pen fs-5 me-2"></i>
+                      <span class="small">Correções aprofundadas e dinâmicas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+<div class="loader" id="loadingOverlay">
+  <div class="spinner-loader"></div>
+</div>
+
+<br><br><br><br><br><br><br><br>
+
+<footer class="footer">
+  <div class="container footer-top">
+    <div class="logo-section">
+      <img src="/images/logo.png" alt="Aprova Total" class="logo" />
+      <%# <p>Transformando sonhos em aprovações</p> %>
+    </div>
+    <div class="footer-links">
+      <div class="icon-footer">
+        <a href="" class="text-white" style="text-decoration: none;">
+          <i class="bi bi-instagram fs-1"></i>
+        </a>
+      </div>
+      <div class="icon-footer">
+        <a href="" class="text-white" style="text-decoration: none;">
+          <i class="bi bi-linkedin fs-1"></i>
+        </a>
+      </div>
+      <div class="icon-footer">
+        <a href="" class="text-white" style="text-decoration: none;">
+          <i class="bi bi-facebook fs-1"></i>
+        </a>
+      </div>
+      <div class="icon-footer">
+        <a href="" class="text-white" style="text-decoration: none;">
+          <i class="bi bi-youtube fs-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="contact-info">
+      <p><strong>Números Oficiais de Vendas:</strong> (19) 99246-0527 | (19) 99246-0527</p>
+    </div>
+    <div class="copyright">
+      <p>Copyright © 2025 Aprova Redação</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showLoadingAndRedirect() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+
+    setTimeout(() => {
+      window.location.href = "";
+      overlay.style.display = 'none';
+    }, 1000);
+  }
+
+  function showLoadingRedirect() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.style.display = 'flex';
+
+    setTimeout(() => {
+      window.location.href = "/user/carrinho";
+      overlay.style.display = 'none';
+    }, 2000);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".boolean-toggle").forEach((el) => {
+      el.addEventListener("click", () => {
+        const taskId = el.dataset.id;
+        const currentValue = el.dataset.approved === "true";
+        const newValue = !currentValue;
+
+        // Atualiza visualmente
+        el.classList.toggle("true", newValue);
+        el.dataset.approved = newValue;
+
+        // Envia para backend
+        fetch(`/toggle_approved`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+          },
+          body: JSON.stringify({ approved: newValue })
+        });
+      });
+    });
+  });
+
+</script>
+
+<style>
+
+</style>
