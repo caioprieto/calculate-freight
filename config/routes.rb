@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get "/apresentacao", to: "welcomes#apresentacao"
   get "/acesso_livre", to: "welcomes#acesso_livre"
+  get "/temas", to: "welcomes#temas"
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
@@ -64,6 +65,7 @@ Rails.application.routes.draw do
     resources :words do
       member do
         get :proposta
+        post :save_timer
       end
 
       resources :chats do

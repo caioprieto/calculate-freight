@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_17_013645) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -238,6 +238,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_17_013645) do
     t.datetime "updated_at", null: false
     t.boolean "concluido", default: false
     t.datetime "data_conclusao"
+    t.bigint "curso_id"
+    t.index ["curso_id"], name: "index_user_words_on_curso_id"
     t.index ["user_id"], name: "index_user_words_on_user_id"
     t.index ["word_id"], name: "index_user_words_on_word_id"
   end
@@ -303,6 +305,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_17_013645) do
   add_foreign_key "user_aulas", "users"
   add_foreign_key "user_cursos", "cursos"
   add_foreign_key "user_cursos", "users"
+  add_foreign_key "user_words", "cursos"
   add_foreign_key "user_words", "users"
   add_foreign_key "user_words", "words"
 end

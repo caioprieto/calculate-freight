@@ -21,14 +21,23 @@ body {
   background-color: whitesmoke;
 }
 
+.main-content {
+  flex: 1;
+  overflow-x: hidden;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 10px;
+}
+
+.container-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 
 .logo img {
   height: 200px;
@@ -69,6 +78,10 @@ body {
 }
 
 .menu a:hover::after {
+  width: 100%;
+}
+
+.menu a.active::after {
   width: 100%;
 }
 

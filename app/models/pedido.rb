@@ -21,7 +21,7 @@ class Pedido < ApplicationRecord
       UserCurso.create(user_id: user_id, curso_id: curso.id, data_inicio: Time.zone.now)
 
       curso.words.each do |word|
-        UserWord.create(user_id: user_id, word_id: word.id)
+        UserWord.create(user_id: user_id, word_id: word.id, curso_id: curso.id)
       end
     end
   end

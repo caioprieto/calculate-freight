@@ -1,27 +1,47 @@
 <div class="navbar d-flex align-items-center w-100" style="gap: 5px;">
   <div class="navbar-left d-flex align-items-center">
-    <a href="/user/redacoes">
+    <a href="/user/redacoes" style="display: flex; text-decoration: none; color: white;">
+      <i class="bi bi-box-arrow-left" style="margin-top: 60px; margin-right: 10px; font-size: 48px"></i>
       <img src="/images/logo.png" alt="Logo" class="navbar-logo" />
     </a>
   </div>
 
   <div class="vertical-line"></div>
 
-  <a class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
+  <a href="" class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
     <span class="course-title"><%= @word.tema %></span>
   </a>
 
   <div class="navbar-right d-flex gap-2">
-    <%# Botão Download %>
-    <div class="btn btn-success text-white" style="cursor: pointer; position: relative;">
-      <i class="bi bi-download fs-4 me-1"></i>
-      <span style="position: relative; top: -3px;">Baixar o PDF</span>
+    <%# Botão CountTimer %>
+    <div id="timerDisplay" class="btn btn-success text-white d-flex align-items-center" style="display: none;">
+      <i class="bi bi-stopwatch fs-4 me-1"></i>
+      <span class="fw-bold" id="timerText">00:00</span>
+
+      <div id="resetButton" class="btn text-white d-flex align-items-center p-1 ms-1" style="cursor: pointer; display: none;">
+        <i class="bi bi-x-circle fs-6"></i>
+      </div>
     </div>
+
+    <%# Iniciar o Timer %>
+    <div id="timerButton" class="btn btn-outline-dark text-white d-flex align-items-center" style="cursor: pointer;">
+      <i id="iconPlay" class="bi bi-play fs-4 me-1"></i>
+      <i id="iconPause" class="bi bi-pause fs-4 me-1" style="display: none;"></i>
+      <span id="timerLabel" style="position: relative; top: 1px;">Iniciar Timer</span>
+    </div>
+
+    <%# Zerar o Timer %>
 
     <!-- Botão Progresso -->
     <div class="btn btn-outline-dark text-white progress-button" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#progressModal">
       <i class="bi bi-trophy fs-4 me-1"></i>
-      <span style="position: relative; top: -4px;">Seu progresso</span>
+      <span style="position: relative; top: -3px;">Seu progresso</span>
+    </div>
+
+    <%# Botão Download %>
+    <div class="btn btn-outline-dark text-white" style="cursor: pointer; position: relative;">
+      <i class="bi bi-download fs-4 me-1"></i>
+      <span style="position: relative; top: -3px;">Baixar o PDF</span>
     </div>
 
     <div class="settings-dropdown">
@@ -42,44 +62,182 @@
 
 <div class="video-border-overlay"></div>
 
-<div class="d-flex w-100 bg-white" style="margin-top: 8px;">
+<div class="d-flex bg-white" style="margin-top: 8px; max-height: 80vh; width: 98.2%; gap: 20px;">
   <% if @word.pdf_file.attached? %>
     <div class="pdf-container">
       <iframe src="<%= rails_blob_path(@word.pdf_file, disposition: 'inline') %>" type="application/pdf"></iframe>
     </div>
   <% end %>
 
-  <div class="chat-wrapper bg-dark">
-    <h6 class="fw-light mb-2 text-white">Chat com o Professor</h6>
+  <div class="bg-dark container-words flex-grow-1 d-flex flex-column p-3 text-white" style="margin-top: 40px;">
+    <div class="beneficios mt-1">
+      <a href="" id="startRedacao" class="text-white start-timer-btn" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
+        <div class="beneficio">
+          <i id="iconNotChecked" class="bi bi-skip-end-circle fs-1"></i>
+          <i id="iconChecked" class="bi bi-pause-circle fs-1" style="display: none;"></i>
+          <h6 id="labelStart">Iniciar redação</h6>
+        </div>
+      </a>
+      <a id="iconEnviar" class="text-white start-timer-btn" style="text-decoration: none; display: none; cursor: pointer;">
+        <div class="beneficio">
+          <i class="bi bi-cloud-arrow-up fs-1"></i>
+          <h6>Enviar para correção</h6>
+        </div>
+      </a>
+      <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#instrutionModal">
+        <div class="beneficio">
+          <i class="bi bi-card-list fs-1"></i>
+          <h6>Instruções e Critérios</h6>
+        </div>
+      </a>
+      <a href="/user/cursos/<%= @word.aula.curso_id%>/player" class="beneficio" style="text-decoration: none">
+        <div class="text-white" style="text-decoration: none;">
+          <i class="bi bi-camera-video fs-1"></i>
+          <h6>Vídeo/Aula</h6>
+        </div>
+      </a>
+      <div class="beneficio">
+        <a class="text-dark" style="text-decoration: none;">
+          <i class="bi bi-clipboard fs-1"></i>
+          <h6>Resultados</h6>
+        </a>
+      </div>
+    </div>
 
-    <div id="chat-messages" class="messages">
-      <% @messages.each do |message| %>
-        <div class="mb-2 <%= message.dono_type == 'Admin' ? 'text-end' : 'text-start' %>">
-          <span class="badge <%= message.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
-            <%= message.dono_type == 'Admin' ? 'Admin' : 'Você' %>
-          </span>
-          <div class="d-inline-block p-2 rounded border mt-1 text-white">
-            <%= message.content %>
+    <p class="text-warning mt-4" style="font-weight: 350;"> Tema: <strong><%= @word.tema %>  </strong> </p>
+    <p class="text-white" style="font-weight: 350;">Prova:  <strong> <%= @word.word_type.upcase %></strong> </p>
+
+    <hr>
+    <h6 class="fw-light mb-3">Chat com o Professor</h6>
+
+    <div class="chat-wrapper d-flex flex-column" style="height: 400px;">
+      <div id="chat-messages" class="messages flex-grow-1 overflow-auto mb-3">
+        <% @messages.each do |message| %>
+          <div class="mb-2 <%= message.dono_type == 'Admin' ? 'text-end' : 'text-start' %>">
+            <span class="badge <%= message.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
+              <%= message.dono_type == 'Admin' ? 'Admin' : 'Você' %>
+            </span>
+            <div class="d-inline-block p-2 rounded border mt-1 text-white">
+              <%= message.content %>
+            </div>
           </div>
+        <% end %>
+      </div>
+
+      <%= form_with url: user_word_chat_messages_path(@word, @chat),
+                    model: Message.new,
+                    local: true,
+                    html: { id: "messageForm", class: "chat-input mt-auto" } do |f| %>
+        <div class="input-group">
+          <%= f.text_field :content, class: "form-control", placeholder: "Digite sua mensagem..." %>
+          <button class="btn btn-light" type="submit">Enviar</button>
         </div>
       <% end %>
     </div>
+  </div>
 
-    <%= form_with url: user_word_chat_messages_path(@word, @chat),
-                model: Message.new,
-                local: true,
-                html: { id: "messageForm", class: "chat-input" } do |f| %>
-      <div class="input-group">
-        <%= f.text_field :content,
-                        class: "form-control",
-                        placeholder: "Digite sua mensagem..." %>
-        <button class="btn btn-light" type="submit">Enviar</button>
+  <!-- MODAL PARA CONFIRMAR O INICIO DA REDACÂO -->
+  <div class="modal fade" id="confirmStartModal" tabindex="-1" aria-labelledby="confirmStartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header border-0">
+          <h6 class="modal-title text-danger" id="confirmStartModalLabel">Confirmar início da redação</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Você tem certeza de que deseja iniciar a redação valendo? O tempo começará a ser contado imediatamente e ficará salvo no histórico.
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="confirmStartRealButton">Confirmar</button>
+        </div>
       </div>
-    <% end %>
+    </div>
+  </div>
+
+  <!-- MODAL DE PROGRESSO -->
+  <div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="progressModalLabel" aria-hidden="true" style="z-index: 1101">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title" id="progressModalLabel">Seu Progresso</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body d-flex mt-3" style="gap: 40px">
+          <div style="width: 50%; height: 100%">
+            <canvas id="progressChart" class="text-center" style="width: 90%; height: 50%;"></canvas>
+            <p class="mt-3 fs-6 mx-3 text-success">Você já assistiu <strong><%= @user_curso.progresso %>%</strong></p>
+          </div>
+          <div style="width: 50%;">
+            <div class="w-100 d-flex">
+              <p class="mt-3 fs-2"><%= @user_curso.total_aulas_vistas %>/<%= @user_curso.total_aulas %></p>
+              <p class="mt-4 fs-5 mx-2 text-secondary"> Aulas</p>
+            </div>
+            <div class="w-100 d-flex">
+              <p class="mt-3 fs-2">0/<%= @user_curso.curso.words.count %></p>
+              <p class="mt-4 fs-5 mx-2 text-secondary"> Redações</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CRITÉRIOS E INSTRUÇÕES -->
+  <div class="modal fade" id="instrutionModal" tabindex="-1" aria-labelledby="instrutionModalLabel" aria-hidden="true" style="z-index: 1101">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title" id="instrutionModalLabel">Instruções</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body d-flex mt-3" style="gap: 40px">
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
+<input type="file" id="pdfUploader" accept="application/pdf" style="display: none;" />
+
+
 <script>
+  document.getElementById('pdfUploader').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (file.type !== "application/pdf") {
+      alert("Por favor, selecione um arquivo PDF.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('pdf_file', file);
+    formData.append('duration_seconds', pausedTime);
+
+    fetch('<%= save_timer_user_word_path(@word) %>', {
+      method: 'POST',
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        resetTimer();
+        localStorage.removeItem(`timerBackup_<%= @word.id %>`);
+        window.location.href = "";
+      } else {
+        alert("Erro ao enviar a redação.");
+      }
+    }).catch(error => {
+      console.error("Erro na requisição:", error);
+      alert("Erro inesperado ao enviar.");
+    });
+  });
+
   document.addEventListener("DOMContentLoaded", function () {
     const toggleButton = document.getElementById("settingsDropdownToggle");
     const dropdownMenu = document.getElementById("settingsDropdownMenu");
@@ -94,5 +252,181 @@
         dropdownMenu.style.display = "none";
       }
     });
+  });
+
+  let timerInterval = null;
+  let startTime = null;
+  let pausedTime = 0;
+  let state = 'stopped'; // 'running' | 'paused' | 'stopped'
+  let currentMode = 'test'; // 'test' or 'real'
+
+  function formatTime(seconds) {
+    const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const secs = String(seconds % 60).padStart(2, '0');
+    return `${mins}:${secs}`;
+  }
+
+  function updateDisplay() {
+    const now = Date.now();
+    const elapsedSeconds = Math.floor((now - startTime) / 1000) + pausedTime;
+    document.getElementById('timerText').textContent = formatTime(elapsedSeconds);
+  }
+
+  function startTimer() {
+    startTime = Date.now();
+    timerInterval = setInterval(updateDisplay, 1000);
+    document.getElementById('timerDisplay').style.display = 'flex';
+
+    state = 'running';
+    document.getElementById('timerLabel').textContent = 'Pausar Timer';
+    document.getElementById('iconPlay').style.display = 'none';
+    document.getElementById('iconPause').style.display = 'flex';
+
+    document.getElementById('resetButton').style.display = 'none';
+  }
+
+  function pauseTimer() {
+    clearInterval(timerInterval);
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    pausedTime += elapsed;
+    state = 'paused';
+
+    document.getElementById('timerLabel').textContent = 'Continuar Timer';
+    document.getElementById('iconPause').style.display = 'none';
+    document.getElementById('iconPlay').style.display = 'flex';
+
+    document.getElementById('resetButton').style.display = 'inline-block';
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    startTime = null;
+    pausedTime = 0;
+    state = 'stopped';
+
+    document.getElementById('timerText').textContent = '00:00';
+    document.getElementById('timerDisplay').style.display = 'none';
+    document.getElementById('timerLabel').textContent = 'Iniciar Timer';
+    document.getElementById('resetButton').style.display = 'none';
+
+    localStorage.removeItem(`timerBackup_<%= @word.id %>`);
+  }
+
+  function enviarRedacao() {
+    document.getElementById('pdfUploader').click();
+  }
+
+  document.getElementById('iconEnviar').addEventListener('click', enviarRedacao);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTimer = localStorage.getItem(`timerBackup_<%= @word.id %>`);
+      if (savedTimer) {
+        const { pausedTime: savedPausedTime, state: savedState, currentMode: savedMode } = JSON.parse(savedTimer);
+
+        pausedTime = savedPausedTime || 0;
+        currentMode = savedMode || 'test';
+
+        document.getElementById('timerText').textContent = formatTime(pausedTime);
+        document.getElementById('timerDisplay').style.display = 'flex';
+        document.getElementById('timerText').classList.add('fw-bold');
+        document.getElementById('resetButton').style.display = 'inline-block';
+
+        if (savedState === 'running') {
+          startTimer(); // volta a contar automaticamente
+        } else if (savedState === 'paused') {
+          state = 'paused';
+          document.getElementById('timerLabel').textContent = 'Continuar Timer';
+          document.getElementById('iconPlay').style.display = 'flex';
+          document.getElementById('iconPause').style.display = 'none';
+        }
+      }
+
+    const timerButton = document.getElementById('timerButton');
+    const resetButton = document.getElementById('resetButton');
+
+    timerButton.addEventListener('click', () => {
+      if (state === 'stopped') {
+        currentMode = 'test';
+        startTimer();
+      } else if (state === 'running') {
+        pauseTimer();
+      } else if (state === 'paused') {
+        startTimer(); // Continua de onde parou
+      }
+    });
+
+    resetButton.addEventListener('click', () => {
+      resetTimer();
+    });
+
+    // Corrigir "Iniciar redação"
+    document.getElementById('confirmStartRealButton').addEventListener('click', () => {
+      currentMode = 'real';
+      if (state === 'stopped') {
+        startTimer();
+      } else if (state === 'paused') {
+        startTimer();
+      } else if (state === 'running') {
+
+      }
+
+      const modal = bootstrap.Modal.getInstance(document.getElementById('confirmStartModal'));
+      modal.hide();
+
+      document.getElementById('labelStart').textContent = "Finalizar redação";
+      document.getElementById('iconNotChecked').style.display = 'none';
+      document.getElementById('iconChecked').style.display = 'block';
+      document.getElementById('iconEnviar').style.display = 'block';
+      document.getElementById('startRedacao').classList.add('disabled');
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+      const modal = document.getElementById('progressModal');
+      const progresso = <%= @user_curso.progresso || 0 %>;
+
+      if (!modal) return; // Evita erro se modal não estiver presente
+
+      modal.addEventListener('shown.bs.modal', function () {
+        const ctx = document.getElementById('progressChart').getContext('2d');
+
+        if (window.myProgressChart) {
+          window.myProgressChart.destroy();
+        }
+
+        window.myProgressChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Assistido', 'Restante'],
+            datasets: [{
+              data: [progresso, 100 - progresso],
+              backgroundColor: ['#4CAF50', '#e0e0e0'],
+              borderWidth: 0
+            }]
+          },
+          options: {
+            cutout: '70%',
+            responsive: false,
+            plugins: {
+              legend: { display: false }
+            }
+          }
+        });
+      });
+    }, 100); // pequeno delay pra garantir que o modal foi renderizado
+  });
+
+  window.addEventListener('beforeunload', () => {
+    if (state === 'running' || state === 'paused') {
+      const elapsed = state === 'running' ? Math.floor((Date.now() - startTime) / 1000) : 0;
+      const totalPaused = pausedTime + elapsed;
+
+      localStorage.setItem(`timerBackup_<%= @word.id %>`, JSON.stringify({
+        pausedTime: totalPaused,
+        state,
+        currentMode
+      }));
+    }
   });
 </script>

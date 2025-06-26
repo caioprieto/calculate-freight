@@ -171,9 +171,18 @@
               <% modulo.aulas.each do |aula| %>
                 <li class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
                   <div style="text-decoration: none; padding: 1px" class="fw-light">
+                    <i class="bi bi-camera-video fs-6" style="margin-right: 3px;"></i>
                     <%= aula.titulo %>
                   </div>
                 </li>
+                <% if aula.word.present? %>
+                  <li class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
+                    <div style="text-decoration: none; padding: 1px" class="fw-light">
+                      <i class="bi bi-pencil-square fs-6" style="margin-right: 3px"></i>
+                      <%= aula.word.tema %>
+                    </div>
+                  </li>
+                <% end %>
               <% end %>
             </ul>
           </div>
@@ -190,7 +199,7 @@
 <br><br><br><br><br><br><br><br>
 
 <footer class="footer">
-  <div class="container footer-top">
+  <div class="container container-flex footer-top">
     <div class="logo-section">
       <img src="/images/logo.png" alt="Aprova Total" class="logo" />
       <%# <p>Transformando sonhos em aprovações</p> %>

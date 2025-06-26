@@ -7,32 +7,46 @@
     <script async src="//www.instagram.com/embed.js"></script>
   </head>
   <body>
-    <%= render partial: "layouts/shared/header" %>
+    <main class="main-content">
+      <%= render partial: "layouts/shared/header" %>
 
-    <div class="container d-flex mb-5" style="margin-top: -40px;">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHY5FXbp2YM/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="margin: auto;">
-      </blockquote>
+      <div class="container d-flex mb-5 flex-wrap justify-content-center" style="margin-top: -40px; width: 1140px;">
+        <div class="insta-wrapper shadow" style="margin-left: -8px">
+          <div class="insta-loader"></div>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHY5FXbp2YM/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+        </div>
 
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHybX1Ss5L6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="margin: auto;">
-      </blockquote>
+        <div class="insta-wrapper shadow">
+          <div class="insta-loader"></div>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHybX1Ss5L6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+        </div>
 
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHOQ_SNMx-n/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="margin: auto;">
-      </blockquote>
-    </div>
+        <div class="insta-wrapper shadow">
+          <div class="insta-loader"></div>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHOQ_SNMx-n/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+        </div>
+      </div>
 
-    <div class="container d-flex mb-5" style="margin-top: -40px;">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHY5FXbp2YM/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="margin: auto;">
-      </blockquote>
+      <div class="container d-flex mb-5 flex-wrap justify-content-center" style="margin-top: -40px;">
+        <div class="insta-wrapper shadow" style="margin-left: -8px">
+          <div class="insta-loader"></div>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHY5FXbp2YM/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+        </div>
 
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHybX1Ss5L6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="margin: auto;">
-      </blockquote>
+        <div class="insta-wrapper shadow">
+          <div class="insta-loader"></div>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHybX1Ss5L6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+        </div>
 
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHOQ_SNMx-n/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="margin: auto;">
-      </blockquote>
-    </div>
+        <div class="insta-wrapper shadow">
+          <div class="insta-loader"></div>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DHOQ_SNMx-n/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+        </div>
+      </div>
+    </main>
 
     <footer class="footer">
-      <div class="container footer-top">
+      <div class="container no-margin-top">
         <div class="logo-section">
           <img src="/images/logo.png" alt="Aprova Total" class="logo" />
           <%# <p>Transformando sonhos em aprovações</p> %>
@@ -90,3 +104,28 @@
     display: flex;
   }
 </style>
+
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const wrappers = document.querySelectorAll('.insta-wrapper');
+
+    wrappers.forEach(wrapper => {
+      const observer = new MutationObserver(() => {
+        const iframe = wrapper.querySelector('iframe');
+        if (iframe) {
+          setTimeout(() => {
+            wrapper.querySelector('.insta-loader')?.remove();
+          }, 4000);
+
+          observer.disconnect();
+        }
+      });
+
+      observer.observe(wrapper, {
+        childList: true,
+        subtree: true
+      });
+    });
+  });
+</script>

@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container container-flex">
     <i class="bi bi-list fs-1 nav-icone"></i>
     <div class="logo">
       <a href="/">
@@ -15,10 +15,10 @@
       </a>
     </div>
     <nav class="menu">
-      <a href="/apresentacao">Quem somos</a>
-      <a href="/">Temas de Redação</a>
-      <a href="/">Cursos</a>
-      <a href="/acesso_livre">Acesso Livre</a>
+      <a href="/apresentacao" class="menu-link <%= 'active' if current_page?('/apresentacao')  %>" >Quem somos</a>
+      <a href="/temas" class="menu-link <%= 'active' if current_page?('/temas') %>">Temas de Redação</a>
+      <a href="/" class="menu-link <%= 'active' if current_page?('/') || current_page?('/cursos') %>">Cursos</a>
+      <a href="/acesso_livre" class="menu-link <%= 'active' if current_page?('/acesso_livre') %>">Acesso Livre</a>
     </nav>
     <div class="navbar-buttons" style="margin-top: -11px; margin-right: 16px; display: flex; gap: 10px; align-items: center;">
       <% if current_user.present? %>

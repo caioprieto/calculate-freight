@@ -18,17 +18,29 @@
   <div class="faixa" style="height: 390px;">
     <div class="content-curso text-dark mt-4">
       <div class="curso-container d-flex flex-wrap justify-content-between">
-        <div class="curso-info" style="width: 65%;">
-          <h3 class="mt-3"></h3>
-          <p class="subtitle"></p>
-          <p style="font-weight: 600;"> Seu caminho para a redação perfeita e aprovação nos melhores cursos do país! </p>
-          <p class="language">📅 Atualizado em</p>
-        </div>
+        <% if @prova == "unicamp" %>
+          <div class="curso-info" style="width: 65%;">
+            <p style="font-weight: 400; font-size: 18px;"> <strong>Universidade Estadual de Campinas</strong> é uma instituição de ensino superior pública estadual brasileira, sediada na cidade de Campinas, no estado de São Paulo, considerada uma das melhores universidades do país e da América Latina</p>
+            <p>Localização: <strong> Campinas, SP </strong></p>
+            <p class="text-success"style="font-size: 16px;"> 🏆 3ª melhor da América Latina </p>
+          </div>
+        <% end %>
+
+        <% if @prova == "enem" %>
+          <div class="curso-info" style="width: 65%;">
+            <p style="font-weight: 400; font-size: 18px;"><strong>Exame Nacional do Ensino Médio </strong>é uma prova de admissão à educação superior realizada pelo Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira, autarquia vinculada ao Ministério da Educação do Brasil.</p>
+            <p>Localização: <strong> Campinas, SP </strong></p>
+            <p class="text-success"style="font-size: 16px;"> 🏆 3ª melhor da América Latina </p>
+          </div>
+        <% end %>
 
         <div class="curso-preview text-dark">
           <div>
             <% if @prova == "unicamp" %>
-              <img src="/images/unicamp.jpg" alt="Login image" class="curso-imagem" />
+              <img src="/images/placa-unicamp.png" alt="Login image" class="curso-imagem" />
+            <% end %>
+            <% if @prova == "enem" %>
+              <img src="/images/enem-placa.jpg" alt="Login image" class="curso-imagem" />
             <% end %>
           </div>
 
@@ -50,7 +62,7 @@
 <div class="row row-cols-1 g-4 mt-3">
   <% @cursos.each do |course| %>
     <div class="col align-items-center justify-content-center">
-      <div class="container card shadow mb-2 rounded-4 w-100 hover">
+      <div class="container card shadow mb-2 rounded-4 w-100 hover p-2">
         <a href="/cursos/<%= course.id %>/edit" style="text-decoration: none; color: black">
           <div class="row g-0">
             <div class="col-md-4 d-flex align-items-center justify-content-center">
@@ -59,7 +71,7 @@
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title" style="font-weight: 350"><%= course.name %></h5>
-                <strong class="mb-5" style="font-size: 18px; font-weight: 600;" >R$ <%= number_with_precision(course.value, precision: 2) %></strong>
+                <strong class="mb-5" style="font-size: 18px; font-weight: 600;" >R$ <%= number_with_precision(course.value, precision: 2, separator: ",") %></strong>
                 <span class="preco-riscado">R$ 199,99</span>
 
                 <div class="mt-2">
@@ -128,7 +140,7 @@
 <br><br><br><br><br><br><br><br>
 
 <footer class="footer">
-  <div class="container footer-top">
+  <div class="container container-flex no-margin-top">
     <div class="logo-section">
       <img src="/images/logo.png" alt="Aprova Total" class="logo" />
       <%# <p>Transformando sonhos em aprovações</p> %>
