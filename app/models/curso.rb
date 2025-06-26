@@ -23,6 +23,20 @@ class Curso < ApplicationRecord
     where("name ILIKE ?", "%#{term}%")
   }
 
+ scope :find_by_order, ->(term) {
+  case term
+  when "most_value"
+    # order(sales_count: :desc) # Exemplo: cursos mais vendidos
+  when "popular"
+    # order(views_count: :desc) # Exemplo: cursos mais visualizados
+  when "completos"
+    # order(completion_rate: :desc) # Exemplo: cursos mais completos
+  else
+    all
+  end
+}
+
+
   def add_word(word_id)
     curso_words.create(curso_id: id, word_id: word_id)
   end

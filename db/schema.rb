@@ -67,7 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
   end
 
   create_table "aulas", force: :cascade do |t|
-    t.integer "modulo_id", null: false
+    t.bigint "modulo_id", null: false
     t.string "titulo", null: false
     t.string "description"
     t.integer "duration"
@@ -105,8 +105,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
   end
 
   create_table "curso_words", force: :cascade do |t|
-    t.integer "curso_id", null: false
-    t.integer "word_id", null: false
+    t.bigint "curso_id", null: false
+    t.bigint "word_id", null: false
     t.index ["curso_id"], name: "index_curso_words_on_curso_id"
     t.index ["word_id"], name: "index_curso_words_on_word_id"
   end
@@ -125,8 +125,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
   end
 
   create_table "cursos_words", id: false, force: :cascade do |t|
-    t.integer "curso_id", null: false
-    t.integer "word_id", null: false
+    t.bigint "curso_id", null: false
+    t.bigint "word_id", null: false
     t.index ["curso_id"], name: "index_cursos_words_on_curso_id"
     t.index ["word_id"], name: "index_cursos_words_on_word_id"
   end
@@ -159,8 +159,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
     t.decimal "preço_final"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "address_origem_id", null: false
-    t.integer "address_destino_id", null: false
+    t.bigint "address_origem_id", null: false
+    t.bigint "address_destino_id", null: false
     t.index ["address_destino_id"], name: "index_freights_on_address_destino_id"
     t.index ["address_origem_id"], name: "index_freights_on_address_origem_id"
   end
@@ -177,7 +177,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
   end
 
   create_table "modulos", force: :cascade do |t|
-    t.integer "curso_id", null: false
+    t.bigint "curso_id", null: false
     t.string "titulo", null: false
     t.string "description"
     t.integer "position"
@@ -201,7 +201,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
   end
 
   create_table "texts", force: :cascade do |t|
-    t.integer "word_id", null: false
+    t.bigint "word_id", null: false
     t.text "content"
     t.index ["word_id"], name: "index_texts_on_word_id"
   end
@@ -219,8 +219,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
   end
 
   create_table "user_cursos", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "curso_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "curso_id", null: false
     t.integer "progresso", default: 0, null: false
     t.boolean "concluido", default: false, null: false
     t.datetime "data_inicio"
