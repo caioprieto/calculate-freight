@@ -1,178 +1,115 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprova Redação</title>
-  </head>
-  <body>
-    <main class="main-content">
-      <%= render partial: "layouts/shared/header" %>
+<div class="container">
+  <%= render 'carrosel' %>
+</div>
 
-      <div class="container">
-        <%= render 'carrosel' %>
-      </div>
-
-      <div class="vestibulares">
-        <hr>
-        <div class="vestibular">
-          <div class="vestibular-card">
-            <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none;">
-              <img src="/images/unicamp.jpg" alt="Login image" />
-            </a>
-          </div>
-          <div class="vestibular-card">
-            <a href="/cursos?prova=enem" class="text-dark" style="text-decoration: none;">
-              <img src="/images/enem-branco.jpg" alt="Login image" />
-            </a>
-          </div>
-          <div class="vestibular-card">
-            <a href="/cursos?prova=unesp" class="text-dark" style="text-decoration: none;">
-              <img src="/images/unesp.jpg" alt="Login image" />
-            </a>
-          </div>
-          <div class="vestibular-card">
-            <a href="/cursos?prova=usp" class="text-dark" style="text-decoration: none;">
-              <img src="/images/usp.jpg" alt="Login image" />
-            </a>
-          </div>
-        </div>
-        <hr>
-      </div>
-
-      <div class="container py-4">
-        <div class="mb-2 ms-4 d-flex" style="width: 93%;">
-          <i class="bi bi-mortarboard fs-2" style="margin-top: -12px; margin-right: 10px; margin-left: 10px;"></i>
-          <h2 class="ms-2" style="font-size: 23px; font-weight: 400;">Alunos aprovados</h2>
-        </div>
-
-        <div class="row d-flex ms-3" style="width: 97.7%;">
-          <div class="col-md-2">
-            <div class="text-center shadow hover">
-              <img src="/images/lais-aprovada.png" alt="Laís aprovada"
-                  class="shadow-sm"
-                  style="width: 120px; height: 120px; object-fit: cover;">
-              <div class="mt-2">
-                <strong>Laís</strong><br>
-                <small class="text-muted">Medicina</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="text-center shadow hover">
-              <img src="/images/lais-aprovada.png" alt="João aprovado"
-                  class="shadow-sm"
-                  style="width: 120px; height: 120px; object-fit: cover;">
-              <div class="mt-2">
-                <strong>João</strong><br>
-                <small class="text-muted">Engenharia</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="text-center shadow hover">
-              <img src="/images/lais-aprovada.png" alt="João aprovado"
-                  class="shadow-sm"
-                  style="width: 120px; height: 120px; object-fit: cover;">
-              <div class="mt-2">
-                <strong>João</strong><br>
-                <small class="text-muted">Engenharia</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="text-center shadow hover">
-              <img src="/images/lais-aprovada.png" alt="João aprovado"
-                  class="shadow-sm"
-                  style="width: 120px; height: 120px; object-fit: cover;">
-              <div class="mt-2">
-                <strong>João</strong><br>
-                <small class="text-muted">Engenharia</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="text-center shadow hover">
-              <img src="/images/lais-aprovada.png" alt="João aprovado"
-                  class="shadow-sm"
-                  style="width: 120px; height: 120px; object-fit: cover;">
-              <div class="mt-2">
-                <strong>João</strong><br>
-                <small class="text-muted">Engenharia</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="text-center shadow hover">
-              <img src="/images/lais-aprovada.png" alt="João aprovado"
-                  class="shadow-sm"
-                  style="width: 120px; height: 120px; object-fit: cover;">
-              <div class="mt-2">
-                <strong>João</strong><br>
-                <small class="text-muted">Engenharia</small>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </main>
-
-
-    <br><br><br>
-
-    <footer class="footer margin-top-footer">
-      <div class="container container-flex no-margin-top">
-        <div class="logo-section">
-          <img src="/images/logo.png" alt="Aprova Total" class="logo mobile-logo" />
-          <%# <p>Transformando sonhos em aprovações</p> %>
-        </div>
-        <div class="footer-links">
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-instagram fs-1"></i>
-            </a>
-          </div>
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-linkedin fs-1"></i>
-            </a>
-          </div>
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-facebook fs-1"></i>
-            </a>
-          </div>
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-youtube fs-1"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="contact-info">
-          <p><strong>Números Oficiais de Vendas:</strong> (19) 99246-0527 | (19) 99246-0527</p>
-        </div>
-        <div class="copyright">
-          <p>Copyright © 2025 Aprova Redação</p>
-        </div>
-      </div>
-      <br>
-    </footer>
-
-
-    <div class="loader" id="loadingOverlay">
-      <div class="spinner-loader"></div>
+<div class="vestibulares">
+  <hr>
+  <div class="vestibular">
+    <div class="vestibular-card">
+      <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none;">
+        <img src="/images/unicamp.jpg" alt="Login image" />
+      </a>
     </div>
-  </body>
-</html>
+    <div class="vestibular-card">
+      <a href="/cursos?prova=enem" class="text-dark" style="text-decoration: none;">
+        <img src="/images/enem-branco.jpg" alt="Login image" />
+      </a>
+    </div>
+    <div class="vestibular-card">
+      <a href="/cursos?prova=unesp" class="text-dark" style="text-decoration: none;">
+        <img src="/images/unesp.jpg" alt="Login image" />
+      </a>
+    </div>
+    <div class="vestibular-card">
+      <a href="/cursos?prova=usp" class="text-dark" style="text-decoration: none;">
+        <img src="/images/usp.jpg" alt="Login image" />
+      </a>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<div class="container py-4">
+  <div class="mb-2 ms-4 d-flex" style="width: 93%;">
+    <i class="bi bi-mortarboard fs-2" style="margin-top: -12px; margin-right: 10px; margin-left: 10px;"></i>
+    <h2 class="ms-2" style="font-size: 23px; font-weight: 400;">Alunos aprovados</h2>
+  </div>
+
+  <div class="row d-flex ms-3" style="width: 97.7%;">
+    <div class="col-md-2">
+      <div class="text-center shadow hover">
+        <img src="/images/lais-aprovada.png" alt="Laís aprovada"
+            class="shadow-sm"
+            style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="mt-2">
+          <strong>Laís</strong><br>
+          <small class="text-muted">Medicina</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="text-center shadow hover">
+        <img src="/images/lais-aprovada.png" alt="João aprovado"
+            class="shadow-sm"
+            style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="mt-2">
+          <strong>João</strong><br>
+          <small class="text-muted">Engenharia</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="text-center shadow hover">
+        <img src="/images/lais-aprovada.png" alt="João aprovado"
+            class="shadow-sm"
+            style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="mt-2">
+          <strong>João</strong><br>
+          <small class="text-muted">Engenharia</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="text-center shadow hover">
+        <img src="/images/lais-aprovada.png" alt="João aprovado"
+            class="shadow-sm"
+            style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="mt-2">
+          <strong>João</strong><br>
+          <small class="text-muted">Engenharia</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="text-center shadow hover">
+        <img src="/images/lais-aprovada.png" alt="João aprovado"
+            class="shadow-sm"
+            style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="mt-2">
+          <strong>João</strong><br>
+          <small class="text-muted">Engenharia</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="text-center shadow hover">
+        <img src="/images/lais-aprovada.png" alt="João aprovado"
+            class="shadow-sm"
+            style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="mt-2">
+          <strong>João</strong><br>
+          <small class="text-muted">Engenharia</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

@@ -5,7 +5,7 @@
 
 <%= form_for(@user, url: user_registration_path(@user), method: :patch, local: true) do |f| %>
   <div class="d-flex" style="gap: 35px; max-height: 500px">
-    <div class="card-white-smoke p-4 mt-3" style="margin-right: 10px; margin-left: 24px; width: 61%; border-radius: 5px">
+    <div class="card bg-white p-4 mt-3" style="margin-right: 10px; margin-left: 24px; width: 61%; border-radius: 5px">
       <div class="field mt-2">
         <%= f.label :nome, class: "form-label fw-light fs-6" %><br />
         <%= f.text_field :nome, autofocus: true, class: "form-control form-control-sm fs-6", style: "margin-top: -6px" %>
@@ -43,9 +43,13 @@
       </div>
     </div>
     <div class="mt-3" style="width: 30%">
-      <div class="card-white-smoke" style="width: 100%; height: 100%;">
+      <div class="card bg-white" style="width: 100%; height: 100%;">
         <% if @user.imagem.present? %>
           <%= image_tag @user.imagem.variant(resize_to_limit: [1000, 1000]).processed, class: "user-imagem" %>
+        <% else %>
+          <div class="d-flex justify-content-center align-items-center mt-5" style="height: 350px;">
+            <i class="bi bi-file-image-fill text-dark" style="font-size: 10rem; color: #ccc;"></i>
+          </div>
         <% end %>
       </div>
     </div>

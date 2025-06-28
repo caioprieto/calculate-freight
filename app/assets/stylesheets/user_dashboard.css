@@ -510,7 +510,7 @@ nav.d-flex {
 
 .continuar-curso-card img {
   width: 100%;
-  height: 190px;
+  height: 170px;
   filter: blur(1.3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -534,11 +534,9 @@ nav.d-flex {
   margin-top: -1px;
 }
 
-
-
-
-
-
+.transition-rotate {
+  transition: transform 0.3s ease;
+}
 
 .modal-backdrop.show {
   z-index: 1040;

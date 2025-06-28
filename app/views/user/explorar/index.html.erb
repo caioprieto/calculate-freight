@@ -7,7 +7,7 @@
 
 <h5 class="mt-3" href="/">
   <i class="bi bi-search fs-4" style="margin-right: 10px; margin-left: 22px"></i>
-  <span style="position: relative; top: -2px;">Explorar</span>
+  <span style="position: relative; top: -2px; font-size: 18px;">Explorar</span>
 </h5>
 
 <div class="full-width-container d-flex flex-wrap" style="display: flex; gap: 20px; width: 100%; margin-left: 17px; margin-top: -8px;">
@@ -18,61 +18,61 @@
           <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
             <div class="row g-0">
               <div class="col-md-4 d-flex align-items-center justify-content-center">
-                <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 180px; object-fit: scale-down" %>
+                <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain;" %>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title" style="font-weight: 350"><%= curso.name %></h5>
-                  <strong class="mb-5" style="font-size: 18px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                  <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
+                  <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
                   <span class="preco-riscado">R$ 199,99</span>
 
                   <div class="mt-2">
                     <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
-                      <span class="badge bg-success p-2" style="font-size: 13px; font-weight: 400;">Comprado ✅</span>
+                      <span class="badge bg-success p-2" style="font-size: 12px; font-weight: 400;">Comprado ✅</span>
                     <% end %>
-                    <span class="badge p-2" style="font-size: 13px; font-weight: 400;">Mais vendidos ⭐</span>
+                    <span class="badge p-2" style="font-size: 12px; font-weight: 400;">Mais vendidos ⭐</span>
                   </div>
 
                   <div class="row mt-3">
-                    <div class="col-12 col-md-6 mb-2">
+                    <div class="col-12 col-md-5 mb-2">
                       <div class="item d-flex align-items-center">
                         <i class="bi bi-file-play fs-5 me-2"></i>
-                        <span class="small">20 horas de vídeo</span>
+                        <span style="font-size: 12px;">20 horas de vídeo</span>
                       </div>
                     </div>
 
-                    <div class="col-12 col-md-6 mb-2">
+                    <div class="col-12 col-md-7 mb-2">
                       <div class="item d-flex align-items-center">
                         <i class="bi bi-phone fs-5 me-2"></i>
-                        <span class="small">Acesso no dispositivo móvel e na TV</span>
+                        <span style="font-size: 12px;">Acesso no dispositivo móvel e na TV</span>
                       </div>
                     </div>
 
-                    <div class="col-12 col-md-6 mb-2">
+                    <div class="col-12 col-md-5 mb-2">
                       <div class="item d-flex align-items-center">
                         <i class="bi bi-trophy fs-5 me-2"></i>
-                        <span class="small">Certificado de conclusão</span>
+                        <span style="font-size: 12px;">Certificado de conclusão</span>
                       </div>
                     </div>
 
-                    <div class="col-12 col-md-6 mb-2">
+                    <div class="col-12 col-md-7 mb-2">
                       <div class="item d-flex align-items-center">
                         <i class="bi bi-file-earmark-arrow-down fs-5 me-2"></i>
-                        <span class="small"><%= curso.words.count %> redações disponíveis para download</span>
+                        <span style="font-size: 12px;"><%= curso.words.count %> redações disponíveis para download</span>
                       </div>
                     </div>
 
-                    <div class="col-12 col-md-6 mb-2">
+                    <div class="col-12 col-md-5 mb-2">
                       <div class="item d-flex align-items-center">
                         <i class="bi bi-pen fs-5 me-2"></i>
-                        <span class="small">Correções aprofundadas e dinâmicas</span>
+                        <span style="font-size: 12px;">Correções aprofundadas</span>
                       </div>
                     </div>
 
-                    <div class="col-12 col-md-6 mb-2">
+                    <div class="col-12 col-md-7 mb-2">
                       <div class="item d-flex align-items-center">
                         <i class="bi bi-pen fs-5 me-2"></i>
-                        <span class="small">Correções aprofundadas e dinâmicas</span>
+                        <span style="font-size: 12px;">Correções aprofundadas e dinâmicas</span>
                       </div>
                     </div>
                   </div>
@@ -102,8 +102,8 @@
   <div style="width: 27.5%;">
     <div class="card-filter mt-3 bg-white p-2" style="min-height: 98.2%">
       <h5 class="mt-3">
-        <i class="bi bi-search fs-4" style="margin-right: 10px; margin-left: 22px"></i>
-        <span style="position: relative; top: -2px;">Filtros rápidos</span>
+        <i class="bi bi-search fs-5" style="margin-right: 10px; margin-left: 22px"></i>
+        <span style="position: relative; top: -1px; font-size: 18px;">Filtros rápidos</span>
       </h5>
 
       <%= form_with url: user_explorar_path, method: :get, local: true do |form| %>
@@ -111,7 +111,7 @@
           <% ['enem', 'usp', 'unicamp', 'unesp'].each do |prova| %>
             <div class="form-check form-switch mt-2">
               <%= check_box_tag 'prova[]', prova, Array(params[:prova]).include?(prova), class: 'form-check-input', id: "prova_#{prova}" %>
-              <%= label_tag "prova_#{prova}", prova.capitalize, class: 'form-check-label mx-2 fw-light' %>
+              <%= label_tag "prova_#{prova}", prova.capitalize, class: 'form-check-label mx-2' %>
             </div>
           <% end %>
 

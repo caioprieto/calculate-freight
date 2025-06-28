@@ -1,102 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprova Redação</title>
-    <script async src="//www.instagram.com/embed.js"></script>
-  </head>
-  <body>
-    <main class="main-content">
-      <%= render partial: "layouts/shared/header" %>
+<div class="container" style="margin-top: -60px;">
+  <div class="vestibulares ms-4">
+    <hr>
+    <div class="vestibular" style="gap: 15px !important">
+      <% 12.times do |item| %>
+        <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
+          <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none; display: block;">
+            <div style="position: relative;">
+              <img src="/images/indions.jpeg" alt="Login image" style="display: block;" />
+              <!-- Badge no canto superior direito -->
+              <span class="badge p-2"
+                    style="position: absolute; top: 8px; right: 25px; font-size: 13px; font-weight: 400;">
+                ENEM
+              </span>
+            </div>
+          </a>
 
-      <div class="container" style="margin-top: -60px;">
-        <div class="vestibulares ms-4">
-          <hr>
-          <div class="vestibular" style="gap: 15px !important">
-            <% 12.times do |item| %>
-              <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
-                <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none; display: block;">
-                  <div style="position: relative;">
-                    <img src="/images/indions.jpeg" alt="Login image" style="display: block;" />
-                    <!-- Badge no canto superior direito -->
-                    <span class="badge p-2"
-                          style="position: absolute; top: 8px; right: 25px; font-size: 13px; font-weight: 400;">
-                      ENEM
-                    </span>
-                  </div>
-                </a>
-
-                <a href="/cursos?prova=unicamp" class="card shadow p-2"
-                  style="width: 69%; min-width: 260px; border-radius: 0px; margin-top: -10px; text-decoration: none;">
-                  <p style="margin-bottom: -1px; font-size: 15px;">
-                    Os desafios para a valorização das comunidades e povos tradicionais do Brasil
-                  </p>
-                </a>
-              </div>
-            <% end %>
-          </div>
-          <hr>
+          <a href="/cursos?prova=unicamp" class="card shadow p-2"
+            style="width: 69%; min-width: 260px; border-radius: 0px; margin-top: -10px; text-decoration: none;">
+            <p style="margin-bottom: -1px; font-size: 15px;">
+              Os desafios para a valorização das comunidades e povos tradicionais do Brasil
+            </p>
+          </a>
         </div>
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="container container-flex no-margin-top">
-        <div class="logo-section">
-          <img src="/images/logo.png" alt="Aprova Total" class="logo" />
-          <%# <p>Transformando sonhos em aprovações</p> %>
-        </div>
-        <div class="footer-links">
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-instagram fs-1"></i>
-            </a>
-          </div>
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-linkedin fs-1"></i>
-            </a>
-          </div>
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-facebook fs-1"></i>
-            </a>
-          </div>
-          <div class="icon-footer">
-            <a href="" class="text-white" style="text-decoration: none;">
-              <i class="bi bi-youtube fs-1"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="contact-info">
-          <p><strong>Números Oficiais de Vendas:</strong> (19) 99246-0527 | (19) 99246-0527</p>
-        </div>
-        <div class="copyright">
-          <p>Copyright © 2025 Aprova Redação</p>
-        </div>
-      </div>
-    </footer>
-
-
-    <div class="loader" id="loadingOverlay">
-      <div class="spinner-loader"></div>
+      <% end %>
     </div>
-  </body>
-</html>
-
-<style>
-  .instagram-media {
-    width: 32%;
-    max-height: 570px;
-  }
-
-  .container-instagram {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-  }
-</style>
+    <hr>
+  </div>
+</div>

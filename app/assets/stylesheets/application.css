@@ -511,3 +511,45 @@ h1 {
   height: 544px;
   width: 359px;
 }
+
+.instagram-media {
+  width: 32%;
+  max-height: 570px;
+}
+
+.container-instagram {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.dropdown-cursos {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-cursos-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border-radius: 4px;
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.dropdown-cursos-menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-cursos-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-cursos:hover .dropdown-cursos-menu {
+  display: block;
+}

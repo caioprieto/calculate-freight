@@ -15,9 +15,9 @@
       </a>
     </div>
     <nav class="menu">
+      <a href="/" class="menu-link <%= 'active' if current_page?('/') || current_page?('/cursos') || @curso.present? %>">Cursos</a>
       <a href="/apresentacao" class="menu-link <%= 'active' if current_page?('/apresentacao')  %>" >Quem somos</a>
       <a href="/temas" class="menu-link <%= 'active' if current_page?('/temas') %>">Temas de Redação</a>
-      <a href="/" class="menu-link <%= 'active' if current_page?('/') || current_page?('/cursos') %>">Cursos</a>
       <a href="/acesso_livre" class="menu-link <%= 'active' if current_page?('/acesso_livre') %>">Acesso Livre</a>
     </nav>
     <div class="navbar-buttons" style="margin-top: -11px; margin-right: 16px; display: flex; gap: 10px; align-items: center;">

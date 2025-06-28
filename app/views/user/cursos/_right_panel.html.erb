@@ -30,13 +30,23 @@
               <% if aula.word_id.present? %>
                 <div class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
                   <div class="p-0" style="margin-bottom: -30px;">
-                    <i class="bi bi-pencil-square fs-5 text-gray"></i>
+                    <% if current_user.user_words.where(word_id: aula.word_id, concluido: false).last.present? %>
+                      <a class="d-flex" style="text-decoration: none; margin-bottom: -20px;">
+                        <i class="bi bi-pencil-square fs-6 text-danger"></i>
+                        <strong class="text-danger" style="font-size: 12px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação pendente</strong>
+                      </a>
+                    <% else %>
+                      <a class="d-flex" style="text-decoration: none; margin-bottom: -20px;">
+                        <i class="bi bi-check2-square fs-6 text-success"></i>
+                        <strong class="text-success" style="font-size: 12px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação concluída</strong>
+                      </a>
+                    <% end %>
+
                     <a href="/user/words/<%= aula.word_id %>/proposta"
                       class="aula-link fw-light"
                       data-video-url=""
-                      style="text-decoration: none; padding: 1px; margin-left: 5px">
-                      <strong>Redação pendente</strong>
-                      <p class="mt-2"><%= aula.word.tema %></p>
+                      style="text-decoration: none; padding: 1px; margin-left: 5px;">
+                      <p style="font-size: 15px;"><%= aula.word.tema %></p>
                     </a>
                   </div>
                 </div>

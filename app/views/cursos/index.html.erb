@@ -34,6 +34,20 @@
           </div>
         <% end %>
 
+        <% if @prova == "unesp" %>
+          <div class="curso-info" style="width: 65%;">
+            <p style="font-weight: 400; font-size: 18px;">A <strong>Vunesp (</strong>Fundação para o Vestibular da Universidade Estadual Paulista) é uma fundação brasileira com personalidade jurídica de direito privado, sem fins lucrativos, responsável por planejar, organizar, executar e supervisionar vestibulares, concursos e avaliações. Ela é conhecida por organizar o vestibular da Unesp e outros concursos e processos seletivos.</p>
+            <p>Localização: <strong> Estado de São Paulo </strong></p>
+          </div>
+        <% end %>
+
+        <% if @prova == "usp" %>
+          <div class="curso-info" style="width: 65%;">
+            <p style="font-weight: 400; font-size: 18px;">A <strong>USP (</strong>Fundação para o Vestibular da Universidade Estadual Paulista) é uma fundação brasileira com personalidade jurídica de direito privado, sem fins lucrativos, responsável por planejar, organizar, executar e supervisionar vestibulares, concursos e avaliações. Ela é conhecida por organizar o vestibular da Unesp e outros concursos e processos seletivos.</p>
+            <p>Localização: <strong> Estado de São Paulo </strong></p>
+          </div>
+        <% end %>
+
         <div class="curso-preview text-dark">
           <div>
             <% if @prova == "unicamp" %>
@@ -41,6 +55,12 @@
             <% end %>
             <% if @prova == "enem" %>
               <img src="/images/enem-placa.jpg" alt="Login image" class="curso-imagem" />
+            <% end %>
+            <% if @prova == "unesp" %>
+              <img src="/images/unesp-placa.png" alt="Login image" class="curso-imagem" />
+            <% end %>
+            <% if @prova == "usp" %>
+              <img src="/images/usp-placa.jpeg" alt="Login image" class="curso-imagem" />
             <% end %>
           </div>
 

@@ -1,7 +1,7 @@
 <div class="navbar d-flex align-items-center w-100" style="gap: 5px;">
-  <div class="navbar-left d-flex align-items-center">
+  <div class="navbar-left d-flex align-items-center p-2">
     <a href="/user/redacoes" style="display: flex; text-decoration: none; color: white;">
-      <i class="bi bi-box-arrow-left" style="margin-top: 60px; margin-right: 10px; font-size: 48px"></i>
+      <i class="bi bi-box-arrow-left" style="margin-top: 44px; margin-right: 10px; font-size: 38px"></i>
       <img src="/images/logo.png" alt="Logo" class="navbar-logo" />
     </a>
   </div>
@@ -62,7 +62,7 @@
 
 <div class="video-border-overlay"></div>
 
-<div class="d-flex bg-white" style="margin-top: 8px; max-height: 80vh; width: 98.2%; gap: 20px;">
+<div class="d-flex bg-white" style="margin-top: -20px; max-height: 80vh; width: 98.2%; gap: 20px;">
   <% if @word.pdf_file.attached? %>
     <div class="pdf-container">
       <iframe src="<%= rails_blob_path(@word.pdf_file, disposition: 'inline') %>" type="application/pdf"></iframe>
@@ -75,40 +75,45 @@
         <div class="beneficio">
           <i id="iconNotChecked" class="bi bi-skip-end-circle fs-1"></i>
           <i id="iconChecked" class="bi bi-pause-circle fs-1" style="display: none;"></i>
-          <h6 id="labelStart">Iniciar redação</h6>
+          <h6 style="font-size: 15px;" id="labelStart">Iniciar redação</h6>
         </div>
       </a>
       <a id="iconEnviar" class="text-white start-timer-btn" style="text-decoration: none; display: none; cursor: pointer;">
         <div class="beneficio">
           <i class="bi bi-cloud-arrow-up fs-1"></i>
-          <h6>Enviar para correção</h6>
+          <h6 style="font-size: 15px;">Enviar para correção</h6>
         </div>
       </a>
       <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#instrutionModal">
         <div class="beneficio">
           <i class="bi bi-card-list fs-1"></i>
-          <h6>Instruções e Critérios</h6>
+          <h6 style="font-size: 15px;">Instruções</h6>
         </div>
       </a>
       <a href="/user/cursos/<%= @word.aula.curso_id%>/player" class="beneficio" style="text-decoration: none">
         <div class="text-white" style="text-decoration: none;">
           <i class="bi bi-camera-video fs-1"></i>
-          <h6>Vídeo/Aula</h6>
+          <h6 style="font-size: 15px;">Vídeo/Aula</h6>
         </div>
       </a>
       <div class="beneficio">
         <a class="text-dark" style="text-decoration: none;">
           <i class="bi bi-clipboard fs-1"></i>
-          <h6>Resultados</h6>
+          <h6 style="font-size: 15px;">Resultados</h6>
         </a>
       </div>
     </div>
 
-    <p class="text-warning mt-4" style="font-weight: 350;"> Tema: <strong><%= @word.tema %>  </strong> </p>
-    <p class="text-white" style="font-weight: 350;">Prova:  <strong> <%= @word.word_type.upcase %></strong> </p>
+    <p class="text-white mt-3" style="font-weight: 400;">Prova:  <strong> <%= @word.word_type.upcase %></strong> </p>
+
+    <div class="d-flex" style="text-decoration: none; margin-top: -8px;">
+      <p class="text-white" style="font-weight: 400; margin-top: 3px;">Status: </p>
+      <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 4px; font-weight: 500">Redação pendente</strong>
+    </div>
+
 
     <hr>
-    <h6 class="fw-light mb-3">Chat com o Professor</h6>
+    <h6 style="font-weight: 350" class="mb-3">Chat com o Professor</h6>
 
     <div class="chat-wrapper d-flex flex-column" style="height: 400px;">
       <div id="chat-messages" class="messages flex-grow-1 overflow-auto mb-3">

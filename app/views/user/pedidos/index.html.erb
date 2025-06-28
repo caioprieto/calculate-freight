@@ -1,16 +1,68 @@
-<h5 class="mt-3" href="/">
-  <i class="bi bi-receipt fs-4" style="margin-right: 10px; margin-left: 22px"></i>
-  <span style="position: relative; top: -2px;">Meus Pedidos</span>
-</h5>
+<div class="mt-3" style="margin-left: 20px">
+  <h5 href="/">
+    <i class="bi bi-receipt fs-4" style="margin-right: 10px"></i>
+    <span style="position: relative; top: -2px; font-size: 18px;">Meus Pedidos</span>
+  </h5>
+</div>
 
 <div style="flex-direction: column; gap: 0px; width: 95%; white-space: nowrap; margin-left: 22px">
   <% if @pedidos.present? %>
-    <% @pedidos.each do |pedido| %>
-      <div class="carrinho-cursos-card mt-3 bg-white d-flex align-items-center" style="padding: 0px; height: 95px">
-        <div class="ms-2 w-75">
-          <p class="ms-2 p-0 m-0 mt-3" style="font-weight: 600"><%= pedido.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></p>
-          <h1 class="fw-light text-dark p-0 m-0 ms-2 mt-1" style="font-size: 15px"><strong style="font-weight: 600">Codígo:</strong> <%= pedido.code %></h1>
-          <p class="ms-2 text-secondary p-0 mt-2" style="font-size: 12px"><%= pedido.cursos_count %> Cursos • Status: <strong><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong> • Valor Total: </strong> <%= number_to_currency(pedido.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></p>
+    <% @pedidos.each_with_index do |pedido, index| %>
+      <div class="card mt-3 shadow-sm border p-2">
+        <div class="card-header d-flex justify-content-between align-items-center bg-white" style="cursor: pointer;" id="togglePedido<%= index %>">
+          <div>
+            <p class="m-0" style="font-size: 16px; font-weight: 500"><%= pedido.created_at.strftime('%d/%m/%Y') %></p>
+            <div class="d-flex">
+              <i class="bi bi-exclamation-triangle fs-5 text-success"></i>
+              <strong class="text-success" style="font-size: 15px; margin-left: 6px; margin-top: 5px; font-weight: 600"><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong>
+            </div>
+            <p class="m-0 mt-1" style="font-weight: 600">Código: <%= pedido.code %></p>
+            <p class="m-0 mt-1 mb-2 text-secondary" style="font-size: 12px">
+              <%= pedido.cursos_count %> Cursos • Valor Total: <%= number_to_currency(pedido.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %>
+            </p>
+          </div>
+          <i id="icon<%= index %>" class="bi bi-chevron-down fs-4 transition-rotate"></i>
+        </div>
+
+        <div id="pedidoDetalhes<%= index %>" class="collapse">
+          <div class="card-body">
+
+            <div class="full-width-container d-flex flex-wrap" style="display: flex; gap: 20px; width: 100%; margin-left: 17px; margin-top: -8px;">
+              <div style="flex-direction: column; width: 50%;">
+                <% Curso.first(pedido.cursos_count).each do |curso| %>
+                  <div class="col align-items-center justify-content-center" style="margin-top: 14px;">
+                    <div class="container card shadow mb-2 rounded-4 w-100 hover p-2">
+                      <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
+                        <div class="row g-0">
+                          <div class="col-md-4 d-flex align-items-center justify-content-center">
+                            <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 100px; max-width: 100%; object-fit: contain;" %>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
+                              <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                              <span class="preco-riscado">R$ 199,99</span>
+
+                              <div class="mt-2">
+                                <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
+                                  <span class="badge bg-success p-2" style="font-size: 12px; font-weight: 400;">Comprado ✅</span>
+                                <% end %>
+                                <span class="badge p-2" style="font-size: 12px; font-weight: 400;">Mais vendidos ⭐</span>
+                              </div>
+
+                              <%= button_tag class: "btn text-dark p-1 position-absolute", style: "top: 10px; right: 15px; border-radius: 5px;" do %>
+                                <i class="bi bi-three-dots-vertical fs-4"></i>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
@@ -21,4 +73,23 @@
   <% end %>
 </div>
 
-<br><br>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[id^="togglePedido"]').forEach((header, index) => {
+      const icon = document.getElementById(`icon${index}`);
+      const target = document.getElementById(`pedidoDetalhes${index}`);
+
+      header.addEventListener('click', function () {
+        const bsCollapse = bootstrap.Collapse.getInstance(target) || new bootstrap.Collapse(target, { toggle: false });
+
+        if (target.classList.contains('show')) {
+          bsCollapse.hide();
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          bsCollapse.show();
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  });
+</script>
