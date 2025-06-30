@@ -167,7 +167,7 @@ input[type="checkbox"] {
 .admin-chat-container {
   display: grid;
   grid-template-columns: 300px 1fr 20px;
-  height: 83vh;
+  height: 80vh;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -191,9 +191,7 @@ input[type="checkbox"] {
 }
 
 .chat-item.active {
-  background-color: #000000d9;
-  color: white;
-  font-weight: 350;
+  background-color: #ddddddd9;
 }
 
 .chat-main {
@@ -219,6 +217,8 @@ input[type="checkbox"] {
   padding: 0.6rem 1rem;
   border-radius: 15px;
   max-width: 70%;
+  font-size: 15px;
+  font-weight: 450;
 }
 
 .message.admin {
@@ -276,7 +276,6 @@ input[type="checkbox"] {
 
 .table-admin th,
 .table-admin td {
-  padding: 14px 18px;
   text-align: left;
   font-size: 16px;
   border-bottom: 1px solid #e5e5e5;
@@ -301,4 +300,80 @@ input[type="checkbox"] {
 
 .table-admin td:last-child i:hover {
   color: #0d6efd;
+}
+
+.badge {
+  background-color: #1d1d1d;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+.preco-riscado {
+  text-decoration: line-through;
+  margin-left: 8px;
+  color: #888;
+}
+
+.hover {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover:hover {
+  transform: scale(1.008);
+}
+
+
+.vestibulares {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 5px;
+  margin-top: -12px;
+}
+
+
+.vestibulares h2 {
+  text-align: center;
+  margin-bottom: -10px;
+  font-weight: 50;
+  font-size: 25px
+}
+
+.vestibulares hr {
+  opacity: 20%;
+  background-color: #302d2d; /* tom de cinza claro */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.50);
+}
+
+.vestibular {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px
+}
+
+.vestibular-card img{
+  width: 260px;
+  height: 150px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.vestibular-card {
+  transition: transform 0.3s ease;
+}
+
+.vestibular-card:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.vestibular-card:hover img {
+  opacity: 80%;
 }

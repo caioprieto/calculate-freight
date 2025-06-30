@@ -1,0 +1,24 @@
+<h5>
+  <i class="bi bi-pencil-square fs-5" style="margin-right: 10px"></i>
+  Correções
+</h5>
+
+<div class="container-full-width mt-3">
+  <div style="width: 100;">
+  <% UserWord.where(concluido: true).each do |user_word| %>
+    <div class="card shadow w-100">
+      <p> Tema: <%= user_word.word.tema %> </p>
+      <p> Usuário: <%= user_word.user.nome %> </p>
+      <% if user_word.user_redacao.attached? %>
+        <% if user_word.user_redacao.content_type == "application/pdf" %>
+          <p><%= link_to "📄 Ver PDF", url_for(user_word.user_redacao), target: "_blank", class: "btn btn-primary btn-sm" %></p>
+        <% elsif user_word.user_redacao.content_type.start_with?("image/") %>
+          <%= image_tag user_word.user_redacao, style: "max-width: 300px; height: auto; border-radius: 8px;" %>
+        <% else %>
+          <p>Arquivo anexado, mas tipo não suportado: <%= user_word.user_redacao.content_type %></p>
+        <% end %>
+      <% else %>
+        <p><em>Nenhuma redação enviada.</em></p>
+      <% end %>
+    <% end %>
+</div>

@@ -92,7 +92,7 @@
               <div class="card-body">
                 <h5 class="card-title" style="font-weight: 350"><%= course.name %></h5>
                 <strong class="mb-5" style="font-size: 18px; font-weight: 600;" >R$ <%= number_with_precision(course.value, precision: 2, separator: ",") %></strong>
-                <span class="preco-riscado">R$ 199,99</span>
+                <span class="preco-riscado">R$ <%= number_with_precision(course.value_riscado, precision: 2, separator: ",") %></span>
 
                 <div class="mt-2">
                   <span class="badge bg-success p-2" style="font-size: 13px; font-weight: 400;">Comprado ✅</span>

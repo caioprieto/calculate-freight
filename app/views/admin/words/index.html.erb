@@ -8,31 +8,29 @@
   <span style="margin-top: -10px; position: relative; top: -4px; font-weight: 600">Criar tema</span>
 </a>
 
-<div class="table-admin">
-  <table class="table table-bordered mt-4" style="width: 99%;">
-    <thead>
+<table class="table table-admin table-bordered mt-4" style="width: 99%;">
+  <thead>
+    <tr>
+      <th scope="col">Tema</th>
+      <th scope="col">Tipo da Prova</th>
+      <th scope="col">Data de criação</th>
+      <th scope="col">Genêro Textual</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @redacoes.each do |redacao| %>
       <tr>
-        <th scope="col">Tema</th>
-        <th scope="col">Tipo da Prova</th>
-        <th scope="col">Data de criação</th>
-        <th scope="col">Genêro Textual</th>
-        <th scope="col"></th>
+        <td><%= redacao.tema %></td>
+        <td><%= redacao.word_type.upcase %></td>
+        <td>  <%= redacao.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %> </td>
+        <td>Texto Dissertativo-Argumentativo</td>
+        <td>
+          <%= link_to edit_admin_word_path(redacao) do %>
+            <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
+          <% end %>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <% @redacoes.each do |redacao| %>
-        <tr>
-          <td><%= redacao.tema %></td>
-          <td><%= redacao.word_type.upcase %></td>
-          <td>  <%= redacao.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %> </td>
-          <td>Texto Dissertativo-Argumentativo</td>
-          <td>
-            <%= link_to edit_admin_word_path(redacao) do %>
-              <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+    <% end %>
+  </tbody>
+</table>

@@ -1,15 +1,18 @@
 <div class="admin-chat-container">
   <!-- Sidebar esquerda -->
   <aside class="chat-sidebar">
-    <h4>Conversas</h4>
+    <h5>
+      <i class="bi bi-mortarboard fs-4" style="margin-right: 10px"></i>
+      Alunos
+    </h5>
     <div id="chatList">
       <% @alunos.each do |aluno| %>
         <% chats = aluno.user_words.collect(&:chat).compact %>
         <% messages = chats.collect(&:messages).flatten.map { |m| { content: m.content, created_at: m.created_at } } %>
 
         <div class="chat-item" data-user-name="<%= aluno.nome %>" data-messages='<%= messages.to_json %>'>
-          <strong><%= aluno.nome %> </strong><br>
-          <small><%= chats.last.messages.last&.content %></small>
+          <p style="font-size: 15px; font-weight: 600; margin-bottom: -15px;"><%= aluno.nome %> </strong><p>
+          <p style="font-size: 13px; font-weight: 400; margin-bottom: 0px;"><%= chats.last.messages.last&.content %></p>
         </div>
       <% end %>
     </div>
@@ -18,7 +21,7 @@
   <!-- Conteúdo do chat -->
   <main class="chat-main">
     <header class="chat-header" id="chatHeader" style="display: none;">
-      <h5></h5>
+      <h5 style="font-size: 17px; margin-left: 5px; margin-top: 3px;"></h5>
     </header>
 
     <section class="chat-messages" id="chatMessages" style="display: none;"></section>

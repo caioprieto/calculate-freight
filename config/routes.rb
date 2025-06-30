@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get "alunos", to: "alunos#index"
     get "pedidos", to: "pedidos#index"
     get "pagamento", to: "pedidos#index"
+    get "correcoes", to: "correcoes#index"
 
     resources :words
     resources :messages, only: [ :create ]
@@ -65,7 +66,7 @@ Rails.application.routes.draw do
     resources :words do
       member do
         get :proposta
-        post :save_timer
+        post :save_user_word_pdf
       end
 
       resources :chats do

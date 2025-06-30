@@ -39,7 +39,7 @@
           <div class="compra-box text-dark">
             <div class="preco">
               <span class="preco-antigo"><%= number_to_currency(@curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
-              <span class="preco-riscado">R$ 80,90</span>
+              <span class="preco-riscado">R$ <%= number_with_precision(@curso.value_riscado, precision: 2, separator: ",") %></span>
               <p class="desconto">68% de desconto</p>
               <p class="tempo-restante fs-6">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
             </div>

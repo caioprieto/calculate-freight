@@ -16,18 +16,18 @@
           </div>
         </div>
         <div class="w-100" style="padding: 0 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border-radius: 10px">
-          <h6 class="text-dark mb-1" style="font-size: 14px; margin-top: 8px;"><%= user_word.word.tema %></h6>
           <% if user_word.concluido %>
-            <div class="d-flex mb-2 mt-1">
+            <div class="d-flex" style="margin-top: 6px;">
               <i class="bi bi-send-check fs-6 text-success"></i>
               <strong class="text-success" style="font-size: 12px; margin-left: 6px; margin-top: 2px; font-weight: 600">Redação enviada para correção</strong>
             </div>
           <% else %>
-            <div class="d-flex mb-2 mt-1">
+            <div class="d-flex" style="margin-top: 6px;">
               <i class="bi bi-exclamation-triangle fs-6 text-danger"></i>
               <strong class="text-danger" style="font-size: 12px; margin-left: 6px; margin-top: 3px; font-weight: 600">Redação pendente</strong>
             </div>
           <% end %>
+          <h6 class="text-dark" style="font-size: 14px; margin-top: 3px;"><%= user_word.word.tema %></h6>
         </div>
       </a>
     </div>

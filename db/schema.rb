@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_28_060808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -122,6 +122,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
     t.string "tipo"
     t.decimal "value"
     t.integer "duration"
+    t.decimal "value_riscado"
+    t.integer "vigencia", default: 6, null: false
   end
 
   create_table "cursos_words", id: false, force: :cascade do |t|
@@ -196,6 +198,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code"
+    t.integer "cursos_ids", default: [], null: false, array: true
     t.index ["cart_id"], name: "index_pedidos_on_cart_id"
     t.index ["user_id"], name: "index_pedidos_on_user_id"
   end
@@ -226,6 +229,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_145234) do
     t.datetime "data_inicio"
     t.integer "total_aulas", default: 0
     t.integer "total_aulas_vistas", default: 0
+    t.datetime "data_fim"
+    t.boolean "ativo", default: true
     t.index ["curso_id"], name: "index_user_cursos_on_curso_id"
     t.index ["user_id", "curso_id"], name: "index_user_cursos_on_user_id_and_curso_id", unique: true
     t.index ["user_id"], name: "index_user_cursos_on_user_id"

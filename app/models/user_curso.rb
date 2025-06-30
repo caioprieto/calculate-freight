@@ -4,6 +4,16 @@ class UserCurso < ApplicationRecord
 
   validates :progresso, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
+  scope :ativos, -> { where("data_fim > ?", Time.zone.now).where(ativo: true) }
+  scope :expirados, -> { where("data_fim <= ?", Time.zone.now).or(where(ativo: false)) }
+
+
+  def expirado?
+    return false if data_fim.blank?
+
+    !ativo || data_fim <= Time.zone.now
+  end
+
   def calculate_values
     calculate_total_aulas
     calculate_total_aulas_vistas

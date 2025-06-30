@@ -3,6 +3,6 @@ class User::PedidosController < ApplicationController
 
   def index
     @user = current_user
-    @pedidos = @user.pedidos
+    @pedidos = @user.pedidos.order(updated_at: :desc)
   end
 end

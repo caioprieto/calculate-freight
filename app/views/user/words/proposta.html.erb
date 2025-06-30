@@ -75,25 +75,25 @@
         <div class="beneficio">
           <i id="iconNotChecked" class="bi bi-skip-end-circle fs-1"></i>
           <i id="iconChecked" class="bi bi-pause-circle fs-1" style="display: none;"></i>
-          <h6 style="font-size: 15px;" id="labelStart">Iniciar redação</h6>
+          <h6 style="font-size: 15px; font-weight: 600" id="labelStart">Iniciar redação</h6>
         </div>
       </a>
       <a id="iconEnviar" class="text-white start-timer-btn" style="text-decoration: none; display: none; cursor: pointer;">
         <div class="beneficio">
           <i class="bi bi-cloud-arrow-up fs-1"></i>
-          <h6 style="font-size: 15px;">Enviar para correção</h6>
+          <h6 style="font-size: 15px; font-weight: 600">Enviar para correção</h6>
         </div>
       </a>
       <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#instrutionModal">
         <div class="beneficio">
           <i class="bi bi-card-list fs-1"></i>
-          <h6 style="font-size: 15px;">Instruções</h6>
+          <h6 style="font-size: 15px; font-weight: 600">Instruções</h6>
         </div>
       </a>
       <a href="/user/cursos/<%= @word.aula.curso_id%>/player" class="beneficio" style="text-decoration: none">
         <div class="text-white" style="text-decoration: none;">
           <i class="bi bi-camera-video fs-1"></i>
-          <h6 style="font-size: 15px;">Vídeo/Aula</h6>
+          <h6 style="font-size: 15px; font-weight: 600">Vídeo/Aula</h6>
         </div>
       </a>
       <div class="beneficio">
@@ -104,13 +104,17 @@
       </div>
     </div>
 
-    <p class="text-white mt-3" style="font-weight: 400;">Prova:  <strong> <%= @word.word_type.upcase %></strong> </p>
-
-    <div class="d-flex" style="text-decoration: none; margin-top: -8px;">
-      <p class="text-white" style="font-weight: 400; margin-top: 3px;">Status: </p>
-      <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 4px; font-weight: 500">Redação pendente</strong>
+    <div class="d-flex" style="text-decoration: none; margin-top: 15px;">
+      <p class="text-white" style="font-weight: 500; margin-top: 3px; font-size: 15px;">Status: </p>
+      <% if @user_word.concluido %>
+        <strong class="text-success" style="font-size: 16px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação concluída</strong>
+      <% else %>
+        <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação pendente</strong>
+      <% end %>
     </div>
 
+    <p class="text-white" style="font-weight: 500; margin-top: -4px; font-size: 15px">Prova:  <strong class="text-warning" style="font-size: 16px"> <%= @word.word_type.upcase %></strong> </p>
+    <p class="text-white" style="font-weight: 500; margin-top: -4px; font-size: 15px">Tempo médio para a realização da redação:  <strong class="fw-bold text-warning" style="font-size: 16px">1h 30min</strong> </p>
 
     <hr>
     <h6 style="font-weight: 350" class="mb-3">Chat com o Professor</h6>
@@ -206,7 +210,7 @@
   </div>
 </div>
 
-<input type="file" id="pdfUploader" accept="application/pdf" style="display: none;" />
+<input type="file" id="pdfUploader" style="display: none;" />
 
 
 <script>
@@ -214,16 +218,11 @@
     const file = event.target.files[0];
     if (!file) return;
 
-    if (file.type !== "application/pdf") {
-      alert("Por favor, selecione um arquivo PDF.");
-      return;
-    }
-
     const formData = new FormData();
-    formData.append('pdf_file', file);
+    formData.append('file', file);
     formData.append('duration_seconds', pausedTime);
 
-    fetch('<%= save_timer_user_word_path(@word) %>', {
+    fetch('<%= save_user_word_pdf_user_word_path(@word) %>', {
       method: 'POST',
       headers: {
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content

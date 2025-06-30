@@ -11,7 +11,7 @@
       <div class="card mt-3 shadow-sm border p-2">
         <div class="card-header d-flex justify-content-between align-items-center bg-white" style="cursor: pointer;" id="togglePedido<%= index %>">
           <div>
-            <p class="m-0" style="font-size: 16px; font-weight: 500"><%= pedido.created_at.strftime('%d/%m/%Y') %></p>
+            <p class="m-0" style="font-size: 16px; font-weight: 500"><%= pedido.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></p>
             <div class="d-flex">
               <i class="bi bi-exclamation-triangle fs-5 text-success"></i>
               <strong class="text-success" style="font-size: 15px; margin-left: 6px; margin-top: 5px; font-weight: 600"><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong>
@@ -27,40 +27,38 @@
         <div id="pedidoDetalhes<%= index %>" class="collapse">
           <div class="card-body">
 
-            <div class="full-width-container d-flex flex-wrap" style="display: flex; gap: 20px; width: 100%; margin-left: 17px; margin-top: -8px;">
-              <div style="flex-direction: column; width: 50%;">
-                <% Curso.first(pedido.cursos_count).each do |curso| %>
-                  <div class="col align-items-center justify-content-center" style="margin-top: 14px;">
-                    <div class="container card shadow mb-2 rounded-4 w-100 hover p-2">
-                      <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
-                        <div class="row g-0">
-                          <div class="col-md-4 d-flex align-items-center justify-content-center">
-                            <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 100px; max-width: 100%; object-fit: contain;" %>
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
-                              <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
-                              <span class="preco-riscado">R$ 199,99</span>
+            <div style="width: 100%; gap: 10px; display: flex;">
+              <% Curso.where(id: pedido.cursos_ids).each do |curso| %>
+                <div class="col align-items-center justify-content-center w-50" style="margin-top: 2px;">
+                  <div class="container card shadow mb-2 rounded-4 w-100 hover p-2">
+                    <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
+                      <div class="row g-0">
+                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                          <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 100px; max-width: 100%; object-fit: contain;" %>
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
+                            <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                            <span class="preco-riscado">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
 
-                              <div class="mt-2">
-                                <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
-                                  <span class="badge bg-success p-2" style="font-size: 12px; font-weight: 400;">Comprado ✅</span>
-                                <% end %>
-                                <span class="badge p-2" style="font-size: 12px; font-weight: 400;">Mais vendidos ⭐</span>
-                              </div>
-
-                              <%= button_tag class: "btn text-dark p-1 position-absolute", style: "top: 10px; right: 15px; border-radius: 5px;" do %>
-                                <i class="bi bi-three-dots-vertical fs-4"></i>
+                            <div class="mt-2">
+                              <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
+                                <span class="badge bg-success p-2" style="font-size: 12px; font-weight: 400;">Comprado ✅</span>
                               <% end %>
+                              <span class="badge p-2" style="font-size: 12px; font-weight: 400;">Mais vendidos ⭐</span>
                             </div>
+
+                            <%= button_tag class: "btn text-dark p-1 position-absolute", style: "top: 10px; right: 15px; border-radius: 5px;" do %>
+                              <i class="bi bi-three-dots-vertical fs-4"></i>
+                            <% end %>
                           </div>
                         </div>
-                      </a>
-                    </div>
+                      </div>
+                    </a>
                   </div>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -68,7 +66,7 @@
     <% end %>
   <% else %>
     <div class="card-warning mt-2">
-      <p style="margin-left: -7px">Você não tem nenhum pedido...</p>
+      <p style="margin-left: -10px; margin-top: -5px;" class="text-danger">Você ainda não tem nenhum pedido...</p>
     </div>
   <% end %>
 </div>

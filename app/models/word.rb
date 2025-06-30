@@ -1,5 +1,5 @@
 class Word < ApplicationRecord
-  WORD_TYPES = %w[enem unicamp fuvest]
+  WORD_TYPES = %w[enem unicamp usp unesp]
 
   has_one :aula, class_name: "::Aula", dependent: :nullify
   has_one_attached :imagem

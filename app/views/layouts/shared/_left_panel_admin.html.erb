@@ -12,6 +12,11 @@
         Dashboard
       <% end %>
 
+      <%= link_to "/admin/correcoes", class: "menu-link #{'active' if current_page?('/admin/correcoes')}" do %>
+        <i class="bi bi-pencil-square fs-5" style="margin-right: 10px"></i>
+        Correções
+      <% end %>
+
       <%= link_to "/admin/words", class: "menu-link #{'active' if current_page?('/admin/words')}" do %>
         <i class="bi bi-book fs-5" style="margin-right: 10px"></i>
         Redações
@@ -40,6 +45,16 @@
       <%= link_to "/admin/pagamento", class: "menu-link #{'active' if current_page?('/admin/pagamento')}" do %>
         <i class="bi bi-cash fs-5" style="margin-right: 10px"></i>
         Pagamento
+      <% end %>
+
+      <%= link_to "/", class: "menu-link" do %>
+        <i class="bi bi-house fs-5" style="margin-right: 10px"></i>
+        Ir para Home
+      <% end %>
+
+      <%= link_to "/user/dashboard", class: "menu-link" do %>
+        <i class="bi bi-backpack fs-5" style="margin-right: 10px"></i>
+        Ir para Área do Aluno
       <% end %>
     </nav>
   </div>

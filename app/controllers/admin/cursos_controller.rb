@@ -2,7 +2,7 @@ class Admin::CursosController < AdminsBackofficeController
   before_action :set_curso, only: %i[edit update]
 
   def index
-    @cursos = Curso.all
+    @cursos = Curso.order(updated_at: :desc)
   end
 
   def new
@@ -53,7 +53,7 @@ class Admin::CursosController < AdminsBackofficeController
 
   def curso_params
     params.require(:curso).permit(
-      :name, :description, :prova, :tipo, :imagem, :remove_imagem,
+      :name, :description, :prova, :tipo, :imagem, :remove_imagem, :value, :value_riscado, :vigencia,
       modulos_attributes: [
         :id, :titulo, :description, :_destroy,
         aulas_attributes: [
