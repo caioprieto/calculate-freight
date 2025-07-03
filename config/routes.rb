@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get "pagamento", to: "pedidos#index"
     get "correcoes", to: "correcoes#index"
 
+    resources :temas, only: %i[new create]
     resources :words
     resources :messages, only: [ :create ]
 

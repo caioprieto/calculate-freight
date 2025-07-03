@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :pedidos
   has_many :messages, as: :dono, class_name: "::Message"
 
+  has_many :notifications, dependent: :destroy
+
   validates :nome, :sobrenome, :cpf, presence: true
 
   def self.from_omniauth(access_token)

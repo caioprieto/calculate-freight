@@ -661,3 +661,34 @@ nav.d-flex {
 .alert {
   font-size: 15px;
 }
+
+.notification-item {
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #282a2b25;
+}
+
+.card-title {
+  margin-top: 5px;
+  font-size: 17px;
+  font-weight: 450;
+}
+
+.accordion-toggle:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.accordion-body {
+  border-top: 1px solid #e9ecef;
+  font-size: 14px;
+}
+
+/* opcional: efeito hover no botão */
+.dropdown-wrapper button:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}

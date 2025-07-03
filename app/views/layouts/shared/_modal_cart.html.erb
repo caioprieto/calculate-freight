@@ -1,7 +1,9 @@
 <div id="cart-modal" class="card shadow position-absolute end-0 mt-2" style="width: 400px; display: none; z-index: 1000;">
-  <div class="card-body">
+  <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center p-3">
     <h6 class="card-title">Carrinho</h6>
-    <hr>
+    <button class="btn-close" aria-label="Fechar" onclick="document.getElementById('cart-modal').style.display='none'" style="font-size: 13px;"></button>
+  </div>
+  <div class="card-body">
     <% if @cursos.present? %>
       <ul class="list-group mb-3">
         <% @cursos.each do |curso| %>

@@ -8,7 +8,7 @@
 
   <div class="vertical-line"></div>
 
-  <a href="/cursos/<%= @curso.id%>/edit" class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
+  <a href="" class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
     <span class="course-title"><%= @curso.name %></span>
   </a>
 
@@ -33,9 +33,9 @@
 
       <div class="settings-dropdown-menu" id="settingsDropdownMenu" style="z-index: 1101">
         <div class="arrow-up"></div>
-        <%= link_to "/admin/cursos/#{@curso.id}/edit" do %>
-          <i class="bi bi-pencil fs-6" style="margin-right: 10px;"></i>
-          Editar curso
+        <%= link_to "/cursos/#{@curso.id}/edit" do %>
+          <i class="bi bi-card-text fs-6" style="margin-right: 10px;"></i>
+          Ver detalhes do curso
         <% end %>
         <%= link_to '' do %>
           <i class="bi bi-gift fs-6" style="margin-right: 10px;"></i>
@@ -110,7 +110,7 @@
         </div>
         <div style="width: 50%;">
           <div class="w-100 d-flex">
-            <p class="mt-3 fs-2"><%= @user_curso.total_aulas_vistas %>/<%= @user_curso.total_aulas %></p>
+            <p class="mt-3 fs-2"><%= @user_curso.total_aulas_vistas %>/<%= @user_curso.total_aulas.zero? ? @user_curso.curso.aulas.count : @user_curso.total_aulas %></p>
             <p class="mt-4 fs-5 mx-2 text-secondary"> Aulas</p>
           </div>
           <div class="w-100 d-flex">

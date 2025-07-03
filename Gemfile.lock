@@ -425,6 +425,9 @@ GEM
     thruster (0.1.12-x86_64-darwin)
     thruster (0.1.12-x86_64-linux)
     timeout (0.4.3)
+    tty-cursor (0.7.1)
+    tty-spinner (0.9.3)
+      tty-cursor (~> 0.7)
     turbo-rails (2.0.13)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
@@ -497,6 +500,7 @@ DEPENDENCIES
   stimulus-rails
   stripe
   thruster
+  tty-spinner
   turbo-rails
   tzinfo-data
   web-console

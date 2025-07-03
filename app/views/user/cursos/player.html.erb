@@ -136,7 +136,6 @@
     });
   });
 
-
   document.addEventListener("DOMContentLoaded", () => {
     const checkboxes = document.querySelectorAll(".watched-checkbox");
 
@@ -160,6 +159,118 @@
         });
       });
     });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkboxes = document.querySelectorAll(".watched-checkbox");
+    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+
+    if (!anyChecked) {
+      // Encontrar o primeiro botão do accordion (se tiver)
+      const firstAccordionToggle = document.querySelector('[data-bs-toggle="collapse"]');
+
+      // Abrir o accordion (simula clique no botão)
+      if (firstAccordionToggle) {
+        firstAccordionToggle.click();
+      }
+
+      // Depois de abrir, aguarda o DOM renderizar o conteúdo e clica no link da aula
+      setTimeout(() => {
+        const firstLink = document.querySelector(".aula-link");
+        if (firstLink) {
+          firstLink.click(); // isso deve disparar sua lógica já implementada
+        }
+      }, 500); // dá um tempo para o collapse abrir
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const aulaLinks = Array.from(document.querySelectorAll(".aula-link"));
+    const checkboxes = Array.from(document.querySelectorAll(".watched-checkbox"));
+
+    if (aulaLinks.length !== checkboxes.length) {
+      console.warn("Número de aulas e checkboxes diferentes!", aulaLinks.length, checkboxes.length);
+    }
+
+    // Encontra o índice da última aula assistida
+    let lastWatchedIndex = -1;
+    for (let i = checkboxes.length - 1; i >= 0; i--) {
+      if (checkboxes[i].checked) {
+        lastWatchedIndex = i;
+        break;
+      }
+    }
+
+    // Calcula o próximo índice a abrir (próxima aula não assistida)
+    let targetIndex = lastWatchedIndex + 1;
+
+    // Se targetIndex está fora dos limites, ajusta para última aula
+    if (targetIndex >= aulaLinks.length) {
+      targetIndex = aulaLinks.length - 1;
+    }
+
+    // Agora, se a aula no targetIndex estiver marcada (assistida),
+    // significa que todas as próximas também estão marcadas.
+    // Então busca o primeiro índice não assistido para garantir abrir a próxima aula disponível.
+    while (targetIndex < aulaLinks.length && checkboxes[targetIndex]?.checked) {
+      targetIndex++;
+    }
+
+    // Se passou do limite, abre a última aula
+    if (targetIndex >= aulaLinks.length) {
+      targetIndex = aulaLinks.length - 1;
+    }
+
+    console.log("Abrindo aula no índice:", targetIndex, aulaLinks[targetIndex]?.textContent);
+
+    if (targetIndex >= 0 && targetIndex < aulaLinks.length) {
+      const targetLink = aulaLinks[targetIndex];
+      openAllAccordionParents(targetLink).then(() => {
+        setTimeout(() => {
+          targetLink.click();
+        }, 100);
+      });
+    }
+
+    function openAllAccordionParents(element) {
+      return new Promise((resolve) => {
+        const collapses = [];
+        let current = element.parentElement;
+
+        while (current && current !== document.body) {
+          if (current.classList.contains("collapse") && current.id) {
+            const toggle = document.querySelector(`[data-bs-toggle="collapse"][data-bs-target="#${current.id}"]`);
+            if (toggle && !current.classList.contains("show")) {
+              collapses.unshift({ collapse: current, toggle });
+            }
+          }
+          current = current.parentElement;
+        }
+
+        if (collapses.length === 0) {
+          resolve();
+          return;
+        }
+
+        const openNext = () => {
+          if (collapses.length === 0) {
+            resolve();
+            return;
+          }
+
+          const { collapse, toggle } = collapses.shift();
+
+          collapse.addEventListener("shown.bs.collapse", function handler() {
+            collapse.removeEventListener("shown.bs.collapse", handler);
+            openNext();
+          });
+
+          toggle.click();
+        };
+
+        openNext();
+      });
+    }
   });
 
   document.addEventListener("DOMContentLoaded", () => {

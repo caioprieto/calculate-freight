@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_28_060808) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_02_193844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -189,6 +189,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_060808) do
     t.index ["curso_id"], name: "index_modulos_on_curso_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "notification_type", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "pedidos", force: :cascade do |t|
     t.bigint "cart_id", null: false
     t.bigint "user_id", null: false
@@ -201,6 +212,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_060808) do
     t.integer "cursos_ids", default: [], null: false, array: true
     t.index ["cart_id"], name: "index_pedidos_on_cart_id"
     t.index ["user_id"], name: "index_pedidos_on_user_id"
+  end
+
+  create_table "temas", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "prova", default: "enem", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "texts", force: :cascade do |t|
@@ -302,6 +320,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_060808) do
   add_foreign_key "freights", "address", column: "address_origem_id"
   add_foreign_key "messages", "chats"
   add_foreign_key "modulos", "cursos"
+  add_foreign_key "notifications", "users"
   add_foreign_key "pedidos", "carts"
   add_foreign_key "pedidos", "users"
   add_foreign_key "texts", "words"

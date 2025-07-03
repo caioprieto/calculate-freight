@@ -2,113 +2,11 @@
   <%= render 'carrosel' %>
 </div>
 
-<div class="vestibulares">
-  <hr>
-  <div class="vestibular">
-    <div class="vestibular-card">
-      <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none;">
-        <img src="/images/unicamp.jpg" alt="Login image" />
-      </a>
-    </div>
-    <div class="vestibular-card">
-      <a href="/cursos?prova=enem" class="text-dark" style="text-decoration: none;">
-        <img src="/images/enem-branco.jpg" alt="Login image" />
-      </a>
-    </div>
-    <div class="vestibular-card">
-      <a href="/cursos?prova=unesp" class="text-dark" style="text-decoration: none;">
-        <img src="/images/unesp.jpg" alt="Login image" />
-      </a>
-    </div>
-    <div class="vestibular-card">
-      <a href="/cursos?prova=usp" class="text-dark" style="text-decoration: none;">
-        <img src="/images/usp.jpg" alt="Login image" />
-      </a>
-    </div>
-  </div>
-  <hr>
+<div style="margin-top: 30px;">
+  <%= render 'vestibulares' %>
 </div>
-
-<div class="container py-4">
-  <div class="mb-2 ms-4 d-flex" style="width: 93%;">
-    <i class="bi bi-mortarboard fs-2" style="margin-top: -12px; margin-right: 10px; margin-left: 10px;"></i>
-    <h2 class="ms-2" style="font-size: 23px; font-weight: 400;">Alunos aprovados</h2>
-  </div>
-
-  <div class="row d-flex ms-3" style="width: 97.7%;">
-    <div class="col-md-2">
-      <div class="text-center shadow hover">
-        <img src="/images/lais-aprovada.png" alt="Laís aprovada"
-            class="shadow-sm"
-            style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="mt-2">
-          <strong>Laís</strong><br>
-          <small class="text-muted">Medicina</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="text-center shadow hover">
-        <img src="/images/lais-aprovada.png" alt="João aprovado"
-            class="shadow-sm"
-            style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="mt-2">
-          <strong>João</strong><br>
-          <small class="text-muted">Engenharia</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="text-center shadow hover">
-        <img src="/images/lais-aprovada.png" alt="João aprovado"
-            class="shadow-sm"
-            style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="mt-2">
-          <strong>João</strong><br>
-          <small class="text-muted">Engenharia</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="text-center shadow hover">
-        <img src="/images/lais-aprovada.png" alt="João aprovado"
-            class="shadow-sm"
-            style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="mt-2">
-          <strong>João</strong><br>
-          <small class="text-muted">Engenharia</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="text-center shadow hover">
-        <img src="/images/lais-aprovada.png" alt="João aprovado"
-            class="shadow-sm"
-            style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="mt-2">
-          <strong>João</strong><br>
-          <small class="text-muted">Engenharia</small>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="text-center shadow hover">
-        <img src="/images/lais-aprovada.png" alt="João aprovado"
-            class="shadow-sm"
-            style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="mt-2">
-          <strong>João</strong><br>
-          <small class="text-muted">Engenharia</small>
-        </div>
-      </div>
-    </div>
-
-  </div>
+<div style="margin-top: 5px;">
+  <%= render 'alunos_aprovados' %>
 </div>
 
 <script>

@@ -21,7 +21,7 @@
               <li class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
                 <div>
                   <%= check_box_tag "watched_aula_#{aula.id}", aula.id, watched, class: "watched-checkbox", data: { aula_id: aula.id, curso_id: @curso.id } %>
-                  <a href="" class="aula-link fw-light" style="text-decoration: none; padding: 1px; margin-left: 5px" data-video-url="<%= aula.video.attached? ? url_for(aula.video) : "" %>">
+                  <a href="" class="aula-link fw-light" style="text-decoration: none; padding: 1px; margin-left: 5px" data-aula-id="<%= aula.id %>" data-curso-id="<%= @curso.id %>" data-video-url="<%= aula.video.attached? ? url_for(aula.video) : "" %>">
                     <%= aula.titulo %>
                   </a>
                 </div>

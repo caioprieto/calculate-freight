@@ -30,8 +30,8 @@
             <div style="width: 100%; gap: 10px; display: flex;">
               <% Curso.where(id: pedido.cursos_ids).each do |curso| %>
                 <div class="col align-items-center justify-content-center w-50" style="margin-top: 2px;">
-                  <div class="container card shadow mb-2 rounded-4 w-100 hover p-2">
-                    <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
+                  <div class="container card shadow mb-2 rounded-4 w-100 p-2">
+                    <a style="text-decoration: none; color: black">
                       <div class="row g-0">
                         <div class="col-md-4 d-flex align-items-center justify-content-center">
                           <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 100px; max-width: 100%; object-fit: contain;" %>
@@ -41,15 +41,14 @@
                             <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
                             <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
                             <span class="preco-riscado">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
-
-                            <div class="mt-2">
-                              <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
-                                <span class="badge bg-success p-2" style="font-size: 12px; font-weight: 400;">Comprado ✅</span>
-                              <% end %>
-                              <span class="badge p-2" style="font-size: 12px; font-weight: 400;">Mais vendidos ⭐</span>
+                            <div class="d-flex mt-2">
+                              <i class="bi bi-stopwatch fs-6 text-danger"></i>
+                              <strong class="text-danger" style="font-size: 12px; margin-left: 6px; margin-top: 4px; font-weight: 600">
+                                Expira em: <span class="countdown" data-expire="<%= current_user.user_cursos.where(curso_id: curso.id).first.data_fim.iso8601 %>">carregando...</span>
+                              </strong>
                             </div>
 
-                            <%= button_tag class: "btn text-dark p-1 position-absolute", style: "top: 10px; right: 15px; border-radius: 5px;" do %>
+                            <%= button_to player_user_curso_path(curso), method: :get, class: "btn text-dark p-1 position-absolute", style: "top: 10px; right: 15px; border-radius: 5px;" do %>
                               <i class="bi bi-three-dots-vertical fs-4"></i>
                             <% end %>
                           </div>
@@ -71,6 +70,8 @@
   <% end %>
 </div>
 
+<br>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[id^="togglePedido"]').forEach((header, index) => {
@@ -90,4 +91,38 @@
       });
     });
   });
+
+  function startCountdown() {
+    const countdownElems = document.querySelectorAll('.countdown');
+
+    function updateCountdown() {
+      const now = new Date();
+
+      countdownElems.forEach(elem => {
+        const expireDate = new Date(elem.getAttribute('data-expire'));
+        let diff = expireDate - now;
+
+        if (diff <= 0) {
+          elem.textContent = 'Expirado';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        const minutes = Math.floor(diff / (1000 * 60));
+        diff -= minutes * (1000 * 60);
+        const seconds = Math.floor(diff / 1000);
+
+        elem.textContent = `${days}d ${hours}h ${minutes}min ${seconds}s`;
+      });
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', startCountdown);
+
 </script>

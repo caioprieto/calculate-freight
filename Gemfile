@@ -28,8 +28,9 @@ gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "image_processing"
 gem "stripe"
-gem 'state_machines'
-gem 'state_machines-activerecord'
+gem "state_machines"
+gem "state_machines-activerecord"
+gem "tty-spinner"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

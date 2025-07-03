@@ -20,9 +20,11 @@ class Pedido < ApplicationRecord
   def liberar_cursos_redacoes
     cart.cursos.each do |curso|
       UserCurso.create(user_id: user_id, curso_id: curso.id, data_inicio: Time.zone.now, data_fim: Time.zone.now + curso.vigencia.months)
+      Notification.create(user_id: user_id, title: "Novo curso disponível!", body: "#{curso.name.upcase} já está liberado na área do aluno", notification_type: "add_curso")
 
       curso.words.each do |word|
         UserWord.create(user_id: user_id, word_id: word.id, curso_id: curso.id)
+        Notification.create(user_id: user_id, title: "Nova redação disponível!", body: "#{word.tema.upcase} já está liberado na área do aluno", notification_type: "add_word")
       end
     end
   end

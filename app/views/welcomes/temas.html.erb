@@ -2,15 +2,14 @@
   <div class="vestibulares ms-4">
     <hr>
     <div class="vestibular" style="gap: 15px !important">
-      <% 12.times do |item| %>
+      <% @temas.each do |tema| %>
         <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
           <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none; display: block;">
             <div style="position: relative;">
-              <img src="/images/indions.jpeg" alt="Login image" style="display: block;" />
-              <!-- Badge no canto superior direito -->
+              <%= image_tag tema.capa, style: "display: block;" %>
               <span class="badge p-2"
                     style="position: absolute; top: 8px; right: 25px; font-size: 13px; font-weight: 400;">
-                ENEM
+                <%= tema.prova.upcase %>
               </span>
             </div>
           </a>
@@ -26,4 +25,9 @@
     </div>
     <hr>
   </div>
+</div>
+
+<%= render 'vestibulares' %>
+<div class="mt-2">
+  <%= render 'alunos_aprovados' %>
 </div>

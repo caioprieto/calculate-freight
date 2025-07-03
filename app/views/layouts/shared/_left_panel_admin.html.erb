@@ -52,6 +52,11 @@
         Ir para Home
       <% end %>
 
+      <%= link_to "/admin/temas/new", class: "menu-link #{'active' if current_page?('/admin/temas')}" do %>
+        <i class="bi bi-book-half fs-5" style="margin-right: 10px"></i>
+        Temas Gratuitos
+      <% end %>
+
       <%= link_to "/user/dashboard", class: "menu-link" do %>
         <i class="bi bi-backpack fs-5" style="margin-right: 10px"></i>
         Ir para Área do Aluno

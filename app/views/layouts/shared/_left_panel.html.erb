@@ -21,14 +21,14 @@
         Redações
       <% end %>
 
-      <%= link_to '/user/carrinho', class: "menu-link #{'active' if current_page?('/user/carrinho')}" do %>
-        <i class="bi bi-cart fs-5" style="margin-right: 10px"></i>
-        Carrinho
-      <% end %>
-
       <%= link_to '/user/pedidos', class: "menu-link #{'active' if current_page?('/user/pedidos')}" do %>
         <i class="bi bi-receipt fs-5" style="margin-right: 10px"></i>
         Pedidos
+      <% end %>
+
+      <%= link_to '/user/carrinho', class: "menu-link #{'active' if current_page?('/user/carrinho')}" do %>
+        <i class="bi bi-cart fs-5" style="margin-right: 10px"></i>
+        Carrinho
       <% end %>
 
       <%= link_to '/', class: "menu-link" do %>

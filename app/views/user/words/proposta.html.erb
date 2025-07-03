@@ -104,17 +104,19 @@
       </div>
     </div>
 
-    <div class="d-flex" style="text-decoration: none; margin-top: 15px;">
+    <div class="d-flex" style="text-decoration: none; margin-top: 15px; margin-bottom: -10px;">
       <p class="text-white" style="font-weight: 500; margin-top: 3px; font-size: 15px;">Status: </p>
       <% if @user_word.concluido %>
-        <strong class="text-success" style="font-size: 16px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação concluída</strong>
+        <strong class="text-success" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500;">Redação concluída</strong>
       <% else %>
-        <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação pendente</strong>
+        <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500">Redação pendente</strong>
       <% end %>
     </div>
 
-    <p class="text-white" style="font-weight: 500; margin-top: -4px; font-size: 15px">Prova:  <strong class="text-warning" style="font-size: 16px"> <%= @word.word_type.upcase %></strong> </p>
-    <p class="text-white" style="font-weight: 500; margin-top: -4px; font-size: 15px">Tempo médio para a realização da redação:  <strong class="fw-bold text-warning" style="font-size: 16px">1h 30min</strong> </p>
+    <% unless @user_word.concluido %>
+      <p class="text-white" style="font-weight: 500; margin-top: 4px; font-size: 15px">Prova:  <strong class="text-warning" style="font-size: 16px; font-weight: 450"> <%= @word.word_type.upcase %></strong> </p>
+      <p class="text-white" style="font-weight: 500; margin-top: -4px; font-size: 15px; margin-bottom: 1px;">Tempo médio para a realização da redação:  <strong class="text-warning" style="font-size: 16px; font-weight: 450">1h 30min</strong> </p>
+    <% end %>
 
     <hr>
     <h6 style="font-weight: 350" class="mb-3">Chat com o Professor</h6>

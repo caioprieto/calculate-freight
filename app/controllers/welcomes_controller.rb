@@ -13,6 +13,7 @@ class WelcomesController < ApplicationController
   end
 
   def temas
+    @temas = ::Tema.all
   end
 
   private
