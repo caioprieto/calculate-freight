@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/apresentacao", to: "welcomes#apresentacao"
   get "/acesso_livre", to: "welcomes#acesso_livre"
   get "/temas", to: "welcomes#temas"
+  get "/cursos", to: "welcomes#cursos"
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :cursos do
+    resources :cursos, only: %i[edit] do
       collection do
         post :delete_multiple
         post :add_word

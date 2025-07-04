@@ -1,33 +1,84 @@
-<div class="container" style="margin-top: -60px;">
-  <div class="vestibulares ms-4">
-    <hr>
-    <div class="vestibular" style="gap: 15px !important">
-      <% @temas.each do |tema| %>
-        <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
-          <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none; display: block;">
-            <div style="position: relative;">
-              <%= image_tag tema.capa, style: "display: block;" %>
-              <span class="badge p-2"
-                    style="position: absolute; top: 8px; right: 25px; font-size: 13px; font-weight: 400;">
-                <%= tema.prova.upcase %>
-              </span>
-            </div>
-          </a>
-
-          <a href="/cursos?prova=unicamp" class="card shadow p-2"
-            style="width: 69%; min-width: 260px; border-radius: 0px; margin-top: -10px; text-decoration: none;">
-            <p style="margin-bottom: -1px; font-size: 15px;">
-              Os desafios para a valorização das comunidades e povos tradicionais do Brasil
-            </p>
-          </a>
-        </div>
-      <% end %>
+<div style="margin-top: -30px;">
+  <div class="vestibulares">
+    <div class="vestibular">
+      <div class="vestibular-card" data-prova-nome="unicamp">
+        <a href="/temas?prova=unicamp" class="text-dark" style="text-decoration: none;">
+          <img src="/images/unicamp.jpg" alt="Login image" />
+        </a>
+      </div>
+      <div class="vestibular-card" data-prova-nome="enem">
+        <a href="/temas?prova=enem" class="text-dark" style="text-decoration: none;">
+          <img src="/images/enem-branco.jpg" alt="Login image" />
+        </a>
+      </div>
+      <div class="vestibular-card" data-prova-nome="unesp">
+        <a href="/temas?prova=unesp" class="text-dark" style="text-decoration: none;">
+          <img src="/images/unesp.jpg" alt="Login image" />
+        </a>
+      </div>
+      <div class="vestibular-card" data-prova-nome="usp">
+        <a href="/temas?prova=usp" class="text-dark" style="text-decoration: none;">
+          <img src="/images/usp.jpg" alt="Login image" />
+        </a>
+      </div>
     </div>
     <hr>
   </div>
+
+  <br>
+
+  <div class="container">
+    <div class="mb-3 ms-4 d-flex" style="width: 93%;">
+      <i class="bi bi-play-btn fs-4" style="margin-top: -4px; margin-right: 8px; margin-left: 10px;"></i>
+      <h2 class="ms-2" style="font-size: 21px; font-weight: 400;">Temas de Redação</h2>
+    </div>
+
+    <hr class="text-dark" style="width: 95.6%; margin-left: 30px; margin-bottom: 30px; margin-top: -22px; opacity: 10%;">
+  </div>
+
+  <div class="container" style="margin-top: 15px;">
+    <div class="vestibulares" style="width: 97%; margin-left: 30px">
+      <div class="vestibular" style="gap: 15px !important">
+        <% @temas_collection.each do |tema| %>
+          <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
+            <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none; display: block;">
+              <div style="position: relative;">
+                <%= image_tag tema.capa, style: "display: block;" %>
+                <span class="badge p-2"
+                      style="position: absolute; top: 8px; right: 25px; font-size: 13px; font-weight: 400;">
+                  <%= tema.prova.upcase %>
+                </span>
+              </div>
+            </a>
+
+            <a href="/cursos?prova=unicamp" class="card shadow p-2"
+              style="width: 69%; min-width: 260px; border-radius: 0px; margin-top: -10px; text-decoration: none;">
+              <p style="margin-bottom: -1px; font-size: 15px;">
+                Os desafios para a valorização das comunidades e povos tradicionais do Brasil
+              </p>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
-<%= render 'vestibulares' %>
-<div class="mt-2">
-  <%= render 'alunos_aprovados' %>
-</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const provaParam = urlParams.get('prova');
+
+    if (provaParam) {
+      const vestibularCards = document.querySelectorAll('.vestibular-card');
+
+      vestibularCards.forEach((card) => {
+        const cardProva = card.dataset.provaNome?.toLowerCase();
+        if (cardProva === provaParam.toLowerCase()) {
+          card.classList.add('highlighted');
+        }
+      });
+    }
+  });
+</script>
