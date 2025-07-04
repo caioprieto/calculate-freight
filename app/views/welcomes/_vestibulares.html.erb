@@ -1,8 +1,8 @@
-<% unless current_page?("") %>
+<% unless current_page?("") || current_page?("/cursos") || current_page?("/temas") %>
   <div class="container">
     <div class="mb-3 ms-4 d-flex" style="width: 93%;">
       <i class="bi bi-mortarboard fs-4" style="margin-top: -4px; margin-right: 8px; margin-left: 10px;"></i>
-      <h2 class="ms-2" style="font-size: 22px; font-weight: 400;">Vestibulares</h2>
+      <h2 class="ms-2" style="font-size: 21px; font-weight: 400;">Vestibulares</h2>
     </div>
 
     <hr class="text-dark" style="width: 95.6%; margin-left: 30px; margin-bottom: 30px; margin-top: -22px; opacity: 10%;">
@@ -11,22 +11,22 @@
 
 <div class="vestibulares">
   <div class="vestibular">
-    <div class="vestibular-card">
+    <div class="vestibular-card" data-prova-nome="unicamp">
       <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none;">
         <img src="/images/unicamp.jpg" alt="Login image" />
       </a>
     </div>
-    <div class="vestibular-card">
+    <div class="vestibular-card" data-prova-nome="enem">
       <a href="/cursos?prova=enem" class="text-dark" style="text-decoration: none;">
         <img src="/images/enem-branco.jpg" alt="Login image" />
       </a>
     </div>
-    <div class="vestibular-card">
+    <div class="vestibular-card" data-prova-nome="unesp">
       <a href="/cursos?prova=unesp" class="text-dark" style="text-decoration: none;">
         <img src="/images/unesp.jpg" alt="Login image" />
       </a>
     </div>
-    <div class="vestibular-card">
+    <div class="vestibular-card" data-prova-nome="usp">
       <a href="/cursos?prova=usp" class="text-dark" style="text-decoration: none;">
         <img src="/images/usp.jpg" alt="Login image" />
       </a>

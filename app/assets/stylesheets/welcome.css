@@ -53,12 +53,12 @@ body {
   display: flex;
   gap: 40px;
   margin-top: -5px;
-  margin-left: 12px;
+  margin-left: 25px;
 }
 
 .menu a {
   color: black;
-  font-size: 18px;
+  font-size: 17px;
   text-decoration: none;
   position: relative;
   display: inline-block;
@@ -330,6 +330,10 @@ footer.footer {
   .margin-top-footer {
     margin-top: -50px !important;
   }
+
+  .mobile-disable {
+    display: none;
+  }
 }
 
 .no-margin-top {
@@ -474,7 +478,6 @@ footer.footer {
 }
 
 .beneficios{
-  margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
   gap: 1.5rem;
@@ -519,7 +522,7 @@ footer.footer {
   flex-direction: column;
   align-items: center;
   margin-left: 5px;
-  margin-top: -12px;
+  margin-top: -15px;
 }
 
 
@@ -582,29 +585,24 @@ footer.footer {
 }
 
 .apresentacao img{
-  width: 100%;
-  height: 400px;
+  width: 85%;
+  height: 350px;
   object-fit: cover;
   object-position: top;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  transition: transform .35s ease;
-}
-
-.apresentacao img:hover{
-  transform: scale(1.04);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .apresentacao-content h1{
-  font-size: clamp(1.75rem,2vw+1rem,2.5rem);
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 25px;
 }
 
 .apresentacao-content h3{
   font-size: 1.25rem;
   font-weight: 500;
   color: var(--primary);
-  margin-top: 1.5rem;
+  margin-top: 15px;
 }
 
 .footer {
@@ -628,8 +626,8 @@ footer.footer {
 }
 
 .logo-section img{
-  width: 280px;
-  height: 280px;
+  width: 230px;
+  height: 230px;
 }
 
 .logo-section p {
@@ -656,11 +654,11 @@ footer.footer {
 
 .footer-bottom {
   text-align: center;
-  margin-top: -50px;
+  margin-top: -55px;
 }
 
 .contact-info p, .copyright {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .icon-footer {
@@ -670,4 +668,43 @@ footer.footer {
 .icon-footer:hover {
   transition: transform 0.3s ease;
   transform: scale(1.3);
+}
+
+.email-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+  position: relative;
+  white-space: nowrap;
+  bottom: 6px;
+  left: 2px;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(197, 255, 7, 0.7); }
+  30% { box-shadow: 0 0 0 10px rgba(7, 255, 139, 0); }
+  70% { box-shadow: 0 0 0 10px rgba(48, 7, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(94, 255, 7, 0); }
+}
+
+.vestibular-card.highlighted {
+  border: 3px solid #deff0762;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(44, 201, 1, 0.6);
+  position: relative;
+  animation: pulse 3s infinite;
+  z-index: 999;
+}
+
+.vestibular-card.highlighted::before {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  background-color: #49ff46;
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 6px;
+  z-index: 10000;
 }

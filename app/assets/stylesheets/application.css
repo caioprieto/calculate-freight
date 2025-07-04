@@ -296,11 +296,17 @@ h1 {
   right: 0;
   top: 100%;
   background-color: white;
-  border: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-top: none;
   border-radius: 4px;
   min-width: 200px;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow:
+    0px 2px 5px rgba(0, 0, 0, 0.2),   /* sombra inferior */
+    -2px 0px 5px rgba(0, 0, 0, 0.1),  /* sombra esquerda */
+    2px 0px 5px rgba(0, 0, 0, 0.1);   /* sombra direita */
 }
 
 .user-dropdown:hover .user-dropdown-menu {
@@ -328,7 +334,7 @@ h1 {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 10px solid white; /* mesma cor do fundo do menu */
-  z-index: 1001; /* acima da dropdown */
+  z-index: 2000; /* acima da dropdown */
 }
 
 @media (max-width: 450px) {
@@ -485,7 +491,13 @@ h1 {
   position: relative;
   width: 359px;
   margin: 10px;
-  height: 544px;
+  height: 547px;
+}
+
+.insta-wrapper iframe {
+  visibility: visible;
+  height: 547px;
+  width: 359px;
 }
 
 .insta-loader {
@@ -506,11 +518,7 @@ h1 {
   to { transform: rotate(360deg); }
 }
 
-.insta-wrapper iframe {
-  visibility: visible;
-  height: 544px;
-  width: 359px;
-}
+
 
 .instagram-media {
   width: 32%;

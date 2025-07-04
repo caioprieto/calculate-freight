@@ -15,39 +15,23 @@
       </a>
     </div>
     <nav class="menu">
-      <a href="/" class="menu-link <%= 'active' if current_page?('/') || current_page?('/cursos') || @curso.present? %>">Cursos</a>
       <a href="/apresentacao" class="menu-link <%= 'active' if current_page?('/apresentacao')  %>" >Quem somos</a>
-      <a href="/temas" class="menu-link <%= 'active' if current_page?('/temas') %>">Temas de Redação</a>
       <a href="/acesso_livre" class="menu-link <%= 'active' if current_page?('/acesso_livre') %>">Acesso Livre</a>
+      <a href="/temas" class="menu-link <%= 'active' if current_page?('/temas') %>">Temas de Redação</a>
+      <a href="/cursos" class="menu-link <%= 'active' if current_page?('/cursos') || @curso.present? %>">Cursos</a>
     </nav>
-    <div class="navbar-buttons" style="margin-top: -11px; margin-right: 16px; display: flex; gap: 10px; align-items: center;">
+    <div class="navbar-buttons" style="margin-top: -11px; margin-right: 20px; display: flex; gap: 10px; align-items: center;">
       <% if current_user.present? %>
-        <!-- Ícone de Perfil com Dropdown -->
-        <div class="user-dropdown">
-          <!-- Ícone do usuário -->
-          <button class="user-dropdown-button" aria-label="Menu do usuário">
-            <i class="bi bi-person-circle user-icon fs-1"></i>
-          </button>
-
-          <!-- Dropdown -->
-          <div class="user-dropdown-menu">
-            <div class="arrow-up"></div>
-            <span style="font-weight: bold; padding: 10px; display: block"><%= current_user.nome %></span>
-            <hr style="margin: 0;">
-            <%= link_to 'Área do Aluno', user_dashboard_path %>
-            <%= link_to 'Meus pedidos', user_pedidos_path %>
-            <%= link_to 'Configurações', user_settings_path %>
-            <%= link_to 'Sair', '#', onclick: "logout()" %>
-          </div>
-        </div>
         <div class="position-relative">
           <!-- BOTÃO DO CARRINHO -->
           <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative;">
-            <i class="bi bi-cart2 fs-1"></i>
+            <i class="bi bi-cart2 fs-2"></i>
             <% if @cart.present? %>
-              <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 800">
-                <%= @cart.cursos.count %>
-              </span>
+              <% unless @cart.cursos.count.zero? %>
+                <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 800">
+                  <%= @cart.cursos.count %>
+                </span>
+              <% end %>
             <% end %>
           </div>
 
@@ -91,9 +75,53 @@
             </div>
           </div>
         </div>
+
+        <!-- Ícone de Perfil com Dropdown -->
+        <div class="user-dropdown">
+          <!-- Ícone do usuário -->
+          <button class="user-dropdown-button" aria-label="Menu do usuário">
+            <i class="bi bi-person-circle user-icon fs-2"></i>
+            <span class="email-text mobile-disable"><%= current_user.nome.upcase %></span>
+          </button>
+
+          <!-- Dropdown -->
+          <div class="user-dropdown-menu">
+            <div class="arrow-up"></div>
+            <%= link_to user_dashboard_path do %>
+              <i class="bi bi-mortarboard fs-6" style="margin-right: 10px;"></i>
+              Área do Aluno
+            <% end %>
+
+            <%= link_to user_pedidos_path do %>
+              <i class="bi bi-card-text fs-6" style="margin-right: 10px;"></i>
+              Meus pedidos
+            <% end %>
+
+            <%= link_to user_redacoes_path do %>
+              <i class="bi bi-book fs-6" style="margin-right: 10px;"></i>
+              Minhas redações
+            <% end %>
+
+            <%= link_to user_dashboard_path do %>
+              <i class="bi bi-collection-play fs-6" style="margin-right: 10px;"></i>
+              Biblioteca
+            <% end %>
+
+            <%= link_to user_settings_path do %>
+              <i class="bi bi-gear-wide-connected fs-6" style="margin-right: 10px;"></i>
+              Configurações
+            <% end %>
+
+            <%= link_to onclick: "logout()" do %>
+              <i class="bi bi-box-arrow-left fs-6" style="margin-right: 10px;"></i>
+              Sair
+            <% end %>
+
+          </div>
+        </div>
       <% else %>
-        <%= button_to "Quero me inscrever", new_user_registration_path, class: "btn btn-light text-custom-nav fw-light", method: :get %>
-        <a class="btn btn-dark text-custom-nav sou-aluno" onclick="showLoadingAndRedirectUser()">Já sou aluno</a>
+        <%= button_to "Quero me inscrever", new_user_registration_path, class: "btn btn-light text-custom-nav fw-light", style: "font-size: 15px", method: :get %>
+        <a class="btn btn-dark text-custom-nav sou-aluno" style="font-size: 15px; padding: 12px" onclick="showLoadingAndRedirectUser()">Já sou aluno</a>
       <% end %>
     </div>
   </div>
