@@ -19,7 +19,9 @@
             <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
               <div class="row g-0">
                 <div class="col-md-4 d-flex align-items-center justify-content-center">
-                  <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain;" %>
+                  <% if curso.imagem.present? %>
+                    <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain;" %>
+                  <% end %>
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">

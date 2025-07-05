@@ -86,7 +86,9 @@
         <a href="/cursos/<%= course.id %>/edit" style="text-decoration: none; color: black">
           <div class="row g-0">
             <div class="col-md-4 d-flex align-items-center justify-content-center">
-              <%= image_tag course.imagem, class: "", alt: course.name, style: "max-height: 200px; object-fit: scale-down" %>
+              <% if course.imagem.present? %>
+                <%= image_tag course.imagem, class: "", alt: course.name, style: "max-height: 200px; object-fit: scale-down" %>
+              <% end %>
             </div>
             <div class="col-md-8">
               <div class="card-body">
