@@ -26,7 +26,7 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.where(email: data["email"]).first
 
-    user ||= User.create(name: data["name"],
+    user ||= User.create(nome: data["name"],
                         email: data["email"],
                         password: Devise.friendly_token[0, 20])
     user

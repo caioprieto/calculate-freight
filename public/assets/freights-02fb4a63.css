@@ -1,0 +1,55 @@
+body {
+  background-color: whitesmoke;
+  /* background-image: url('http://localhost:3000/images/background.jpg'); */
+  background-size: cover; /* Garante que a imagem cubra toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Evita repetição */
+  background-attachment: fixed; /* Mantém fixa ao rolar a página */
+  min-height: 1300px;
+}
+
+.card-freight {
+  background-color: #F5F5F5;
+}
+
+.fixed-container {
+  max-width: 1200px; /* Define uma largura máxima */
+  max-height: 1200px;
+}
+
+.fixed-card {
+  width: 100%; /* Ocupa toda a largura do container */
+  min-height: 1250px; /* Define uma altura mínima */
+  max-height: 850px; /* Define uma altura máxima */
+}
+
+.select2-container .select2-selection--single {
+  height: 30px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.select2-container--bootstrap4 .select2-results__option {
+  font-size: 16px;
+  padding: 3px;
+}
+
+.select2-container--bootstrap4 .select2-results__option--highlighted {
+  background-color: #e9ecef;
+  color: black;
+}
+
+.mukta-medium {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.text-title {
+  font-family: "Mukta", sans-serif;
+  font-size: 26px;
+  font-weight: 380;
+  color: #333;
+  letter-spacing: 0.05px; /* Adiciona espaçamento entre as letras */
+}
