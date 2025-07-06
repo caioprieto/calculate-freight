@@ -68,9 +68,11 @@
                     <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative;">
                       <i class="bi bi-cart2 fs-3"></i>
                       <% if @cart.present? %>
-                        <span class="bolinha position-absolute top-0" style="font-weight: 600; font-size: 15px">
-                          <%= @cart.cursos.count %>
-                        </span>
+                        <% unless @cart.cursos.count.zero? %>
+                          <span class="bolinha position-absolute top-0" style="font-weight: 600; font-size: 15px">
+                            <%= @cart.cursos.count %>
+                          </span>
+                        <% end %>
                       <% end %>
                     </div>
                     <%= render partial: "layouts/shared/modal_cart" %>
@@ -80,7 +82,7 @@
                   <div class="position-relative me-1">
                     <div class="btn notify-toggle" id="notify-toggle" style="cursor: pointer; position: relative;">
                       <i class="bi bi-bell fs-3"></i>
-                      <% if @cart.present? %>
+                      <% unless current_user.notifications.count.zero? %>
                         <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 600; font-size: 15px">
                           <%= current_user.notifications.count %>
                         </span>
@@ -101,8 +103,7 @@
                       <span style="font-weight: bold; padding: 10px; display: block">Área do Aluno</span>
                       <hr style="margin: 0;">
                       <%= link_to 'Voltar para Home', root_path %>
-                      <%= link_to 'Painel do Admin', admin_dashboard_path, if: "#{current_user.admin?}" %>
-                      <%= link_to 'Sair', '#', onclick: "logout()" %>
+                      <%= link_to 'Sair', '#', onclick: 'event.preventDefault(); logout();' %>
                     </div>
                   </div>
                 </div>

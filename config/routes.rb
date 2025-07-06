@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :cursos, only: %i[edit] do
+    resources :cursos do
       collection do
         post :delete_multiple
         post :add_word

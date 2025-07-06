@@ -9,7 +9,6 @@
   --bg-light: #f9f9fb;         /* cinza bem claro */
   --text-dark: #2c2c2c;
   --radius: 12px;
-  --shadow-sm: 0 4px 16px rgba(0,0,0,.08);
   --shadow-lg: 0 12px 32px rgba(0,0,0,.12);
 }
 
@@ -53,7 +52,7 @@ body {
   display: flex;
   gap: 40px;
   margin-top: -5px;
-  margin-left: 12px;
+  margin-left: 40px !important;
 }
 
 .menu a {
@@ -484,7 +483,7 @@ footer.footer {
   background: #fff;
   padding: 2rem 1.25rem;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-lg);
   text-align: center;
   transition: transform .35s ease, box-shadow .35s ease;
 }
@@ -565,13 +564,13 @@ footer.footer {
 }
 
 /* === CONTAINER APRESENTAÇÃO ============================================ */
-.container-apresentacao{
+.container-apresentacao {
   max-width: 1130px;
   margin: 3rem auto;
   padding: clamp(1.5rem,4vw,3rem);
   background: rgba(255, 255, 255, 0.767);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-lg);
   margin-top: -45px;
 }
 
@@ -587,17 +586,12 @@ footer.footer {
   object-fit: cover;
   object-position: top;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-lg);
   transition: transform .35s ease;
 }
 
 .apresentacao img:hover{
   transform: scale(1.04);
-}
-
-.apresentacao-content h1{
-  font-size: clamp(1.75rem,2vw+1rem,2.5rem);
-  font-weight: 600;
 }
 
 .apresentacao-content h3{
