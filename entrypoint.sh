@@ -4,6 +4,11 @@ set -e
 export RAILS_ENV=production
 export RACK_ENV=production
 
+if [ ! -d "public/assets" ] || [ -z "$(ls -A public/assets)" ]; then
+  echo "==> Compilando assets..."
+  bundle exec rake assets:precompile
+fi
+
 echo "==> Executando migrations..."
 bundle exec rails db:migrate
 
