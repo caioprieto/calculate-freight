@@ -96,12 +96,19 @@
           <h6 style="font-size: 15px; font-weight: 600">Vídeo/Aula</h6>
         </div>
       </a>
-      <div class="beneficio">
+      <% if @user_word.user_redacao.attached? %>
+        <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#resultModal">
+          <div class="beneficio">
+            <i class="bi bi-clipboard fs-1"></i>
+            <h6 style="font-size: 15px; font-weight: 600">Resultados</h6>
+          </div>
+        </a>
+      <% else %>
         <a class="text-dark" style="text-decoration: none;">
           <i class="bi bi-clipboard fs-1"></i>
           <h6 style="font-size: 15px;">Resultados</h6>
         </a>
-      </div>
+      <% end %>
     </div>
 
     <div class="d-flex" style="text-decoration: none; margin-top: 15px; margin-bottom: -10px;">
@@ -201,6 +208,22 @@
       <div class="modal-content p-3">
         <div class="modal-header">
           <h5 class="modal-title" id="instrutionModalLabel">Instruções</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body d-flex mt-3" style="gap: 40px">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE RESULTADOS -->
+  <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true" style="z-index: 1101">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title" id="resultModalLabel">Resultados</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
 

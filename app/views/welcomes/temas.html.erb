@@ -41,7 +41,7 @@
       <div class="vestibular" style="gap: 15px !important">
         <% @temas_collection.each do |tema| %>
           <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
-            <a href="/cursos?prova=unicamp" class="text-dark" style="text-decoration: none; display: block;">
+            <a href="" class="text-dark" style="text-decoration: none; display: block;">
               <div style="position: relative;">
                 <%= image_tag tema.capa, style: "display: block;" %>
                 <span class="badge p-2"
@@ -51,7 +51,7 @@
               </div>
             </a>
 
-            <a href="/cursos?prova=unicamp" class="card shadow p-2"
+            <a href="" class="card shadow p-2"
               style="width: 69%; min-width: 260px; border-radius: 0px; margin-top: -10px; text-decoration: none;">
               <p style="margin-bottom: -1px; font-size: 15px;">
                 Os desafios para a valorização das comunidades e povos tradicionais do Brasil
@@ -63,7 +63,6 @@
     </div>
   </div>
 </div>
-
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {

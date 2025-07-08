@@ -14,13 +14,17 @@ class WelcomesController < ApplicationController
 
   def temas
     @temas_collection = ::Tema.all
+
+    if params[:prova].present?
+      @temas_collection = ::Tema.find_by_prova(params[:prova])
+    end
   end
 
   def cursos
-    @cursos_collection = Curso.all
+    @cursos_collection = ::Curso.all
 
     if params[:prova].present?
-      @cursos_collection = Curso.find_by_prova(params[:prova])
+      @cursos_collection = ::Curso.find_by_prova(params[:prova])
     end
   end
 
