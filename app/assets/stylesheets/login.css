@@ -135,3 +135,37 @@ body {
 #error_explanation ul {
   padding-left: 18px;
 }
+
+@media (max-width: 450px) {
+  .login-container {
+    display: block !important;
+  }
+
+  .left-panel,
+  .left-panel img {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    z-index: -1 !important;
+  }
+
+  .right-panel {
+    width: 100% !important;
+    flex: none !important;
+    height: 100vh !important;
+  }
+
+  .card-login {
+    height: auto !important;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .img-login {
+    visibility: hidden !important;
+  }
+}

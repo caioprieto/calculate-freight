@@ -11,6 +11,8 @@ class CartController < ApplicationController
         flash[:alerta] = "Este curso já foi comprado!"
       end
     end
+
+    redirect_back fallback_location: root_path, allow_other_host: false
   end
 
   def remove

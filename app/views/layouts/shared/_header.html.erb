@@ -28,8 +28,8 @@
             <i class="bi bi-cart2 fs-3"></i>
             <% if @cart.present? %>
               <% unless @cart.cursos.count.zero? %>
-                <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 800">
-                  <%= @cart.cursos.count %>
+                <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 600">
+                  <span class="bolinha-span" style="margin-top: 1px;"> <%= @cart.cursos.count %></span>
                 </span>
               <% end %>
             <% end %>
