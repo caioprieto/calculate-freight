@@ -20,13 +20,13 @@
       <div class="curso-container d-flex flex-wrap justify-content-between">
         <div class="curso-info" style="width: 65%;">
           <div class="meta">
-            <span class="badge fw-light">Mais vendidos ⭐</span>
+            <span class="badge fw-light">⭐ Mais vendidos</span>
           </div>
 
           <h3 class="mt-3"><%= @curso.name %></h3>
           <p class="subtitle"><%= @curso.description %></p>
           <p style="font-weight: 600;"> Seu caminho para a redação perfeita e aprovação nos melhores cursos do país! </p>
-          <p class="language">📅 Atualizado em <%= @curso.updated_at.strftime("%m/%Y") %></p>
+          <p class="language">⏳ Vigência de <%= @curso.vigencia %> Meses</p>
         </div>
 
         <div class="curso-preview text-dark">

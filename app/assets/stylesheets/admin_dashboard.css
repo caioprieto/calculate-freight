@@ -377,3 +377,29 @@ input[type="checkbox"] {
 .vestibular-card:hover img {
   opacity: 80%;
 }
+
+
+.beneficios{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+  gap: 2rem;
+}
+
+.beneficio{
+  background: #3a3a3a6e;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  box-shadow: rgba(255, 255, 255, 0.795);
+  text-align: center;
+  transition: transform .35s ease;
+  height: 125px;
+}
+
+.beneficio:hover{
+  transform: scale(1.06);
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

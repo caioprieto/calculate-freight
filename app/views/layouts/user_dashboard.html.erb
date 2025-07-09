@@ -48,11 +48,11 @@
               <div class="d-flex justify-content-between align-items-center" style="width: 97%">
                 <!-- Grupo esquerdo: Barra de busca -->
                 <div class="d-flex align-items-center" style="gap: 20px; width: 55%">
-                  <%= form_with url: current_page?("/user/redacoes") ? user_redacoes_search_path : user_explorar_path, method: :get, local: true, class: "search-form d-flex align-items-center" do %>
+                  <%= form_with url: user_explorar_path, method: :get, local: true, class: "search-form d-flex align-items-center" do %>
                     <input
                       type="text"
                       name="query"
-                      placeholder="Qual <%= current_page?("/user/redacoes") ? "redação" : "curso" %> está procurando?"
+                      placeholder="Qual curso está procurando?"
                       class="search-input"
                     />
                     <button type="submit" class="search-button">
@@ -101,7 +101,7 @@
                     <div class="user-dropdown-menu">
                       <div class="arrow-up"></div>
                       <div class="d-flex">
-                        <i class="bi bi-mortarboard fs-5" style="margin-top: 6px; margin-left: 7px; margin-right: 3px;"></i>
+                        <i class="bi bi-mortarboard fs-5" style="margin-top: 6px; margin-left: 8px; margin-right: 1px;"></i>
                         <span style="font-weight: bold; padding: 10px; font-size: 15px">Área do Aluno</span>
                       </div>
                       <hr style="margin: 0;">

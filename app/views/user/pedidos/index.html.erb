@@ -13,7 +13,7 @@
           <div>
             <p class="m-0" style="font-size: 16px; font-weight: 500"><%= pedido.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></p>
             <div class="d-flex">
-              <i class="bi bi-exclamation-triangle fs-5 text-success"></i>
+              <i class="bi bi-check2-circle fs-5 text-success"></i>
               <strong class="text-success" style="font-size: 15px; margin-left: 6px; margin-top: 5px; font-weight: 600"><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong>
             </div>
             <p class="m-0 mt-1" style="font-weight: 600">Código: <%= pedido.code %></p>
@@ -49,10 +49,6 @@
                                 Expira em: <span class="countdown" data-expire="<%= current_user.user_cursos.where(curso_id: curso.id).first.data_fim.iso8601 %>">carregando...</span>
                               </strong>
                             </div>
-
-                            <%= button_to player_user_curso_path(curso), method: :get, class: "btn text-dark p-1 position-absolute", style: "top: 10px; right: 15px; border-radius: 5px;" do %>
-                              <i class="bi bi-three-dots-vertical fs-4"></i>
-                            <% end %>
                           </div>
                         </div>
                       </div>

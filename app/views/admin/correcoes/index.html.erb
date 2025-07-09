@@ -4,21 +4,54 @@
 </h5>
 
 <div class="container-full-width mt-3">
-  <div style="width: 100;">
-  <% UserWord.where(concluido: true).each do |user_word| %>
-    <div class="card shadow w-100">
-      <p> Tema: <%= user_word.word.tema %> </p>
-      <p> Usuário: <%= user_word.user.nome %> </p>
-      <% if user_word.user_redacao.attached? %>
-        <% if user_word.user_redacao.content_type == "application/pdf" %>
-          <p><%= link_to "📄 Ver PDF", url_for(user_word.user_redacao), target: "_blank", class: "btn btn-primary btn-sm" %></p>
-        <% elsif user_word.user_redacao.content_type.start_with?("image/") %>
-          <%= image_tag user_word.user_redacao, style: "max-width: 300px; height: auto; border-radius: 8px;" %>
-        <% else %>
-          <p>Arquivo anexado, mas tipo não suportado: <%= user_word.user_redacao.content_type %></p>
-        <% end %>
-      <% else %>
-        <p><em>Nenhuma redação enviada.</em></p>
-      <% end %>
+  <div style="width: 100%;">
+    <% UserWord.where(concluido: true).each do |user_word| %>
+      <div class="card shadow w-100 p-3 d-flex flex-column gap-2 mt-2">
+        <div class="d-flex justify-content-between align-items-start flex-wrap">
+          <!-- Tema e aluno à esquerda -->
+          <div>
+            <p><%= user_word.word.word_type.upcase %> - <%= user_word.word.tema %></p>
+            <p>Aluno: <%= user_word.user.nome %></p>
+          </div>
+
+          <!-- Botões à direita -->
+          <div class="d-flex flex-wrap gap-2 justify-content-end">
+            <%= link_to url_for(user_word.user_redacao), download: "redacao_#{user_word.id}.pdf", class: "btn btn-dark p-2 text-nowrap" do %>
+              <i class="bi bi-download fs-6 me-1"></i>
+              <span>Baixar</span>
+            <% end %>
+
+            <%= link_to "📄 Pré-visualizar", url_for(user_word.user_redacao), target: "_blank", class: "btn btn-primary p-2 text-white text-nowrap" %>
+
+            <%= form_with url: '', html: { multipart: true }, method: :post, remote: true, id: "uploadForm_#{user_word.id}", style: "display: none;" do |form| %>
+              <%= form.file_field :file, id: "fileInput_#{user_word.id}", style: "display: none;", accept: ".pdf,.doc,.docx" %>
+            <% end %>
+
+            <%= link_to "#", class: "btn btn-success p-2 text-white text-nowrap", style: "margin-left: -8px", onclick: "triggerUpload(#{user_word.id})" do %>
+              <i class="bi bi-upload fs-6 me-1"></i>
+              <span>Upload Correção</span>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
     <% end %>
+  </div>
 </div>
+
+<script>
+  function triggerUpload(id) {
+    document.getElementById(`fileInput_${id}`).click();
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[id^=fileInput_]").forEach((input) => {
+      input.addEventListener("change", function () {
+        const form = input.closest("form");
+        if (input.files.length > 0) {
+          form.submit();
+        }
+      });
+    });
+  });
+</script>

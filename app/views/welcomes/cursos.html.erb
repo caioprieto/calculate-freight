@@ -39,10 +39,10 @@
                   <div class="mt-2">
                     <% if current_user.present? %>
                       <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
-                        <span class="badge bg-success p-2" style="font-size: 11px; font-weight: 450;">Comprado ✅</span>
+                        <span class="badge bg-success p-2" style="font-size: 11px; font-weight: 450;">✅ Comprado</span>
                       <% end %>
                     <% end %>
-                    <span class="badge p-2" style="font-size: 11px; font-weight: 450;">Mais vendidos ⭐</span>
+                    <span class="badge p-2" style="font-size: 11px; font-weight: 450;">⭐ Mais vendidos</span>
                   </div>
 
                   <div class="row mt-2">

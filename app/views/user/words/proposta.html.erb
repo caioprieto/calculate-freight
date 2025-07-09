@@ -9,7 +9,7 @@
   <div class="vertical-line"></div>
 
   <a href="" class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
-    <span class="course-title"><%= @word.tema %></span>
+    <span class="course-title"><span class="text-warning me-2 bold"><%= @word.word_type.upcase %></span> <%= @word.tema %></span>
   </a>
 
   <div class="navbar-right d-flex gap-2">
@@ -30,14 +30,6 @@
       <span id="timerLabel" style="position: relative; top: 1px;">Iniciar Timer</span>
     </div>
 
-    <%# Zerar o Timer %>
-
-    <!-- Botão Progresso -->
-    <div class="btn btn-outline-dark text-white progress-button" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#progressModal">
-      <i class="bi bi-trophy fs-4 me-1"></i>
-      <span style="position: relative; top: -3px;">Seu progresso</span>
-    </div>
-
     <div class="settings-dropdown">
       <button class="btn btn-outline-dark settings-dropdown-button p-2 text-white" aria-label="Menu de configurações" id="settingsDropdownToggle">
         <i class="bi bi-three-dots-vertical fs-4"></i>
@@ -45,13 +37,17 @@
 
       <div class="settings-dropdown-menu" id="settingsDropdownMenu" style="z-index: 1101">
         <div class="arrow-up"></div>
-        <%= link_to '' do %>
+        <%= link_to url_for(@word.pdf_file), download: "redacao_#{@word.id}.pdf" do %>
           <i class="bi bi-download fs-6" style="margin-right: 10px;"></i>
           Baixar o PDF
         <% end %>
         <%= link_to '' do %>
           <i class="bi bi-gift fs-6" style="margin-right: 10px;"></i>
           Enviar presente
+        <% end %>
+        <%= link_to '#', data: { bs_toggle: 'modal', bs_target: '#progressModal' } do %>
+          <i class="bi bi-trophy fs-6" style="margin-right: 10px;"></i>
+          Seu progresso
         <% end %>
       </div>
     </div>
@@ -102,9 +98,11 @@
           </div>
         </a>
       <% else %>
-        <a class="text-dark" style="text-decoration: none;">
-          <i class="bi bi-clipboard fs-1"></i>
-          <h6 style="font-size: 15px;">Resultados</h6>
+        <a class="beneficio" style="text-decoration: none">
+          <div class="text-dark" style="text-decoration: none;">
+            <i class="bi bi-clipboard fs-1"></i>
+            <h6 style="font-size: 15px; font-weight: 600">Resultados</h6>
+          </div>
         </a>
       <% end %>
     </div>
@@ -117,11 +115,6 @@
         <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500">Redação pendente</strong>
       <% end %>
     </div>
-
-    <% unless @user_word.concluido %>
-      <p class="text-white" style="font-weight: 500; margin-top: 4px; font-size: 15px">Prova:  <strong class="text-warning" style="font-size: 16px; font-weight: 450"> <%= @word.word_type.upcase %></strong> </p>
-      <p class="text-white" style="font-weight: 500; margin-top: -4px; font-size: 15px; margin-bottom: 1px;">Tempo médio para a realização da redação:  <strong class="text-warning" style="font-size: 16px; font-weight: 450">1h 30min</strong> </p>
-    <% end %>
 
     <hr>
     <h6 style="font-weight: 350" class="mb-3">Chat com o Professor</h6>
@@ -157,7 +150,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content bg-dark text-white">
         <div class="modal-header border-0">
-          <h6 class="modal-title text-danger" id="confirmStartModalLabel">Confirmar início da redação</h6>
+          <h6 class="modal-title text-white" id="confirmStartModalLabel">Iniciar redação</h6>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
         <div class="modal-body">
@@ -191,7 +184,7 @@
               <p class="mt-4 fs-5 mx-2 text-secondary"> Aulas</p>
             </div>
             <div class="w-100 d-flex">
-              <p class="mt-3 fs-2">0/<%= @user_curso.curso.words.count %></p>
+              <p class="mt-3 fs-2"><%= current_user.user_words.where(curso_id: @user_curso.curso_id, concluido: true).count %>/<%= @user_curso.curso.words.count %></p>
               <p class="mt-4 fs-5 mx-2 text-secondary"> Redações</p>
             </div>
           </div>
@@ -210,7 +203,7 @@
         </div>
 
         <div class="modal-body d-flex mt-3" style="gap: 40px">
-
+          <p class="text-dark fw-light" style="font-weight: 500; margin-top: -4px; font-size: 15px; margin-bottom: 1px;">Tempo esperado para a realização da redação: <strong>1h 30min</strong></p>
         </div>
       </div>
     </div>
@@ -226,22 +219,18 @@
         </div>
 
         <div class="modal-body d-flex mt-3" style="gap: 40px">
-          <div class="card w-100 bg-secondary">
-
-          </div>
-
           <% if @user_word.user_redacao.attached? %>
             <% content_type = @user_word.user_redacao.content_type %>
 
             <% if content_type == "application/pdf" %>
               <div class="pdf-container">
-                <iframe src="<%= rails_blob_path(@user_word.user_redacao, disposition: 'inline') %>" type="application/pdf" width="100%" height="500px"></iframe>
+                <iframe src="<%= rails_blob_path(@user_word.user_redacao, disposition: 'inline') %>" class="img-fluid w-100"></iframe>
               </div>
             <% end %>
 
             <% if content_type.start_with?("image/") %>
               <div class="image-container">
-                <%= image_tag @user_word.user_redacao, class: "img-fluid" %>
+                <%= image_tag @user_word.user_redacao, class: "img-fluid w-100" %>
               </div>
             <% end %>
           <% end %>
@@ -253,6 +242,29 @@
 
 <input type="file" id="pdfUploader" style="display: none;" />
 
+<!-- MODAL DE ENVIO DE REDAÇÃO -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg top-modal">
+    <div class="modal-content">
+      <div class="modal-body" style="min-height: 250px">
+        <!-- SPINNER LOADER -->
+        <div class="loader" id="uploadLoading" style="display: flex;">
+          <div class="spinner-loader"></div>
+        </div>
+
+        <!-- ÍCONE DE SUCESSO -->
+        <div id="uploadSuccess" style="display: none; text-align: center;">
+          <i class="bi bi-check-circle-fill text-success" style="font-size: 80px; animation: zoomIn 0.6s ease;"></i>
+          <h4 class="text-success">REDAÇÃO ENVIADA COM SUCESSO!</h4>
+          <p class="fw-light fs-6 w-75 mx-auto mt-2">
+            Sua redação foi salva. Em breve ela será corrigida por um de nossos professores.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
   document.getElementById('pdfUploader').addEventListener('change', function (event) {
@@ -261,7 +273,13 @@
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('duration_seconds', pausedTime);
+
+    let duration = pausedTime;
+    if (state === 'running') {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      duration += elapsed;
+    }
+    formData.append('duration_seconds', duration);
 
     fetch('<%= save_user_word_pdf_user_word_path(@word) %>', {
       method: 'POST',
@@ -271,9 +289,28 @@
       body: formData
     }).then(response => {
       if (response.ok) {
-        resetTimer();
-        localStorage.removeItem(`timerBackup_<%= @word.id %>`);
-        window.location.href = "";
+        const uploadModalElement = document.getElementById('uploadModal');
+        const uploadModal = new bootstrap.Modal(uploadModalElement);
+        uploadModal.show();
+
+        const loader = document.getElementById("uploadLoading");
+        const success = document.getElementById("uploadSuccess");
+
+        loader.style.display = "flex";
+        success.style.display = "none";
+
+        setTimeout(() => {
+          loader.style.display = "none";
+          success.style.display = "block";
+
+          resetTimer();
+          localStorage.removeItem(`timerBackup_<%= @word.id %>`);
+
+          // Redireciona após alguns segundos
+          setTimeout(() => {
+            window.location.href = "";
+          }, 2500);
+        }, 3000); // tempo do loader
       } else {
         alert("Erro ao enviar a redação.");
       }
