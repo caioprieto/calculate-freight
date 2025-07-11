@@ -1,0 +1,28 @@
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Evita rolagem extra */
+  }
+
+  .full-width-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  .full-width-container iframe {
+    width: 100%;
+    height: 100vh;
+    border: none;
+    display: block; /* Remove espaço indesejado abaixo do iframe */
+  }
+</style>
+
+<div class="full-width-container">
+  <% if @tema.pdf_file.attached? %>
+    <iframe src="<%= rails_blob_path(@tema.pdf_file, disposition: 'inline') %>" type="application/pdf"></iframe>
+  <% end %>
+</div>

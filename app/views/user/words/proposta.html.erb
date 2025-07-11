@@ -9,7 +9,7 @@
   <div class="vertical-line"></div>
 
   <a href="" class="course-title-card me-auto p-3" style="text-decoration: none; color: white">
-    <span class="course-title"><span class="text-warning me-2 bold"><%= @word.word_type.upcase %></span> <%= @word.tema %></span>
+    <span class="course-title"><span class="text-warning me-1 bold"><%= @word.word_type.upcase %></span> <%= @word.tema %></span>
   </a>
 
   <div class="navbar-right d-flex gap-2">
@@ -90,7 +90,7 @@
           <h6 style="font-size: 15px; font-weight: 600">Vídeo/Aula</h6>
         </div>
       </a>
-      <% if @user_word.user_redacao.attached? %>
+      <% if @user_word.concluido %>
         <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#resultModal">
           <div class="beneficio">
             <i class="bi bi-clipboard fs-1"></i>
@@ -122,7 +122,7 @@
     <div class="chat-wrapper d-flex flex-column" style="height: 400px;">
       <div id="chat-messages" class="messages flex-grow-1 overflow-auto mb-3">
         <% @messages.each do |message| %>
-          <div class="mb-2 <%= message.dono_type == 'Admin' ? 'text-end' : 'text-start' %>">
+          <div class="mb-2 <%= message.dono_type == 'Admin' ? 'text-start' : 'text-end' %>">
             <span class="badge <%= message.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
               <%= message.dono_type == 'Admin' ? 'Admin' : 'Você' %>
             </span>
@@ -145,105 +145,16 @@
     </div>
   </div>
 
-  <!-- MODAL PARA CONFIRMAR O INICIO DA REDACÂO -->
-  <div class="modal fade" id="confirmStartModal" tabindex="-1" aria-labelledby="confirmStartModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-dark text-white">
-        <div class="modal-header border-0">
-          <h6 class="modal-title text-white" id="confirmStartModalLabel">Iniciar redação</h6>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-        <div class="modal-body">
-          Você tem certeza de que deseja iniciar a redação valendo? O tempo começará a ser contado imediatamente e ficará salvo no histórico.
-        </div>
-        <div class="modal-footer border-0">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="confirmStartRealButton">Confirmar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL DE PROGRESSO -->
-  <div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="progressModalLabel" aria-hidden="true" style="z-index: 1101">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title" id="progressModalLabel">Seu Progresso</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-
-        <div class="modal-body d-flex mt-3" style="gap: 40px">
-          <div style="width: 50%; height: 100%">
-            <canvas id="progressChart" class="text-center" style="width: 90%; height: 50%;"></canvas>
-            <p class="mt-3 fs-6 mx-3 text-success">Você já assistiu <strong><%= @user_curso.progresso %>%</strong></p>
-          </div>
-          <div style="width: 50%;">
-            <div class="w-100 d-flex">
-              <p class="mt-3 fs-2"><%= @user_curso.total_aulas_vistas %>/<%= @user_curso.total_aulas %></p>
-              <p class="mt-4 fs-5 mx-2 text-secondary"> Aulas</p>
-            </div>
-            <div class="w-100 d-flex">
-              <p class="mt-3 fs-2"><%= current_user.user_words.where(curso_id: @user_curso.curso_id, concluido: true).count %>/<%= @user_curso.curso.words.count %></p>
-              <p class="mt-4 fs-5 mx-2 text-secondary"> Redações</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL DE CRITÉRIOS E INSTRUÇÕES -->
-  <div class="modal fade" id="instrutionModal" tabindex="-1" aria-labelledby="instrutionModalLabel" aria-hidden="true" style="z-index: 1101">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title" id="instrutionModalLabel">Instruções</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-
-        <div class="modal-body d-flex mt-3" style="gap: 40px">
-          <p class="text-dark fw-light" style="font-weight: 500; margin-top: -4px; font-size: 15px; margin-bottom: 1px;">Tempo esperado para a realização da redação: <strong>1h 30min</strong></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL DE RESULTADOS -->
-  <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true" style="z-index: 1101">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title" id="resultModalLabel">Resultados</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-
-        <div class="modal-body d-flex mt-3" style="gap: 40px">
-          <% if @user_word.user_redacao.attached? %>
-            <% content_type = @user_word.user_redacao.content_type %>
-
-            <% if content_type == "application/pdf" %>
-              <div class="pdf-container">
-                <iframe src="<%= rails_blob_path(@user_word.user_redacao, disposition: 'inline') %>" class="img-fluid w-100"></iframe>
-              </div>
-            <% end %>
-
-            <% if content_type.start_with?("image/") %>
-              <div class="image-container">
-                <%= image_tag @user_word.user_redacao, class: "img-fluid w-100" %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'modal_start_word' %>
+  <%= render partial: 'modal_progress' %>
+  <%= render partial: 'modal_instrution' %>
+  <%= render partial: 'modal_results' %>
 </div>
 
 <input type="file" id="pdfUploader" style="display: none;" />
 
 <!-- MODAL DE ENVIO DE REDAÇÃO -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-lg top-modal">
     <div class="modal-content">
       <div class="modal-body" style="min-height: 250px">
@@ -265,60 +176,78 @@
   </div>
 </div>
 
+<!-- MODAL DE REVISÃO -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title">Revisar Redação</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body" style="gap: 20px; min-height: 500px">
+        <div class="w-100" id="reviewFileContainer">
+          <p class="text-muted">Carregando arquivo...</p>
+        </div>
+
+        <div class="w-100 text-end mt-2">
+          <button class="btn btn-success" id="confirmUploadBtn">Confirmar Envio</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-  document.getElementById('pdfUploader').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    if (!file) return;
+  document.addEventListener('DOMContentLoaded', () => {
+    const confirmUploadBtn = document.getElementById('confirmUploadBtn');
 
-    const formData = new FormData();
-    formData.append('file', file);
+    confirmUploadBtn.addEventListener('click', () => {
+      const reviewModalInstance = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+      reviewModalInstance.hide();
 
-    let duration = pausedTime;
-    if (state === 'running') {
-      const elapsed = Math.floor((Date.now() - startTime) / 1000);
-      duration += elapsed;
-    }
-    formData.append('duration_seconds', duration);
+      const uploadModalElement = document.getElementById('uploadModal');
+      const uploadModal = new bootstrap.Modal(uploadModalElement);
 
-    fetch('<%= save_user_word_pdf_user_word_path(@word) %>', {
-      method: 'POST',
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-      },
-      body: formData
-    }).then(response => {
-      if (response.ok) {
-        const uploadModalElement = document.getElementById('uploadModal');
-        const uploadModal = new bootstrap.Modal(uploadModalElement);
-        uploadModal.show();
+      const loader = document.getElementById("uploadLoading");
+      const success = document.getElementById("uploadSuccess");
 
-        const loader = document.getElementById("uploadLoading");
-        const success = document.getElementById("uploadSuccess");
+      // Etapa 1: garantir estado inicial
+      loader.style.display = "none";
+      success.style.display = "none";
 
+      // Etapa 2: exibe o modal
+      uploadModal.show();
+
+      // Etapa 3: ativa o loader assim que o modal terminar de abrir
+      uploadModalElement.addEventListener('shown.bs.modal', () => {
         loader.style.display = "flex";
-        success.style.display = "none";
 
-        setTimeout(() => {
-          loader.style.display = "none";
-          success.style.display = "block";
+        // Etapa 4: faz a requisição
+        fetch('<%= concluir_user_word_path(@word) %>', {
+          method: 'POST',
+          headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          }
+        }).then(response => {
+          if (!response.ok) throw new Error("Erro ao concluir");
 
-          resetTimer();
-          localStorage.removeItem(`timerBackup_<%= @word.id %>`);
-
-          // Redireciona após alguns segundos
           setTimeout(() => {
-            window.location.href = "";
-          }, 2500);
-        }, 3000); // tempo do loader
-      } else {
-        alert("Erro ao enviar a redação.");
-      }
-    }).catch(error => {
-      console.error("Erro na requisição:", error);
-      alert("Erro inesperado ao enviar.");
+            loader.style.display = "none";
+            success.style.display = "block";
+            resetTimer();
+            localStorage.removeItem(`timerBackup_<%= @word.id %>`);
+
+            setTimeout(() => {
+              uploadModal.hide();
+              window.location.reload();
+            }, 2000); // tempo para o sucesso
+          }, 3000); // tempo do loader
+        });
+
+      }, { once: true }); // executa uma vez só
     });
   });
+
 
   document.addEventListener("DOMContentLoaded", function () {
     const toggleButton = document.getElementById("settingsDropdownToggle");
@@ -395,10 +324,45 @@
   }
 
   function enviarRedacao() {
-    document.getElementById('pdfUploader').click();
+    const fileInput = document.getElementById('pdfUploader');
+    fileInput.click();
+
+    fileInput.onchange = function () {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      let duration = pausedTime;
+      if (state === 'running') {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        duration += elapsed;
+      }
+      formData.append('duration_seconds', duration);
+
+      fetch('<%= save_user_word_pdf_user_word_path(@word) %>', {
+        method: 'POST',
+        headers: {
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: formData
+      }).then(response => {
+        if (response.ok) {
+          const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+          reviewModal.show();
+        } else {
+          alert("Erro ao salvar a redação.");
+        }
+      }).catch(error => {
+        console.error("Erro ao salvar:", error);
+        alert("Erro inesperado.");
+      });
+    };
   }
 
   document.getElementById('iconEnviar').addEventListener('click', enviarRedacao);
+  document.getElementById('replaceFileButton')?.addEventListener('click', enviarRedacao);
 
   document.addEventListener('DOMContentLoaded', () => {
     const savedTimer = localStorage.getItem(`timerBackup_<%= @word.id %>`);
@@ -511,4 +475,43 @@
       }));
     }
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const reviewModalEl = document.getElementById('reviewModal');
+    reviewModalEl.addEventListener('show.bs.modal', async () => {
+      const container = document.getElementById('reviewFileContainer');
+      container.innerHTML = '<p class="text-muted">Carregando arquivo...</p>';
+
+      try {
+        const resp = await fetch('<%= reload_redacao_user_word_path(@user_word) %>', {
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!resp.ok) throw new Error('Arquivo não encontrado');
+        const { url, content_type } = await resp.json();
+
+        let html = '';
+        if (content_type === 'application/pdf') {
+          html = `<iframe src="${url}?t=${Date.now()}" class="w-100 h-100" style="border: none;"></iframe>`;
+        } else if (content_type.startsWith('image/')) {
+          html = `<img src="${url}?t=${Date.now()}" class="img-fluid" style="max-height: 100%;">`;
+        } else {
+          html = `<p class="text-danger">Formato de arquivo não suportado.</p>`;
+        }
+
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = `<p class="text-danger">Erro ao carregar arquivo.</p>`;
+        console.error(e);
+      }
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const chatMessages = document.getElementById("chat-messages");
+    if (chatMessages) {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  });
+
 </script>

@@ -34,6 +34,13 @@
     </div>
 
     <hr class="text-dark" style="width: 95.6%; margin-left: 30px; margin-bottom: 30px; margin-top: -22px; opacity: 10%;">
+
+    <% if flash[:alerta] %>
+      <div class="alert alert-danger alert-dismissible fade show text-center mb-5" role="alert" style="margin-top: -20px; margin-left: 30px; width: 95.7%">
+        <%= flash[:alerta] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
   </div>
 
   <div class="container" style="margin-top: 15px;">
@@ -41,7 +48,7 @@
       <div class="vestibular" style="gap: 15px !important">
         <% @temas_collection.each do |tema| %>
           <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
-            <a href="" class="text-dark" style="text-decoration: none; display: block;">
+            <a href="/temas/<%= tema.id %>" class="text-dark" style="text-decoration: none; display: block;">
               <div style="position: relative;">
                 <%= image_tag tema.capa, style: "display: block;" %>
                 <span class="badge p-2"
@@ -51,7 +58,7 @@
               </div>
             </a>
 
-            <a href="" class="card shadow p-2"
+            <a href="/temas/<%= tema.id %>" class="card shadow p-2"
               style="width: 69%; min-width: 260px; border-radius: 0px; margin-top: -10px; text-decoration: none;">
               <p style="margin-bottom: -1px; font-size: 15px;">
                 Os desafios para a valorização das comunidades e povos tradicionais do Brasil

@@ -1,0 +1,50 @@
+<%= form_with(model: [:admin, @word], local: true, html: { class: "curso-form" }) do |form| %>
+  <div class="w-75">
+    <%= form.label "Tema", class: "form-label fw-light" %>
+    <%= form.text_field :tema, class: "form-control", class: "form-control form-control-sm", style: "margin-top: -8px" %>
+  </div>
+
+  <div class="w-75">
+    <%= form.label :prova, "Prova", class: "form-label fw-light" %>
+    <div class="d-flex align-items-center" style="gap: 5px;">
+      <%= form.select :word_type, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @word.word_type), {}, class: "form-select form-select-sm select2-prova", style: "margin-top: -8px" %>
+      <button type="button" class="btn btn-sm btn-danger" id="limpar-prova" title="Limpar seleção" style="margin-top: -8px">
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="w-75">
+      <%= form.label "Imagem", class: "form-label fw-light" %><br>
+      <% if @word.imagem.present? %>
+        <%= image_tag @word.imagem %>
+      <% end %>
+      <%= form.file_field :imagem, style: "margin-top: -8px" %>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="w-75">
+      <%= form.label "PDF", class: "form-label fw-light" %><br>
+      <% if @word.pdf_file.attached? %>
+        <iframe src="<%= rails_blob_path(@word.pdf_file, disposition: 'inline') %>" type="application/pdf" class="mb-3 w-100"></iframe>
+      <% end %>
+      <%= form.file_field :pdf_file, style: "margin-top: -8px" %>
+    </div>
+  </div>
+
+  <div class="d-flex mt-4 gap-2">
+    <%# Voltar %>
+    <a href="/admin/words" class="btn btn-secondary btn-sm px-3 py-1" style="border-radius: 10px">
+      <i class="bi bi-box-arrow-left fs-6 me-1"></i>
+      <span style="position: relative; top: -1px; font-weight: 600">Voltar</span>
+    </a>
+
+    <%# Salvar %>
+    <%= form.button type: "submit", class: "btn btn-success btn-sm px-3 py-0", style: "border-radius: 10px" do %>
+      <i class="bi bi-check-circle-fill fs-6 me-1"></i>
+      <span style="position: relative; top: -1px; font-weight: 600">Salvar</span>
+    <% end %>
+  </div>
+<% end %>

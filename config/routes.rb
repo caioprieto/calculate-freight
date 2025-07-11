@@ -24,9 +24,12 @@ Rails.application.routes.draw do
     get "pagamento", to: "pedidos#index"
     get "correcoes", to: "correcoes#index"
 
-    resources :temas, only: %i[new create]
+    resources :temas
     resources :words
-    resources :messages, only: [ :create ]
+
+    resources :chats, only: [ :show ] do
+      resources :messages, only: [ :create ]
+    end
 
     resources :users do
       member do
@@ -68,7 +71,9 @@ Rails.application.routes.draw do
     resources :words do
       member do
         get :proposta
+        get :reload_redacao
         post :save_user_word_pdf
+        post :concluir
       end
 
       resources :chats do
@@ -87,6 +92,7 @@ Rails.application.routes.draw do
   resources :cursos
   resources :videos
   resources :pedidos
+  resources :temas, only: :show
 
   get "/success", to: "payments#success"
   get "/cancel", to: "payments#cancel"

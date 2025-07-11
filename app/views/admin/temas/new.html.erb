@@ -1,43 +1,37 @@
+<h5 style="margin-top: 3px;">
+  <i class="bi bi-book-half fs-4" style="margin-right: 10px"></i>
+  Temas Gratuitos
+</h5>
+
 <div class="w-100">
-  <%= form_with(model: [:admin, @tema], local: true, html: { class: "curso-form" }) do |form| %>
-    <div class="row">
-      <div class="w-50">
-        <%= form.label "Nome", class: "form-label fw-light" %>
-        <%= form.text_field :name, class: "form-control", class: "form-control form-control-sm", style: "margin-top: -8px" %>
-      </div>
+  <table class="table table-admin table-bordered mt-4" style="width: 99%;">
+    <thead>
+      <tr>
+        <th scope="col">Tema</th>
+        <th scope="col">Tipo da Prova</th>
+        <th scope="col">Data de criação</th>
+        <th scope="col">Imagem</th>
+        <th scope="col">PDF</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @temas.each do |tema| %>
+        <tr>
+          <td><%= tema.name %></td>
+          <td><%= tema.prova.upcase %></td>
+          <td><%= tema.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %></td>
+          <td><%= tema.capa.attached? ? "Sim" : "Não" %></td>
+          <td><%= tema.pdf_file.attached? ? "Sim" : "Não" %></td>
+          <td>
+            <%= link_to edit_admin_tema_path(tema) do %>
+              <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-      <div class="w-50">
-        <%= form.label :prova, "Prova", class: "form-label fw-light" %>
-        <div class="d-flex align-items-center" style="gap: 5px;">
-          <%= form.select :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @tema.prova), {}, class: "form-select form-select-sm select2-prova", style: "margin-top: -8px" %>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt-2">
-      <div class="w-50">
-        <%= form.label "Capa do tema", class: "form-label fw-light" %><br>
-        <%= form.file_field :capa, style: "margin-top: -8px" %>
-      </div>
-
-      <div class="w-50">
-        <%= form.label "PDF", class: "form-label fw-light" %><br>
-        <%= form.file_field :pdf_file, style: "margin-top: -8px" %>
-      </div>
-    </div>
-
-    <br>
-    <%# Voltar %>
-    <a href="/admin/words" class="btn btn-secondary px-3 py-0" style="border-radius: 10px">
-      <i class="bi bi-box-arrow-left fs-4 me-1"></i>
-      <span style="position: relative; top: -4px; font-weight: 600">Voltar</span>
-    </a>
-
-    <%# Salvar %>
-    <%= form.button type: "submit", class: "btn btn-success px-3 py-0", style: "border-radius: 10px" do %>
-      <i class="bi bi-check-circle-fill fs-4 me-1"></i>
-      <span style="position: relative; top: -4px; font-weight: 600">Salvar</span>
-    <% end %>
-
-  <% end %>
+  <%= render partial: 'form' %>
 </div>

@@ -11,7 +11,8 @@
           <!-- Tema e aluno à esquerda -->
           <div>
             <p><%= user_word.word.word_type.upcase %> - <%= user_word.word.tema %></p>
-            <p>Aluno: <%= user_word.user.nome %></p>
+            <p style="margin-top: -8px">Aluno: <strong style="font-weight: 550"><%= user_word.user.nome %></strong></p>
+            <p style="margin-top: -8px">Data de envio: <strong style="font-weight: 550"><%= user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></strong></p>
           </div>
 
           <!-- Botões à direita -->

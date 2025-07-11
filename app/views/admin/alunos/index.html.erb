@@ -8,11 +8,22 @@
     <div id="chatList">
       <% @alunos.each do |aluno| %>
         <% chats = aluno.user_words.collect(&:chat).compact %>
-        <% messages = chats.collect(&:messages).flatten.map { |m| { content: m.content, created_at: m.created_at } } %>
+        <% chat_infos = chats.uniq.map do |chat|
+            {
+              id: chat.id,
+              messages: chat.messages.map { |m| { content: m.content, created_at: m.created_at, dono_type: m.dono_type } }
+            }
+          end %>
 
-        <div class="chat-item" data-user-name="<%= aluno.nome %>" data-messages='<%= messages.to_json %>'>
-          <p style="font-size: 15px; font-weight: 600; margin-bottom: -15px;"><%= aluno.nome %> </strong><p>
-          <p style="font-size: 13px; font-weight: 400; margin-bottom: 0px;"><%= chats.last.messages.last&.content %></p>
+        <div class="chat-item d-flex align-items-start" data-user-name="<%= aluno.nome %>" data-chats='<%= chat_infos.to_json %>'>
+          <% if aluno.imagem.present? %>
+            <%= image_tag aluno.imagem, class: "user-avatar me-3", alt: aluno.nome %>
+          <% end %>
+
+          <div class="chat-text">
+            <p style="font-size: 15px; font-weight: 600; margin: 0;"><%= aluno.nome %></p>
+            <p style="font-size: 13px; font-weight: 400; margin: 0;"><%= chats.last.messages.last&.content %></p>
+          </div>
         </div>
       <% end %>
     </div>
@@ -24,15 +35,17 @@
       <h5 style="font-size: 17px; margin-left: 5px; margin-top: 3px;"></h5>
     </header>
 
+    <!-- Abas dos chats (serão populadas via JS) -->
+    <div class="chat-tabs-container px-2 py-1" id="chatTabsContainer" style="display: none;">
+    </div>
+
     <section class="chat-messages" id="chatMessages" style="display: none;"></section>
-    </section>
 
     <footer class="chat-input" id="chatInput" style="display: none;">
-      <%= form_with url: '', model: Message.new, local: true do |f| %>
+      <%= form_with url: admin_chat_messages_path(0), model: Message.new, local: true, html: { id: "chat-form" } do |f| %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <div class="input-group w-100">
-          <%= f.text_field :content,
-                class: "form-control",
-                placeholder: "Digite sua mensagem..." %>
+          <%= f.text_field :content, class: "form-control", placeholder: "Digite sua mensagem..." %>
           <%= f.submit "Enviar", class: "btn btn-dark text-white" %>
         </div>
       <% end %>
@@ -41,33 +54,145 @@
 </div>
 
 <script>
-document.querySelectorAll('.chat-item').forEach(item => {
-  item.addEventListener('click', () => {
-    // Remover classe 'active' dos outros
-    document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
+  document.addEventListener("DOMContentLoaded", () => {
+    // Setup click nas chat-items
+    document.querySelectorAll('.chat-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
 
-    // Limpar mensagens antigas
-    const chatMessages = document.getElementById('chatMessages');
-    chatMessages.innerHTML = '';
+        const userName = item.dataset.userName;
+        const chats = JSON.parse(item.dataset.chats);
 
-    // Mostrar nome do usuário no header
-    const userName = item.getAttribute('data-user-name');
-    document.querySelector('.chat-header h5').textContent = userName;
+        // Atualiza cabeçalho e mostra
+        const chatHeader = document.getElementById('chatHeader');
+        chatHeader.querySelector('h5').textContent = userName;
+        chatHeader.style.display = 'block';
 
-    // Recuperar e exibir mensagens
-    const messages = JSON.parse(item.getAttribute('data-messages'));
-    messages.forEach(msg => {
-      const div = document.createElement('div');
-      div.className = 'message admin'; // você pode ajustar se quiser alternar sender
-      div.textContent = `${msg.content} (${msg.created_at})`;
-      chatMessages.appendChild(div);
+        // Abas
+        const tabsContainer = document.getElementById('chatTabsContainer');
+        tabsContainer.innerHTML = '';
+        tabsContainer.style.display = 'flex';
+
+        chats.forEach((chat, index) => {
+          const tabBtn = document.createElement('button');
+          tabBtn.className = 'btn btn-sm btn-outline-dark w-100 chat-tab';
+          tabBtn.textContent = `Chat ${index + 1}`;
+          tabBtn.dataset.chatId = chat.id;
+          tabBtn.dataset.messages = JSON.stringify(chat.messages);
+
+          tabBtn.addEventListener('click', () => {
+            document.querySelectorAll('.chat-tab').forEach(btn => btn.classList.remove('active'));
+            tabBtn.classList.add('active');
+
+            const messages = JSON.parse(tabBtn.dataset.messages);
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+
+            messages.forEach(msg => {
+              const msgDiv = document.createElement('div');
+              msgDiv.classList.add('mb-2');
+              msgDiv.classList.add(msg.dono_type === 'Admin' ? 'text-end' : 'text-start');
+
+              const badge = document.createElement('span');
+              badge.classList.add('badge');
+              if (msg.dono_type === 'Admin') {
+                badge.classList.add('bg-primary');
+                badge.textContent = 'Você';
+              } else {
+                badge.classList.add('bg-secondary');
+                badge.textContent = 'Aluno';
+              }
+
+              const contentDiv = document.createElement('div');
+              contentDiv.classList.add('d-inline-block', 'p-2', 'rounded', 'border', 'mt-1');
+              contentDiv.style.border = msg.dono_type === 'Admin' ? '1px solid #0d6efd' : '1px solid #6c757d';
+              contentDiv.style.color = 'black';
+              contentDiv.textContent = msg.content;
+
+              msgDiv.appendChild(badge);
+              msgDiv.appendChild(contentDiv);
+
+              chatMessages.appendChild(msgDiv);
+            });
+
+            chatMessages.style.display = 'block';
+
+            // Atualiza action do form
+            const form = document.getElementById('chat-form');
+            form.action = `/admin/chats/${tabBtn.dataset.chatId}/messages`;
+
+            // Mostrar input
+            document.getElementById('chatInput').style.display = 'block';
+          });
+
+          tabsContainer.appendChild(tabBtn);
+        });
+
+        if (tabsContainer.firstChild) tabsContainer.firstChild.click();
+      });
     });
 
-    // Mostrar a área de mensagens
-    chatMessages.style.display = 'block';
-    document.getElementById('chatInput').style.display = 'block';
-    document.getElementById('chatHeader').style.display = 'block';
+    // Submit do form (AJAX)
+    const form = document.getElementById("chat-form");
+    if (!form) return;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const url = form.action;
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+            "Accept": "application/json"
+          },
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error("Erro ao enviar a mensagem");
+
+        const newMessage = await response.json();
+
+        const chatMessages = document.getElementById('chatMessages');
+
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("mb-2");
+        msgDiv.classList.add(newMessage.dono_type === "Admin" ? "text-end" : "text-start");
+
+        const badge = document.createElement("span");
+        badge.classList.add("badge");
+        if (newMessage.dono_type === "Admin") {
+          badge.classList.add("bg-primary");
+          badge.textContent = "Admin";
+        } else {
+          badge.classList.add("bg-secondary");
+          badge.textContent = "Você";
+        }
+
+        const contentDiv = document.createElement("div");
+        contentDiv.classList.add("d-inline-block", "p-2", "rounded", "border", "mt-1");
+        contentDiv.style.border = newMessage.dono_type === "Admin" ? "1px solid #0d6efd" : "1px solid #6c757d";
+        contentDiv.style.color = "black";
+        contentDiv.textContent = newMessage.content;
+
+        msgDiv.appendChild(badge);
+        msgDiv.appendChild(contentDiv);
+
+        chatMessages.appendChild(msgDiv);
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        form.querySelector("input[name='message[content]']").value = "";
+
+      } catch (error) {
+        alert("Erro ao enviar a mensagem: " + error.message);
+        console.error(error);
+      }
+    });
   });
-});
+
 </script>

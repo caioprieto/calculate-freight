@@ -5,9 +5,11 @@ class Admin::MessagesController < ApplicationController
     @message.dono = current_admin
 
     if @message.save
-      redirect_to admin_chat_path(@chat)
-    else
-      render "admin/chats/show"
+      render json: {
+        id: @message.id,
+        content: @message.content,
+        dono_type: @message.dono_type
+      }
     end
   end
 

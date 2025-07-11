@@ -1,0 +1,35 @@
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true" style="z-index: 1101">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel">Resultados</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+
+      <div class="modal-body d-flex mt-3" style="gap: 20px">
+        <% if @user_word.user_redacao.attached? %>
+          <% content_type = @user_word.user_redacao.content_type %>
+
+          <div class="w-50">
+            <% if content_type == "application/pdf" %>
+              <div class="pdf-container">
+                <iframe src="<%= rails_blob_path(@user_word.user_redacao, disposition: 'inline') %>"></iframe>
+              </div>
+            <% elsif content_type.start_with?("image/") %>
+              <div class="image-container text-center">
+                <%= image_tag @user_word.user_redacao, class: "img-fluid", style: "max-height: 500px;" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="w-50 d-flex flex-column justify-content-start">
+          <div class="card shadow p-3">
+            <p>Tempo de Duração: 1h 13min</p>
+            <!-- Você pode adicionar mais informações aqui -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

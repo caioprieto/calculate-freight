@@ -1,6 +1,7 @@
 class Admin::TemasController < AdminsBackofficeController
   def new
     @tema = ::Tema.new
+    @temas = ::Tema.all
   end
 
   def create
@@ -8,6 +9,20 @@ class Admin::TemasController < AdminsBackofficeController
       redirect_to new_admin_tema_path, notice: "Curso atualizado com sucesso!"
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @tema = ::Tema.find(params[:id])
+  end
+
+  def update
+    @tema = Tema.find(params[:id])
+
+    if @tema.update(tema_params)
+      redirect_to edit_admin_tema_path(@tema), notice: "Curso atualizado com sucesso!"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

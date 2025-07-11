@@ -1,0 +1,40 @@
+<%= form_with(model: [:admin, @tema], local: true, html: { class: "curso-form" }) do |form| %>
+  <div class="row mt-2">
+    <div class="w-50">
+      <%= form.label "Nome", class: "form-label fw-light" %>
+      <%= form.text_field :name, class: "form-control form-control-sm", style: "margin-top: -8px" %>
+    </div>
+
+    <div class="w-50">
+      <%= form.label :prova, "Prova", class: "form-label fw-light" %>
+      <div class="d-flex align-items-center" style="gap: 5px;">
+        <%= form.select :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"]], @tema.prova), {}, class: "form-select form-select-sm select2-prova", style: "margin-top: -8px" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="w-50">
+      <%= form.label "Capa do tema", class: "form-label fw-light" %><br>
+      <%= form.file_field :capa, style: "margin-top: -8px" %>
+    </div>
+
+    <div class="w-50">
+      <%= form.label "PDF", class: "form-label fw-light" %><br>
+      <%= form.file_field :pdf_file, style: "margin-top: -8px" %>
+    </div>
+  </div>
+
+  <br>
+  <%# Voltar %>
+  <a href="/admin/temas/new" class="btn btn-secondary px-3 py-0" style="border-radius: 10px">
+    <i class="bi bi-box-arrow-left fs-4 me-1"></i>
+    <span style="position: relative; top: -4px; font-weight: 600">Voltar</span>
+  </a>
+
+  <%# Salvar %>
+  <%= form.button type: "submit", class: "btn btn-success px-3 py-0", style: "border-radius: 10px" do %>
+    <i class="bi bi-check-circle-fill fs-4 me-1"></i>
+    <span style="position: relative; top: -4px; font-weight: 600">Salvar</span>
+  <% end %>
+<% end %>
