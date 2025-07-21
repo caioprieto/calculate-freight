@@ -18,6 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: whitesmoke;
+  overflow-x: hidden;
 }
 
 .main-content {
@@ -234,9 +235,10 @@ footer.footer {
   }
 
   .text-custom-nav {
-    font-size: 15px;
+    font-size: 11px !important;
     padding: 8px;
     margin-top: -10px;
+    white-space: nowrap;
   }
 
   .carousel-section .carousel-image {
@@ -270,10 +272,10 @@ footer.footer {
   }
 
   .width-mobile {
-    width: 150px;
+    width: 100px;
     object-fit: contain;
     margin-top: 10px;
-    margin-left: -20px;
+    margin-left: 3px;
   }
 
   .cart-card {
@@ -308,8 +310,8 @@ footer.footer {
   }
 
   .mobile-logo {
-    width: 160px !important;
-    height: 160px !important;
+    width: 90px !important;
+    height: 90px !important;
     margin-left: 15px !important;
     margin-top: 40px !important;
   }
@@ -334,6 +336,10 @@ footer.footer {
 
   .margin-top-footer {
     margin-top: -50px !important;
+  }
+
+  .mobile-none {
+    display: none !important;
   }
 }
 
@@ -716,4 +722,8 @@ footer.footer {
   padding: 2px 10px;
   border-radius: 6px;
   z-index: 10000;
+}
+
+.background-hover:hover {
+  background-color: rgb(94, 94, 94);
 }

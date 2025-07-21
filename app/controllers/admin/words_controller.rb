@@ -28,6 +28,6 @@ class Admin::WordsController < AdminsBackofficeController
   private
 
   def word_params
-    params.require(:word).permit(:pdf_file, :tema)
+    params.require(:word).permit(:pdf_file, :tema, :imagem, :word_type)
   end
 end

@@ -1,16 +1,11 @@
-class Admin::MessagesController < ApplicationController
+class Admin::MessagesController < AdminsBackofficeController
   def create
     @chat = Chat.find(params[:chat_id])
     @message = @chat.messages.build(message_params)
     @message.dono = current_admin
+    @message.save
 
-    if @message.save
-      render json: {
-        id: @message.id,
-        content: @message.content,
-        dono_type: @message.dono_type
-      }
-    end
+    redirect_to admin_alunos_path(aluno_id: @chat.user_word.user_id, chat_id: @chat.id, anchor: "bottom")
   end
 
   private

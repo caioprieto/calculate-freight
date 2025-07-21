@@ -167,7 +167,7 @@ input[type="checkbox"] {
 .admin-chat-container {
   display: grid;
   grid-template-columns: 300px 1fr 20px;
-  height: 80vh;
+  height: 83vh;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -192,6 +192,7 @@ input[type="checkbox"] {
 
 .chat-item.active {
   background-color: #ddddddd9;
+  font-weight: 500;
 }
 
 .user-avatar {
@@ -199,10 +200,12 @@ input[type="checkbox"] {
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
+  object-position: top;
 }
 
 .chat-text {
   flex: 1;
+  margin-top: 10px;
 }
 
 .chat-main {
@@ -293,14 +296,13 @@ input[type="checkbox"] {
 }
 
 .table-admin thead th {
-  background-color: #000000d9;
+  background-color: #1400001a;
   font-weight: 500;
-  color: #dedede;
   font-size: 16px;
 }
 
 .table-admin tbody tr:hover {
-  background-color: #f1f1f1;
+  background-color: #000000;
   transition: background-color 0.2s ease;
 }
 
@@ -335,6 +337,21 @@ input[type="checkbox"] {
   transform: scale(1.008);
 }
 
+.hover-medium {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover-medium:hover {
+  transform: scale(1.05);
+}
+
+.hover-max {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover-max:hover {
+  transform: scale(1.1);
+}
 
 .vestibulares {
   width: 100%;
@@ -389,7 +406,6 @@ input[type="checkbox"] {
   opacity: 80%;
 }
 
-
 .beneficios{
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
@@ -397,17 +413,18 @@ input[type="checkbox"] {
 }
 
 .beneficio{
-  background: #3a3a3a6e;
-  padding: 1rem 1rem;
+  background: #3a3a3aa9;
+  padding: 0.8rem 1rem;
   border-radius: 10px;
   box-shadow: rgba(255, 255, 255, 0.795);
   text-align: center;
   transition: transform .35s ease;
-  height: 125px;
+  height: 80px;
+  width: 100%;
 }
 
 .beneficio:hover{
-  transform: scale(1.06);
+  transform: scale(1.03);
 }
 
 .disabled {
@@ -416,11 +433,88 @@ input[type="checkbox"] {
 }
 
 .chat-tabs-container {
-  gap: 6px;
   margin-bottom: 10px;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.chat-tabs-container a {
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: white;
 }
 
 .chat-tab.active {
   background-color: #0d6efd;
   color: white;
+}
+
+.search-form-alunos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: border 0.3s ease;
+  height: 40px;
+}
+
+.search-input-alunos {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0px 10px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.progress { /* cinza claro */
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: gray;
+}
+
+.progress-bar {
+  border-radius: 30px;
+  transition: width 0.4s ease;
+  background-color:rgba(0, 0, 0, 0.47);
+}
+
+.sticky-chat-header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 0;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.background-filter {
+  background-color: rgba(116, 116, 116, 0.192);
+  border-radius: 3px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }

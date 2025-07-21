@@ -41,10 +41,6 @@
           <i class="bi bi-download fs-6" style="margin-right: 10px;"></i>
           Baixar o PDF
         <% end %>
-        <%= link_to '' do %>
-          <i class="bi bi-gift fs-6" style="margin-right: 10px;"></i>
-          Enviar presente
-        <% end %>
         <%= link_to '#', data: { bs_toggle: 'modal', bs_target: '#progressModal' } do %>
           <i class="bi bi-trophy fs-6" style="margin-right: 10px;"></i>
           Seu progresso
@@ -65,43 +61,53 @@
 
   <div class="bg-dark container-words flex-grow-1 d-flex flex-column p-3 text-white" style="margin-top: 40px;">
     <div class="beneficios mt-1">
-      <a href="" id="startRedacao" class="text-white start-timer-btn" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
-        <div class="beneficio">
-          <i id="iconNotChecked" class="bi bi-skip-end-circle fs-1"></i>
-          <i id="iconChecked" class="bi bi-pause-circle fs-1" style="display: none;"></i>
-          <h6 style="font-size: 15px; font-weight: 600" id="labelStart">Iniciar redação</h6>
-        </div>
-      </a>
+      <% unless @user_word.concluido %>
+        <a href="" id="startRedacao" class="text-white start-timer-btn" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#confirmStartModal">
+          <div class="beneficio">
+            <i id="iconNotChecked" class="bi bi-skip-end-circle fs-3"></i>
+            <i id="iconChecked" class="bi bi-pause-circle fs-3" style="display: none;"></i>
+            <h6 style="font-size: 14px; font-weight: 600" id="labelStart">Iniciar</h6>
+          </div>
+        </a>
+      <% else %>
+        <a class="text-dark start-timer-btn" style="text-decoration: none;">
+          <div class="beneficio">
+            <i class="bi bi-skip-end-circle fs-3" style="font-weight: 700"></i>
+            <h6 style="font-size: 14px; font-weight: 700">Iniciar</h6>
+          </div>
+        </a>
+      <% end %>
+
       <a id="iconEnviar" class="text-white start-timer-btn" style="text-decoration: none; display: none; cursor: pointer;">
         <div class="beneficio">
-          <i class="bi bi-cloud-arrow-up fs-1"></i>
-          <h6 style="font-size: 15px; font-weight: 600">Enviar para correção</h6>
+          <i class="bi bi-cloud-arrow-up fs-3"></i>
+          <h6 style="font-size: 14px; font-weight: 600">Enviar para correção</h6>
         </div>
       </a>
       <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#instrutionModal">
         <div class="beneficio">
-          <i class="bi bi-card-list fs-1"></i>
-          <h6 style="font-size: 15px; font-weight: 600">Instruções</h6>
+          <i class="bi bi-card-list fs-3"></i>
+          <h6 style="font-size: 14px; font-weight: 600">Instruções</h6>
         </div>
       </a>
       <a href="/user/cursos/<%= @word.aula.curso_id%>/player" class="beneficio" style="text-decoration: none">
         <div class="text-white" style="text-decoration: none;">
-          <i class="bi bi-camera-video fs-1"></i>
-          <h6 style="font-size: 15px; font-weight: 600">Vídeo/Aula</h6>
+          <i class="bi bi-camera-video fs-3"></i>
+          <h6 style="font-size: 14px; font-weight: 600">Vídeo/Aula</h6>
         </div>
       </a>
       <% if @user_word.concluido %>
         <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#resultModal">
           <div class="beneficio">
-            <i class="bi bi-clipboard fs-1"></i>
-            <h6 style="font-size: 15px; font-weight: 600">Resultados</h6>
+            <i class="bi bi-clipboard fs-3"></i>
+            <h6 style="font-size: 14px; font-weight: 600">Resultados</h6>
           </div>
         </a>
       <% else %>
         <a class="beneficio" style="text-decoration: none">
           <div class="text-dark" style="text-decoration: none;">
-            <i class="bi bi-clipboard fs-1"></i>
-            <h6 style="font-size: 15px; font-weight: 600">Resultados</h6>
+            <i class="bi bi-clipboard fs-3"></i>
+            <h6 style="font-size: 14px; font-weight: 600">Resultados</h6>
           </div>
         </a>
       <% end %>
@@ -115,6 +121,17 @@
         <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500">Redação pendente</strong>
       <% end %>
     </div>
+
+    <% if @user_word.concluido %>
+      <div class="d-flex" style="text-decoration: none; margin-top: 5px; margin-bottom: -10px;">
+        <p class="text-white" style="font-weight: 500; margin-top: 3px; font-size: 15px;">Correção: </p>
+        <% if @user_word.corrigido %>
+          <strong class="text-success" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500;">Correção concluída</strong>
+        <% else %>
+          <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500">Correção pendente</strong>
+        <% end %>
+      </div>
+    <% end %>
 
     <hr>
     <h6 style="font-weight: 350" class="mb-3">Chat com o Professor</h6>
@@ -178,21 +195,27 @@
 
 <!-- MODAL DE REVISÃO -->
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content p-3">
+
       <div class="modal-header">
-        <h5 class="modal-title">Revisar Redação</h5>
+        <h6 class="modal-title">Revisar Redação</h6>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
-      <div class="modal-body" style="gap: 20px; min-height: 500px">
-        <div class="w-100" id="reviewFileContainer">
+
+      <div class="modal-body" style="min-height: 300px: width: 100%">
+        <div style="width: 100%; height: 300px; margin-top: 10px;" id="reviewFileContainer">
           <p class="text-muted">Carregando arquivo...</p>
         </div>
 
         <div class="w-100 text-end mt-2">
-          <button class="btn btn-success" id="confirmUploadBtn">Confirmar Envio</button>
+          <button class="btn btn-success w-100" id="confirmUploadBtn">
+            <i class="bi bi-check2-circle me-2"></i>
+            Confirmar Envio
+          </button>
         </div>
       </div>
+
     </div>
   </div>
 </div>

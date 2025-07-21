@@ -1,0 +1,33 @@
+<aside class="chat-sidebar scrollable p-3 border-end" style="min-width: 300px;">
+  <h5 href="/">
+    <i class="bi bi-mortarboard fs-4" style="margin-right: 8px; margin-left: -3px;"></i>
+    <span style="position: relative; top: -2px; font-size: 18px;">Alunos</span>
+  </h5>
+
+  <%= form_with url: admin_alunos_path, method: :get, local: true, class: "d-flex mb-3 mt-3" do %>
+    <input
+      type="text"
+      name="query"
+      value="<%= params[:query] %>"
+      placeholder="Nome do aluno"
+      class="form-control me-2"
+      style="margin-left: -11px;"
+    />
+    <button type="submit" class="btn btn-secondary">
+      <i class="bi bi-search" style=""></i>
+    </button>
+  <% end %>
+
+  <div id="chatList">
+    <% @alunos.each do |aluno| %>
+      <%= link_to admin_alunos_path(aluno_id: aluno.id, informacoes: true), class: "chat-item d-flex align-items-center text-decoration-none text-dark #{'active' if params[:aluno_id].to_i == aluno.id}" do %>
+        <% if aluno.imagem.present? %>
+          <%= image_tag aluno.imagem, class: "user-avatar me-2 rounded-circle", width: 40, height: 40, alt: aluno.nome %>
+        <% else %>
+          <img src="/images/avatar-padrao.jpg" class="user-avatar me-2 rounded-circle" width="40" height="40" />
+        <% end %>
+        <span class="ms-2"><%= aluno.nome %></span>
+      <% end %>
+    <% end %>
+  </div>
+</aside>

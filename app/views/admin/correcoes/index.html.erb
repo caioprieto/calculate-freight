@@ -1,18 +1,55 @@
-<h5>
-  <i class="bi bi-pencil-square fs-5" style="margin-right: 10px"></i>
-  Correções
+<h5 href="/">
+  <i class="bi bi-pencil-square fs-4" style="margin-right: 8px"></i>
+  <span style="position: relative; top: -2px; font-size: 18px;">Correções</span>
 </h5>
+
+<div class="container-full-width mb-4 mt-4 p-3 background-filter">
+  <%= form_with url: admin_correcoes_path, method: :get, local: true, class: "row gy-2 gx-3 align-items-end" do %>
+    <div class="col-md-4">
+      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Nome do aluno</label>
+      <%= text_field_tag :aluno, params[:aluno], class: "form-control form-control-sm", placeholder: "Nome do aluno" %>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Tipo de Redação</label>
+      <%= select_tag :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"], ["Unesp", "unesp"]], params[:prova]), include_blank: "Todos", class: "form-select form-select-sm" %>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Ordernar por</label>
+      <%= select_tag :word_type, options_for_select([["Prazo mais Apertados", "apertados"], ["Melhores alunos", "melhores"]], params[:order_by]), include_blank: "Todos", class: "form-select form-select-sm" %>
+    </div>
+
+    <!-- Botão -->
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-secondary w-100 p-1 fs-6">
+        <i class="bi bi-search me-1" style="font-weight: 1000"></i>
+      </button>
+    </div>
+  <% end %>
+</div>
 
 <div class="container-full-width mt-3">
   <div style="width: 100%;">
-    <% UserWord.where(concluido: true).each do |user_word| %>
-      <div class="card shadow w-100 p-3 d-flex flex-column gap-2 mt-2">
+    <% @correcoes.each do |user_word| %>
+      <div class="card shadow w-100 p-3 d-flex flex-column gap-2 mt-3">
         <div class="d-flex justify-content-between align-items-start flex-wrap">
           <!-- Tema e aluno à esquerda -->
-          <div>
-            <p><%= user_word.word.word_type.upcase %> - <%= user_word.word.tema %></p>
-            <p style="margin-top: -8px">Aluno: <strong style="font-weight: 550"><%= user_word.user.nome %></strong></p>
-            <p style="margin-top: -8px">Data de envio: <strong style="font-weight: 550"><%= user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></strong></p>
+          <div style="margin-bottom: -20px">
+            <p style="margin-top: -10px"><strong><%= user_word.word.word_type.upcase %></strong> - <%= user_word.word.tema %></p>
+            <div class="d-flex">
+              <i class="bi bi-calendar-day fs-6" style="margin-top: -10px; margin-right: 8px;"></i>
+              <p style="margin-top: -10px">Data de envio: <strong style="font-weight: 550"><%= user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></strong></p>
+            </div>
+
+            <div class="d-flex text-danger fw-bold">
+              <i class="bi bi-calendar-day fs-6" style="margin-top: -10px; margin-right: 8px;"></i>
+              <p style="margin-top: -10px">Prazo de entrega: <strong style="font-weight: 550"><%= user_word.prazo_entrega.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></strong></p>
+            </div>
+            <div class="d-flex">
+              <i class="bi bi-mortarboard fs-6" style="margin-top: -10px; margin-right: 8px;"></i>
+              <p style="margin-top: -10px">Aluno: <strong style="font-weight: 550"><%= user_word.user.nome %></strong></p>
+            </div>
           </div>
 
           <!-- Botões à direita -->
@@ -22,10 +59,14 @@
               <span>Baixar</span>
             <% end %>
 
-            <%= link_to "📄 Pré-visualizar", url_for(user_word.user_redacao), target: "_blank", class: "btn btn-primary p-2 text-white text-nowrap" %>
+            <%= link_to url_for(user_word.user_redacao), target: "_blank", class: "btn btn-primary p-2 text-white text-nowrap" do %>
+              <i class="bi bi-binoculars fs-6 me-1"></i>
+              <span>Pré-visualizar</span>
+            <% end %>
 
-            <%= form_with url: '', html: { multipart: true }, method: :post, remote: true, id: "uploadForm_#{user_word.id}", style: "display: none;" do |form| %>
+            <%= form_with url: admin_enviar_correcao_path, html: { multipart: true }, method: :post, remote: true, id: "uploadForm_#{user_word.id}", style: "display: none;" do |form| %>
               <%= form.file_field :file, id: "fileInput_#{user_word.id}", style: "display: none;", accept: ".pdf,.doc,.docx" %>
+              <%= hidden_field_tag :user_word_id, user_word.id %>
             <% end %>
 
             <%= link_to "#", class: "btn btn-success p-2 text-white text-nowrap", style: "margin-left: -8px", onclick: "triggerUpload(#{user_word.id})" do %>

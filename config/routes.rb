@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get "dashboard", to: "dashboard#index"
     get "alunos", to: "alunos#index"
     get "pedidos", to: "pedidos#index"
-    get "pagamento", to: "pedidos#index"
+    get "pagamento", to: "pagamento#index"
     get "correcoes", to: "correcoes#index"
 
     resources :temas
@@ -46,6 +46,11 @@ Rails.application.routes.draw do
 
       post :destroy_image, on: :member
     end
+
+    post "adicionar_cursos", to: "alunos#adicionar_cursos", as: :adicionar_cursos
+    post "adicionar_words", to: "alunos#adicionar_words", as: :adicionar_words
+    patch "alterar_vigencia/:id", to: "alunos#alterar_vigencia", as: :alterar_vigencia
+    post "enviar_correcao", to: "correcoes#enviar_correcao", as: :enviar_correcao
   end
 
   namespace :user do

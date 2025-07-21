@@ -12,7 +12,8 @@ class CartController < ApplicationController
       end
     end
 
-    redirect_back fallback_location: root_path, allow_other_host: false
+    redirect_to user_carrinho_path if params[:redirect].present?
+    redirect_back fallback_location: root_path, allow_other_host: false unless params[:redirect].present?
   end
 
   def remove

@@ -1,5 +1,4 @@
 window.showLoadingAndRedirect = function () {
-  console.log('entrei');
   const overlay = document.getElementById('loadingOverlay');
   if (overlay) {
     overlay.style.display = 'flex';

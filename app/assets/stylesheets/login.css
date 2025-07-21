@@ -1,7 +1,7 @@
 body {
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .login-container {
@@ -23,8 +23,12 @@ body {
 .right-panel {
   flex: 1;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
   overflow-y: auto;
 }
+
 
 .card-login {
   width: 100%;
@@ -137,35 +141,15 @@ body {
 }
 
 @media (max-width: 450px) {
-  .login-container {
-    display: block !important;
-  }
-
-  .left-panel,
-  .left-panel img {
+  .mobile-none {
     display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    z-index: -1 !important;
   }
 
-  .right-panel {
-    width: 100% !important;
-    flex: none !important;
-    height: 100vh !important;
+  .logo img {
+    height: 150px;
   }
 
-  .card-login {
-    height: auto !important;
-    padding: 20px;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .img-login {
-    visibility: hidden !important;
+  .label-mobile {
+    font-size: 12px;
   }
 }
