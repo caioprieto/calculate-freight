@@ -3,9 +3,9 @@
 
   <br>
 
-  <div class="container">
-    <div class="mb-3 ms-4 d-flex" style="width: 93%;">
-      <i class="bi bi-play-btn fs-4" style="margin-top: -4px; margin-right: 8px; margin-left: 10px;"></i>
+  <div class="container margin-top-mobile">
+    <div class="mb-3 ms-4 d-flex margin-top-max" style="width: 93%;">
+      <i class="bi bi-play-btn fs-4" style="margin-top: -4px; margin-right: 3px; margin-left: 10px;"></i>
       <h2 class="ms-2" style="font-size: 21px; font-weight: 400;">Cursos</h2>
     </div>
 
@@ -19,24 +19,24 @@
     <% end %>
   </div>
 
-  <div class="container" style="margin-top: -12px">
+  <div class="container flex-columns-mobile">
     <% @cursos_collection.each do |curso| %>
-      <div class="col align-items-center justify-content-center" style="margin-top: 10px; margin-left: 8px;" data-prova-nome="<%= curso.prova %>">
-        <div class="container card shadow mb-2 rounded-4 hover p-2" style="width: 96.3%">
+      <div class="col align-items-center justify-content-center" style="margin-top: 5px; margin-left: 8px;" data-prova-nome="<%= curso.prova %>">
+        <div class="container card shadow mb-2 rounded-4 hover p-2 card-mobile" style="width: 96.3%">
           <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
             <div class="row g-0">
               <div class="col-md-4 d-flex align-items-center justify-content-center">
               <% if curso.imagem.present? %>
-                <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain;" %>
+                <%= image_tag curso.imagem, class: "mobile-imagem", alt: curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain;" %>
               <% end %>
               </div>
               <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
-                  <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
-                  <span class="preco-riscado">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
+                <div class="card-body mobile-card-body">
+                  <h5 class="card-title no-margin-bottom-mobile font-mobile-small" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
+                  <strong class="mb-5 no-margin-bottom-mobile font-mobile-small" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                  <span class="preco-riscado font-mobile-small mobile-none">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
 
-                  <div class="mt-2">
+                  <div class="mt-2 mobile-none">
                     <% if current_user.present? %>
                       <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
                         <span class="badge bg-success p-2" style="font-size: 11px; font-weight: 450;">✅ Comprado</span>
@@ -44,7 +44,7 @@
                     <% end %>
                   </div>
 
-                  <div class="row mt-2">
+                  <div class="row mt-2 mobile-none">
                     <div class="col-12 col-md-5 mb-2">
                       <div class="item d-flex align-items-center">
                         <i class="bi bi-file-play fs-5 me-2"></i>

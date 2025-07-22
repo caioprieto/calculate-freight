@@ -8,7 +8,18 @@
   </div>
 
   <div class="container container-flex">
-    <i class="bi bi-list fs-1 nav-icone"></i>
+    <i class="bi bi-list fs-3 nav-icone hover"></i>
+    <div id="mobileSidebar" class="mobile-sidebar">
+      <button id="closeSidebar" class="close-btn">&times;</button>
+      <nav class="mobile-menu-links">
+        <a href="/apresentacao" class="<%= 'active' if current_page?('/apresentacao')  %>" >Quem somos</a>
+        <a href="/temas" class="<%= 'active' if current_page?('/temas') %>">Temas de Redação</a>
+        <a href="/acesso_livre" class="<%= 'active' if current_page?('/acesso_livre') %>">Acesso Livre</a>
+        <a href="/cursos" class="<%= 'active' if current_page?('/cursos') || @curso.present? %>">Cursos</a>
+      </nav>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
     <div class="logo">
       <a href="/">
         <img src="/images/logo_preto.png" alt="Logo" style="display: flex;" class="width-mobile">
@@ -24,7 +35,7 @@
       <% if current_user.present? %>
         <div class="position-relative">
           <!-- BOTÃO DO CARRINHO -->
-          <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative;">
+          <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative; border: none">
             <i class="bi bi-cart2 fs-3"></i>
             <% if @cart.present? %>
               <% unless @cart.cursos.count.zero? %>
@@ -175,4 +186,27 @@
       console.error("Erro ao fazer logout:", error);
     });
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("mobileSidebar");
+    const overlay = document.getElementById("overlay");
+    const openBtn = document.querySelector(".nav-icone");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    openBtn.addEventListener("click", function () {
+      sidebar.classList.add("active");
+      overlay.classList.add("active");
+    });
+
+    closeBtn.addEventListener("click", function () {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", function () {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+  });
+
 </script>
