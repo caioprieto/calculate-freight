@@ -7,7 +7,6 @@ class UserCurso < ApplicationRecord
   scope :ativos, -> { where("data_fim > ?", Time.zone.now).where(ativo: true) }
   scope :expirados, -> { where("data_fim <= ?", Time.zone.now).or(where(ativo: false)) }
 
-
   def expirado?
     return false if data_fim.blank?
 
@@ -15,6 +14,8 @@ class UserCurso < ApplicationRecord
   end
 
   def calculate_values
+    return if curso.aulas.blank?
+
     calculate_total_aulas
     calculate_total_aulas_vistas
     calculate_progress

@@ -49,7 +49,10 @@
           <!-- MINI MODAL DO CARRINHO -->
           <div id="cart-dropdown" class="card cart-card shadow position-absolute end-0 mt-2">
             <div class="card-body">
-              <h6 class="card-title">Carrinho</h6>
+              <div class="d-flex justify-content-between">
+                <h6 style="margin-top: 5px;">Carrinho</h6>
+                <button type="button" class="btn-close justify-content-end" data-bs-dismiss="alert" aria-label="Close" onclick="document.getElementById('cart-dropdown').style.display='none'"></button>
+              </div>
               <hr>
               <% if @cursos.present? %>
                 <ul class="list-group mb-3">
@@ -84,7 +87,7 @@
                 <p class="text-muted">Seu carrinho está vazio...</p>
               <% end %>
             </div>
-            <div class="card-footer bg-light text-center py-2">
+            <div class="card-footer bg-white text-center py-2">
             </div>
           </div>
         </div>
@@ -128,6 +131,8 @@
               <i class="bi bi-box-arrow-left fs-6" style="margin-right: 10px;"></i>
               Sair
             <% end %>
+            <div class="card-footer bg-white text-center py-2 shadow border">
+            </div>
           </div>
         </div>
       <% else %>
@@ -139,11 +144,25 @@
       <% end %>
     </div>
   </div>
-
   <div class="loader" id="loadingOverlay">
     <div class="spinner-loader"></div>
   </div>
 </nav>
+
+<div class="full-width-container"style="margin-bottom: 30px; margin-top: -60px;">
+  <% if flash[:noticia] %>
+    <div class="alert alert-success alert-dismissible fade show text-center mb-3" role="alert">
+      <%= flash[:noticia] %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+  <% if flash[:alerta] %>
+    <div class="alert alert-danger alert-dismissible fade show text-center mb-3" role="alert" style="margin-top: -3px">
+      <%= flash[:alerta]%>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+</div>
 
 <script>
   function showLoadingAndRedirectUser() {

@@ -64,6 +64,14 @@ html, body {
   opacity: 1;
 }
 
+.hover {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover:hover {
+  transform: scale(1.1);
+}
+
 .menu a:hover::after,
 .menu a.active::after {
   width: 78%;
@@ -581,6 +589,24 @@ nav.d-flex {
   border-left: solid 8px rgba(0,0,0,.1);
 
   animation: 1.5s linear infinite spin;
+}
+
+.scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
 }
 
 .scroll {

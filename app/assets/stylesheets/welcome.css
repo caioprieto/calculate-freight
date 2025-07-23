@@ -23,7 +23,10 @@ body {
 
 .main-content {
   flex: 1;
-  overflow-x: hidden;
+}
+
+nav {
+  z-index: 1;
 }
 
 .container {
@@ -238,7 +241,7 @@ footer.footer {
   .text-custom-nav {
     font-size: 11px !important;
     padding: 8px;
-    margin-top: -10px;
+    margin-top: -3px;
     white-space: nowrap;
   }
 
@@ -282,7 +285,7 @@ footer.footer {
 
   .cart-card {
     width: 350px !important;
-    margin-right: -78px !important;
+    margin-right: -95px !important;
   }
 
   .vestibulares {
@@ -348,6 +351,9 @@ footer.footer {
 
   .email-text {
     top: -3px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    margin-right: 20px !important;
   }
 
   .user-dropdown {
@@ -378,6 +384,10 @@ footer.footer {
     margin-top: 50px !important;
   }
 
+  .margin-top-mobile-min {
+    margin-top: -45px !important;
+  }
+
   .mobile-card-body {
     padding: 0px;
   }
@@ -393,6 +403,12 @@ footer.footer {
   .mobile-imagem {
     height: 90px;
     width: 100%;
+  }
+
+  .logo-mobile-footer {
+    width: 150px !important;
+    Height: 150px !important;
+    margin-top: 10px !important;
   }
 }
 
@@ -636,7 +652,7 @@ footer.footer {
   background: rgba(255, 255, 255, 0.767);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  margin-top: -45px;
+  margin-top: -25px;
 }
 
 .apresentacao{

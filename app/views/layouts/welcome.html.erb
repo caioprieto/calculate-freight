@@ -40,47 +40,40 @@
   <body>
     <%= render partial: "layouts/shared/header" %>
 
-    <%= yield %>
+    <main class="main-content">
+      <%= yield %>
+    </main>
 
     <br><br>
     <footer class="footer">
-    <div class="container container-flex no-margin-top">
-      <div class="logo-section">
-        <img src="/images/logo.png" alt="Aprova Total" class="logo" />
-        <%# <p>Transformando sonhos em aprovações</p> %>
-      </div>
-      <div class="footer-links">
-        <div class="icon-footer">
-          <a href="" class="text-white" style="text-decoration: none;">
-            <i class="bi bi-instagram fs-3"></i>
-          </a>
+      <div class="container container-flex no-margin-top">
+        <div class="logo-section">
+          <img src="/images/logo.png" alt="Aprova Total" class="logo logo-mobile-footer" />
+          <%# <p>Transformando sonhos em aprovações</p> %>
         </div>
-        <div class="icon-footer">
-          <a href="" class="text-white" style="text-decoration: none;">
-            <i class="bi bi-linkedin fs-3"></i>
-          </a>
-        </div>
-        <div class="icon-footer">
-          <a href="" class="text-white" style="text-decoration: none;">
-            <i class="bi bi-facebook fs-3"></i>
-          </a>
-        </div>
-        <div class="icon-footer">
-          <a href="" class="text-white" style="text-decoration: none;">
-            <i class="bi bi-youtube fs-3"></i>
-          </a>
+        <div class="footer-links">
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-instagram fs-3"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-linkedin fs-3"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-facebook fs-3"></i>
+            </a>
+          </div>
+          <div class="icon-footer">
+            <a href="" class="text-white" style="text-decoration: none;">
+              <i class="bi bi-youtube fs-3"></i>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="contact-info">
-        <p><strong>Números Oficiais de Vendas:</strong> (19) 99246-0527 | (19) 99246-0527</p>
-      </div>
-      <div class="copyright" style="margin-top: -5px">
-        <p>Copyright © 2025 Aprova Redação</p>
-      </div>
-    </div>
     </footer>
 
     <div class="loader" id="loadingOverlay">
