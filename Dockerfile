@@ -1,6 +1,10 @@
 FROM ruby:3.2
 
-ARG RAILS_ENV=development
+ARG RAILS_ENV=production
+ARG SKIP_ENTRYPOINT=false
+
+ENV RAILS_ENV=production
+ENV RACK_ENV=production
 
 RUN apt-get update -qq && apt-get install -y \
   build-essential \
@@ -15,7 +19,7 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
 
-# Comando de bundle baseado no ambiente
+# Configura bundle para produção apenas se for o ambiente
 RUN if [ "$RAILS_ENV" = "production" ]; then \
       bundle config set deployment 'true' && \
       bundle config set without 'development test'; \
@@ -24,15 +28,11 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
 
 COPY . .
 
-# Só executa o entrypoint e exporta envs se for produção
-ARG SKIP_ENTRYPOINT=false
-RUN if [ "$RAILS_ENV" = "production" ] && [ "$SKIP_ENTRYPOINT" != "true" ]; then \
-      cp entrypoint.sh /entrypoint.sh && \
-      chmod +x /entrypoint.sh; \
-    fi
+# Copia o entrypoint e torna executável sempre
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 3000
 
-# ENTRYPOINT também pode ser condicional, se quiser mais controle, mas aqui deixamos fixo:
-# ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["rails", "server", "-b", "0.0.0.0"]
