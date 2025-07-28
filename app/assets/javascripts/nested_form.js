@@ -18,9 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
     lastModulo.dataset.index = index;
   });
 
+  // Remove Módulo, Aula
   document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("remove-modulo")) {
-      const wrapper = e.target.closest(".modulo");
+    const removeModuloBtn = e.target.closest(".remove-modulo");
+    const removeAulaBtn = e.target.closest(".remove-aula");
+    const addAulaBtn = e.target.closest(".add-aula");
+
+    if (removeModuloBtn) {
+      const wrapper = removeModuloBtn.closest(".modulo");
       if (wrapper.dataset.newRecord === "true") {
         wrapper.remove();
       } else {
@@ -29,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    if (e.target.classList.contains("add-aula")) {
-      const wrapper = e.target.closest(".modulo");
+    if (addAulaBtn) {
+      const wrapper = addAulaBtn.closest(".modulo");
       const aulasDiv = wrapper.querySelector(".aulas");
       const moduloIndex = wrapper.dataset.index;
       const aulaIndex = new Date().getTime();
@@ -41,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
       aulasDiv.insertAdjacentHTML("beforeend", newAulaHtml);
     }
 
-    if (e.target.classList.contains("remove-aula")) {
-      const wrapper = e.target.closest(".aula");
+    if (removeAulaBtn) {
+      const wrapper = removeAulaBtn.closest(".aula");
       if (wrapper.dataset.newRecord === "true") {
         wrapper.remove();
       } else {
@@ -51,4 +56,5 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
 });

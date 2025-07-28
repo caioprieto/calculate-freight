@@ -1,18 +1,16 @@
 <div class="aula nested-fields" data-new-record="<%= local_assigns[:new_record] ? "true" : "false" %>">
-  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
-
   <div class="mb-1">
-    <%= f.label :titulo, "Título da Aula", class: "form-label fw-light" %>
-    <%= f.text_field :titulo, class: "form-control form-control-sm", style: "margin-top: -8px" %>
+    <%= f.label :titulo, "Título da Aula", class: "form-label" %>
+    <%= f.text_field :titulo, class: "form-control form-control-sm", style: "margin-top: -8px; font-size: 13px;" %>
   </div>
 
   <div class="mb-3 w-100">
-    <%= f.label :word_id, "Redação (Opcional)", class: "form-label fw-light" %>
+    <%= f.label :word_id, "Redação (Opcional)", class: "form-label" %>
     <div class="d-flex">
       <%= f.hidden_field :word_id, value: nil %>
       <%= f.collection_select :word_id, Word.all, :id, :tema,
         { prompt: "Nenhuma" },
-        { class: "form-select form-select-sm select2-redacao", style: "margin-top: -8px" } %>
+        { class: "form-select form-select-sm select2-redacao", style: "margin-top: -8px; font-size: 13px;" } %>
     </div>
   </div>
 
@@ -25,17 +23,23 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+
   <div class="video-upload-wrapper mt-1 p-0">
-    <label class="btn btn-dark d-flex align-items-center p-0" style="border-radius: 5px;">
-      <i class="bi bi-file-earmark-play-fill fs-3 me-1 ms-4"></i>
-      <span class="video-file-name fs-6 fw-light" style="position: relative; right: -10px">Escolher Vídeo</span>
+    <label class="btn btn-<%= f.object.video.attached? ? "success" : "dark"%> d-flex justify-content-center align-items-center p-1" style="border-radius: 3px;">
+      <i class="bi bi-file-earmark-play-fill me-1" style="font-size: 14px;"></i>
+      <span class="video-file-name">Escolher Vídeo</span>
       <%= f.file_field :video, class: "d-none video-upload-field", data: { filename: f.object.video.filename.to_s } %>
     </label>
   </div>
 
-  <button type="button" class="btn btn-danger remove-aula mt-1 mb-1 p-1 w-100" style="border-radius: 5px;">
-    <i class="bi bi-trash-fill fs-6"></i>
+  <button type="button"
+          class="btn btn-danger d-flex justify-content-center align-items-center remove-aula mt-1 mb-1 w-100 p-1"
+          style="border-radius: 3px;">
+    <i class="bi bi-trash-fill me-1" style="font-size: 14px;"></i>
+    <span style="font-size: 13px; font-weight: 600">Excluir Aula</span>
   </button>
+
 </div>
 
 <script>

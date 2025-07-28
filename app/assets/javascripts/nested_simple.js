@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       itemsContainer.insertAdjacentHTML("beforeend", newHtml);
     });
 
-    // Remove item (delegado)
+    // Remove item
     container.addEventListener("click", function (e) {
       if (e.target.classList.contains("remove-item")) {
         const wrapper = e.target.closest(".nested-record");

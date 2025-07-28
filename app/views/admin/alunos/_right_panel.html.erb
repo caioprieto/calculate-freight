@@ -3,16 +3,16 @@
     <!-- Cabeçalho do Aluno -->
     <header class="chat-header mb-3">
       <div class="d-flex">
-        <%= link_to admin_alunos_path, class: "text-dark hover-max", style: "text-decoration: none; margin-right: 20px; margin-top: 4px;" do %>
-          <i class="bi bi-caret-left-square fs-3"></i>
+        <%= link_to admin_alunos_path, class: "text-dark hover-max", style: "text-decoration: none; margin-right: 15px; margin-top: 5px;" do %>
+          <i class="bi bi-caret-left-square fs-5"></i>
         <% end %>
 
         <% if @aluno_selecionado.imagem.present? %>
-          <%= image_tag @aluno_selecionado.imagem, class: "user-avatar me-2 rounded-circle", width: 20, height: 20, alt: @aluno_selecionado.nome %>
+          <%= image_tag @aluno_selecionado.imagem, class: "user-avatar me-2 rounded-circle", width: 10, height: 10, alt: @aluno_selecionado.nome %>
         <% else %>
-          <img src="/images/avatar-padrao.jpg" class="user-avatar me-2 rounded-circle" width="20" height="20" />
+          <img src="/images/avatar-padrao.jpg" class="user-avatar me-2 rounded-circle" width="10" height="10" />
         <% end %>
-        <span style="font-size: 15px; font-weight: 500; margin-top: 13px; margin-left: 3px;"><%= @aluno_selecionado.nome %></span>
+        <span style="font-size: 15px; font-weight: 500; margin-top: 8px; margin-left: 3px;"><%= @aluno_selecionado.nome %></span>
       </div>
     </header>
 
@@ -41,8 +41,15 @@
 
       <% @chats.each_with_index do |chat, idx| %>
         <%= link_to admin_alunos_path(aluno_id: @aluno_selecionado.id, chat_id: chat.id), class: "text-white", style: "text-decoration: none;" do %>
-          <div class="beneficio <%= 'bg-dark' if params[:chat_id].to_i == chat.id %>">
-            <i class="bi bi-chat-left-text fs-4"></i>
+          <% notification_count = @aluno_selecionado.notifications.where(painel: "admin", chat_id: chat.id).count %>
+          <div class="beneficio <%= 'bg-dark' if params[:chat_id].to_i == chat.id %>" style="<%= 'background-color: rgba(170, 125, 0, 0.75);' unless notification_count.zero? %>">
+            <% if notification_count > 0 %>
+              <span id="chat-badge-<%= chat.id %>" class="badge rounded-pill notification-badge ms-2 mt-2 mb-2" style="font-size: 11px; font-weight: 700; background-color:rgba(255, 255, 255, 0.88); color: black; border-radius: 50%;">
+                <%= notification_count %>
+              </span>
+            <% else %>
+              <i class="bi bi-chat-left-text fs-4"></i>
+            <% end %>
             <h6 style="font-size: 13px; font-weight: 600;">Chat <%= idx + 1 %></h6>
           </div>
         <% end %>
@@ -230,8 +237,8 @@
         </div>
         <% @chat_selecionado.messages.each do |msg| %>
           <div class="p-1 <%= msg.dono_type == 'Admin' ? 'text-end' : 'text-start' %>">
-            <span class="badge ms-2 <%= msg.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
-              <%= msg.dono_type == 'Admin' ? 'Você' : 'Aluno' %>
+            <span class="badge-admin ms-2 <%= msg.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
+              <%= msg.dono_type == 'Admin' ? 'Admin' : "#{@aluno_selecionado.nome}" %>
             </span>
             <div class="me-3 mb-1 d-inline-block p-2 rounded border mt-1" style="color: black;">
               <%= msg.content %>
@@ -252,20 +259,22 @@
       </footer>
     <% end %>
   <% else %>
-    <section class="p-4" style="height: 83vh; overflow-y: auto;">
+    <section class="p-4" style="height: 89vh; overflow-y: auto;">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         <% @alunos.limit(9).each do |aluno| %>
           <div class="col">
             <%= link_to admin_alunos_path(aluno_id: aluno.id, informacoes: true), class: "text-decoration-none text-dark" do %>
               <div class="card hover-medium shadow-sm border-0 hover-shadow transition-all h-100">
-                <% if aluno.imagem.present? %>
-                  <%= image_tag aluno.imagem, class: "card-img-top rounded-top", style: "height: 5rem; object-fit: cover;" %>
-                <% else %>
-                  <img src="/images/avatar-padrao.jpg" class="card-img-top rounded-top" style="height: 5rem; object-fit: cover;" />
-                <% end %>
+                <div>
+                  <% if aluno.imagem.present? %>
+                    <%= image_tag aluno.imagem, class: "card-img-top rounded-top", style: "height: 7rem; object-fit: cover;" %>
+                  <% else %>
+                    <img src="/images/avatar-padrao.jpg" class="card-img-top rounded-top" style="height: 7rem; object-fit: cover;" />
+                  <% end %>
+                </div>
                 <div class="card-body">
-                  <h6 class="card-title fw-semibold mb-1"><%= aluno.nome %></h6>
-                  <p class="card-text text-muted mb-0" style="font-size: 13px;"><%= aluno.email %></p>
+                  <h6 class="fw-semibold" style="margin-top: -8px;"><%= aluno.nome %></h6>
+                  <p class="card-text text-muted" style="font-size: 12px; margin-top: -8px; margin-bottom: -4px;"><%= aluno.email %></p>
                 </div>
               </div>
             <% end %>

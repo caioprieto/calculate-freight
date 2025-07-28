@@ -56,7 +56,7 @@ td:first-child, th:first-child {
 }
 
 input[type="checkbox"] {
-  transform: scale(1.3);
+  transform: scale(1.01);
   margin: 5px;
 }
 
@@ -92,13 +92,14 @@ input[type="checkbox"] {
 }
 
 .container-redacoes-escolhidas {
-  background-color: rgba(201, 201, 201, 0.411);
   border-radius: 5px;
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 1px;
+  background-color: whitesmoke;
+  margin-left: -5px;
 }
 
 .card-redacao {
@@ -195,9 +196,21 @@ input[type="checkbox"] {
   font-weight: 500;
 }
 
+.menu-link {
+  font-size: 16px !important;
+}
+
 .user-avatar {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  object-position: top;
+}
+
+.user-avatar-max {
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 50%;
   object-position: top;
@@ -274,6 +287,16 @@ input[type="checkbox"] {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.form-label {
+  font-size: 13px;
+  font-weight: 370;
+}
+
+.video-file-name {
+  font-size: 13px;
+  font-weight: 500px;
+}
+
 .table-admin {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -291,14 +314,16 @@ input[type="checkbox"] {
 .table-admin th,
 .table-admin td {
   text-align: left;
-  font-size: 16px;
+  font-size: 14px;
   border-bottom: 1px solid #e5e5e5;
+  padding: 6px !important;
 }
 
 .table-admin thead th {
-  background-color: #1400001a;
+  background-color: #acacac0a;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
+  padding: 6px !important;
 }
 
 .table-admin tbody tr:hover {
@@ -319,8 +344,33 @@ input[type="checkbox"] {
   background-color: #1d1d1d;
   color: white;
   padding: 5px 10px;
-  border-radius: 50px;
   margin-right: 10px;
+  width: 14.5px;
+  height: 15.5px;
+}
+
+.badge-admin {
+  background-color: #1d1d1d;
+  color: white;
+  padding: 3px;
+  margin-right: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+}
+
+.notification-badge {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  background-color: rgba(255, 255, 255, 0.88);
+  color: black;
+  border-radius: 50%; /* garante círculo */
+  padding: 0; /* remove padding para não distorcer */
 }
 
 .preco-riscado {
@@ -419,7 +469,7 @@ input[type="checkbox"] {
   box-shadow: rgba(255, 255, 255, 0.795);
   text-align: center;
   transition: transform .35s ease;
-  height: 80px;
+  height: 85px;
   width: 100%;
 }
 
@@ -514,7 +564,64 @@ input[type="checkbox"] {
 }
 
 .background-filter {
-  background-color: rgba(116, 116, 116, 0.192);
+  background-color: rgba(116, 116, 116, 0.044);
   border-radius: 3px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0.2,0.2,0,0.19);
+}
+
+.select2-container--bootstrap4 .select2-selection--single {
+  height: calc(1.8125rem); /* igual ao form-select-sm */
+  padding: 0rem 0rem;
+  font-size: 0.875rem; /* sm */
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+  padding-left: 0;
+  padding-right: 0;
+  line-height: 0.5;
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow {
+  height: 100%;
+  top: 0;
+  right: 0.5rem;
+}
+
+.notification-bubble {
+  background-color:rgba(201, 201, 201, 0.494);
+  color: black;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 15px;
+}
+
+.bolinha-span {
+  font-size: 13px;
+}
+
+.notifications-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  z-index: 1000;
+  display: none;
+}
+.notifications-dropdown.active {
+  display: block;
+}
+.notification-item {
+  padding: 10px;
+  font-size: 13px;
+  border-bottom: 1px solid #eee;
+}
+.notification-item:last-child {
+  border-bottom: none;
 }

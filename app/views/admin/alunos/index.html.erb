@@ -5,9 +5,26 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // 🔽 Scroll para o final do chat
     const bottom = document.getElementById("bottom");
     if (bottom) {
       bottom.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // 🔽 Dropdown de notificações
+    const icon = document.getElementById("notification-icon");
+    const dropdown = document.getElementById("notifications-dropdown");
+
+    if (icon && dropdown) {
+      icon.addEventListener("click", function () {
+        dropdown.classList.toggle("active");
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!icon.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.remove("active");
+        }
+      });
     }
   });
 </script>

@@ -13,13 +13,13 @@
                 <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho border" %>
               <% end %>
               <div style="margin-left: 10px; width: 75%">
-                <h6 class="fw-light mt-1"><%= curso.name %></h6>
+                <h6 class="fw-light mt-1" style="font-size: 16px;"><%= curso.name %></h6>
                 <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
               </div>
               <div>
                 <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true do %>
                   <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 mt-0", style: "border-radius: 5px;" do %>
-                    <i class="icon-lixeira bi bi-trash fs-5" style="font-weight: 2000"></i>
+                    <i class="icon-lixeira bi bi-trash" style="font-weight: 2000; font-size: 16px;"></i>
                   <% end %>
                 <% end %>
               </div>

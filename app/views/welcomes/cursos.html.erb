@@ -1,110 +1,89 @@
 <div style="margin-top: -15px;">
   <%= render 'vestibulares' %>
   <br>
+  <%= render partial: 'provas_anteriores' %>
 
-  <div class="container margin-top-mobile">
+  <div class="container margin-top-mobile mt-5">
     <div class="mb-3 ms-4 d-flex margin-top-max" style="width: 93%;">
-      <i class="bi bi-play-btn fs-4" style="margin-top: -4px; margin-right: 6px; margin-left: 10px;"></i>
-      <h2 class="ms-2" style="font-size: 21px; font-weight: 400;">Cursos</h2>
+      <i class="bi bi-play-btn fs-5" style="margin-top: -4px; margin-right: 6px; margin-left: 10px;"></i>
+      <h2 class="ms-2" style="font-size: 19px; font-weight: 400;">Cursos</h2>
     </div>
 
     <hr class="text-dark" style="width: 95.6%; margin-left: 30px; margin-bottom: 10px; margin-top: -22px; opacity: 10%;">
   </div>
 
   <div class="container flex-columns-mobile">
-    <% @cursos_collection.each do |curso| %>
-      <div class="col align-items-center justify-content-center" style="margin-top: 5px; margin-left: 8px;" data-prova-nome="<%= curso.prova %>">
-        <div class="container card shadow mb-2 rounded-4 hover p-2 card-mobile" style="width: 96.3%">
-          <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
-            <div class="row g-0">
-              <div class="col-md-4 d-flex align-items-center justify-content-center">
-              <% if curso.imagem.present? %>
-                <%= image_tag curso.imagem, class: "mobile-imagem", alt: curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain;" %>
-              <% end %>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body mobile-card-body">
-                  <h5 class="card-title no-margin-bottom-mobile font-mobile-small" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
-                  <strong class="mb-5 no-margin-bottom-mobile font-mobile-small" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
-                  <span class="preco-riscado font-mobile-small mobile-none">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
+    <div class="row row-cols-1 row-cols-md-2 g-0">
+      <% @cursos_collection.each do |curso| %>
+        <div class="col" style="margin-right: -15px;" data-prova-nome="<%= curso.prova %>">
+          <div class="card shadow ms-4 rounded-4 hover p-2 card-mobile" style="width: 96.3%; height: 90%;">
+            <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
+              <div class="row g-0">
+                <div class="col-md-3 d-flex align-items-center justify-content-center">
+                  <% if curso.imagem.present? %>
+                    <%= image_tag curso.imagem, class: "mobile-imagem", alt: curso.name, style: "max-height: 150px; max-width: 100%; object-fit: cover;" %>
+                  <% end %>
+                </div>
+                <div class="col-md-9">
+                  <div class="card-body mobile-card-body">
+                    <h5 class="card-title no-margin-bottom-mobile font-mobile-small" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
+                    <strong class="mb-5 no-margin-bottom-mobile font-mobile-small" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                    <span class="preco-riscado font-mobile-small mobile-none">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
 
-                  <div class="mt-2 mobile-none">
+                    <div class="row mt-2 mobile-none">
+                      <div class="col-12 col-md-5 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <i class="bi bi-file-earmark-arrow-down fs-5 me-1"></i>
+                          <span style="font-size: 11px;"><%= curso.words.count %> temas de redação</span>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-md-7 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <i class="bi bi-phone fs-5 me-1"></i>
+                          <span style="font-size: 11px;">Acesso no dispositivo móvel</span>
+                        </div>
+                      </div>
+                    </div>
+
+
                     <% if current_user.present? %>
-                      <% if current_user.user_cursos.where(curso_id: curso.id).present? %>
-                        <span class="badge bg-success p-2" style="font-size: 11px; font-weight: 450;">✅ Comprado</span>
-                      <% end %>
-                    <% end %>
-                  </div>
-
-                  <div class="row mt-2 mobile-none">
-                    <div class="col-12 col-md-5 mb-2">
-                      <div class="item d-flex align-items-center">
-                        <i class="bi bi-file-play fs-5 me-2"></i>
-                        <span style="font-size: 12px;">20 horas de vídeo</span>
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-md-7 mb-2">
-                      <div class="item d-flex align-items-center">
-                        <i class="bi bi-phone fs-5 me-2"></i>
-                        <span style="font-size: 12px;">Acesso no dispositivo móvel e na TV</span>
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-md-5 mb-2">
-                      <div class="item d-flex align-items-center">
-                        <i class="bi bi-trophy fs-5 me-2"></i>
-                        <span style="font-size: 12px;">Certificado de conclusão</span>
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-md-7 mb-2">
-                      <div class="item d-flex align-items-center">
-                        <i class="bi bi-file-earmark-arrow-down fs-5 me-2"></i>
-                        <span style="font-size: 12px;"><%= curso.words.count %> redações disponíveis para download</span>
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-md-5 mb-2">
-                      <div class="item d-flex align-items-center">
-                        <i class="bi bi-pen fs-5 me-2"></i>
-                        <span style="font-size: 12px;">Correções aprofundadas</span>
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-md-7 mb-2">
-                      <div class="item d-flex align-items-center">
-                        <i class="bi bi-pen fs-5 me-2"></i>
-                        <span style="font-size: 12px;">Correções aprofundadas e dinâmicas</span>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <% if current_user.present? %>
-                    <% if current_user.cart.cart_cursos.where(curso_id: curso.id).present? %>
-                      <%= button_tag class: "btn text-success p-1 position-absolute hover", style: "top: 10px; right: 10px;  border: none;" do %>
-                        <i class="bi bi-cart-check fs-3"></i>
-                      <% end %>
-                    <% elsif current_user.user_cursos.where(curso_id: curso.id).present? %>
-                      <!-- nenhum botão extra aqui -->
-                    <% else %>
-                      <%= form_with url: add_to_cart_path(curso), method: :post, local: true do %>
-                        <%= button_tag type: "submit", class: "btn text-dark p-1 position-absolute hover", style: "top: 10px; right: 10px; border: none;", onclick: "showLoadingAndRedirect()" do %>
-                          <i class="bi bi-cart-plus fs-3"></i>
+                      <% if current_user.cart.cart_cursos.where(curso_id: curso.id).present? %>
+                        <%= button_tag class: "btn text-success p-1 position-absolute hover d-flex", style: "top: 10px; right: 10px;  border: none;" do %>
+                          <i class="bi bi-cart-check fs-6"></i>
+                          <span style="font-size: 11px; margin-top: 4px; margin-left: 1px;">Adicionado</span>
+                        <% end %>
+                      <% elsif current_user.user_cursos.where(curso_id: curso.id).present? %>
+                        <%= button_tag class: "btn text-success p-1 position-absolute d-flex", style: "top: 10px; right: 10px;  border: none;" do %>
+                          <span style="font-size: 11px; margin-top: 8px; margin-left: 3px;">
+                            <i class="bi bi-check-circle-fill" style="font-size: 10px;"></i>
+                            Adquirido: <%= current_user.user_cursos.where(curso_id: curso.id).first.data_inicio.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %><br>
+                            <span style="font-size: 11px; margin-left: 0px;" class="text-danger">
+                            <i class="bi bi-exclamation-circle-fill" style="font-size: 10px;"></i>
+                            Expira em: <%= current_user.user_cursos.where(curso_id: curso.id).first.data_fim.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></span>
+                          </span>
+                        <% end %>
+                      <% else %>
+                        <%= form_with url: add_to_cart_path(curso), method: :post, local: true do %>
+                          <%= button_tag type: "submit", class: "btn text-dark p-1 position-absolute hover d-flex", style: "top: 10px; right: 10px; border: none;", onclick: "showLoadingAndRedirect()" do %>
+                            <i class="bi bi-cart-plus fs-6"></i>
+                            <span style="font-size: 11px; margin-top: 4px; margin-left: 1px;">Adicionar</span>
+                          <% end %>
                         <% end %>
                       <% end %>
                     <% end %>
-                  <% end %>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<br><br>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {

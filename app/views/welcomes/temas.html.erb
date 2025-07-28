@@ -43,7 +43,9 @@
           <div class="vestibular-card mb-4" style="width: 24%; position: relative;">
             <a href="/temas/<%= tema.id %>" class="text-dark" style="text-decoration: none; display: block;">
               <div style="position: relative;">
-                <%= image_tag tema.capa, style: "display: block;" %>
+                <% if tema.capa.attached? %>
+                  <%= image_tag tema.capa, style: "display: block;" %>
+                <% end %>
                 <span class="badge p-2"
                       style="position: absolute; top: 8px; right: 25px; font-size: 13px; font-weight: 400;">
                   <%= tema.prova.upcase %>

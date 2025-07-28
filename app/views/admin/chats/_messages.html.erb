@@ -1,0 +1,10 @@
+<% chat.messages.each do |msg| %>
+  <div class="p-1 <%= msg.dono_type == 'Admin' ? 'text-end' : 'text-start' %>">
+    <span class="badge-admin ms-2 <%= msg.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
+      <%= msg.dono_type == 'Admin' ? 'Admin' : chat.user_word.user.nome %>
+    </span>
+    <div class="me-3 mb-1 d-inline-block p-2 rounded border mt-1" style="color: black;">
+      <%= msg.content %>
+    </div>
+  </div>
+<% end %>

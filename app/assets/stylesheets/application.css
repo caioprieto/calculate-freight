@@ -19,21 +19,19 @@
 }
 
 .spinner-loader {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  border-top: solid 8px rgb(71,203,255);
-  border-right: solid 8px rgba(0,0,0,.1);
-  border-bottom: solid 8px rgba(0,0,0,.1);
-  border-left: solid 8px rgba(0,0,0,.1);
-
-  animation: 1.5s linear infinite spin;
+  border-top: solid 6px rgb(71,203,255);
+  border-right: solid 6px rgba(0,0,0,.1);
+  border-bottom: solid 6px rgba(0,0,0,.1);
+  border-left: solid 6px rgba(0,0,0,.1);
+  animation: spin 1.5s linear infinite;
 }
 
 .container-curso {
   padding: 0;
   margin: 0;
-  margin-top: -30px;
   background-color: #e9e9e9;
 }
 
@@ -91,11 +89,6 @@ h1 {
   margin-right: 0px;
 }
 
-.curso-preview {
-  position: relative;
-  z-index: 1;
-}
-
 .preview-text {
   text-align: center;
   margin-top: 10px;
@@ -111,7 +104,7 @@ h1 {
 }
 
 .pagar-box {
-  background: whitesmoke;
+  background: white;
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -119,18 +112,17 @@ h1 {
 }
 
 .preco {
-  margin-top: 5px;
+  margin-top: -5px;
 }
 
 .preco-atual {
-  font-size: 16px;
-  font-weight: lighter;
+  font-size: 13px;
+  font-weight: 350;
   color: #1c1c1c;
 }
 
 .preco-riscado {
   text-decoration: line-through;
-  margin-bottom: -10px;
   color: #888;
   font-size: 13px;
 }
@@ -141,7 +133,13 @@ h1 {
 }
 
 .preco-antigo {
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1c1c1c;
+}
+
+.preco-parcelado {
+  font-size: 14px;
   font-weight: 600;
   color: #1c1c1c;
 }
@@ -156,10 +154,10 @@ h1 {
 .btn-comprar {
   width: 100%;
   margin-top: 10px;
-  padding: 10px;
+  padding: 14px;
   border-radius: 5px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 }
@@ -317,12 +315,12 @@ h1 {
   display: none;
   position: absolute;
   right: 0;
-  top: 100%;
+  top: 105%;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   min-width: 200px;
-  z-index: 1000;
+  z-index: 99999 !important;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
@@ -354,6 +352,18 @@ h1 {
   z-index: 1001; /* acima da dropdown */
 }
 
+.arrow-up-cart {
+  position: absolute;
+  top: -10px;
+  right: 25px; /* Ajuste horizontal conforme o botão */
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid white; /* mesma cor do fundo do menu */
+  z-index: 1001; /* acima da dropdown */
+}
+
 @media (max-width: 450px) {
   .arrow-up {
     right: 5px;
@@ -367,8 +377,8 @@ h1 {
 
 .curso-imagem {
   width: 300px;
-  height: 200px;
-  object-fit: scale-down;
+  height: 180px;
+  object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   margin: 0 auto 15px auto;
@@ -410,8 +420,8 @@ h1 {
 
 .price-bold {
   font-weight: 600;
-  font-size: 18px;
-  margin-top: -5px;
+  font-size: 14px;
+  margin-top: -10px;
 }
 
 .itens-curso {
@@ -573,4 +583,43 @@ h1 {
 
 .dropdown-cursos:hover .dropdown-cursos-menu {
   display: block;
+}
+
+
+.redacoes-card {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+  background-color: whitesmoke;
+}
+
+.redacoes-card:hover {
+  transform: scale(1.06);
+}
+
+.redacoes-card:hover img {
+  filter: blur(0px);
+}
+
+.redacoes-card:hover i {
+  transform: scale(1.15);
+}
+
+.redacoes-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  filter: blur(1.3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.redacoes-card h1 {
+  font-size: 17px;
+  padding: 8px;
+}
+
+.redacoes-card i {
+  transition: transform 0.3s ease-in-out;
+  margin-left: 2px;
+  margin-top: -1px;
 }

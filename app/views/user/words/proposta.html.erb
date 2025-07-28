@@ -41,9 +41,11 @@
           <i class="bi bi-download fs-6" style="margin-right: 10px;"></i>
           Baixar o PDF
         <% end %>
-        <%= link_to '#', data: { bs_toggle: 'modal', bs_target: '#progressModal' } do %>
-          <i class="bi bi-trophy fs-6" style="margin-right: 10px;"></i>
-          Seu progresso
+        <% if @user_curso.present? %>
+          <%= link_to '#', data: { bs_toggle: 'modal', bs_target: '#progressModal' } do %>
+            <i class="bi bi-trophy fs-6" style="margin-right: 10px;"></i>
+            Seu progresso
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -163,9 +165,12 @@
   </div>
 
   <%= render partial: 'modal_start_word' %>
-  <%= render partial: 'modal_progress' %>
   <%= render partial: 'modal_instrution' %>
   <%= render partial: 'modal_results' %>
+
+  <% if @user_curso.present? %>
+    <%= render partial: 'modal_progress' %>
+  <% end %>
 </div>
 
 <input type="file" id="pdfUploader" style="display: none;" />
@@ -453,7 +458,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       const modal = document.getElementById('progressModal');
-      const progresso = <%= @user_curso.progresso || 0 %>;
+      const progresso = <%= @user_curso.try(:progresso) || 0 %>;
 
       if (!modal) return; // Evita erro se modal não estiver presente
 

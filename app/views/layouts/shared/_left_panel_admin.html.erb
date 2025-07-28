@@ -3,58 +3,58 @@
     <img src="/images/logo.png" style="width: 200px; height: 200px; margin-top: -50px; margin-left: 15px">
   </a>
 </div>
-<div style="margin-left: 25px; margin-top: -25px; width: 235px">
+<div style="margin-left: 20px; margin-top: -25px; width: 235px">
   <p class="text-warning mb-4"> Você está no <strong>Admin</strong> </p>
   <div class="row">
     <nav class="menu fw-light">
       <%= link_to "/admin/dashboard", class: "menu-link #{'active' if current_page?('/admin/dashboard')}" do %>
-        <i class="bi bi-border-all fs-5" style="margin-right: 10px"></i>
+        <i class="bi bi-border-all fs-5" style="margin-right: 9px"></i>
         Dashboard
       <% end %>
 
-      <%= link_to "/admin/correcoes", class: "menu-link #{'active' if current_page?('/admin/correcoes')}" do %>
-        <i class="bi bi-pencil-square fs-5" style="margin-right: 10px"></i>
-        Correções
-      <% end %>
-
       <%= link_to "/admin/alunos", class: "menu-link #{'active' if current_page?('/admin/alunos')}" do %>
-        <i class="bi bi-mortarboard fs-5" style="margin-right: 10px"></i>
+        <i class="bi bi-mortarboard fs-5" style="margin-right: 9px"></i>
         Alunos
       <% end %>
 
+      <%= link_to "/admin/correcoes", class: "menu-link #{'active' if current_page?('/admin/correcoes')}" do %>
+        <i class="bi bi-pencil-square fs-5" style="margin-right: 9px"></i>
+        Correções
+      <% end %>
+
       <%= link_to "/admin/pedidos", class: "menu-link #{'active' if current_page?('/admin/pedidos')}" do %>
-        <i class="bi bi-bag fs-5" style="margin-right: 10px"></i>
+        <i class="bi bi-bag fs-5" style="margin-right: 9px"></i>
         Pedidos
       <% end %>
 
+      <%= link_to "/admin/cursos", class: "menu-link #{'active' if current_page?('/admin/cursos') || @curso.present? }" do %>
+        <i class="bi bi-play-btn fs-5" style="margin-right: 9px"></i>
+        Cursos
+      <% end %>
+
+      <%= link_to "/admin/words", class: "menu-link #{'active' if current_page?('/admin/words') || @word.present? }" do %>
+        <i class="bi bi-book fs-5" style="margin-right: 9px"></i>
+        Redações
+      <% end %>
+
+      <%= link_to "/admin/temas", class: "menu-link #{'active' if current_page?('/admin/temas') || current_page?('/admin/temas/new') || @tema.present? }" do %>
+        <i class="bi bi-book-half fs-5" style="margin-right: 9px"></i>
+        Temas Gratuitos
+      <% end %>
+
       <%= link_to "/admin/pagamento", class: "menu-link #{'active' if current_page?('/admin/pagamento')}" do %>
-        <i class="bi bi-cash fs-5" style="margin-right: 10px"></i>
+        <i class="bi bi-cash fs-5" style="margin-right: 9px"></i>
         Pagamento
       <% end %>
 
       <%= link_to "/", class: "menu-link" do %>
-        <i class="bi bi-house fs-5" style="margin-right: 10px"></i>
+        <i class="bi bi-house fs-5" style="margin-right: 9px"></i>
         Ir para Home
       <% end %>
 
       <%= link_to "/user/dashboard", class: "menu-link" do %>
-        <i class="bi bi-backpack fs-5" style="margin-right: 10px"></i>
+        <i class="bi bi-backpack fs-5" style="margin-right: 9px"></i>
         Ir para Área do Aluno
-      <% end %>
-
-      <%= link_to "/admin/cursos", class: "menu-link #{'active' if current_page?('/admin/cursos')}" do %>
-        <i class="bi bi-play-btn fs-5" style="margin-right: 10px"></i>
-        Cursos
-      <% end %>
-
-      <%= link_to "/admin/words", class: "menu-link #{'active' if current_page?('/admin/words')}" do %>
-        <i class="bi bi-book fs-5" style="margin-right: 10px"></i>
-        Redações
-      <% end %>
-
-      <%= link_to "/admin/temas/new", class: "menu-link #{'active' if current_page?('/admin/temas')}" do %>
-        <i class="bi bi-book-half fs-5" style="margin-right: 10px"></i>
-        Temas Gratuitos
       <% end %>
     </nav>
   </div>

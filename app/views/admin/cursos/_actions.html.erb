@@ -1,26 +1,26 @@
-<div class="d-flex gap-2 mt-3 mb-3">
-  <%# Voltar %>
-  <a href="/admin/cursos" class="btn btn-secondary px-3 py-1" style="border-radius: 10px">
-    <i class="bi bi-box-arrow-left fs-4 me-1"></i>
-    <span style="position: relative; top: -4px; font-weight: 600">Voltar</span>
-  </a>
-
+<div class="d-flex gap-1 mt-3 mb-3">
   <%# Salvar %>
-  <%= f.button type: "submit", class: "btn btn-success px-3 py-0", style: "border-radius: 10px" do %>
-    <i class="bi bi-check-circle-fill fs-4 me-1"></i>
-    <span style="position: relative; top: -4px; font-weight: 600">Salvar</span>
+  <%= f.button type: "submit", class: "btn btn-success px-3 py-2", style: "border-radius: 3px" do %>
+    <i class="bi bi-check-circle-fill fs-6 me-1"></i>
+    <span style="position: relative; top: -1.5px; font-weight: 600; font-size: 13px;">Salvar</span>
   <% end %>
 
+  <%# Voltar %>
+  <a href="/admin/cursos" class="btn btn-secondary px-3 py-2" style="border-radius: 3px">
+    <i class="bi bi-box-arrow-left fs-6 me-1"></i>
+    <span style="position: relative; top: -1.5px; font-weight: 600; font-size: 13px;">Voltar</span>
+  </a>
+
   <%# Adicionar Módulo %>
-  <button type="button" id="add-modulo" class="btn btn-primary px-3 py-0" style="border-radius: 10px">
-    <i class="bi bi-plus-circle-fill fs-4 me-1"></i>
-    <span style="position: relative; top: -4px; font-weight: 600">Adicionar Módulo</span>
+  <button type="button" id="add-modulo" class="btn btn-primary px-3 py-2" style="border-radius: 3px">
+    <i class="bi bi-plus-circle-fill fs-6 me-1"></i>
+    <span style="position: relative; top: -1.5px; font-weight: 600; font-size: 13px;">Adicionar Módulo</span>
   </button>
 
   <%# Escolher Capa %>
-  <label class="btn btn-info px-3 py-0 text-white" style="border-radius: 10px;">
-    <i style="position: relative; top: 4px;" class="bi bi-file-image-fill fs-4 me-1"></i>
-    <span id="imagem_label_text" style="position: relative; top: 1px; font-weight: 600;">
+  <label class="btn btn-info px-3 py-2 text-white" style="border-radius: 3px;">
+    <i style="position: relative; top: 1px;" class="bi bi-file-image-fill fs-6 me-1"></i>
+    <span id="imagem_label_text" style="position: relative; top: -1.5px; font-weight: 600; font-size: 13px;">
       <%= @curso.imagem.attached? ? @curso.imagem.filename.to_s.truncate(25) : "Escolher Capa" %>
     </span>
     <%= f.file_field :imagem, style: "display: none;", id: "imagem_input" %>
@@ -28,11 +28,17 @@
 
   <%# Remover capa %>
   <%= f.hidden_field :remove_imagem, id: "remove_imagem_field" %>
-  <button type="button" class="btn btn-danger px-3 py-0" onclick="removerImagem()" style="border-radius: 10px;">
-    <i class="bi bi-trash-fill fs-4 me-1"></i>
-    <span style="position: relative; top: -3px; font-weight: 600;">
+  <button type="button" class="btn btn-danger px-3 py-2" onclick="removerImagem()" style="border-radius: 3px;">
+    <i class="bi bi-trash-fill fs-6 me-1"></i>
+    <span style="position: relative; top: -1.5px; font-weight: 600; font-size: 13px;">
       Remover Capa
     </span>
+  </button>
+
+  <%# Editar GRID %>
+  <button type="button" id="edit-grid" class="btn btn-warning px-3 py-2 d-flex text-dark" style="border-radius: 3px; font-weight: 620">
+    <i class="bi bi-ui-checks-grid fs-6 me-2" style="margin-top: 1px;"></i>
+    <span style="position: -1.5px; font-size: 13px; margin-top: 3px;">Editar <span class="text-dark" style="font-weight: 700">GRID</span></span>
   </button>
 </div>
 
@@ -42,4 +48,19 @@
     document.getElementById('remove_imagem_field').value = "1";
     document.getElementById('imagem_label_text').innerText = "Escolher Capa";
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnEditGrid = document.getElementById("edit-grid");
+    const switches = document.querySelectorAll(".grid-switch");
+
+    btnEditGrid.addEventListener("click", () => {
+      switches.forEach(switchInput => {
+        if (switchInput.style.display === "none" || switchInput.style.display === "") {
+          switchInput.style.display = "inline-block";
+        } else {
+          switchInput.style.display = "none";
+        }
+      });
+    });
+  });
 </script>

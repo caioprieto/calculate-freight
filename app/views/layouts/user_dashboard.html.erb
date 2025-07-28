@@ -66,7 +66,7 @@
                   <!-- Carrinho -->
                   <div class="position-relative">
                     <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative; border: none">
-                      <i class="bi bi-cart2 fs-4"></i>
+                      <i class="bi bi-cart2 fs-5"></i>
                       <% if @cart.present? %>
                         <% unless @cart.cursos.count.zero? %>
                           <span class="bolinha position-absolute top-0" style="font-weight: 600;">
@@ -81,7 +81,7 @@
                   <!-- Notificação -->
                   <div class="position-relative me-1">
                     <div class="btn notify-toggle" id="notify-toggle" style="cursor: pointer; position: relative; border: none">
-                      <i class="bi bi-bell fs-4"></i>
+                      <i class="bi bi-bell fs-5"></i>
                       <% unless current_user.notifications.count.zero? %>
                         <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 600;">
                           <span class="bolinha-span"> <%= current_user.notifications.count %></span>
@@ -94,7 +94,7 @@
                   <!-- BOTÃO DO ÚSUARIO -->
                   <div class="user-dropdown">
                     <button class="user-dropdown-button" aria-label="Menu do usuário">
-                      <i class="bi bi-person-circle user-icon fs-4"></i>
+                      <i class="bi bi-person-circle user-icon fs-5"></i>
                       <span class="email-text"><%= current_user.nome.upcase %></span>
                     </button>
 

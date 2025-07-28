@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_18_172940) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_27_155433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -75,6 +75,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_172940) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "word_id"
+    t.integer "duration_in_seconds"
     t.index ["modulo_id"], name: "index_aulas_on_modulo_id"
     t.index ["word_id"], name: "index_aulas_on_word_id"
   end
@@ -124,6 +125,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_172940) do
     t.integer "duration"
     t.decimal "value_riscado"
     t.integer "vigencia", default: 6, null: false
+    t.boolean "grid_horas_video", default: true, null: false
+    t.boolean "grid_mobile_and_tv", default: true, null: false
+    t.boolean "grid_certificate", default: true, null: false
+    t.boolean "grid_counter_words", default: true, null: false
+    t.boolean "grid_correcoes", default: true, null: false
+    t.integer "qtd_parcelas", default: 3, null: false
   end
 
   create_table "cursos_words", id: false, force: :cascade do |t|
@@ -197,6 +204,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_172940) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "notification_type", null: false
+    t.bigint "chat_id"
+    t.string "painel", default: "user", null: false
+    t.index ["chat_id"], name: "index_notifications_on_chat_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -263,6 +273,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_172940) do
     t.datetime "data_conclusao"
     t.bigint "curso_id"
     t.boolean "corrigido", default: false, null: false
+    t.string "status", default: "pending", null: false
     t.index ["curso_id"], name: "index_user_words_on_curso_id"
     t.index ["user_id"], name: "index_user_words_on_user_id"
     t.index ["word_id"], name: "index_user_words_on_word_id"
@@ -305,6 +316,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_172940) do
     t.text "proposta"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_type", default: "cover", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -321,6 +333,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_172940) do
   add_foreign_key "freights", "address", column: "address_origem_id"
   add_foreign_key "messages", "chats"
   add_foreign_key "modulos", "cursos"
+  add_foreign_key "notifications", "chats"
   add_foreign_key "notifications", "users"
   add_foreign_key "pedidos", "carts"
   add_foreign_key "pedidos", "users"

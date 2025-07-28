@@ -420,6 +420,7 @@ footer.footer {
   width: 400px;
   display: none;
   z-index: 1000;
+  margin-top: 0px !important;
 }
 
 .nav-icone {
@@ -441,7 +442,7 @@ footer.footer {
   font-size: 20px;
   padding: 10px;
   cursor: pointer;
-  z-index: 10;
+  /* z-index: 10; */
   height: 100%;
   width: 50px;
   border-radius: 10px;

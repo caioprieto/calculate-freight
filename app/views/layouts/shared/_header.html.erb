@@ -48,10 +48,11 @@
 
           <!-- MINI MODAL DO CARRINHO -->
           <div id="cart-dropdown" class="card cart-card shadow position-absolute end-0 mt-2">
+            <div class="arrow-up-cart"></div>
             <div class="card-body">
               <div class="d-flex justify-content-between">
-                <h6 style="margin-top: 5px;">Carrinho</h6>
-                <button type="button" class="btn-close justify-content-end" data-bs-dismiss="alert" aria-label="Close" onclick="document.getElementById('cart-dropdown').style.display='none'"></button>
+                <h6 style="margin-top: 4px;">Carrinho</h6>
+                <button type="button" class="btn-close fs-6 justify-content-end" data-bs-dismiss="alert" aria-label="Close" onclick="document.getElementById('cart-dropdown').style.display='none'"></button>
               </div>
               <hr>
               <% if @cursos.present? %>
@@ -63,13 +64,16 @@
                           <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho border" %>
                         <% end %>
                         <div style="margin-left: 10px; width: 75%">
-                          <h6 class="fw-light mt-1"><%= curso.name %></h6>
-                          <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
+                          <h6 class="fw-light mt-2"><%= curso.name %></h6>
+                          <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %><strong> à vista</strong> <p>
+                          <div style="margin-top: 20px; display: flex">
+                            <span class="preco-parcelado" style="margin-top: -23px;">R$ 10,00 <span class="fw-light" style="font-size: 13px;">x10<strong> sem juros</strong></span></span>
+                          </div>
                         </div>
                         <div>
                           <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true do %>
-                            <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 mt-0", style: "border-radius: 5px;" do %>
-                              <i class="icon-lixeira bi bi-trash fs-5" style="font-weight: 2000"></i>
+                            <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 mt-0 d-flex", style: "border-radius: 3px;" do %>
+                              <i class="icon-lixeira bi bi-trash" style="font-weight: 1000; font-size: 15px; margin-top: 3px;"></i>
                             <% end %>
                           <% end %>
                         </div>
@@ -82,7 +86,7 @@
                 <span class="preco-atual">Valor dos Produtos</span>
                 <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
               </div>
-                <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d; border-radius: 5px" %>
+                <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d; border-radius: 5px; font-size: 15px;" %>
               <% else %>
                 <p class="text-muted">Seu carrinho está vazio...</p>
               <% end %>
@@ -91,6 +95,7 @@
             </div>
           </div>
         </div>
+
         <!-- Ícone de Perfil com Dropdown -->
         <div class="user-dropdown">
           <!-- Ícone do usuário -->
@@ -151,13 +156,13 @@
 
 <div class="full-width-container"style="margin-bottom: 30px; margin-top: -60px;">
   <% if flash[:noticia] %>
-    <div class="alert alert-success alert-dismissible fade show text-center mb-3" role="alert">
+    <div class="alert alert-success alert-dismissible fade show text-center mb-3" role="alert" style="margin-top: -10px">
       <%= flash[:noticia] %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
   <% if flash[:alerta] %>
-    <div class="alert alert-danger alert-dismissible fade show text-center mb-3" role="alert" style="margin-top: -3px">
+    <div class="alert alert-danger alert-dismissible fade show text-center mb-3" role="alert" style="margin-top: -10px">
       <%= flash[:alerta]%>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

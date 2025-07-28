@@ -1,29 +1,37 @@
-<h5 href="/">
-  <i class="bi bi-pencil-square fs-4" style="margin-right: 8px"></i>
-  <span style="position: relative; top: -2px; font-size: 18px;">Correções</span>
-</h5>
+<h6 href="/" class="d-flex">
+  <i class="bi bi-pencil-square fs-5" style="margin-right: 13px; margin-top: -3px;"></i>
+  Correções
+</h6>
 
-<div class="container-full-width mb-4 mt-4 p-3 background-filter">
+<div class="container-full-width mb-4 mt-3 p-3 background-filter">
   <%= form_with url: admin_correcoes_path, method: :get, local: true, class: "row gy-2 gx-3 align-items-end" do %>
-    <div class="col-md-4">
-      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Nome do aluno</label>
-      <%= text_field_tag :aluno, params[:aluno], class: "form-control form-control-sm", placeholder: "Nome do aluno" %>
-    </div>
-
-    <div class="col-md-4">
-      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Tipo de Redação</label>
-      <%= select_tag :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"], ["Unesp", "unesp"]], params[:prova]), include_blank: "Todos", class: "form-select form-select-sm" %>
+    <div class="col-md-3">
+      <label class="form-label" style="margin-bottom: -10px;">Nome do aluno</label>
+      <%= text_field_tag :aluno, params[:aluno], class: "form-control form-control-sm" %>
     </div>
 
     <div class="col-md-3">
-      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Ordernar por</label>
-      <%= select_tag :word_type, options_for_select([["Prazo mais Apertados", "apertados"], ["Melhores alunos", "melhores"]], params[:order_by]), include_blank: "Todos", class: "form-select form-select-sm" %>
+      <label class="form-label" style="margin-bottom: -10px;">Ordernar por</label>
+      <%= select_tag :order_by, options_for_select([["Prazo mais Apertados", "apertados"], ["Melhores alunos", "melhores"]], params[:order_by]), value: params[:order_by], class: "form-select form-select-sm" %>
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label" style="margin-bottom: -10px;">Tipo de Redação</label>
+      <%= select_tag :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"], ["Unesp", "unesp"]], params[:prova]), value: params[:prova], include_blank: "Todos", class: "form-select form-select-sm" %>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label" style="margin-bottom: -10px;">Prazo da correção</label>
+      <div class="d-flex gap-2">
+        <%= date_field_tag :data_inicial, params[:data_inicial], class: "form-control form-control-sm" %>
+        <%= date_field_tag :data_final, params[:data_final], class: "form-control form-control-sm" %>
+      </div>
     </div>
 
     <!-- Botão -->
-    <div class="col-md-1">
-      <button type="submit" class="btn btn-secondary w-100 p-1 fs-6">
-        <i class="bi bi-search me-1" style="font-weight: 1000"></i>
+    <div class="col-md-1 justify-content-end d-flex">
+      <button type="submit" class="btn btn-dark d-flex justify-content-center align-items-center w-75 px-2 fs-6" style="border-radius: 3px; white-space: nowrap; padding-top: 4px; margin-bottom: 1px;">
+        <i class="bi bi-search" style="font-weight: 500; font-size: 14px;"></i>
       </button>
     </div>
   <% end %>
@@ -32,36 +40,49 @@
 <div class="container-full-width mt-3">
   <div style="width: 100%;">
     <% @correcoes.each do |user_word| %>
-      <div class="card shadow w-100 p-3 d-flex flex-column gap-2 mt-3">
+      <div class="card shadow w-100 p-4 d-flex flex-column gap-0 mt-3">
         <div class="d-flex justify-content-between align-items-start flex-wrap">
           <!-- Tema e aluno à esquerda -->
-          <div style="margin-bottom: -20px">
-            <p style="margin-top: -10px"><strong><%= user_word.word.word_type.upcase %></strong> - <%= user_word.word.tema %></p>
-            <div class="d-flex">
-              <i class="bi bi-calendar-day fs-6" style="margin-top: -10px; margin-right: 8px;"></i>
-              <p style="margin-top: -10px">Data de envio: <strong style="font-weight: 550"><%= user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></strong></p>
+          <div style="margin-bottom: -20px" class="row">
+            <div class="col-3">
+              <% if user_word.user.imagem.present? %>
+                <%= image_tag user_word.user.imagem, class: "user-avatar-max rounded-circle me-2", width: 40, height: 40, alt: user_word.user.nome %>
+              <% else %>
+                <img src="/images/avatar-padrao.jpg" class="user-avatar-max rounded-circle me-2" width="40" height="40" />
+              <% end %>
             </div>
 
-            <div class="d-flex text-danger fw-bold">
-              <i class="bi bi-calendar-day fs-6" style="margin-top: -10px; margin-right: 8px;"></i>
-              <p style="margin-top: -10px">Prazo de entrega: <strong style="font-weight: 550"><%= user_word.prazo_entrega.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %></strong></p>
-            </div>
-            <div class="d-flex">
-              <i class="bi bi-mortarboard fs-6" style="margin-top: -10px; margin-right: 8px;"></i>
-              <p style="margin-top: -10px">Aluno: <strong style="font-weight: 550"><%= user_word.user.nome %></strong></p>
+            <div class="col-9">
+              <p style="margin-top: -10px; font-size: 13px; white-space: nowrap;"><strong><%= user_word.word.word_type.upcase %></strong> - <%= user_word.word.tema %></p>
+              <div class="d-flex">
+                <i class="bi bi-mortarboard fs-6" style="margin-top: -14px; margin-right: 8px;"></i>
+                <p style="margin-top: -11px; font-size: 13px;">Aluno: <strong style="font-weight: 550"><%= user_word.user.nome %></strong></p>
+              </div>
+
+              <div class="d-flex">
+                <i class="bi bi-calendar-day text-success fs-6" style="margin-top: -13px; margin-right: 8px;"></i>
+                <p class="text-success" style="margin-top: -10px; font-size: 13px; white-space: nowrap;">Data de envio <strong style="font-weight: 500">redação aluno</strong>: <strong style="font-weight: 550"><%= user_word.data_conclusao.present? ? user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') : "Sem data" %></strong></p>
+              </div>
+
+              <div class="d-flex text-danger fw-bold">
+                <i class="bi bi-calendar-day fs-6" style="margin-top: -13px; margin-right: 8px;"></i>
+                <p style="margin-top: -10px; font-size: 13px; font-weight: 500; white-space: nowrap;">Prazo de entrega da correção: <strong style="font-weight: 700"><%= user_word.prazo_entrega.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></strong></p>
+              </div>
             </div>
           </div>
 
           <!-- Botões à direita -->
-          <div class="d-flex flex-wrap gap-2 justify-content-end">
-            <%= link_to url_for(user_word.user_redacao), download: "redacao_#{user_word.id}.pdf", class: "btn btn-dark p-2 text-nowrap" do %>
-              <i class="bi bi-download fs-6 me-1"></i>
-              <span>Baixar</span>
-            <% end %>
+          <div class="d-flex flex-wrap gap-2 justify-content-end mt-3">
+            <% if user_word.user_redacao.attached? %>
+              <%= link_to url_for(user_word.user_redacao), download: "redacao_#{user_word.id}.pdf", class: "btn btn-dark px-3 py-2 d-flex text-nowrap", style: "font-size: 12px; font-weight: 600; border-radius: 3px;" do %>
+                <i class="bi bi-download fs-6 me-1"></i>
+                <span style="margin-top: 3px; margin-left: 5px;">Download redação aluno</span>
+              <% end %>
 
-            <%= link_to url_for(user_word.user_redacao), target: "_blank", class: "btn btn-primary p-2 text-white text-nowrap" do %>
-              <i class="bi bi-binoculars fs-6 me-1"></i>
-              <span>Pré-visualizar</span>
+              <%= link_to url_for(user_word.user_redacao), target: "_blank", class: "btn btn-primary px-3 py-2 text-nowrap", style: "font-size: 12px; font-weight: 600; border-radius: 3px;" do %>
+                <i class="bi bi-binoculars fs-6 me-1"></i>
+                <span>Pré-visualizar</span>
+              <% end %>
             <% end %>
 
             <%= form_with url: admin_enviar_correcao_path, html: { multipart: true }, method: :post, remote: true, id: "uploadForm_#{user_word.id}", style: "display: none;" do |form| %>
@@ -69,9 +90,14 @@
               <%= hidden_field_tag :user_word_id, user_word.id %>
             <% end %>
 
-            <%= link_to "#", class: "btn btn-success p-2 text-white text-nowrap", style: "margin-left: -8px", onclick: "triggerUpload(#{user_word.id})" do %>
-              <i class="bi bi-upload fs-6 me-1"></i>
-              <span>Upload Correção</span>
+            <%= link_to "#", class: "btn btn-success px-3 py-2 d-flex text-nowrap", onclick: "triggerUpload(#{user_word.id})", style: "font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: -8px;" do %>
+              <i class="bi bi-upload fs-6 me-1" style="margin-top: 1px;"></i>
+              <span style="margin-top: 2px; margin-left: 5px;">Upload Correção</span>
+            <% end %>
+
+            <%= link_to "/admin/correcoes/#{user_word.id}/edit", class: "btn btn-dark px-3 py-2 d-flex text-nowrap", style: "font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: -1px;" do %>
+              <i class="bi bi-chat-square-text fs-6 me-1" style="margin-top: 1px;"></i>
+              <span style="margin-top: 2px; margin-left: 5px;">Ir para Correção</span>
             <% end %>
           </div>
 
@@ -96,4 +122,25 @@
       });
     });
   });
+
+  $(document).ready(function() {
+    $('.select2-ajax').select2({
+      theme: 'bootstrap4', // Aplica o tema
+      placeholder: 'Nome do aluno',
+      allowClear: true,
+      width: '100%',
+      ajax: {
+        url: $('.select2-ajax').data('url'),
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return { name: params.term };
+        },
+        processResults: function (data) {
+          return { results: data };
+        }
+      }
+    });
+  });
+
 </script>

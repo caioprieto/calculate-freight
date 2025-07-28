@@ -12,6 +12,22 @@ class Aula < ApplicationRecord
   delegate :curso_id, :curso, to: :modulo, prefix: false, allow_nil: true
 
   after_save :update_words, if: :saved_change_to_word_id?
+  after_save :extrair_duracao_video
+
+  def extrair_duracao_video
+    return unless video.attached?
+
+    downloaded_file = Tempfile.new([ "video", ".mp4" ])
+    downloaded_file.binmode
+    downloaded_file.write(video.download)
+    downloaded_file.rewind
+
+    movie = FFMPEG::Movie.new(downloaded_file.path)
+    update_column(:duration_in_seconds, movie.duration.to_i)
+
+    downloaded_file.close
+    downloaded_file.unlink
+  end
 
   def update_words
     old_word_id = word_id_before_last_save

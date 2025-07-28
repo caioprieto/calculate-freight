@@ -34,6 +34,17 @@ class Curso < ApplicationRecord
     curso_words.create(curso_id: id, word_id: word_id)
   end
 
+  def desconto
+    return 0 if value_riscado.blank? || value.blank?
+
+    ((value_riscado - value) / value_riscado) * 100.to_i
+  end
+
+  def total_horas
+    total_segundos = aulas.sum(:duration_in_seconds)
+    (total_segundos / 3600.0).round(2)
+  end
+
   private
 
   def titulo_blank?(attributes)

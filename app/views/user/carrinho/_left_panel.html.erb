@@ -1,0 +1,77 @@
+<% if @cursos.present? %>
+  <% @cursos.each do |curso| %>
+    <div class="col align-items-center justify-content-center" style="margin-top: 14px;">
+      <div class="container card shadow mb-2 rounded-4 w-100 hover p-2">
+        <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
+          <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+              <% if curso.imagem.present? %>
+                <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 140px; max-width: 100%; object-fit: contain;" %>
+              <% end %>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
+                <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                <span class="preco-riscado">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
+
+                <div class="row mt-3" style="max-width: 400px;">
+                  <div class="col-12 col-md-7 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-file-play fs-6 me-2"></i>
+                      <span style="font-size: 12px;">20 horas de vídeo</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-5 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-phone fs-6 me-2"></i>
+                      <span style="font-size: 12px;">Acesso no dispositivo móvel e na TV</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-7 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-trophy fs-6 me-2"></i>
+                      <span style="font-size: 12px;">Certificado de conclusão</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-5 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-file-earmark-arrow-down fs-6 me-2"></i>
+                      <span style="font-size: 12px;"><%= curso.words.count %> redações disponíveis para download</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-7 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-pen fs-6 me-2"></i>
+                      <span style="font-size: 12px;">Correções aprofundadas</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-5 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-pen fs-6 me-2"></i>
+                      <span style="font-size: 12px;">Correções aprofundadas e dinâmicas</span>
+                    </div>
+                  </div>
+                </div>
+
+                <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true do %>
+                  <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 position-absolute", style: "top: 20px; right: 20px; border-radius: 5px;", onclick: "showLoadingAndRedirect()" do %>
+                    <i class="icon-lixeira bi bi-trash fs-6" style="font-weight: 2000"></i>
+                  <% end %>
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+
+<% end %>

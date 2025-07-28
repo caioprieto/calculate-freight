@@ -1,8 +1,8 @@
 <aside class="chat-sidebar scrollable p-3 border-end" style="min-width: 300px;">
-  <h5 href="/">
-    <i class="bi bi-mortarboard fs-4" style="margin-right: 8px; margin-left: -3px;"></i>
-    <span style="position: relative; top: -2px; font-size: 18px;">Alunos</span>
-  </h5>
+  <h6 href="/" class="d-flex">
+    <i class="bi bi-mortarboard fs-5" style="margin-right: 13px; margin-left: -3px; margin-top: -6px;"></i>
+    <span style="position: relative; top: -2px;">Alunos</span>
+  </h6>
 
   <%= form_with url: admin_alunos_path, method: :get, local: true, class: "d-flex mb-3 mt-3" do %>
     <input
@@ -11,22 +11,47 @@
       value="<%= params[:query] %>"
       placeholder="Nome do aluno"
       class="form-control me-2"
-      style="margin-left: -11px;"
+      style="margin-left: -11px; font-size: 13px;"
     />
-    <button type="submit" class="btn btn-secondary">
-      <i class="bi bi-search" style=""></i>
+    <button type="submit" class="btn btn-dark">
+      <i class="bi bi-search" style="font-size: 16px;"></i>
     </button>
   <% end %>
 
   <div id="chatList">
-    <% @alunos.each do |aluno| %>
-      <%= link_to admin_alunos_path(aluno_id: aluno.id, informacoes: true), class: "chat-item d-flex align-items-center text-decoration-none text-dark #{'active' if params[:aluno_id].to_i == aluno.id}" do %>
-        <% if aluno.imagem.present? %>
-          <%= image_tag aluno.imagem, class: "user-avatar me-2 rounded-circle", width: 40, height: 40, alt: aluno.nome %>
-        <% else %>
-          <img src="/images/avatar-padrao.jpg" class="user-avatar me-2 rounded-circle" width="40" height="40" />
+    <% @alunos_notifications.each do |alunos_notification| %>
+      <%= link_to admin_alunos_path(aluno_id: alunos_notification.id, informacoes: true), style: "background-color: rgba(209, 154, 2, 0.13);", class: "chat-item d-flex justify-content-between align-items-center text-decoration-none text-dark #{'active' if params[:aluno_id].to_i == alunos_notification.id}" do %>
+        <div class="d-flex align-items-center">
+           <div style="width: 2px; height: 35px; background-color: gold; border-radius: 2px; margin-right: 15px;"></div>
+
+          <% if alunos_notification.imagem.present? %>
+            <%= image_tag alunos_notification.imagem, class: "user-avatar me-2 rounded-circle", width: 24, height: 24, alt: alunos_notification.nome %>
+          <% else %>
+            <img src="/images/avatar-padrao.jpg" class="user-avatar me-2 rounded-circle" width="24" height="24" />
+          <% end %>
+          <span class="ms-1" style="font-size: 14px;"><%= alunos_notification.nome %></span>
+        </div>
+        <% notification_count = alunos_notification.notifications.where(painel: "admin").count %>
+        <% if notification_count > 0 %>
+          <span id="sidebar-badge-<%= alunos_notification.id %>" class="badge rounded-pill notification-badge ms-auto" style="font-size: 10px; font-weight: 770; background-color:rgba(255, 255, 255, 0.88); color: black; border-radius: 100%">
+            <%= notification_count %>
+          </span>
         <% end %>
-        <span class="ms-2"><%= aluno.nome %></span>
+        <i class="bi bi-envelope"></i>
+      <% end %>
+    <% end %>
+
+    <% @alunos.each do |aluno| %>
+      <%= link_to admin_alunos_path(aluno_id: aluno.id, informacoes: true), class: "chat-item d-flex justify-content-between align-items-center text-decoration-none text-dark #{'active' if params[:aluno_id].to_i == aluno.id}" do %>
+        <div class="d-flex align-items-center">
+          <% if aluno.imagem.present? %>
+            <%= image_tag aluno.imagem, class: "user-avatar me-2 rounded-circle", width: 24, height: 24, alt: aluno.nome %>
+          <% else %>
+            <img src="/images/avatar-padrao.jpg" class="user-avatar me-2 rounded-circle" width="24" height="24" />
+          <% end %>
+          <span class="ms-1" style="font-size: 14px;"><%= aluno.nome %></span>
+        </div>
+        <i class="bi bi-envelope-open"></i>
       <% end %>
     <% end %>
   </div>

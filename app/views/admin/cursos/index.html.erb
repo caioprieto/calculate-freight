@@ -1,25 +1,23 @@
-<h4 style="margin-top: 3px;">
-  <i class="bi bi-play-btn-fill text-dark fs-4" style="margin-right: 10px"></i>
+<h6 style="margin-top: 1px; display: flex">
+  <i class="bi bi-play-btn-fill text-dark fs-5" style="margin-right: 13px; margin-top: -3px;"></i>
   Cursos
-</h4>
+</h6>
 
 <%= form_with url: delete_multiple_admin_cursos_path, method: :post, local: true do %>
-  <div style="width: 97%; display: flex; gap: 5px;">
-    <a href="/admin/cursos/new" class="btn btn-success w-50" style="margin-top: 10px; border-radius: 10px">
-      <i class="bi bi-plus-circle-fill fs-4" style="margin-right: 3px"></i>
-      <span style="margin-top: -10px; position: relative; top: -4px; font-weight: 600">Criar novo curso</span>
-    </a>
+  <a href="/admin/cursos/new" class="btn btn-success px-3 py-2" style="margin-top: 8px; border-radius: 3px">
+    <i class="bi bi-plus-circle-fill fs-6" style="margin-right: 2px"></i>
+    <span style="margin-top: -10px; position: relative; top: -1px; font-weight: 600; font-size: 13px;">Criar novo curso</span>
+  </a>
 
-    <%= button_tag type: "submit", id: "delete-button", class: "btn btn-danger w-50", style: "margin-top: 10px; border-radius: 10px", disabled: true do %>
-      <i class="bi bi-trash-fill fs-4" style="margin-right: 3px"></i>
-      <span style="margin-top: -10px; position: relative; top: -4px; font-weight: 600">Excluir selecionados</span>
-    <% end %>
-  </div>
+  <%= button_tag type: "submit", id: "delete-button", class: "btn btn-danger px-3 py-2", style: "margin-top: 8px; border-radius: 3px", disabled: true do %>
+    <i class="bi bi-trash-fill fs-6" style="margin-right: 3px"></i>
+    <span style="top: -1px; position: relative; font-weight: 600; font-size: 14px;">Excluir selecionados</span>
+  <% end %>
 
-  <table class="table table-admin table-sm table-bordered mt-4 text-center" style="width: 97%;">
+  <table class="table table-admin table-sm table-bordered mt-3 text-center" style="width: 97%;">
     <thead>
       <tr>
-        <th style="width: 50px;"> <input type="checkbox" id="select-all" /> </th>
+        <th style="width: 30px;"> <input type="checkbox" id="select-all" /> </th>
         <th scope="col">Nome do Curso</th>
         <th scope="col">Prova</th>
         <th scope="col">Vigência</th>
@@ -37,17 +35,18 @@
           <td>
             <%= check_box_tag "curso_ids[]", curso.id, false, class: "curso-checkbox" %>
           </td>
-          <td><p class="mt-2"><%= curso.name %></p></td>
-          <td><p class="mt-2"><%= curso.prova.upcase %></p></td>
-          <td><p class="mt-2"><%= curso.vigencia %> Meses</p></td>
-          <td><p class="mt-2"><%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n")  %></p></td>
-          <td><p class="mt-2"><%= curso.modulos.count %> módulos</p></td>
-          <td><p class="mt-2"><%= curso.aulas.count %> aulas</p></td>
-          <td><p class="mt-2"><%= curso.words.count %> redações</p></td>
-          <td><p class="mt-2"><%= curso.updated_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %>
+          <td><%= curso.name %></td>
+          <td><%= curso.prova.upcase %></td>
+          <td><%= curso.vigencia %> Meses</td>
+          <td><%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n")  %></td>
+          <td><%= curso.modulos.length %> módulos</td>
+          <td><%= curso.aulas.length %> aulas</td>
+          <td><%= curso.words.length %> redações</td>
+          <td><%= curso.updated_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %>
           <td style="font-size: 16px; font-weight: 450; padding-left: 4px;">
-            <%= link_to edit_admin_curso_path(curso) do %>
-              <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
+            <%= link_to edit_admin_curso_path(curso), style: "text-decoration: none; color: black; display: flex", class: "hover" do %>
+              <i class="bi bi-pencil-square text-dark fs-6" style="position: relative; left: 3px; bottom: 3px" ></i>
+              <span style="text-decoration: none; font-size: 12px; margin-top: 0px; margin-left: 6px;">Editar</span>
             <% end %>
           </td>
         </tr>

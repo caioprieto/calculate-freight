@@ -2,23 +2,9 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Pix_Logo_2020.png" alt="Pix" style="height: 32px;">
 
-<div class="container-curso">
-  <% if flash[:alerta] %>
-    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
-      <%= flash[:alerta]%>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
-
-  <% if flash[:noticia] %>
-    <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="margin-top: -3px">
-      <%= flash[:noticia] %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
-
+<div class="container-curso" style="margin-top: -55px;">
   <div class="faixa ms-2">
-    <div class="content-curso text-dark mt-4">
+    <div class="content-curso text-dark mt-3">
       <div class="curso-container d-flex flex-wrap justify-content-between">
         <div class="curso-info" style="width: 65%;">
           <h4 class="mt-2 z-index"><%= @curso.name %></h4>
@@ -37,33 +23,33 @@
               <img src="https://cdn.simpleicons.org/pix/00B4AA" alt="Pix" height="32" class="mt-3">
               <span class="me-2 ms-2 preco-antigo"><%= number_to_currency(@curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
               <span class="preco-riscado">R$ <%= number_with_precision(@curso.value_riscado, precision: 2, separator: ",") %></span>
-              <p class="desconto" style="font-size: 14px; margin-left: 45px;">68% de desconto</p>
+              <p class="desconto" style="font-size: 14px; margin-left: 45px; margin-top: -12px;"><%= @curso.desconto.to_i %>% de desconto</p>
             </div>
 
             <hr>
 
             <div class="preco d-flex">
               <i class="bi bi-credit-card-fill" style="font-size: 32px;"></i>
-              <span class="preco-antigo" style="margin-left: 10px; margin-top: 7px">R$ 10,00</span>
-              <span class="preco-vezes" style="margin-top: 15px; margin-left: 7px;">x24</span>
+              <span class="preco-antigo" style="margin-left: 10px; margin-top: 12px">R$ 10,00</span>
+              <span class="preco-vezes" style="margin-top: 15px; margin-left: 7px;"><%= @curso.qtd_parcelas%>x</span>
               <p class="desconto" style="font-size: 12px; margin-top: 15px; margin-left: 2px; font-weight: 1000">sem juros</p>
             </div>
 
-            <p class="tempo-restante fs-6 mt-3">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
-            <div style="display: flex; gap: 4px">
+            <p class="tempo-restante fs-6 mt-2">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
+            <div style="display: flex; gap: 4px; z-index: 9999; position: relative">
               <% if current_user.present? %>
                 <% if current_user.user_cursos.where(curso_id: @curso.id).blank? %>
                   <div class="">
                     <%= form_with url: add_to_cart_path(@curso), method: :post, local: true do %>
                       <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
-                        <i class="bi bi-cart-plus-fill fs-3"></i>
+                        <i class="bi bi-cart-plus-fill fs-4"></i>
                       <% end %>
                     <% end %>
                   </div>
 
                   <div class="w-100 p-1">
                     <%= form_with url: add_to_cart_path(@curso, redirect: true), method: :post, local: true do %>
-                      <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-3 mt-1", onclick: "showLoadingRedirect()" do %>
+                      <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light mt-1", onclick: "showLoadingRedirect()" do %>
                         Comprar agora
                       <% end %>
                     <% end %>
@@ -71,7 +57,7 @@
                 <% else %>
                   <div class="w-100 p-1">
                     <%= form_with url: player_user_curso_path(@curso), method: :get, local: true do %>
-                      <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-3 mt-1" do %>
+                      <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light mt-1" do %>
                         Ir para o Curso
                       <% end %>
                     <% end %>
@@ -81,14 +67,14 @@
                 <div class="">
                   <%= form_with url: add_to_cart_path(@curso), method: :post, local: true do %>
                     <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
-                      <i class="bi bi-cart-plus-fill fs-3"></i>
+                      <i class="bi bi-cart-plus-fill fs-4"></i>
                     <% end %>
                   <% end %>
                 </div>
 
                 <div class="w-100 p-1">
                   <%= form_with url: add_to_cart_path(@curso, redirect: true), method: :post, local: true do %>
-                    <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-3 mt-1", onclick: "showLoadingRedirect()" do %>
+                    <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light mt-1", onclick: "showLoadingRedirect()" do %>
                       Comprar agora
                     <% end %>
                   <% end %>
@@ -106,28 +92,28 @@
   <div class="curso-inclui">
     <div class="itens-curso" style="margin-left: 30px;">
       <div class="item">
-        <i class="bi bi-file-play fs-3"></i>
-        <span class="fs-6">20 horas de vídeo</span>
+        <i class="bi bi-file-play fs-4"></i>
+        <span style="font-size: 14px;">20 horas de vídeo</span>
       </div>
       <div class="item">
-        <i class="bi bi-phone fs-3"></i>
-        <span class="fs-6" style="white-space: nowrap;">Acesso no dispositivo móvel e na TV</span>
+        <i class="bi bi-phone fs-4"></i>
+        <span style="white-space: nowrap; font-size: 14px;">Acesso no dispositivo móvel e na TV</span>
       </div>
       <div class="item">
-        <i class="bi bi-book fs-3"></i>
-        <span class="fs-6" style="white-space: nowrap;"><%= @curso.words.count %> <%= @curso.words.count == 1 ? "Redação" : "Redações" %></span>
+        <i class="bi bi-book fs-4"></i>
+        <span style="white-space: nowrap; font-size: 14px;"><%= @curso.words.count %> <%= @curso.words.count == 1 ? "Redação" : "Redações" %></span>
       </div>
       <div class="item">
-        <i class="bi bi-trophy fs-3"></i>
-        <span class="fs-6" style="white-space: nowrap;">Certificado de conclusão</span>
+        <i class="bi bi-trophy fs-4"></i>
+        <span style="white-space: nowrap; font-size: 14px;">Certificado de conclusão</span>
       </div>
       <div class="item">
-        <i class="bi bi-file-earmark-arrow-down fs-3"></i>
-        <span class="fs-6" style="white-space: nowrap;">18 recursos para download</span>
+        <i class="bi bi-file-earmark-arrow-down fs-4"></i>
+        <span style="white-space: nowrap; font-size: 14px;">18 recursos para download</span>
       </div>
       <div class="item">
-        <i class="bi bi-pen fs-3"></i>
-        <span class="fs-6" style="white-space: nowrap;">Correções aprofundadas e dinâmicas</span>
+        <i class="bi bi-pen fs-4"></i>
+        <span style="white-space: nowrap; font-size: 14px;">Correções aprofundadas e dinâmicas</span>
       </div>
     </div>
   </div>
@@ -135,8 +121,8 @@
 
 <div class="container mt-5">
   <h5 class="mt-3" href="/" style="margin-left: 32px;">
-    <i class="bi bi-book-half fs-4" style="margin-right: 10px"></i>
-    <span style="position: relative; top: -2px;">Conteúdo do Curso</span>
+    <i class="bi bi-book-half fs-5" style="margin-right: 10px"></i>
+    <span style="font-size: 18px; position: relative; top: -2px;">Conteúdo do Curso</span>
   </h5>
 </div>
 
@@ -180,14 +166,44 @@
   </div>
 </div>
 
+<hr class="container" style="opacity: 10%;">
+
+<div class="container mt-5">
+  <h5 class="mt-3" style="margin-left: 35px;">
+    <i class="bi bi-arrow-down-circle-fill fs-5 me-2"></i>
+    <span style="font-size: 18px; position: relative; top: 0px;">Temas que estão inclusos com o curso</span>
+  </h5>
+
+  <div class="row g-3 mt-1" style="margin-left: 22px; margin-top: -15px;">
+    <% @curso.words.each do |word| %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+        <a class="redacoes-card bg-white d-flex flex-column align-items-center text-dark w-100" style="text-decoration: none; border-radius: 10px;">
+          <div class="meus-cursos-img position-relative w-100" style="border-radius: 10px;">
+            <% if word.imagem.attached? %>
+              <% if word.image_type == "cover" %>
+                <%= image_tag word.imagem, style: "max-height: 170px; width: 100%; object-fit: cover; border-radius: 10px 10px 0 0;" %>
+              <% elsif word.image_type == "scaledown" %>
+                <%= image_tag word.imagem, style: "max-height: 170px; width: 100%; object-fit: scale-down; border-radius: 10px 10px 0 0;" %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="w-100" style="padding: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border-radius: 0 0 10px 10px; min-height: 50px;">
+            <h6 class="text-dark mb-0" style="font-size: 14px;"><%= word.tema %></h6>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <div class="loader" id="loadingOverlay">
   <div class="spinner-loader"></div>
 </div>
 
-<br><br><br><br><br><br><br><br>
+<br><br><br>
 
 <footer class="footer">
-  <div class="container container-flex footer-top">
+  <div class="container container-flex no-margin-top">
     <div class="logo-section">
       <img src="/images/logo.png" alt="Aprova Total" class="logo" />
       <%# <p>Transformando sonhos em aprovações</p> %>
@@ -213,15 +229,6 @@
           <i class="bi bi-youtube fs-3"></i>
         </a>
       </div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="contact-info">
-      <p><strong>Números Oficiais de Vendas:</strong> (19) 99246-0527 | (19) 99246-0527</p>
-    </div>
-    <div class="copyright">
-      <p>Copyright © 2025 Aprova Redação</p>
     </div>
   </div>
 </footer>

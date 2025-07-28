@@ -1,0 +1,40 @@
+<div class="curso-info card-filter" style="height: 93.8%">
+  <div class="curso-preview mt-3 text-dark h-100">
+    <div class="pagar-box text-dark h-100">
+      <h5 href="/">
+        <i class="bi bi-clipboard fs-5" style="margin-right: 6px"></i>
+        <span style="position: relative; top: -2px; font-size: 15px">Resumo  •  <%= @cursos.count %> Produtos</span>
+      </h5>
+      <div class="preco mt-3">
+        <% @cursos.each do |curso| %>
+          <div class="d-flex justify-content-between">
+            <span class="preco-atual"><%= curso.name %></span>
+            <span class="preco-antigo"><%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
+          </div>
+        <% end %>
+      </div>
+
+      <hr>
+
+      <div class="preco mt-3 d-flex justify-content-between">
+        <span class="preco-atual">Valor Total</span>
+        <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
+      </div>
+
+      <div style="width: 100%; margin-top: 20px">
+        <%= form_with url: create_checkout_session_path, method: :post, local: true do %>
+          <%= hidden_field_tag :cart_id, @cart.id %>
+          <%= button_tag type: "submit", class: "btn-roxo btn-comprar fw-light p-2 d-flex align-items-center gap-2 justify-content-center", disabled: @cursos.blank? ? true : false do %>
+            <i class="bi bi-credit-card-fill fs-4"></i>
+            Cartão de Crédito/Débito
+          <% end %>
+        <% end %>
+      </div>
+
+      <button class="btn-dark btn-pix fw-light d-flex align-items-center p-2 mt-1 justify-content-center">
+        <i class="bi bi-qr-code-scan fs-4 mx-1"></i>
+        Gerar Pix QRCode
+      </button>
+    </div>
+  </div>
+</div>

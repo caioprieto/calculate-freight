@@ -1,44 +1,18 @@
-<h5 href="/">
-  <i class="bi bi-receipt fs-4" style="margin-right: 8px"></i>
-  <span style="position: relative; top: -2px; font-size: 18px;">Pedidos</span>
-</h5>
-
-<div class="container-full-width mb-4 mt-4 p-3 background-filter">
-  <%= form_with url: admin_correcoes_path, method: :get, local: true, class: "row gy-2 gx-3 align-items-end" do %>
-    <div class="col-md-4">
-      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Nome do aluno</label>
-      <%= text_field_tag :aluno, params[:aluno], class: "form-control form-control-sm", placeholder: "Nome do aluno" %>
-    </div>
-
-    <div class="col-md-4">
-      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Tipo de Redação</label>
-      <%= select_tag :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"], ["Unesp", "unesp"]], params[:prova]), include_blank: "Todos", class: "form-select form-select-sm" %>
-    </div>
-
-    <div class="col-md-3">
-      <label class="form-label" style="margin-bottom: -10px; font-size: 14px;">Ordernar por</label>
-      <%= select_tag :word_type, options_for_select([["Prazo mais Apertados", "apertados"], ["Melhores alunos", "melhores"]], params[:order_by]), include_blank: "Todos", class: "form-select form-select-sm" %>
-    </div>
-
-    <!-- Botão -->
-    <div class="col-md-1">
-      <button type="submit" class="btn btn-secondary w-100 p-1 fs-6">
-        <i class="bi bi-search me-1" style="font-weight: 1000"></i>
-      </button>
-    </div>
-  <% end %>
-</div>
+<h6 href="/" class="d-flex">
+  <i class="bi bi-receipt fs-5" style="margin-right: 13px; margin-top: -3px;"></i>
+  <span>Pedidos</span>
+</h6>
 
 <% @pedidos.each_with_index do |pedido, index| %>
   <div class="card mt-3 shadow-sm border p-2">
     <div class="card-header d-flex justify-content-between align-items-center bg-white" style="cursor: pointer;" id="togglePedido<%= index %>">
       <div>
-        <p class="m-0" style="font-size: 16px; font-weight: 500"><%= pedido.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></p>
+        <p class="m-0" style="font-size: 13px; font-weight: 500"><%= pedido.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></p>
         <div class="d-flex">
-          <i class="bi bi-check2-circle fs-5 text-success"></i>
-          <strong class="text-success" style="font-size: 15px; margin-left: 6px; margin-top: 5px; font-weight: 600"><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong>
+          <i class="bi bi-check2-circle fs-6 text-success"></i>
+          <strong class="text-success" style="font-size: 13px; margin-left: 6px; margin-top: 5px; font-weight: 600"><%= pedido.status.upcase == "FINALIZADO" ? "Finalizado" : "Pendente" %></strong>
         </div>
-        <p class="m-0 mt-1" style="font-weight: 600">Código: <%= pedido.code %></p>
+        <p class="m-0 mt-1" style="font-size: 13px; font-weight: 600">Código: <%= pedido.code %></p>
         <p class="m-0 mt-1 mb-2 text-secondary" style="font-size: 12px">
           <%= pedido.cursos_count %> Cursos • Valor Total: <%= number_to_currency(pedido.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %>
         </p>
@@ -62,9 +36,9 @@
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
-                        <h5 class="card-title" style="font-size: 15px; font-weight: 350"><%= curso.name %></h5>
-                        <strong class="mb-5" style="font-size: 14px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
-                        <span class="preco-riscado">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
+                        <h5 class="card-title" style="font-size: 14px; font-weight: 350"><%= curso.name %></h5>
+                        <strong class="mb-1" style="font-size: 13px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                        <span class="preco-riscado" style="font-size: 13px;">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
                       </div>
                     </div>
                   </div>

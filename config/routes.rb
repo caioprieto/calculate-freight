@@ -23,7 +23,11 @@ Rails.application.routes.draw do
     get "pedidos", to: "pedidos#index"
     get "pagamento", to: "pagamento#index"
     get "correcoes", to: "correcoes#index"
+    get "find_by_alunos", to: "correcoes#alunos"
+    get "alunos/:id/notifications", to: "alunos#notifications", as: "aluno_notifications"
+    get "chats/:id/messages", to: "chats#messages", as: :chat_messages
 
+    resources :correcoes
     resources :temas
     resources :words
 

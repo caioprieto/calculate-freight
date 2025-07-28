@@ -1,37 +1,7 @@
-<h5 style="margin-top: 3px;">
-  <i class="bi bi-book-half fs-4" style="margin-right: 10px"></i>
-  Temas Gratuitos
-</h5>
 
-<div class="w-100">
-  <table class="table table-admin table-sm table-bordered mt-4" style="width: 99%;">
-    <thead>
-      <tr>
-        <th scope="col">Tema</th>
-        <th scope="col">Tipo da Prova</th>
-        <th scope="col">Data de criação</th>
-        <th scope="col">Imagem</th>
-        <th scope="col">PDF</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @temas.each do |tema| %>
-        <tr>
-          <td><%= tema.name %></td>
-          <td><%= tema.prova.upcase %></td>
-          <td><%= tema.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %></td>
-          <td><%= tema.capa.attached? ? "Sim" : "Não" %></td>
-          <td><%= tema.pdf_file.attached? ? "Sim" : "Não" %></td>
-          <td>
-            <%= link_to edit_admin_tema_path(tema) do %>
-              <i class="bi bi-pencil-square text-dark fs-4" style="position: relative; left: 3px; bottom: 3px" ></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<h6 style="margin-top: 0px; display: flex; margin-bottom: 10px;">
+  <i class="bi bi-plus-circle-fill fs-6" style="margin-right: 10px; margin-top: 0px;"></i>
+  Criar Tema Gratuito
+</h6>
 
-  <%= render partial: 'form' %>
-</div>
+<%= render partial: 'form' %>
