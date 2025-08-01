@@ -1,7 +1,7 @@
-<aside class="chat-sidebar scrollable p-3 border-end" style="min-width: 300px;">
-  <h6 href="/" class="d-flex">
-    <i class="bi bi-mortarboard fs-5" style="margin-right: 13px; margin-left: -3px; margin-top: -6px;"></i>
-    <span style="position: relative; top: -2px;">Alunos</span>
+<aside class="chat-sidebar scrollable p-1 border-end" style="min-width: 300px;">
+  <h6 href="/" class="d-flex" style="margin-top: -1px; margin-left: -4px;">
+    <i class="bi bi-mortarboard fs-5" style="margin-right: 13px; margin-top: -5px;"></i>
+    <span style="position: relative; top: -2px; font-size: 17px;">Alunos</span>
   </h6>
 
   <%= form_with url: admin_alunos_path, method: :get, local: true, class: "d-flex mb-3 mt-3" do %>
@@ -10,8 +10,8 @@
       name="query"
       value="<%= params[:query] %>"
       placeholder="Nome do aluno"
-      class="form-control me-2"
-      style="margin-left: -11px; font-size: 13px;"
+      class="form-control me-1"
+      style="margin-left: -4px; font-size: 13px; width: 78%;"
     />
     <button type="submit" class="btn btn-dark">
       <i class="bi bi-search" style="font-size: 16px;"></i>

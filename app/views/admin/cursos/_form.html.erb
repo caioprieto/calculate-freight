@@ -6,75 +6,78 @@
   <%= render "actions", f: form %>
   <div style="width: 100%">
     <%= render partial: "layouts/shared/errors", locals: { resource: @curso } %>
-    <%= render partial: "layouts/shared/alert" %>
+    <div class="mt-4">
+      <%= render partial: "layouts/shared/alert" %>
+    </div>
   </div>
 
   <% if @curso.id.present? %>
-    <div class="mt-4" style="width: 98%">
+    <div class="mt-4" style="width: 100%">
       <div style="flex-direction: column; width: 100%;">
-          <div class="col" style="margin-top: 14px;">
-            <div class="full-width-container card mb-2 rounded-4 w-100 hover p-2">
-              <a class="hover" style="text-decoration: none; color: black">
-                <div class="row g-0">
-                  <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <% if @curso.imagem.present? %>
-                      <%= image_tag @curso.imagem, class: "", alt: @curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain;" %>
-                    <% end %>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= @curso.name %></h5>
-                      <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(@curso.value, precision: 2, separator: ",") %></strong>
-                      <span class="preco-riscado">R$ <%= number_with_precision(@curso.value_riscado, precision: 2, separator: ",") %></span>
+        <div class="col" style="margin-top: 14px;">
+          <div class="full-width-container card mb-2 rounded-4 w-100 hover p-2">
+            <a class="hover" style="text-decoration: none; color: black">
+              <div class="row g-0">
+                <div class="col-md-4 d-flex align-items-center justify-content-center">
+                  <% if @curso.imagem.present? %>
+                    <%= image_tag @curso.imagem, class: "", alt: @curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain; border-radius: 5px;" %>
+                  <% end %>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= @curso.name %></h5>
+                    <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(@curso.value, precision: 2, separator: ",") %></strong>
+                    <span class="preco-riscado">R$ <%= number_with_precision(@curso.value_riscado, precision: 2, separator: ",") %></span>
 
-                      <div class="row mt-3">
-                        <div class="col-12 col-md-5 mb-2">
-                          <div class="item d-flex align-items-center">
-                            <%= form.check_box :grid_horas_video, class: "form-check-input grid-switch me-3", style: "display: none;" %>
-                            <i class="bi bi-file-play fs-5 me-2"></i>
-                            <span style="font-size: 12px;">? horas de vídeo</span>
-                          </div>
+                    <div class="row mt-3">
+                      <div class="col-12 col-md-6 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <%= form.check_box :grid_horas_video, class: "form-check-input grid-switch me-3", style: "display: none;" %>
+                          <i class="bi bi-file-play fs-5 me-2"></i>
+                          <span style="font-size: 12px;">? horas de vídeo</span>
                         </div>
+                      </div>
 
-                        <div class="col-12 col-md-7 mb-2">
-                          <div class="item d-flex align-items-center">
-                            <%= form.check_box :grid_mobile_and_tv, class: "form-check-input grid-switch me-3", style: "display: none;" %>
-                            <i class="bi bi-phone fs-5 me-2"></i>
-                            <span style="font-size: 12px;">Acesso no dispositivo móvel e na TV</span>
-                          </div>
+                      <div class="col-12 col-md-6 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <%= form.check_box :grid_mobile_and_tv, class: "form-check-input grid-switch me-3", style: "display: none;" %>
+                          <i class="bi bi-phone fs-5 me-2"></i>
+                          <span style="font-size: 12px;">Acesso no dispositivo móvel e na TV</span>
                         </div>
+                      </div>
 
-                        <div class="col-12 col-md-5 mb-2">
-                          <div class="item d-flex align-items-center">
-                            <%= form.check_box :grid_certificate, class: "form-check-input grid-switch me-3", style: "display: none;" %>
-                            <i class="bi bi-trophy fs-5 me-2"></i>
-                            <span style="font-size: 12px;">Certificado de conclusão</span>
-                          </div>
+                      <div class="col-12 col-md-6 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <%= form.check_box :grid_certificate, class: "form-check-input grid-switch me-3", style: "display: none;" %>
+                          <i class="bi bi-trophy fs-5 me-2"></i>
+                          <span style="font-size: 12px;">Certificado de conclusão</span>
                         </div>
+                      </div>
 
-                        <div class="col-12 col-md-7 mb-2">
-                          <div class="item d-flex align-items-center">
-                            <%= form.check_box :grid_counter_words, class: "form-check-input grid-switch me-3", style: "display: none;" %>
-                            <i class="bi bi-file-earmark-arrow-down fs-5 me-2"></i>
-                            <span style="font-size: 12px;"><%= @curso.words.length %> redações disponíveis</span>
-                          </div>
+                      <div class="col-12 col-md-6 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <%= form.check_box :grid_counter_words, class: "form-check-input grid-switch me-3", style: "display: none;" %>
+                          <i class="bi bi-file-earmark-arrow-down fs-5 me-2"></i>
+                          <span style="font-size: 12px;"><%= @curso.words.length %> redações disponíveis</span>
                         </div>
+                      </div>
 
-                        <div class="col-12 col-md-7 mb-2">
-                          <div class="item d-flex align-items-center">
-                            <%= form.check_box :grid_correcoes, class: "form-check-input grid-switch me-3", style: "display: none;" %>
-                            <i class="bi bi-pen fs-5 me-2"></i>
-                            <span style="font-size: 12px;">Correções aprofundadas e dinâmicas</span>
-                          </div>
+                      <div class="col-12 col-md-6 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <%= form.check_box :grid_correcoes, class: "form-check-input grid-switch me-3", style: "display: none;" %>
+                          <i class="bi bi-pen fs-5 me-2"></i>
+                          <span style="font-size: 12px;">Correções aprofundadas e dinâmicas</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </a>
-            </div>
+              </div>
+            </a>
           </div>
         </div>
+      </div>
+    </div>
   <% end %>
 
   <div id="form_container">
@@ -139,7 +142,7 @@
                   class: "form-control form-control-sm",
                   style: "margin-top: -8px",
                   disabled: true,
-                  value: "#{form.object.desconto}%" %>
+                  value: "#{form.object.desconto.to_i}%" %>
           </div>
         </div>
 
@@ -163,7 +166,7 @@
                     class: "form-control form-control-sm",
                     style: "margin-top: -8px",
                     disabled: true,
-                    value: number_with_precision(form.object.value.blank? ? 0 : number_to_currency((form.object.value / form.object.qtd_parcelas)), precision: 0, separator: ",", delimiter: ".") %>
+                    value: number_with_precision(form.object.value.blank? ? 0 : number_to_currency((form.object.value / form.object.qtd_parcelas), unit: "R$", separator: ",", delimiter: ".", format: "%u %n"), precision: 0, separator: ",", delimiter: ".") %>
             </div>
           </div>
         </div>
@@ -181,9 +184,9 @@
 
             <div class="preco d-flex">
               <i class="bi bi-credit-card-fill" style="font-size: 32px;"></i>
-              <span class="preco-antigo" style="margin-left: 10px; margin-top: 12px"><%= form.object.value.blank? ? 0 : number_to_currency((form.object.value / form.object.qtd_parcelas), unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
-              <span class="preco-vezes" style="margin-top: 15px; margin-left: 7px; font-size: 12px;"><%= form.object.qtd_parcelas%>x</span>
-              <p class="desconto" style="font-size: 12px; margin-top: 15px; margin-left: 3px; font-weight: 700"> sem juros</p>
+              <span class="preco-antigo" style="margin-left: 14px; margin-top: 12px"><%= form.object.value.blank? ? 0 : number_to_currency((form.object.value / form.object.qtd_parcelas), unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
+              <span class="preco-vezes" style="margin-top: 16px; margin-left: 7px; font-size: 12px;"><%= form.object.qtd_parcelas%>x</span>
+              <p class="desconto" style="font-size: 12px; margin-top: 16px; margin-left: 3px; font-weight: 700"> sem juros</p>
             </div>
           </div>
         </div>
@@ -192,7 +195,7 @@
   </div>
 
   <% if @redacoes.present? %>
-    <div class="mt-5" style="margin-left: 3px;">
+    <div class="mt-4" style="margin-left: 3px;">
       <h6 href="/">
         <i class="bi bi-book fs-5" style="margin-right: 8px"></i>
         <span style="position: relative; top: -1px; font-size: 16px">Redações</span>

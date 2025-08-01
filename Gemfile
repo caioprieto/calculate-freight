@@ -31,7 +31,7 @@ gem "stripe"
 gem "state_machines"
 gem "state_machines-activerecord"
 gem "tty-spinner"
-gem 'aws-sdk-s3', require: false
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
@@ -40,6 +40,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "byebug"
   gem "web-console"
+  gem "faker"
 end
 
 group :development do

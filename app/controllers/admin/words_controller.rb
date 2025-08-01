@@ -8,7 +8,11 @@ class Admin::WordsController < AdminsBackofficeController
   end
 
   def create
-    Word.create(tema: params[:word][:tema], word_type: params[:word][:word_type])
+    if @word = ::Word.create(word_params)
+      render :edit, notice: "Redação criada com sucesso!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def edit

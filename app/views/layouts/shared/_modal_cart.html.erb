@@ -1,9 +1,12 @@
-<div id="cart-modal" class="card shadow position-absolute end-0 mt-2" style="width: 400px; display: none; z-index: 1000;">
-  <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center p-3">
-    <h6 class="card-title">Carrinho</h6>
-    <button class="btn-close" aria-label="Fechar" onclick="document.getElementById('cart-modal').style.display='none'" style="font-size: 13px;"></button>
-  </div>
-  <div class="card-body">
+<!-- MINI MODAL DO CARRINHO -->
+<div id="cart-dropdown" class="card cart-card shadow position-absolute end-0 mt-2" style="width: 400px; display: none; z-index: 1000;">
+  <div class="arrow-up-cart"></div>
+  <div class="card-body p-3">
+    <div class="d-flex justify-content-between">
+      <h6 style="margin-top: 4px; font-size: 15px;">Carrinho</h6>
+      <button type="button" class="btn-close justify-content-end" style="font-size: 13px;" data-bs-dismiss="alert" aria-label="Close" onclick="document.getElementById('cart-dropdown').style.display='none'"></button>
+    </div>
+    <hr>
     <% if @cursos.present? %>
       <ul class="list-group mb-3">
         <% @cursos.each do |curso| %>
@@ -13,13 +16,16 @@
                 <%= image_tag curso.imagem.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho border" %>
               <% end %>
               <div style="margin-left: 10px; width: 75%">
-                <h6 class="fw-light mt-1" style="font-size: 16px;"><%= curso.name %></h6>
-                <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %> <p>
+                <h6 class="fw-light mt-2"><%= curso.name %></h6>
+                <p class="price-bold"> <%= number_to_currency(curso.value, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %><strong> à vista</strong> <p>
+                <div style="margin-top: 20px; display: flex">
+                  <span class="preco-parcelado" style="margin-top: -23px;">R$ 10,00 <span class="fw-light" style="font-size: 13px;">x10<strong> sem juros</strong></span></span>
+                </div>
               </div>
               <div>
                 <%= form_with url: remove_from_cart_path(curso), method: :delete, local: true do %>
-                  <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 mt-0", style: "border-radius: 5px;" do %>
-                    <i class="icon-lixeira bi bi-trash" style="font-weight: 2000; font-size: 16px;"></i>
+                  <%= button_tag type: "submit", class: "btn btn-danger text-white p-1 mt-0 d-flex", style: "border-radius: 3px;" do %>
+                    <i class="icon-lixeira bi bi-trash" style="font-weight: 1000; font-size: 15px; margin-top: 3px;"></i>
                   <% end %>
                 <% end %>
               </div>
@@ -32,11 +38,11 @@
       <span class="preco-atual">Valor dos Produtos</span>
       <span class="preco-antigo"><%= number_to_currency(@cart.total, unit: "R$", separator: ",", delimiter: ".", format: "%u %n") %></span>
     </div>
-      <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d; border-radius: 5px" %>
+      <%= link_to 'Finalizar Compra', '/user/carrinho', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d; border-radius: 5px; font-size: 15px;" %>
     <% else %>
       <p class="text-muted">Seu carrinho está vazio...</p>
     <% end %>
   </div>
-  <div class="card-footer bg-light text-center py-2">
+  <div class="card-footer bg-white text-center py-2">
   </div>
 </div>

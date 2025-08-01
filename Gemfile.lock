@@ -146,6 +146,8 @@ GEM
     et-orbi (1.2.11)
       tzinfo
     event_stream_parser (1.0.0)
+    faker (3.5.2)
+      i18n (>= 1.8.11, < 2)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -497,6 +499,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   dotenv-rails
+  faker
   httparty (~> 0.22.0)
   image_processing
   importmap-rails

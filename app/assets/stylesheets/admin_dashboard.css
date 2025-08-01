@@ -184,7 +184,8 @@ input[type="checkbox"] {
   padding: 1rem;
   cursor: pointer;
   border-top: 1px solid #ddd;
-  margin-left: -25px;
+  margin-left: -15px;
+  margin-right: 20px;
   padding-left: 30px;
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
   background: whitesmoke;
@@ -375,7 +376,8 @@ input[type="checkbox"] {
 
 .preco-riscado {
   text-decoration: line-through;
-  margin-left: 8px;
+  margin-left: 3px;
+  font-size: 14px;
   color: #888;
 }
 
@@ -566,7 +568,7 @@ input[type="checkbox"] {
 .background-filter {
   background-color: rgba(116, 116, 116, 0.044);
   border-radius: 3px;
-  box-shadow: 0 4px 12px rgba(0.2,0.2,0,0.19);
+  box-shadow: 0 4px 12px rgba(0.2,0.2,0.2,0.3);
 }
 
 .select2-container--bootstrap4 .select2-selection--single {
@@ -624,4 +626,14 @@ input[type="checkbox"] {
 }
 .notification-item:last-child {
   border-bottom: none;
+}
+
+.form-actions-sticky {
+  position: sticky;
+  top: 0;
+  background-color: whitesmoke; /* ou a cor de fundo do seu layout */
+  z-index: 1000; /* alto o suficiente para ficar sobre outros elementos */
+  padding: 1px 0; /* opcional */
+  border-bottom: 1px solid #ddd; /* opcional, só pra destacar */
+  margin-top: 5px;
 }

@@ -19,7 +19,7 @@
   </button>
 
   <div class="aulas">
-    <%= f.fields_for :aulas do |aula_fields| %>
+    <%= f.fields_for :aulas, f.object.aulas.order(created_at: :asc) do |aula_fields| %>
       <%= render "aulas_nested", f: aula_fields %>
     <% end %>
   </div>

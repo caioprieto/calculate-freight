@@ -3,7 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
-  has_one :cart
+  has_one :cart, dependent: :destroy
   has_one_attached :imagem
 
   has_many :user_cursos, dependent: :destroy
@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :words, through: :user_words
   has_many :user_aulas, dependent: :destroy
   has_many :watched_aulas, through: :user_aulas, source: :aula
-  has_many :pedidos
+  has_many :pedidos, dependent: :destroy
   has_many :messages, as: :dono, class_name: "::Message"
   has_many :notifications, dependent: :destroy
 

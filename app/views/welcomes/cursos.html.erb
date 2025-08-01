@@ -1,9 +1,8 @@
 <div style="margin-top: -15px;">
   <%= render 'vestibulares' %>
-  <br>
   <%= render partial: 'provas_anteriores' %>
 
-  <div class="container margin-top-mobile mt-5">
+  <div class="container margin-top-mobile" style="margin-top: 15px;">
     <div class="mb-3 ms-4 d-flex margin-top-max" style="width: 93%;">
       <i class="bi bi-play-btn fs-5" style="margin-top: -4px; margin-right: 6px; margin-left: 10px;"></i>
       <h2 class="ms-2" style="font-size: 19px; font-weight: 400;">Cursos</h2>
@@ -21,13 +20,13 @@
               <div class="row g-0">
                 <div class="col-md-3 d-flex align-items-center justify-content-center">
                   <% if curso.imagem.present? %>
-                    <%= image_tag curso.imagem, class: "mobile-imagem", alt: curso.name, style: "max-height: 150px; max-width: 100%; object-fit: cover;" %>
+                    <%= image_tag curso.imagem, class: "mobile-imagem", alt: curso.name, style: "max-height: 110px; max-width: 100%; object-fit: contain; margin-bottom: 15px; border-radius: 5px;" %>
                   <% end %>
                 </div>
                 <div class="col-md-9">
                   <div class="card-body mobile-card-body">
                     <h5 class="card-title no-margin-bottom-mobile font-mobile-small" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
-                    <strong class="mb-5 no-margin-bottom-mobile font-mobile-small" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                    <strong class="mb-5 no-margin-bottom-mobile font-mobile-small" style="font-size: 17px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
                     <span class="preco-riscado font-mobile-small mobile-none">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
 
                     <div class="row mt-2 mobile-none">

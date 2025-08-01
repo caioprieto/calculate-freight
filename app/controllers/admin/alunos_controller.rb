@@ -1,13 +1,14 @@
 class Admin::AlunosController < AdminsBackofficeController
   def index
-    @alunos = ::User.includes(:user_words, :notifications)
-                    .where.not(
-                      id: Notification.where(painel: "admin").select(:user_id)
-                    )
+    notified_user_ids = Notification.where(painel: "admin").distinct.pluck(:user_id)
 
-    @alunos_notifications = ::User.includes(:user_words, :notifications)
-                                  .joins(:notifications)
-                                  .where(notifications: { painel: "admin" })
+    @alunos = ::User
+      .where.not(id: notified_user_ids)
+      .includes(:user_words, :notifications)
+
+    @alunos_notifications = ::User
+      .where(id: notified_user_ids)
+      .includes(:user_words, :notifications)
 
     if params[:query].present?
       @alunos = @alunos.where("users.nome ILIKE ?", "%#{params[:query]}%")

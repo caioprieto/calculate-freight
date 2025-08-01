@@ -1,0 +1,69 @@
+<div class="<%= container_class || 'container flex-columns-mobile' %>">
+  <div class="row <%= row_class || 'row-cols-1 row-cols-md-2 g-0' %>">
+    <% Array(cursos).each do |curso| %>
+      <div class="col" style="margin-right: -15px;" data-prova-nome="<%= curso.prova %>">
+        <div class="card shadow ms-4 rounded-4 hover p-2 card-mobile" style="width: <%= card_width || '96.3%' %>; height: <%= card_height || '90%' %>;">
+          <a href="<%= polymorphic_path([:edit, curso]) %>" style="text-decoration: none; color: black">
+            <div class="row g-0">
+              <div class="col-md-3 d-flex align-items-center justify-content-center">
+                <% if curso.imagem.present? %>
+                  <%= image_tag curso.imagem, class: "mobile-imagem", alt: curso.name, style: "max-height: 110px; max-width: 100%; object-fit: contain; margin-bottom: 15px; border-radius: 5px;" %>
+                <% end %>
+              </div>
+              <div class="col-md-9">
+                <div class="card-body mobile-card-body">
+                  <h5 class="card-title font-mobile-small" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
+                  <strong style="font-size: 17px; font-weight: 600;">R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                  <span class="preco-riscado font-mobile-small mobile-none">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
+
+                  <div class="row mt-2 mobile-none">
+                    <div class="col-12 col-md-5 mb-2">
+                      <div class="item d-flex align-items-center">
+                        <i class="bi bi-file-earmark-arrow-down fs-5 me-1"></i>
+                        <span style="font-size: 11px;"><%= curso.words.count %> temas de redação</span>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-7 mb-2">
+                      <div class="item d-flex align-items-center">
+                        <i class="bi bi-phone fs-5 me-1"></i>
+                        <span style="font-size: 11px;">Acesso no dispositivo móvel</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <% if current_user.present? %>
+                    <% if current_user.cart.cart_cursos.where(curso_id: curso.id).present? %>
+                      <%= button_tag class: "btn text-success p-1 position-absolute d-flex", style: "top: 10px; right: 10px; border: none;" do %>
+                        <i class="bi bi-cart-check fs-6"></i>
+                        <span style="font-size: 11px; margin-left: 4px;">Adicionado</span>
+                      <% end %>
+                    <% elsif current_user.user_cursos.where(curso_id: curso.id).present? %>
+                      <% uc = current_user.user_cursos.find_by(curso_id: curso.id) %>
+                      <%= button_tag class: "btn text-success p-1 position-absolute d-flex", style: "top: 10px; right: 10px; border: none;" do %>
+                        <span style="font-size: 11px;">
+                          <i class="bi bi-check-circle-fill"></i> Adquirido: <%= uc.data_inicio.strftime('%d/%m/%Y') %><br>
+                          <span class="text-danger">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            Expira em: <%= uc.data_fim.strftime('%d/%m/%Y') %>
+                          </span>
+                        </span>
+                      <% end %>
+                    <% else %>
+                      <%= form_with url: add_to_cart_path(curso), method: :post, local: true do %>
+                        <%= button_tag type: "submit", class: "btn text-dark p-1 position-absolute d-flex", style: "top: 10px; right: 10px; border: none;", onclick: "showLoadingAndRedirect()" do %>
+                          <i class="bi bi-cart-plus fs-6"></i>
+                          <span style="font-size: 11px; margin-left: 4px;">Adicionar</span>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

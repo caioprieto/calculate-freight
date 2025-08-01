@@ -142,7 +142,7 @@
         <div id="collapse-<%= index %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= index %>">
           <div class="accordion-body">
             <ul class="list-group list-group-flush" style="gap: 10px">
-              <% modulo.aulas.each do |aula| %>
+              <% modulo.aulas.order(created_at: :asc).each do |aula| %>
                 <li class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
                   <div style="text-decoration: none; padding: 1px" class="fw-light">
                     <i class="bi bi-camera-video fs-6" style="margin-right: 3px;"></i>
@@ -165,8 +165,6 @@
     <% end %>
   </div>
 </div>
-
-<hr class="container" style="opacity: 10%;">
 
 <div class="container mt-5">
   <h5 class="mt-3" style="margin-left: 35px;">
