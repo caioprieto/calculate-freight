@@ -6,55 +6,57 @@
           <div class="row g-0">
             <div class="col-md-4 d-flex align-items-center justify-content-center">
               <% if curso.imagem.present? %>
-                <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 140px; max-width: 100%; object-fit: contain;" %>
+                <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 160px; max-width: 100%; object-fit: contain;" %>
               <% end %>
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= curso.name %></h5>
-                <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
-                <span class="preco-riscado">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
+                <h5 class="card-title" style="font-size: 15px; font-weight: 350"><%= curso.name %></h5>
+                <div class="d-flex" style="margin-top: -3px;">
+                  <strong style="font-size: 14px; font-weight: 600;" >R$ <%= number_with_precision(curso.value, precision: 2, separator: ",") %></strong>
+                  <span class="preco-riscado">R$ <%= number_with_precision(curso.value_riscado, precision: 2, separator: ",") %></span>
+                </div>
 
-                <div class="row mt-3" style="max-width: 400px;">
-                  <div class="col-12 col-md-7 mb-2">
+                <div class="row" style="margin-top: 12px;">
+                  <div class="col-12 col-md-5 mb-2">
                     <div class="item d-flex align-items-center">
                       <i class="bi bi-file-play fs-6 me-2"></i>
-                      <span style="font-size: 12px;">20 horas de vídeo</span>
+                      <span style="font-size: 10px;">20 horas de vídeo</span>
                     </div>
                   </div>
 
-                  <div class="col-12 col-md-5 mb-2">
+                  <div class="col-12 col-md-6 mb-2">
                     <div class="item d-flex align-items-center">
                       <i class="bi bi-phone fs-6 me-2"></i>
-                      <span style="font-size: 12px;">Acesso no dispositivo móvel e na TV</span>
+                      <span style="font-size: 10px;">Acesso no dispositivo móvel e na TV</span>
                     </div>
                   </div>
 
-                  <div class="col-12 col-md-7 mb-2">
+                  <div class="col-12 col-md-5 mb-2">
                     <div class="item d-flex align-items-center">
                       <i class="bi bi-trophy fs-6 me-2"></i>
-                      <span style="font-size: 12px;">Certificado de conclusão</span>
+                      <span style="font-size: 10px;">Certificado de conclusão</span>
                     </div>
                   </div>
 
-                  <div class="col-12 col-md-5 mb-2">
+                  <div class="col-12 col-md-6 mb-2">
                     <div class="item d-flex align-items-center">
                       <i class="bi bi-file-earmark-arrow-down fs-6 me-2"></i>
-                      <span style="font-size: 12px;"><%= curso.words.count %> redações disponíveis para download</span>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-7 mb-2">
-                    <div class="item d-flex align-items-center">
-                      <i class="bi bi-pen fs-6 me-2"></i>
-                      <span style="font-size: 12px;">Correções aprofundadas</span>
+                      <span style="font-size: 10px;"><%= curso.words.count %> redações disponíveis para download</span>
                     </div>
                   </div>
 
                   <div class="col-12 col-md-5 mb-2">
                     <div class="item d-flex align-items-center">
                       <i class="bi bi-pen fs-6 me-2"></i>
-                      <span style="font-size: 12px;">Correções aprofundadas e dinâmicas</span>
+                      <span style="font-size: 10px;">Correções aprofundadas</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="item d-flex align-items-center">
+                      <i class="bi bi-pen fs-6 me-2"></i>
+                      <span style="font-size: 10px;">Correções aprofundadas e dinâmicas</span>
                     </div>
                   </div>
                 </div>

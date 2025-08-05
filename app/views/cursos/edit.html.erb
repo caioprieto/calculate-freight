@@ -2,7 +2,7 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Pix_Logo_2020.png" alt="Pix" style="height: 32px;">
 
-<div class="container-curso" style="margin-top: -55px;">
+<div class="container-curso" style="margin-top: -45px;">
   <div class="faixa ms-2">
     <div class="content-curso text-dark mt-3">
       <div class="curso-container d-flex flex-wrap justify-content-between">
@@ -92,28 +92,28 @@
   <div class="curso-inclui">
     <div class="itens-curso" style="margin-left: 30px;">
       <div class="item">
-        <i class="bi bi-file-play fs-4"></i>
-        <span style="font-size: 14px;">20 horas de vídeo</span>
+        <i class="bi bi-file-play fs-5"></i>
+        <span style="font-size: 13px;">20 horas de vídeo</span>
       </div>
       <div class="item">
-        <i class="bi bi-phone fs-4"></i>
-        <span style="white-space: nowrap; font-size: 14px;">Acesso no dispositivo móvel e na TV</span>
+        <i class="bi bi-phone fs-5"></i>
+        <span style="white-space: nowrap; font-size: 13px;">Acesso no dispositivo móvel e na TV</span>
       </div>
       <div class="item">
-        <i class="bi bi-book fs-4"></i>
-        <span style="white-space: nowrap; font-size: 14px;"><%= @curso.words.count %> <%= @curso.words.count == 1 ? "Redação" : "Redações" %></span>
+        <i class="bi bi-book fs-5"></i>
+        <span style="white-space: nowrap; font-size: 13px;"><%= @curso.words.count %> <%= @curso.words.count == 1 ? "Redação" : "Redações" %></span>
       </div>
       <div class="item">
-        <i class="bi bi-trophy fs-4"></i>
-        <span style="white-space: nowrap; font-size: 14px;">Certificado de conclusão</span>
+        <i class="bi bi-trophy fs-5"></i>
+        <span style="white-space: nowrap; font-size: 13px;">Certificado de conclusão</span>
       </div>
       <div class="item">
-        <i class="bi bi-file-earmark-arrow-down fs-4"></i>
-        <span style="white-space: nowrap; font-size: 14px;">18 recursos para download</span>
+        <i class="bi bi-file-earmark-arrow-down fs-5"></i>
+        <span style="white-space: nowrap; font-size: 13px;">18 recursos para download</span>
       </div>
       <div class="item">
-        <i class="bi bi-pen fs-4"></i>
-        <span style="white-space: nowrap; font-size: 14px;">Correções aprofundadas e dinâmicas</span>
+        <i class="bi bi-pen fs-5"></i>
+        <span style="white-space: nowrap; font-size: 13px;">Correções aprofundadas e dinâmicas</span>
       </div>
     </div>
   </div>
@@ -127,7 +127,7 @@
 </div>
 
 <div class="container">
-  <p class="fw-light text-secondary" style="margin-left: 32px;"><%= @modulos.count %> Módulos • <%= @curso.aulas.count %> Aulas • Duração Total: 20h 34min</p>
+  <p class="fw-light text-secondary" style="margin-left: 32px; font-size: 14px;"><%= @modulos.count %> Módulos • <%= @curso.aulas.count %> Aulas • Duração Total: 20h 34min</p>
 </div>
 
 <div class="container">
@@ -144,9 +144,9 @@
             <ul class="list-group list-group-flush" style="gap: 10px">
               <% modulo.aulas.order(created_at: :asc).each do |aula| %>
                 <li class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
-                  <div style="text-decoration: none; padding: 1px" class="fw-light">
-                    <i class="bi bi-camera-video fs-6" style="margin-right: 3px;"></i>
-                    <%= aula.titulo %>
+                  <div style="text-decoration: none; padding: 1px" class="fw-light d-flex">
+                    <i class="bi bi-camera-video fs-6" style="margin-right: 10px; margin-top: -1px;"></i>
+                    <span style="font-size: 15px;"><%= aula.titulo %></span>
                   </div>
                 </li>
                 <% if aula.word.present? %>
@@ -174,9 +174,9 @@
 
   <div class="row g-3 mt-1" style="margin-left: 22px; margin-top: -15px;">
     <% @curso.words.each do |word| %>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex h-100">
         <a class="redacoes-card bg-white d-flex flex-column align-items-center text-dark w-100" style="text-decoration: none; border-radius: 10px;">
-          <div class="meus-cursos-img position-relative w-100" style="border-radius: 10px;">
+          <div class="meus-cursos-img position-relative w-100" style="border-radius: 10px; ">
             <% if word.imagem.attached? %>
               <% if word.image_type == "cover" %>
                 <%= image_tag word.imagem, style: "max-height: 170px; width: 100%; object-fit: cover; border-radius: 10px 10px 0 0;" %>
@@ -185,7 +185,7 @@
               <% end %>
             <% end %>
           </div>
-          <div class="w-100" style="padding: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border-radius: 0 0 10px 10px; min-height: 50px;">
+          <div class="w-100" style="padding: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border-radius: 0 0 10px 10px; min-height: 70px;">
             <h6 class="text-dark mb-0" style="font-size: 14px;"><%= word.tema %></h6>
           </div>
         </a>

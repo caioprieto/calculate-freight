@@ -5,12 +5,12 @@
 
 <div class="container-full-width mb-4 mt-3 p-3 background-filter">
   <%= form_with url: admin_correcoes_path, method: :get, local: true, class: "row gy-2 gx-3 align-items-end" do %>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label class="form-label" style="margin-bottom: -10px;">Nome do aluno</label>
       <%= text_field_tag :aluno, params[:aluno], class: "form-control form-control-sm" %>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
       <label class="form-label" style="margin-bottom: -10px;">Ordernar por</label>
       <%= select_tag :order_by, options_for_select([["Prazos mais apertados", "apertados"], ["Envios recentes", "recentes"]], params[:order_by]), value: params[:order_by], class: "form-select form-select-sm" %>
     </div>

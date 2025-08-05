@@ -1,0 +1,32 @@
+pt-BR:
+  activerecord:
+    models:
+      user: "Usuário"
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        nome: "Nome"
+        sobrenome: "Sobrenome"
+        cpf: "CPF"
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      not_saved: "Alguns erro(s) foram encontrados: "
+      confirmation: "não coincide com %{attribute}"
+      accepted: "deve ser aceito"
+      blank: "não pode ficar em branco"
+      present: "deve estar em branco"
+      too_long: "é muito longo (máximo: %{count} caracteres)"
+      too_short: "é muito curta (mínimo: %{count} caracteres)"
+      wrong_length: "tamanho incorreto (deve ter %{count} caracteres)"
+      taken: "já está em uso"
+      invalid: "não é válido"
+
+    template:
+      header:
+        one: "1 erro impediu este %{model} de ser salvo:"
+        other: "%{count} erros impediram este %{model} de ser salvo:"
+      body: "Houve problemas com os seguintes campos:"

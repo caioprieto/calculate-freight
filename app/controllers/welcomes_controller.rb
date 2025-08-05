@@ -7,12 +7,15 @@ class WelcomesController < ApplicationController
   end
 
   def apresentacao
+    @title_page = "Quem somos"
   end
 
   def acesso_livre
+    @title_page = "Acesso Livre"
   end
 
   def temas
+    @title_page = "Temas de Redação"
     @temas_collection = ::Tema.all
 
     if params[:prova].present?
@@ -21,6 +24,7 @@ class WelcomesController < ApplicationController
   end
 
   def cursos
+    @title_page = "Cursos"
     @cursos_collection = ::Curso.all
 
     if params[:prova].present?

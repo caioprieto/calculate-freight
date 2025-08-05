@@ -243,6 +243,7 @@ footer.footer {
     padding: 8px;
     margin-top: -3px;
     white-space: nowrap;
+    border-radius: 10px;
   }
 
   .carousel-section .carousel-image {
@@ -266,6 +267,8 @@ footer.footer {
 
   .sou-aluno {
     display: none;
+    padding: 10px !important;
+    margin-left: -5px !important;
   }
 
   .nav-icone {
@@ -623,17 +626,17 @@ footer.footer {
   gap: 30px
 }
 
-.vestibular-card img{
+.vestibular-card img {
   width: 260px;
   height: 150px;
   object-fit: cover;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .vestibular-card {
-  transition: transform 0.3s ease;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .vestibular-card:hover {
@@ -642,7 +645,8 @@ footer.footer {
 }
 
 .vestibular-card:hover img {
-  opacity: 80%;
+  transform: scale(1.05);
+  opacity: 70%;
 }
 
 /* === CONTAINER APRESENTAÇÃO ============================================ */
@@ -773,7 +777,7 @@ footer.footer {
 }
 
 .vestibular-card.highlighted {
-  border: 3px solid rgba(255, 193, 7, 0.6);
+  border: 3px solid rgba(255, 193, 7, 0.199);
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(44, 201, 1, 0.9);
   position: relative;

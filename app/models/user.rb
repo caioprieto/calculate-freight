@@ -17,6 +17,13 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   validates :nome, :sobrenome, :cpf, presence: true
+  validates :cpf, uniqueness: { case_sensitive: false }
+  validates :cpf, format: { with: /\A\d{11}\z/, message: "deve conter 11 dígitos numéricos" }
+  validate :cpf_must_be_valid
+
+  def cpf_must_be_valid
+    errors.add(:cpf, "não é válido") unless CPF.valid?(cpf)
+  end
 
   def self.from_omniauth(access_token)
     data = access_token.info

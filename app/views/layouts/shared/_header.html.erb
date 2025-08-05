@@ -10,8 +10,9 @@
   <div class="container container-flex">
     <i class="bi bi-list fs-3 nav-icone hover"></i>
     <div id="mobileSidebar" class="mobile-sidebar">
-      <button id="closeSidebar" class="close-btn">&times;</button>
+      <button id="closeSidebar" class="close-btn text-dark">&times;</button>
       <nav class="mobile-menu-links">
+        <a href="/" class="<%= 'active' if current_page?('/')  %>" >Home</a>
         <a href="/apresentacao" class="<%= 'active' if current_page?('/apresentacao')  %>" >Quem somos</a>
         <a href="/temas" class="<%= 'active' if current_page?('/temas') %>">Temas de Redação</a>
         <a href="/acesso_livre" class="<%= 'active' if current_page?('/acesso_livre') %>">Acesso Livre</a>
@@ -106,6 +107,12 @@
     <div class="spinner-loader"></div>
   </div>
 </nav>
+
+<% unless current_page?(root_path) %>
+  <div class="container d-flex mt-2">
+    <p style="margin-top: -74px; margin-left: 31px; font-size: 14px;">Home <span style="margin-right: 10px;"> </span>● <span class="text-secondary" style="margin-left: 10px;"><%= @title_page %> </span> </p>
+  </div>
+<% end %>
 
 <div class="full-width-container"style="margin-bottom: 30px; margin-top: -60px;">
   <% if flash[:noticia] %>
