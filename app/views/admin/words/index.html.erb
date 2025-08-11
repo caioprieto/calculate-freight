@@ -11,6 +11,7 @@
 <table class="table table-admin table-sm table-bordered mt-3" style="width: 99%;">
   <thead>
     <tr>
+      <th style="width: 30px;"> <input type="checkbox" id="select-all" /> </th>
       <th scope="col">Tema</th>
       <th scope="col">Tipo da Prova</th>
       <th scope="col">Data de criação</th>
@@ -22,6 +23,9 @@
   <tbody>
     <% @redacoes.each do |redacao| %>
       <tr>
+        <td>
+          <%= check_box_tag "redacao_ids[]", redacao.id, false, class: "redacao-checkbox" %>
+        </td>
         <td><%= redacao.tema %></td>
         <td><%= redacao.word_type.upcase %></td>
         <td><%= redacao.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %></td>
@@ -49,3 +53,30 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const selectAll = document.getElementById("select-all");
+    const checkboxes = document.querySelectorAll(".redacao-checkbox");
+    const deleteButton = document.getElementById("delete-button");
+
+    function updateButtonState() {
+      const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+      deleteButton.disabled = !anyChecked;
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", updateButtonState);
+    });
+
+    if (selectAll) {
+      selectAll.addEventListener("change", () => {
+        checkboxes.forEach(cb => cb.checked = selectAll.checked);
+        updateButtonState();
+      });
+    }
+
+    // Estado inicial
+    updateButtonState();
+  });
+</script>

@@ -32,7 +32,8 @@ gem "state_machines"
 gem "state_machines-activerecord"
 gem "tty-spinner"
 gem "aws-sdk-s3", require: false
-gem 'cpf_cnpj'
+gem "cpf_cnpj"
+gem "streamio-ffmpeg"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]

@@ -1,21 +1,62 @@
-<% if params[:prova].present? %>
-  <div class="container mb-5"style="margin-top: 5px;">
-    <div class="mt-2 ms-4 d-flex" style="width: 93%;">
-      <i class="bi bi-chevron-double-left fs-5" style="margin-top: -3px; margin-right: 6px; margin-left: 10px;"></i>
-      <h2 class="ms-2" style="font-size: 18px; font-weight: 400; margin-top: 2px;">Provas anteriores <strong style="font-weight: 600; font-size: 17px;"><%= params[:prova].present? ? " - #{params[:prova].upcase}" : "" %><strong></h2>
+<div class="container mb-5" style="margin-top: 5px;">
+  <div class="mt-2 ms-4 d-flex" style="width: 93%;">
+    <i class="bi bi-chevron-double-left fs-6" style="margin-top: -1px; margin-right: 6px; margin-left: 10px;"></i>
+    <h2 class="ms-2" style="font-size: 18px; font-weight: 400;">
+      Provas anteriores
+    </h2>
+  </div>
+
+  <hr class="text-dark" style="width: 95.6%; margin-left: 30px; margin-bottom: 15px; margin-top: -3px; opacity: 10%;">
+
+  <div class="row gx-3" style="margin-left: 25px; margin-right: 0; width: 97%;">
+    <!-- CARD FUNCIONAL COM VÍDEO -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex mb-3">
+      <div class="redacoes-card d-flex flex-column align-items-center text-dark w-100 text-decoration-none"
+            id="video-card"
+            style="cursor: pointer;">
+        <div class="position-relative w-100 bg-dark d-flex justify-content-center align-items-center"
+              style="border-radius: 10px; height: 350px;" id="video-card-content">
+          <p class="text-white m-0 fs-4" style="opacity: 80%">2021</p>
+        </div>
+      </div>
     </div>
 
-    <% if params[:prova] == "unicamp" %>
-      <%= render partial: "welcomes/accordion/unicamp" %>
-    <% end %>
-    <% if params[:prova] == "usp" %>
-      <%= render partial: "welcomes/accordion/usp" %>
-    <% end %>
-    <% if params[:prova] == "enem" %>
-      <%= render partial: "welcomes/accordion/enem" %>
-    <% end %>
-    <% if params[:prova] == "unesp" %>
-      <%= render partial: "welcomes/accordion/unesp" %>
+    <!-- Outros cards (sem funcionalidade ainda) -->
+    <% 3.times.each_with_index do |item, index| %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex mb-3">
+        <a href="#" class="redacoes-card d-flex flex-column align-items-center text-dark w-100 text-decoration-none">
+          <div class="position-relative w-100 bg-dark d-flex justify-content-center align-items-center"
+                style="border-radius: 10px; height: 350px;">
+            <p class="text-white m-0 fs-4" style="opacity: 80%">202<%= index + 2 %></p>
+          </div>
+        </a>
+      </div>
     <% end %>
   </div>
-<% end %>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const card = document.getElementById("video-card");
+    const content = document.getElementById("video-card-content");
+
+    card.addEventListener("click", function () {
+      const video = document.createElement("video");
+
+      video.src = "/videos/videoplayback.mp4"; // coloque o vídeo em public/videos/
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.controlsList = "nodownload noplaybackrate";
+      video.style.width = "100%";
+      video.style.height = "100%";
+      video.style.objectFit = "cover";
+      video.style.borderRadius = "10px";
+      video.setAttribute("class", "shadow-sm");
+
+      content.innerHTML = "";
+      content.appendChild(video);
+    });
+  });
+</script>

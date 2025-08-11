@@ -36,7 +36,7 @@
             </div>
 
             <p class="tempo-restante fs-6 mt-2">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
-            <div style="display: flex; gap: 4px; z-index: 9999; position: relative">
+            <div style="display: flex; gap: 4px; position: relative">
               <% if current_user.present? %>
                 <% if current_user.user_cursos.where(curso_id: @curso.id).blank? %>
                   <div class="">
@@ -152,8 +152,8 @@
                 <% if aula.word.present? %>
                   <li class="list-group-item" style="background-color: whitesmoke; border: 10px; border-radius: 5px">
                     <div style="text-decoration: none; padding: 1px" class="fw-light">
-                      <i class="bi bi-pencil-square fs-6" style="margin-right: 3px"></i>
-                      <%= aula.word.tema %>
+                      <i class="bi bi-pencil-square fs-6" style="margin-right: 6px"></i>
+                      <span style="font-size: 15px;"><%= aula.word.tema %></span>
                     </div>
                   </li>
                 <% end %>

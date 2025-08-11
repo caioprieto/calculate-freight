@@ -1,45 +1,131 @@
-<div id="notify-modal" class="card shadow position-absolute end-0 mt-2" style="width: 400px; display: none; z-index: 1050; background-color: white;">
+<div id="notify-modal" class="card shadow position-absolute end-0 mt-2"
+     style="width: 400px; display: none; z-index: 1050; background-color: white;">
   <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center p-3">
-    <h6 style="margin-top: 4px; font-size: 15px;">Notificações</h6>
-    <button class="btn-close" aria-label="Fechar" onclick="document.getElementById('notify-modal').style.display='none'" style="font-size: 13px;"></button>
-  </div>
-  <div class="card-body p-0" style="max-height: 400px; overflow-y: auto;">
+    <h6 style="margin-top: 4px; font-size: 14px;">Notificações</h6>
 
-    <!-- Lista de notificações (substitua com conteúdo real futuramente) -->
-    <ul class="list-group list-group-flush">
-      <% if current_user.notifications.present? %>
-        <% current_user.notifications.each do |notification|%>
-          <% if notification.notification_type == "add_word" || notification.notification_type == "add_curso" %>
-            <li class="list-group-item notification-item p-0">
-              <button class="accordion-toggle w-100 border-0 text-start px-3 py-3 bg-white d-flex justify-content-between align-items-center" type="button">
-                <div>
-                  <h6 class="fw-semibold mb-0" style="font-size: 14px;"><%= notification.title %></h6>
-                </div>
-                <span class="badge bg-primary rounded-pill">Novo</span>
+    <div class="d-flex">
+      <i class="bi bi-circle-fill text-dark" style="font-size: 11px;"></i>
+      <span class="text-dark" style="font-size: 10px; margin-left: 5px; margin-top: 0px;">Visualizado</span>
+    </div>
+
+    <div class="d-flex">
+      <i class="bi bi-circle-fill text-success" style="font-size: 11px;"></i>
+      <span class="text-success" style="font-size: 10px; margin-left: 5px; margin-top: 0px;">Não lida</span>
+    </div>
+
+    <button class="btn-close" aria-label="Fechar"
+            onclick="document.getElementById('notify-modal').style.display='none'"
+            style="font-size: 13px;"></button>
+  </div>
+
+  <div class="card-body p-0" style="max-height: 400px; overflow-y: auto;">
+    <% if current_user.notifications.present? %>
+      <div class="accordion" id="notificationsAccordion">
+
+        <% current_user.notifications.where(read: false, painel: "user").order(created_at: :desc).each do |notification| %>
+          <% uid = "collapse-unread-#{notification.id}" %>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-<%= uid %>">
+              <button class="accordion-button collapsed manual-toggle d-flex justify-content-between align-items-center"
+                      style="background-color: #00921350"
+                      type="button"
+                      data-target="#<%= uid %>"
+                      aria-expanded="false"
+                      aria-controls="<%= uid %>">
+                <% if notification.notification_type == "message" && notification.painel == "user" %>
+                  <span class="d-flex" style="font-size: 14px; font-weight: 600">
+                    <%= notification.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %> -
+                    <span style="font-size: 13px; font-weight: 500" class="ms-1">Mensagem da Professora</span>
+                    <i class="bi bi-circle-fill fs-6 status-icon text-success" style="margin-top: -2px; margin-left: 25px;"></i>
+                  </span>
+                <% else %>
+                  <span style="font-size: 14px;"><%= notification.title %></span>
+                <% end %>
               </button>
-              <div class="accordion-body px-3 py-2 text-muted" style="display: none; font-size: 13px">
-                <%= notification.body %>
+            </h2>
+
+            <div id="<%= uid %>" class="accordion-body-wrapper" style="display: none;" aria-labelledby="heading-<%= uid %>">
+              <div class="accordion-body d-flex justify-content-between align-items-start gap-2 text-muted" style="font-size: 13px;">
+                <span><%= notification.body %></span>
+                <%= button_to '✓ Marcar como lido', marcar_leitura_notification_path(notification),
+                      method: :patch,
+                      class: 'btn btn-success btn-sm',
+                      style: "border-radius: 3px; padding: 3px; font-size: 11px;",
+                      data: { turbo: false },
+                      form: { class: 'd-inline-block', style: 'margin: 0;' } %>
               </div>
-            </li>
-          <% end %>
+            </div>
+          </div>
         <% end %>
 
-      <% else %>
-        <p class="text-muted" style="margin-left: 15px; margin-top: 15px; margin-bottom: 30px;">Você ainda não tem notificações...</p>
-      <% end %>
-    </ul>
+        <% current_user.notifications.where(read: true, painel: "user").order(created_at: :desc).each do |notification| %>
+          <% uid = "collapse-read-#{notification.id}" %>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-<%= uid %>">
+              <button class="accordion-button collapsed manual-toggle d-flex justify-content-between align-items-center"
+                      type="button"
+                      data-target="#<%= uid %>"
+                      aria-expanded="false"
+                      aria-controls="<%= uid %>">
+                <% if notification.notification_type == "message" && notification.painel == "user" %>
+                  <span class="d-flex" style="font-size: 14px; font-weight: 600">
+                    <%= notification.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %> -
+                    <span style="font-size: 13px; font-weight: 500" class="ms-1">Mensagem da Professora</span>
+                    <i class="bi bi-circle-fill fs-6 text-dark" style="margin-top: -2px; margin-left: 27px;"></i>
+                  </span>
+                <% else %>
+                  <span style="font-size: 14px;"><%= notification.title %></span>
+                <% end %>
+              </button>
+            </h2>
 
+            <div id="<%= uid %>" class="accordion-body-wrapper" style="display: none;" aria-labelledby="heading-<%= uid %>">
+              <div class="accordion-body d-flex justify-content-between align-items-start gap-2 text-muted" style="font-size: 13px;">
+                <span><%= notification.body %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    <% else %>
+      <p style="font-size: 12px" class="text-muted px-3 py-2 mt-2">
+        Você ainda não tem notificações...
+      </p>
+    <% end %>
   </div>
-  <div class="card-footer bg-light text-center py-2">
-  </div>
+
+  <div class="card-footer bg-light text-center py-2"></div>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".accordion-toggle").forEach(function (button) {
-      button.addEventListener("click", function () {
-        const body = this.nextElementSibling;
-        body.style.display = (body.style.display === "none" || body.style.display === "") ? "block" : "none";
+    document.querySelectorAll(".manual-toggle").forEach(function(btn) {
+      btn.addEventListener("click", function () {
+        const targetId = this.getAttribute("data-target");
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        // Alterna visibilidade do painel clicado
+        const isOpen = target.style.display === "block";
+
+        if (isOpen) {
+          target.style.display = "none";
+          this.classList.add("collapsed");
+          const icon = this.querySelector(".status-icon");
+          if (icon) {
+            icon.classList.remove("bi-check-circle-fill");
+            icon.classList.add("bi-circle-fill");
+          }
+        } else {
+          target.style.display = "block";
+          this.classList.remove("collapsed");
+          const icon = this.querySelector(".status-icon");
+          if (icon) {
+            icon.classList.remove("bi-circle-fill");
+            icon.classList.add("bi-check-circle-fill");
+          }
+        }
       });
     });
   });

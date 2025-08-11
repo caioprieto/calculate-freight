@@ -49,7 +49,7 @@
         <a href="/user/cursos/<%= user_curso.curso.id %>/player" class="meus-cursos-card bg-white d-flex flex-column align-items-center text-dark" style="width: 100%; text-decoration: none;">
           <div class="meus-cursos-img position-relative" style="width: 100%; border-radius: 10px">
             <% if user_curso.curso.imagem.attached? %>
-              <%= image_tag user_curso.curso.imagem.variant(resize_to_limit: [1000, 1000]).processed, class: "w-100" %>
+              <%= image_tag user_curso.curso.imagem.variant(resize_to_limit: [1000, 1000]).processed, class: "w-100", style: "object-fit: cover;" %>
             <% end %>
             <div class="position-absolute top-50 start-50 translate-middle d-flex justify-content-center align-items-center rounded-circle bg-dark" style="width: 50px; height: 50px;">
               <i class="bi bi-play-fill text-white fs-3"></i>
@@ -103,7 +103,7 @@
           </div>
         </div>
         <div class="w-100" style="padding: 0 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border-radius: 10px">
-          <h6 class="text-dark mt-2 mb-2">Vazio</h6>
+          <h6 style="font-size: 14px;" class="text-dark mt-2 mb-2">Vazio</h6>
           <div class="progress" style="height: 8px;">
             <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
           </div>

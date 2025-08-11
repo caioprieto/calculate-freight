@@ -18,12 +18,12 @@
           <div class="full-width-container card mb-2 rounded-4 w-100 hover p-2">
             <a class="hover" style="text-decoration: none; color: black">
               <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <div class="col-md-3 d-flex align-items-center justify-content-center ms-2">
                   <% if @curso.imagem.present? %>
-                    <%= image_tag @curso.imagem, class: "", alt: @curso.name, style: "max-height: 180px; max-width: 100%; object-fit: contain; border-radius: 5px;" %>
+                    <%= image_tag @curso.imagem, class: "", alt: @curso.name, style: "max-height: 180px; min-width: 100%; object-fit: cover; border-radius: 10px;" %>
                   <% end %>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 ms-4">
                   <div class="card-body">
                     <h5 class="card-title" style="font-size: 17px; font-weight: 350"><%= @curso.name %></h5>
                     <strong class="mb-5" style="font-size: 16px; font-weight: 600;" >R$ <%= number_with_precision(@curso.value, precision: 2, separator: ",") %></strong>

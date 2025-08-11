@@ -83,7 +83,7 @@ body {
   z-index: 999; /* acima do .video-border-overlay que está com z-index: 2 */
   background-color: white;
   overflow: hidden;
-  width: 60%;
+  width: 70%;
   height: 78vh;
   margin-top: 40px;
   margin-left: 35px;
@@ -202,12 +202,12 @@ body {
 
 .beneficio{
   background: #3a3a3a6e;
-  padding: 1rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 10px;
   box-shadow: rgba(255, 255, 255, 0.795);
   text-align: center;
   transition: transform .35s ease;
-  height: 100px;
+  height: 97px;
 }
 
 .beneficio:hover{

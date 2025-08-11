@@ -59,22 +59,22 @@
     <% if params[:cursos] %>
       <section class="chat-messages scrollable mb-3 border p-3 rounded bg-white" style="max-height: 700px; overflow-y: auto;">
         <div class="d-flex">
-          <i class="bi bi-collection-play-fill fs-6" style="margin-top: -2px;"></i>
-          <h6 class="mb-3 ms-2">Cursos</h6>
+          <i class="bi bi-collection-play-fill fs-6" style="margin-top: -4px;"></i>
+          <h6 style="font-size: 14px;" class="mb-3 ms-2">Cursos</h6>
         </div>
 
         <% if @aluno_selecionado.user_cursos.any? %>
           <ul class="list-group">
             <% @aluno_selecionado.user_cursos.each_with_index do |user_curso, index| %>
-              <li class="list-group-item">
+              <li class="list-group-item p-3">
                 <div class="row g-0">
-                  <div class="col-md-3 d-flex align-items-center justify-content-center">
+                  <div class="col-md-3 ms-2 d-flex align-items-center justify-content-center">
                     <% if user_curso.curso.imagem.present? %>
-                      <%= image_tag user_curso.curso.imagem, class: "", alt: user_curso.curso.name, style: "max-height: 80px; object-fit: scale-down" %>
+                      <%= image_tag user_curso.curso.imagem, class: "", alt: user_curso.curso.name, style: "max-height: 80px; object-fit: cover; min-width: 100%; border-radius: 5px;" %>
                     <% end %>
                   </div>
-                  <div class="col-md-8">
-                    <div class="">
+                  <div class="col-md-7 ms-3">
+                    <div class="mt-1">
                       <h6 style="font-weight: 400; font-size: 13px; margin-bottom: -1px; "><%= user_curso.curso.name %></h6>
                       <strong class="text-danger" style="font-size: 12px; font-weight: 600">
                         Expira em: <span class="fw-bold"><%= user_curso.data_fim.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></span>
@@ -119,35 +119,35 @@
           <%= hidden_field_tag :aluno_id, @aluno_selecionado.id %>
 
           <div class="mb-3 mt-2">
-            <h6 class="mb-3">+ Adicionar Curso</h6>
-            <%= select_tag :curso_id, options_from_collection_for_select(Curso.all, :id, :name), prompt: "Selecione um curso", class: "form-select form-select-sm" %>
+            <h6 style="font-size: 13px;" class="mb-3">+ Adicionar Curso</h6>
+            <%= select_tag :curso_id, options_from_collection_for_select(Curso.all, :id, :name), prompt: "Selecione um curso", class: "form-select form-select-sm", style: "font-size: 12px;" %>
           </div>
 
-          <%= submit_tag "+ Adicionar", class: "btn btn-primary btn-sm", style: "font-weight: 500; font-size: 13px;" %>
+          <%= submit_tag "+ Adicionar", class: "btn btn-primary btn-sm", style: "font-weight: 500; font-size: 12px;" %>
         <% end %>
       </section>
 
     <% elsif params[:redacoes] %>
       <section class="chat-messages scrollable mb-3 border p-3 rounded bg-white">
         <div class="d-flex">
-          <i class="bi bi-book fs-6" style="margin-top: -2px;"></i>
-          <h6 class="mb-3 ms-2">Redações</h6>
+          <i class="bi bi-book fs-6" style="margin-top: -4px;"></i>
+          <h6 style="font-size: 14px;" class="mb-3 ms-2">Redações</h6>
         </div>
         <% if @aluno_selecionado.user_words.any? %>
           <ul class="list-group">
             <% @aluno_selecionado.user_words.each do |user_word| %>
-              <li class="list-group-item">
+              <li class="list-group-item p-2">
                 <div class="row g-0">
-                  <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <div class="col-md-3 d-flex align-items-center justify-content-center">
                     <% if user_word.word.imagem.present? %>
-                      <%= image_tag user_word.word.imagem, class: "", alt: user_word.word.tema, style: "max-height: 60px; object-fit: cover; width: 150px" %>
+                      <%= image_tag user_word.word.imagem, class: "", alt: user_word.word.tema, style: "max-height: 80px; object-fit: cover; min-width: 100%; border-radius: 5px;" %>
                     <% end %>
                   </div>
-                  <div class="col-md-6 ms-3">
+                  <div class="col-md-5 ms-3">
                     <div class="mt-3">
-                      <h6 style="font-weight: 400; font-size: 13px; margin-bottom: -1px; "><strong style="font-weight: 500"><%= user_word.word.word_type.upcase %></strong> - <%= user_word.word.tema %></h6>
+                      <h6 style="font-weight: 400; font-size: 12px; margin-bottom: -1px; "><strong style="font-weight: 500"><%= user_word.word.word_type.upcase %></strong> - <%= user_word.word.tema %></h6>
                       <strong class="<%= user_word.concluido ? "text-success" : "text-danger" %>" style="font-size: 12px; font-weight: 600">
-                        Status: <span class="fw-bold"><%= user_word.concluido ? "Finalizado" : "Pendente" %></span>
+                        Status: <span class="fw-bold"><%= user_word.concluido ? "Enviado para correção" : "Pendente" %></span>
                       </strong>
                       <p class="<%= user_word.correcao.attached? ? "text-success" : "text-danger" %>" style="font-size: 12px; font-weight: 600">
                         Correção: <span class="fw-bold"><%= user_word.correcao.attached? ? "Finalizado" : "Pendente" %></span>
@@ -182,8 +182,8 @@
           <%= hidden_field_tag :aluno_id, @aluno_selecionado.id %>
 
           <div class="mb-3 mt-2">
-            <h6 class="mb-3">+ Adicionar Redação</h6>
-            <%= select_tag :word_id, options_from_collection_for_select(Word.all, :id, :tema), prompt: "Selecione um redação", class: "form-select form-select-sm" %>
+            <h6 style="font-size: 13px;" class="mb-3">+ Adicionar Redação</h6>
+            <%= select_tag :word_id, options_from_collection_for_select(Word.all, :id, :tema), prompt: "Selecione um redação", class: "form-select form-select-sm", style: "font-size: 12px;" %>
           </div>
 
           <%= submit_tag "+ Adicionar", class: "btn btn-primary btn-sm", style: "font-weight: 500; font-size: 12px;" %>
@@ -193,36 +193,36 @@
     <% elsif params[:informacoes] %>
       <section class="chat-messages mb-3 border p-3 rounded bg-white">
         <div class="d-flex">
-          <i class="bi bi-info-circle fs-6" style="margin-top: -2px;"></i>
-          <h6 class="mb-3 ms-2">Informações</h6>
+          <i class="bi bi-info-circle fs-6" style="margin-top: -4px;"></i>
+          <h6 style="font-size: 14px;" class="mb-3 ms-2">Informações</h6>
         </div>
 
         <div class="row g-3">
           <div class="col-md-6">
             <div class="info-item p-3 border rounded bg-light">
-              <small class="text-muted">Nome completo</small>
-              <div class="fw-semibold text-dark"><%= @aluno_selecionado.nome %> <%= @aluno_selecionado.sobrenome %></div>
+              <small style="font-size: 12px" class="text-muted">Nome completo</small>
+              <div style="font-size: 15px" class="fw-semibold text-dark"><%= @aluno_selecionado.nome %> <%= @aluno_selecionado.sobrenome %></div>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="info-item p-3 border rounded bg-light">
-              <small class="text-muted">E-mail</small>
-              <div class="fw-semibold text-dark"><%= @aluno_selecionado.email %></div>
+              <small style="font-size: 12px" class="text-muted">E-mail</small>
+              <div style="font-size: 15px" class="fw-semibold text-dark"><%= @aluno_selecionado.email %></div>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="info-item p-3 border rounded bg-light">
-              <small class="text-muted">CPF</small>
-              <div class="fw-semibold text-dark"><%= (@aluno_selecionado.cpf) %></div>
+              <small style="font-size: 12px" class="text-muted">CPF</small>
+              <div style="font-size: 15px" class="fw-semibold text-dark"><%= (@aluno_selecionado.cpf) %></div>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="info-item p-3 border rounded bg-light">
-              <small class="text-muted">Telefone</small>
-              <div class="fw-semibold text-dark">(19) 99246-0527 </div>
+              <small style="font-size: 12px" class="text-muted">Telefone</small>
+              <div style="font-size: 15px" class="fw-semibold text-dark">(19) 99246-0527 </div>
             </div>
           </div>
         </div>
@@ -233,14 +233,14 @@
       <section class="chat-messages scrollable mb-2 border p-0 rounded bg-white" style="max-height: 500px; overflow-y: auto;">
         <div class="d-flex sticky-chat-header ms-2">
           <i class="bi bi-chat-left-text fs-6" style="margin-top: -2px; margin-left: 5px;"></i>
-          <h6 class="mb-3 ms-2">Chat do tema: <%= @chat_selecionado.user_word.word.tema %></h6>
+          <h6 style="font-size: 14px;" class="mb-3 ms-2">Chat do tema: <%= @chat_selecionado.user_word.word.tema %></h6>
         </div>
         <% @chat_selecionado.messages.each do |msg| %>
           <div class="p-1 <%= msg.dono_type == 'Admin' ? 'text-end' : 'text-start' %>">
             <span class="badge-admin ms-2 <%= msg.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
               <%= msg.dono_type == 'Admin' ? 'Admin' : "#{@aluno_selecionado.nome}" %>
             </span>
-            <div class="me-3 mb-1 d-inline-block p-2 rounded border mt-1" style="color: black;">
+            <div class="me-3 mb-1 d-inline-block p-2 rounded border mt-1" style="color: black; font-size: 13px;">
               <%= msg.content %>
             </div>
           </div>
@@ -272,6 +272,27 @@
                     <img src="/images/avatar-padrao.jpg" class="card-img-top rounded-top" style="height: 7rem; object-fit: cover;" />
                   <% end %>
                 </div>
+                <div class="card-body">
+                  <h6 class="fw-semibold" style="margin-top: -8px;"><%= aluno.nome %></h6>
+                  <p class="card-text text-muted" style="font-size: 12px; margin-top: -8px; margin-bottom: -4px;"><%= aluno.email %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% @alunos_notifications.limit(9).each do |aluno| %>
+          <div class="col">
+            <%= link_to admin_alunos_path(aluno_id: aluno.id, informacoes: true), class: "text-decoration-none text-dark" do %>
+              <div class="card hover-medium shadow-sm border-0 hover-shadow transition-all h-100">
+                <div>
+                  <% if aluno.imagem.present? %>
+                    <%= image_tag aluno.imagem, class: "card-img-top rounded-top", style: "height: 7rem; object-fit: cover;" %>
+                  <% else %>
+                    <img src="/images/avatar-padrao.jpg" class="card-img-top rounded-top" style="height: 7rem; object-fit: cover;" />
+                  <% end %>
+                </div>
+
                 <div class="card-body">
                   <h6 class="fw-semibold" style="margin-top: -8px;"><%= aluno.nome %></h6>
                   <p class="card-text text-muted" style="font-size: 12px; margin-top: -8px; margin-bottom: -4px;"><%= aluno.email %></p>

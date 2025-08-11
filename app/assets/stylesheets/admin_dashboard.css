@@ -354,6 +354,7 @@ input[type="checkbox"] {
   background-color: #1d1d1d;
   color: white;
   padding: 3px;
+  padding-right: 1px;
   margin-right: 10px;
   font-size: 10px;
   font-weight: 600;
@@ -377,7 +378,6 @@ input[type="checkbox"] {
 .preco-riscado {
   text-decoration: line-through;
   margin-left: 3px;
-  font-size: 14px;
   color: #888;
 }
 

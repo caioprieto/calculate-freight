@@ -3,6 +3,40 @@
   <span style="font-size: 17px;">Pedidos</span>
 </h6>
 
+<div class="container-full-width mb-4 mt-3 p-3 background-filter">
+  <%= form_with url: admin_pedidos_path, method: :get, local: true, class: "row gy-2 gx-3 align-items-end" do %>
+    <div class="col-md-4">
+      <label class="form-label" style="margin-bottom: -10px;">Nome do aluno</label>
+      <%= text_field_tag :aluno, params[:aluno], class: "form-control form-control-sm" %>
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label" style="margin-bottom: -10px;">Ordernar por</label>
+      <%= select_tag :order_by, options_for_select([["Prazos mais apertados", "apertados"], ["Envios recentes", "recentes"]], params[:order_by]), value: params[:order_by], class: "form-select form-select-sm" %>
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label" style="margin-bottom: -10px;">Tipo de Redação</label>
+      <%= select_tag :prova, options_for_select([["Enem", "enem"], ["Fuvest", "usp"], ["Unicamp", "unicamp"], ["Unesp", "unesp"]], params[:prova]), value: params[:prova], include_blank: "Todos", class: "form-select form-select-sm" %>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label" style="margin-bottom: -10px;">Prazo da correção</label>
+      <div class="d-flex gap-2">
+        <%= date_field_tag :data_inicial, params[:data_inicial], class: "form-control form-control-sm" %>
+        <%= date_field_tag :data_final, params[:data_final], class: "form-control form-control-sm" %>
+      </div>
+    </div>
+
+    <!-- Botão -->
+    <div class="col-md-1 justify-content-end d-flex">
+      <button type="submit" class="btn btn-dark d-flex justify-content-center align-items-center w-75 px-2 fs-6" style="border-radius: 3px; white-space: nowrap; padding-top: 4px; margin-bottom: 1px;">
+        <i class="bi bi-search" style="font-weight: 500; font-size: 14px;"></i>
+      </button>
+    </div>
+  <% end %>
+</div>
+
 <% @pedidos.each_with_index do |pedido, index| %>
   <div class="card mt-3 shadow-sm border p-2">
     <div class="card-header d-flex justify-content-between align-items-center bg-white" style="cursor: pointer;" id="togglePedido<%= index %>">

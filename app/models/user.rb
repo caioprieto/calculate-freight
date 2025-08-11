@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :pedidos, dependent: :destroy
   has_many :messages, as: :dono, class_name: "::Message"
   has_many :notifications, dependent: :destroy
+  has_many :favoritos, dependent: :destroy
 
   validates :nome, :sobrenome, :cpf, presence: true
   validates :cpf, uniqueness: { case_sensitive: false }

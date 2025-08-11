@@ -21,6 +21,12 @@ class WelcomesController < ApplicationController
     if params[:prova].present?
       @temas_collection = ::Tema.find_by_prova(params[:prova])
     end
+
+    if current_user
+      @favoritos_ids = current_user.favoritos.pluck(:tema_id)
+    else
+      @favoritos_ids = []
+    end
   end
 
   def cursos

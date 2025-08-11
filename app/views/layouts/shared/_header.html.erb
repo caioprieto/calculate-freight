@@ -34,6 +34,22 @@
     </nav>
     <div class="navbar-buttons" style="margin-top: -11px; margin-right: 18px; display: flex; gap: 10px; align-items: center;">
       <% if current_user.present? %>
+        <div class="position-relative" style="margin-top: 5px; margin-right: -15px;">
+          <!-- BOTÃO DE FAVORITOS -->
+          <div class="btn fav-toggle" id="fav-toggle" style="cursor: pointer; position: relative; border: none">
+            <i class="bi bi-balloon-heart fs-4"></i>
+            <% if current_user.favoritos %>
+              <% unless current_user.favoritos.count.zero? %>
+                <span class="bolinha fs-6 position-absolute top-0" style="font-weight: 600">
+                  <span class="bolinha-span" style="margin-top: 1px;"> <%= current_user.favoritos.count %></span>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+
+          <%= render partial: 'layouts/shared/modal_favoritos' %>
+        </div>
+
         <div class="position-relative">
           <!-- BOTÃO DO CARRINHO -->
           <div class="btn cart-toggle" id="cart-toggle" style="cursor: pointer; position: relative; border: none">
@@ -63,32 +79,32 @@
             <div class="arrow-up"></div>
             <%= link_to user_dashboard_path do %>
               <i class="bi bi-mortarboard fs-6" style="margin-right: 10px;"></i>
-              Área do Aluno
+              <span style="font-size: 14px;">Área do Aluno</span>
             <% end %>
 
             <%= link_to user_pedidos_path do %>
               <i class="bi bi-card-text fs-6" style="margin-right: 10px;"></i>
-              Meus pedidos
+              <span style="font-size: 14px;">Meus pedidos</span>
             <% end %>
 
             <%= link_to user_redacoes_path do %>
               <i class="bi bi-book fs-6" style="margin-right: 10px;"></i>
-              Minhas redações
+              <span style="font-size: 14px;">Minhas redações</span>
             <% end %>
 
             <%= link_to user_dashboard_path do %>
               <i class="bi bi-collection-play fs-6" style="margin-right: 10px;"></i>
-              Biblioteca
+              <span style="font-size: 14px;">Biblioteca</span>
             <% end %>
 
             <%= link_to user_settings_path do %>
               <i class="bi bi-gear-wide-connected fs-6" style="margin-right: 10px;"></i>
-              Configurações
+              <span style="font-size: 14px;">Configurações</span>
             <% end %>
 
             <%= link_to '#', onclick: 'logout(); return false;' do %>
               <i class="bi bi-box-arrow-left fs-6" style="margin-right: 10px;"></i>
-              Sair
+              <span style="font-size: 14px;">Sair</span>
             <% end %>
             <div class="card-footer bg-white text-center py-2 shadow border">
             </div>
@@ -143,6 +159,22 @@
   document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById("cart-toggle");
     const dropdown = document.getElementById("cart-dropdown");
+
+    let timeout;
+
+    toggle.addEventListener("click", () => {
+      clearTimeout(timeout);
+      if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+      } else {
+        dropdown.style.display = "none";
+      }
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("fav-toggle");
+    const dropdown = document.getElementById("favoritos-dropdown");
 
     let timeout;
 

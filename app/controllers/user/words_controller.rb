@@ -28,6 +28,7 @@ class User::WordsController < ApplicationController
     @word = Word.find(params[:id])
     @user_word = current_user.user_words.where(word_id: @word.id).first
     @user_word.update(concluido: true, data_conclusao: Time.zone.now)
+    @user_word.enviar
 
     redirect_to proposta_user_word_path(@user_word.word_id), notice: "Redação enviada com sucesso."
   end

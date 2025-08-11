@@ -103,6 +103,16 @@ Rails.application.routes.draw do
   resources :pedidos
   resources :temas, only: :show
 
+  resources :notifications, only: [:index] do
+    member do
+      patch :marcar_leitura
+    end
+  end
+
+  resources :favoritos, only: [:create] do
+    delete ":tema_id", to: "favoritos#destroy", as: :remove, on: :collection
+  end
+
   get "/success", to: "payments#success"
   get "/cancel", to: "payments#cancel"
 

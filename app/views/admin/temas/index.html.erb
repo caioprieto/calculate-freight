@@ -12,6 +12,7 @@
   <table class="table table-admin table-sm table-bordered mt-3" style="width: 99%;">
     <thead>
       <tr>
+        <th style="width: 30px;"> <input type="checkbox" id="select-all" /> </th>
         <th scope="col">Tema</th>
         <th scope="col">Tipo da Prova</th>
         <th scope="col">Data de criação</th>
@@ -23,12 +24,15 @@
     <tbody>
       <% @temas.each do |tema| %>
         <tr>
+          <td>
+            <%= check_box_tag "tema_ids[]", tema.id, false, class: "tema-checkbox" %>
+          </td>
           <td><%= tema.name %></td>
           <td><%= tema.prova.upcase %></td>
           <td><%= tema.created_at.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M:%S') %></td>
           <td>
             <% if tema.capa.attached? %>
-              <i class='bi bi-check-circle-fill text-success fs-5 d-flex hover' style="margin-left: 10px; margin-top: 5px;"></i>
+              <i class='bi bi-check-circle-fill text-success fs-5 d-flex hover' style="margin-top: 5px;"></i>
             <% else %>
               <i class="bi bi-x-circle-fill text-danger fs-5 d-flex hover" style="margin-left: 10px; margin-top: 5px;"></i>
             <% end %>
@@ -51,3 +55,30 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const selectAll = document.getElementById("select-all");
+    const checkboxes = document.querySelectorAll(".tema-checkbox");
+    const deleteButton = document.getElementById("delete-button");
+
+    function updateButtonState() {
+      const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+      deleteButton.disabled = !anyChecked;
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", updateButtonState);
+    });
+
+    if (selectAll) {
+      selectAll.addEventListener("change", () => {
+        checkboxes.forEach(cb => cb.checked = selectAll.checked);
+        updateButtonState();
+      });
+    }
+
+    // Estado inicial
+    updateButtonState();
+  });
+</script>

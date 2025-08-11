@@ -24,6 +24,7 @@ pt-BR:
       wrong_length: "tamanho incorreto (deve ter %{count} caracteres)"
       taken: "já está em uso"
       invalid: "não é válido"
+      record_invalid: "Registro inválido: %{errors}"
 
     template:
       header:

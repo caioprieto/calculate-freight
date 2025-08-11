@@ -2,7 +2,7 @@
   <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="margin-top: 9px; margin-left: 17px; width: 95.5%">
     <i class="bi bi-check-circle-fill me-1 fs-6"></i>
     <%= flash[:noticia] %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close text-success" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>
 
@@ -10,7 +10,7 @@
   <div class="alert alert-danger alert-dismissible fade show text-center" role="alert" style="margin-top: 9px; margin-left: 17px; width: 95.5%">
     <i class="bi bi-x-circle-fill me-1 fs-6"></i>
     <%= flash[:alerta]%>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>
 
@@ -27,12 +27,12 @@
           <div class="container card shadow mb-2 rounded-4 w-100 p-2">
             <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
               <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <div class="col-md-3 ms-4 d-flex align-items-center justify-content-center">
                   <% if curso.imagem.present? %>
-                    <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 140px; max-width: 100%; object-fit: contain;" %>
+                    <%= image_tag curso.imagem, class: "", alt: curso.name, style: "max-height: 180px; min-width: 100%; object-fit: cover; border-radius: 3px" %>
                   <% end %>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 ms-3">
                   <div class="card-body">
                     <h5 class="card-title" style="font-size: 14px; font-weight: 350"><%= curso.name %></h5>
                     <div class="d-flex" style="margin-top: -4px;">
@@ -46,32 +46,46 @@
                       <% end %>
                     </div>
 
-                    <div class="row mt-2">
+                    <div class="row mt-3">
                       <div class="col-12 col-md-5 mb-2">
                         <div class="item d-flex align-items-center">
-                          <i class="bi bi-file-play fs-5 me-2"></i>
-                          <span style="font-size: 11px;">20 horas de vídeo</span>
+                          <i class="bi bi-file-play fs-6 me-2"></i>
+                          <span style="font-size: 10px;">20 horas de vídeo</span>
                         </div>
                       </div>
 
                       <div class="col-12 col-md-7 mb-2">
                         <div class="item d-flex align-items-center">
-                          <i class="bi bi-phone fs-5 me-2"></i>
-                          <span style="font-size: 11px;">Acesso no dispositivo móvel e na TV</span>
+                          <i class="bi bi-phone fs-6 me-2"></i>
+                          <span style="font-size: 10px;">Acesso no dispositivo móvel e na TV</span>
                         </div>
                       </div>
 
                       <div class="col-12 col-md-5 mb-2">
                         <div class="item d-flex align-items-center">
-                          <i class="bi bi-trophy fs-5 me-2"></i>
-                          <span style="font-size: 11px;">Certificado de conclusão</span>
+                          <i class="bi bi-trophy fs-6 me-2"></i>
+                          <span style="font-size: 10px;">Certificado de conclusão</span>
                         </div>
                       </div>
 
                       <div class="col-12 col-md-7 mb-2">
                         <div class="item d-flex align-items-center">
-                          <i class="bi bi-file-earmark-arrow-down fs-5 me-2"></i>
-                          <span style="font-size: 11px;"><%= curso.words.count %> redações disponíveis para download</span>
+                          <i class="bi bi-file-earmark-arrow-down fs-6 me-2"></i>
+                          <span style="font-size: 10px;"><%= curso.words.count %> redações disponíveis para download</span>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-md-5 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <i class="bi bi-trophy fs-6 me-2"></i>
+                          <span style="font-size: 10px;">Certificado de conclusão</span>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-md-7 mb-2">
+                        <div class="item d-flex align-items-center">
+                          <i class="bi bi-file-earmark-arrow-down fs-6 me-2"></i>
+                          <span style="font-size: 10px;"><%= curso.words.count %> redações disponíveis para download</span>
                         </div>
                       </div>
                     </div>
@@ -85,9 +99,9 @@
                       <!-- nenhum botão extra aqui -->
                     <% else %>
                       <%= form_with url: add_to_cart_path(curso), method: :post, local: true do %>
-                        <%= button_tag type: "submit", class: "btn text-dark p-1 position-absolute hover", style: "top: 10px; right: 10px; border: none", onclick: "showLoadingAndRedirect()" do %>
+                        <%= button_tag type: "submit", class: "btn text-dark p-1 position-absolute hover d-flex", style: "top: 10px; right: 10px; border: none", onclick: "showLoadingAndRedirect()" do %>
                           <i class="bi bi-cart-plus fs-6"></i>
-                          <span style="font-size: 11px; margin-top: 12px; margin-left: -2px; font-weight: 600">Adicionar</span>
+                          <span style="font-size: 11px; margin-top: 5px; margin-left: 2px; font-weight: 600">Adicionar</span>
                         <% end %>
                       <% end %>
                     <% end %>

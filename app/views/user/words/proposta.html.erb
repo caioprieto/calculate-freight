@@ -68,14 +68,14 @@
           <div class="beneficio">
             <i id="iconNotChecked" class="bi bi-skip-end-circle fs-3"></i>
             <i id="iconChecked" class="bi bi-pause-circle fs-3" style="display: none;"></i>
-            <h6 style="font-size: 14px; font-weight: 600" id="labelStart">Iniciar</h6>
+            <h6 style="font-size: 13px; font-weight: 600" id="labelStart">Iniciar</h6>
           </div>
         </a>
       <% else %>
         <a class="text-dark start-timer-btn" style="text-decoration: none;">
           <div class="beneficio">
             <i class="bi bi-skip-end-circle fs-3" style="font-weight: 700"></i>
-            <h6 style="font-size: 14px; font-weight: 700">Iniciar</h6>
+            <h6 style="font-size: 13px; font-weight: 700">Iniciar</h6>
           </div>
         </a>
       <% end %>
@@ -83,69 +83,72 @@
       <a id="iconEnviar" class="text-white start-timer-btn" style="text-decoration: none; display: none; cursor: pointer;">
         <div class="beneficio">
           <i class="bi bi-cloud-arrow-up fs-3"></i>
-          <h6 style="font-size: 14px; font-weight: 600">Enviar para correção</h6>
+          <h6 style="font-size: 13px; font-weight: 600">Enviar para correção</h6>
         </div>
       </a>
       <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#instrutionModal">
         <div class="beneficio">
           <i class="bi bi-card-list fs-3"></i>
-          <h6 style="font-size: 14px; font-weight: 600">Instruções</h6>
+          <h6 style="font-size: 13px; font-weight: 600">Instruções</h6>
         </div>
       </a>
-      <a href="/user/cursos/<%= @word.aula.curso_id%>/player" class="beneficio" style="text-decoration: none">
-        <div class="text-white" style="text-decoration: none;">
-          <i class="bi bi-camera-video fs-3"></i>
-          <h6 style="font-size: 14px; font-weight: 600">Vídeo/Aula</h6>
-        </div>
-      </a>
+      <% if @word.aula.present? %>
+        <a href="/user/cursos/<%= @word.aula.curso_id%>/player" class="beneficio" style="text-decoration: none">
+          <div class="text-white" style="text-decoration: none;">
+            <i class="bi bi-camera-video fs-3"></i>
+            <h6 style="font-size: 13px; font-weight: 600">Vídeo/Aula</h6>
+          </div>
+        </a>
+      <% end %>
+
       <% if @user_word.concluido %>
         <a class="text-white" style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#resultModal">
           <div class="beneficio">
             <i class="bi bi-clipboard fs-3"></i>
-            <h6 style="font-size: 14px; font-weight: 600">Resultados</h6>
+            <h6 style="font-size: 13px; font-weight: 600">Resultados</h6>
           </div>
         </a>
       <% else %>
         <a class="beneficio" style="text-decoration: none">
           <div class="text-dark" style="text-decoration: none;">
             <i class="bi bi-clipboard fs-3"></i>
-            <h6 style="font-size: 14px; font-weight: 600">Resultados</h6>
+            <h6 style="font-size: 13px; font-weight: 600">Resultados</h6>
           </div>
         </a>
       <% end %>
     </div>
 
     <div class="d-flex" style="text-decoration: none; margin-top: 15px; margin-bottom: -10px;">
-      <p class="text-white" style="font-weight: 500; margin-top: 3px; font-size: 15px;">Status: </p>
+      <p class="text-white" style="font-weight: 500; margin-top: 2px; font-size: 14px;">Status: </p>
       <% if @user_word.concluido %>
-        <strong class="text-success" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500;">Redação concluída</strong>
+        <strong class="text-success" style="font-size: 14px; margin-left: 6px; margin-top: 3px; font-weight: 500;">Redação concluída</strong>
       <% else %>
-        <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500">Redação pendente</strong>
+        <strong class="text-danger" style="font-size: 14px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação pendente</strong>
       <% end %>
     </div>
 
     <% if @user_word.concluido %>
       <div class="d-flex" style="text-decoration: none; margin-top: 5px; margin-bottom: -10px;">
-        <p class="text-white" style="font-weight: 500; margin-top: 3px; font-size: 15px;">Correção: </p>
+        <p class="text-white" style="font-weight: 500; margin-top: 3px; font-size: 14px;">Correção: </p>
         <% if @user_word.corrigido %>
-          <strong class="text-success" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500;">Correção concluída</strong>
+          <strong class="text-success" style="font-size: 14px; margin-left: 6px; margin-top: 4px; font-weight: 500;">Correção concluída</strong>
         <% else %>
-          <strong class="text-danger" style="font-size: 16px; margin-left: 6px; margin-top: 2px; font-weight: 500">Correção pendente</strong>
+          <strong class="text-danger" style="font-size: 14px; margin-left: 6px; margin-top: 4px; font-weight: 500">Correção pendente</strong>
         <% end %>
       </div>
     <% end %>
 
     <hr>
-    <h6 style="font-weight: 350" class="mb-3">Chat com o Professor</h6>
+    <h6 style="font-weight: 500; font-size: 14px;" class="mb-3">Chat com o Professor</h6>
 
     <div class="chat-wrapper d-flex flex-column" style="height: 400px;">
       <div id="chat-messages" class="messages flex-grow-1 overflow-auto mb-3">
         <% @messages.each do |message| %>
           <div class="mb-2 <%= message.dono_type == 'Admin' ? 'text-start' : 'text-end' %>">
-            <span class="badge <%= message.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
+            <span style="font-size: 10px; font-weight: 700" class="badge <%= message.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">
               <%= message.dono_type == 'Admin' ? 'Admin' : 'Você' %>
             </span>
-            <div class="d-inline-block p-2 rounded border mt-1 text-white">
+            <div class="d-inline-block p-2 rounded border mt-1 text-white" style="font-size: 14px;">
               <%= message.content %>
             </div>
           </div>
@@ -157,8 +160,8 @@
                     local: true,
                     html: { id: "messageForm", class: "chat-input mt-auto" } do |f| %>
         <div class="input-group">
-          <%= f.text_field :content, class: "form-control", placeholder: "Digite sua mensagem..." %>
-          <button class="btn btn-light" type="submit">Enviar</button>
+          <%= f.text_field :content, class: "form-control", placeholder: "Digite sua mensagem...", style: "font-size: 14px;" %>
+          <button style="font-size: 14px;" class="btn btn-light" type="submit">Enviar</button>
         </div>
       <% end %>
     </div>

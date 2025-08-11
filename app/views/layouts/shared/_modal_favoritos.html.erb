@@ -1,0 +1,32 @@
+<!-- MINI MODAL DO CARRINHO -->
+<div id="favoritos-dropdown" class="card cart-card shadow position-absolute end-0" style="width: 400px; display: none; z-index: 1000; margin-top: 5px;">
+  <div class="card-body p-3">
+    <div class="d-flex justify-content-between">
+      <h6 style="margin-top: 4px; font-size: 14px;">Favoritos</h6>
+      <button type="button" class="btn-close justify-content-end" style="font-size: 13px;" data-bs-dismiss="alert" aria-label="Close" onclick="document.getElementById('favoritos-dropdown').style.display='none'"></button>
+    </div>
+    <hr>
+
+    <% if current_user.favoritos.present? %>
+      <ul class="list-group mb-3">
+        <% current_user.favoritos.each do |favorito| %>
+          <li class="list-group-item d-flex align-items-center p-2">
+            <a style="text-decoration: none;" class="text-dark d-flex w-100 select-curso">
+              <% if favorito.tema.capa.present? %>
+                <%= image_tag favorito.tema.capa.variant(resize_to_limit: [500, 500]).processed, class: "imagem-carrinho", style: "max-height: 50px;" %>
+              <% end %>
+              <div style="margin-left: 10px; width: 75%; margin-top: 10px;">
+                <h6 class="fw-light" style="font-size: 13px;"><%= favorito.tema.name %></h6>
+              </div>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+      <%= link_to '+ Ver mais temas', '/temas', class: "btn btn-comprar text-white w-100", style: "background-color:#1d1d1d; border-radius: 5px; font-size: 13px; margin-top: -3px;" %>
+    <% else %>
+      <p style="font-size: 12px;" class="text-muted">Seus favoritos está vazio...</p>
+    <% end %>
+  </div>
+  <div class="card-footer bg-white text-center py-2">
+  </div>
+</div>

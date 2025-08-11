@@ -35,15 +35,41 @@
 
     <hr class="text-dark" style="width: 95.6%; margin-left: 30px; margin-bottom: 10px; margin-top: -22px; opacity: 10%;">
 
-    <div class="col-12" style="margin-left: 30px;">
+    <div class="row gx-3" style="margin-left: 25px; margin-right: 0; width: 97%;">
       <% @temas_collection.each do |tema| %>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex mb-3">
           <a href="/temas/<%= tema.id %>" class="redacoes-card d-flex flex-column align-items-center text-dark w-100" style="text-decoration: none;">
             <div class="meus-cursos-img position-relative w-100" style="border-radius: 10px;">
               <% if tema.capa.attached? %>
                 <%= image_tag tema.capa, style: "max-height: 170px; width: 100%; object-fit: cover; border-radius: 10px 10px 0 0;" %>
+
+                <% if current_user.present? %>
+                  <% if @favoritos_ids.include?(tema.id) %>
+                    <%= button_to remove_favoritos_path(tema_id: tema.id),
+                                  method: :delete,
+                                  class: "btn p-1 position-absolute top-0 end-0 m-2 favorite-button",
+                                  style: "border: none;" do %>
+                      <i class="bi bi-heart-fill text-danger fs-4"></i>
+                    <% end %>
+                  <% else %>
+                    <%= button_to favoritos_path(tema_id: tema.id),
+                                  method: :post,
+                                  class: "btn p-1 position-absolute top-0 end-0 m-2 favorite-button",
+                                  style: "border: none;" do %>
+                      <i class="bi bi-heart-fill text-white fs-4"></i>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <button class="btn p-1 position-absolute top-0 end-0 m-2 favorite-button"
+                          type="button"
+                          style="border: none;">
+                    <i class="bi bi-heart-fill text-white fs-3"></i>
+                  </button>
+                <% end %>
+
               <% end %>
             </div>
+
             <div class="w-100" style="padding: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border-radius: 0 0 10px 10px; min-height: 50px;">
               <h6 class="text-dark mb-0" style="font-size: 14px;"><%= tema.name %></h6>
             </div>

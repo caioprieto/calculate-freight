@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_27_155433) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_08_194251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -76,6 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_155433) do
     t.datetime "updated_at", null: false
     t.bigint "word_id"
     t.integer "duration_in_seconds"
+    t.integer "duration_in_minutes"
     t.index ["modulo_id"], name: "index_aulas_on_modulo_id"
     t.index ["word_id"], name: "index_aulas_on_word_id"
   end
@@ -153,6 +154,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_155433) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "favoritos", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "tema_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tema_id"], name: "index_favoritos_on_tema_id"
+    t.index ["user_id", "tema_id"], name: "index_favoritos_on_user_id_and_tema_id", unique: true
+    t.index ["user_id"], name: "index_favoritos_on_user_id"
   end
 
   create_table "freights", force: :cascade do |t|
@@ -329,6 +340,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_155433) do
   add_foreign_key "chats", "user_words"
   add_foreign_key "curso_words", "cursos"
   add_foreign_key "curso_words", "words"
+  add_foreign_key "favoritos", "temas"
+  add_foreign_key "favoritos", "users"
   add_foreign_key "freights", "address", column: "address_destino_id"
   add_foreign_key "freights", "address", column: "address_origem_id"
   add_foreign_key "messages", "chats"

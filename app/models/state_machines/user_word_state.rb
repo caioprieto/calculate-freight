@@ -5,15 +5,15 @@ module StateMachines
     included do
       state_machine :status, initial: :pending do
         state :pending
-        state :enviado
+        state :enviado_correcao
         state :corrigido
 
         event :enviar do
-          transition pending: :enviado, if: :user_redacao?
+          transition pending: :enviado_correcao, if: :user_redacao?
         end
 
         event :finalizar do
-          transition enviado: :corrigido, if: :corrigido?
+          transition enviado_correcao: :corrigido, if: :corrigido?
         end
       end
     end

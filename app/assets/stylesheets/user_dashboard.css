@@ -19,6 +19,11 @@ html, body {
   box-sizing: border-box;
 }
 
+.accordion-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .right-panel {
   flex: 1;
   background-color: rgba(0, 0, 0, 0.94);
@@ -308,7 +313,7 @@ nav.d-flex {
   color: black;
   position: relative;
   white-space: nowrap;
-  bottom: 2px;
+  bottom: 4px;
   left: 1px;
 }
 
@@ -471,7 +476,7 @@ nav.d-flex {
 }
 
 .redacoes-card:hover i {
-  transform: scale(1.15);
+  transform: scale(1.01);
 }
 
 .redacoes-card img {
@@ -596,6 +601,14 @@ nav.d-flex {
 
 .hover:hover {
   transform: scale(1.01);
+}
+
+.hover-max {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover-max:hover {
+  transform: scale(1.2);
 }
 
 .scrollable {
@@ -723,4 +736,14 @@ nav.d-flex {
 .dropdown-wrapper button:hover {
   background-color: #f0f0f0;
   cursor: pointer;
+}
+
+@keyframes pulse-notification {
+  0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 123, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+}
+
+#notify-modal.pulse {
+  animation: pulse-notification 1s ease-out;
 }

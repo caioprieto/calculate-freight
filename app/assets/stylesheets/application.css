@@ -124,7 +124,6 @@ h1 {
 .preco-riscado {
   text-decoration: line-through;
   color: #888;
-  font-size: 14px;
   font-weight: 500;
   margin-left: 4px;
 }
@@ -141,7 +140,7 @@ h1 {
 }
 
 .preco-parcelado {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #1c1c1c;
 }
@@ -159,7 +158,7 @@ h1 {
   padding: 14px;
   border-radius: 5px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 }
@@ -295,6 +294,15 @@ h1 {
   transform: scale(1.03);
 }
 
+.fav-toggle i {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.fav-toggle:hover i {
+  transform: scale(1.1);
+}
+
 .cart-toggle i {
   display: inline-block;
   transition: transform 0.3s ease-in-out;
@@ -357,7 +365,7 @@ h1 {
 .arrow-up-cart {
   position: absolute;
   top: -10px;
-  right: 15px; /* Ajuste horizontal conforme o botão */
+  right: 23px; /* Ajuste horizontal conforme o botão */
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
@@ -418,8 +426,8 @@ h1 {
 
 .price-bold {
   font-weight: 600;
-  font-size: 14px;
-  margin-top: -10px;
+  font-size: 13px;
+  margin-top: -8px;
 }
 
 .itens-curso {
@@ -477,7 +485,7 @@ h1 {
 }
 
 .bolinha-span {
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .course-card .media-wrapper {
@@ -592,7 +600,7 @@ h1 {
 }
 
 .redacoes-card:hover {
-  transform: scale(1.06);
+  transform: scale(1.03);
 }
 
 .redacoes-card:hover img {
@@ -620,4 +628,8 @@ h1 {
   transition: transform 0.3s ease-in-out;
   margin-left: 2px;
   margin-top: -1px;
+}
+
+.text-muted {
+  font-size: 14px;
 }

@@ -35,3 +35,5 @@
 
 # Vendor 'bundle_install'
 /vendor/bundle
+
+/public/videos/videoplayback.mp4

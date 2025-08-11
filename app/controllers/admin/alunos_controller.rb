@@ -10,6 +10,7 @@ class Admin::AlunosController < AdminsBackofficeController
 
     if params[:query].present?
       @alunos = @alunos.where("users.nome ILIKE ?", "%#{params[:query]}%")
+      @alunos_notifications = @alunos
     end
 
     if params[:aluno_id].present?
@@ -39,6 +40,11 @@ class Admin::AlunosController < AdminsBackofficeController
 
     if curso.present?
       @aluno.user_cursos.find_or_create_by(data_inicio: Time.zone.now, user_id: @aluno.id, curso: curso, data_fim: Time.zone.now + curso.vigencia.months)
+
+      curso.words.each do |word|
+        @aluno.user_words.find_or_create_by(user_id: @aluno.id, word_id: word.id, curso_id: curso.id)
+      end
+
       flash[:notice] = "Curso adicionado com sucesso!"
     else
       flash[:alert] = "Selecione um curso válido."
