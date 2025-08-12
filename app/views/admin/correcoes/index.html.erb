@@ -43,8 +43,8 @@
       <div class="card shadow w-100 p-4 d-flex flex-column gap-0 mt-3">
         <div class="d-flex justify-content-between align-items-start flex-wrap">
           <!-- Tema e aluno à esquerda -->
-          <div style="margin-bottom: -20px" class="row">
-            <div class="col-3">
+          <div class="row g-0 align-items-start flex-grow-1" style="margin-bottom: -20px;">
+            <div class="col-auto">
               <% if user_word.user.imagem.present? %>
                 <%= image_tag user_word.user.imagem, class: "user-avatar-max rounded-circle me-2", width: 40, height: 40, alt: user_word.user.nome %>
               <% else %>
@@ -52,21 +52,32 @@
               <% end %>
             </div>
 
-            <div class="col-9">
-              <p style="margin-top: -10px; font-size: 13px; white-space: nowrap;"><strong><%= user_word.word.word_type.upcase %></strong> - <%= user_word.word.tema %></p>
+            <div class="col ms-3">
+              <p style="margin-top: -10px; font-size: 13px; white-space: nowrap;">
+                <strong><%= user_word.word.word_type.upcase %></strong> - <%= user_word.word.tema %>
+              </p>
+
               <div class="d-flex">
                 <i class="bi bi-mortarboard fs-6" style="margin-top: -14px; margin-right: 8px;"></i>
-                <p style="margin-top: -11px; font-size: 13px;">Aluno: <strong style="font-weight: 550"><%= user_word.user.nome %></strong></p>
+                <p style="margin-top: -11px; font-size: 13px;">
+                  Aluno: <strong style="font-weight: 550"><%= user_word.user.nome %></strong>
+                </p>
               </div>
 
               <div class="d-flex">
                 <i class="bi bi-calendar-day text-success fs-6" style="margin-top: -13px; margin-right: 8px;"></i>
-                <p class="text-success" style="margin-top: -10px; font-size: 13px; white-space: nowrap;">Data de envio <strong style="font-weight: 500">redação aluno</strong>: <strong style="font-weight: 550"><%= user_word.data_conclusao.present? ? user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') : "Sem data" %></strong></p>
+                <p class="text-success" style="margin-top: -10px; font-size: 13px; white-space: nowrap;">
+                  Data de envio <strong style="font-weight: 500">redação aluno</strong>: 
+                  <strong style="font-weight: 550"><%= user_word.data_conclusao.present? ? user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') : "Sem data" %></strong>
+                </p>
               </div>
 
               <div class="d-flex text-danger fw-bold">
                 <i class="bi bi-calendar-day fs-6" style="margin-top: -13px; margin-right: 8px;"></i>
-                <p style="margin-top: -10px; font-size: 13px; font-weight: 500; white-space: nowrap;">Prazo de entrega da correção: <strong style="font-weight: 700"><%= user_word.prazo_entrega.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></strong></p>
+                <p style="margin-top: -10px; font-size: 13px; font-weight: 500; white-space: nowrap;">
+                  Prazo de entrega da correção:
+                  <strong style="font-weight: 700"><%= user_word.prazo_entrega.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></strong>
+                </p>
               </div>
             </div>
           </div>
@@ -94,13 +105,7 @@
               <i class="bi bi-upload fs-6 me-1" style="margin-top: 1px;"></i>
               <span style="margin-top: 2px; margin-left: 5px;">Upload Correção</span>
             <% end %>
-
-            <%= link_to "/admin/correcoes/#{user_word.id}/edit", class: "btn btn-dark px-3 py-2 d-flex text-nowrap", style: "font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: -1px;" do %>
-              <i class="bi bi-chat-square-text fs-6 me-1" style="margin-top: 1px;"></i>
-              <span style="margin-top: 2px; margin-left: 5px;">Ir para Correção</span>
-            <% end %>
           </div>
-
         </div>
       </div>
     <% end %>
@@ -125,7 +130,7 @@
 
   $(document).ready(function() {
     $('.select2-ajax').select2({
-      theme: 'bootstrap4', // Aplica o tema
+      theme: 'bootstrap4',
       placeholder: 'Nome do aluno',
       allowClear: true,
       width: '100%',
@@ -142,5 +147,4 @@
       }
     });
   });
-
 </script>

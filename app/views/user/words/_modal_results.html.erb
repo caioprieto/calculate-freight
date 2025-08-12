@@ -9,29 +9,43 @@
       <div class="modal-body d-flex mt-1" style="gap: 20px">
         <div class="w-50 d-flex flex-column justify-content-start">
           <div class="card shadow p-3">
-            <p>Tempo de Duração: 1h 13min</p>
+            <% if @user_word.data_conclusao.present? %>
+              <div class="d-flex" style="margin-top: -3px; margin-left: -1px;">
+                <i class="bi bi-send-check text-success" style="font-size: 14px; margin-top: 1px;"></i>
+                <strong class="text-success" style="font-size: 12px; margin-left: 8px; margin-top: 2px; font-weight: 600">Redação enviada para correção</strong>
+              </div>
+              <p style="font-size: 13px; font-weight: 400"><i class="bi bi-calendar3 me-2"></i>Data de entrega: <strong style=" font-weight: 620"><%= @user_word.data_conclusao.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></strong></p>
+            <% end %>
             <% if @user_word.user_redacao.attached? %>
               <% content_type = @user_word.user_redacao.content_type %>
 
               <% if content_type == "application/pdf" %>
-                <div class="pdf-container">
+                <div class="pdf-container-result" style="border-radius: 5px">
                   <iframe src="<%= rails_blob_path(@user_word.user_redacao, disposition: 'inline') %>"></iframe>
                 </div>
               <% elsif content_type.start_with?("image/") %>
                 <div class="image-container text-center">
-                  <%= image_tag @user_word.user_redacao, class: "img-fluid", style: "max-height: 500px;" %>
+                  <%= image_tag @user_word.user_redacao, class: "img-fluid", style: "max-height: 500px; border-radius: 5px; height: 55vh; object-fit: cover" %>
                 </div>
               <% end %>
             <% end %>
           </div>
         </div>
 
-        <div class="w-50 d-flex flex-column justify-content-start">
-          <div class="card shadow p-3">
-            <p>Tempo de Duração: 1h 13min</p>
-            <!-- Você pode adicionar mais informações aqui -->
+        <% if @user_word.data_conclusao.present? %>
+          <div class="w-50 d-flex flex-column justify-content-start">
+            <div class="card shadow p-3" style="margin-bottom: -10px;">
+              <div class="d-flex" style="margin-top: -3px; margin-left: -1px;">
+                <i class="bi bi-exclamation-triangle text-danger" style="font-size: 14px; margin-top: 1px;"></i>
+                <strong class="text-danger" style="font-size: 12px; margin-left: 7px; margin-top: 3px; font-weight: 600">Correção pendente</strong>
+              </div>
+              <p style="font-size: 13px; font-weight: 400">
+                <i class="bi bi-calendar3 me-1"></i>
+                Prazo de entrega: <strong style=" font-weight: 620"><%= (@user_word.data_conclusao + 14.days).in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y %H:%M') %></strong>
+              </p>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>

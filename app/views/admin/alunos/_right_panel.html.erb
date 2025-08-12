@@ -154,17 +154,23 @@
                       </p>
                     </div>
                   </div>
-                  <div class="col-md-3 mt-2">
+                  <div class="col-md-3 mt-2 ms-3">
                     <% if user_word.user_redacao.attached? %>
                       <%= link_to url_for(user_word.user_redacao), download: "redacao_#{user_word.id}.pdf", class: "btn btn-dark p-1 text-nowrap" do %>
-                        <i class="bi bi-download" style="font-size: 13px;"></i>
-                        <span style="font-size: 13px">Download <strong>redação aluno</strong></span>
+                        <i class="bi bi-download" style="font-size: 11px;"></i>
+                        <span style="font-size: 11px">Download <strong>redação aluno</strong></span>
                       <% end %>
                     <% end %><br>
                     <% if user_word.correcao.attached? %>
                       <%= link_to url_for(user_word.correcao), download: "correcao_#{user_word.id}.pdf", class: "btn btn-warning p-1 text-nowrap mt-2" do %>
                         <i class="bi bi-download" style="font-size: 13px;"></i>
                         <span style="font-size: 13px">Download <strong>correção professor</strong></span>
+                      <% end %>
+                    <% end %>
+                    <% unless user_word.correcao.attached? %>
+                      <%= link_to admin_correcoes_path, class: "btn btn-danger p-1 text-nowrap mt-1" do %>
+                        <i class="bi bi-exclamation-triangle" style="font-size: 12px;"></i>
+                        <span style="font-size: 12px">Fazer <strong>correção pendente</strong></span>
                       <% end %>
                     <% end %>
                   </div>

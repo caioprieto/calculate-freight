@@ -83,13 +83,29 @@ body {
   z-index: 999; /* acima do .video-border-overlay que está com z-index: 2 */
   background-color: white;
   overflow: hidden;
-  width: 70%;
+  width: 65%;
   height: 78vh;
   margin-top: 40px;
   margin-left: 35px;
 }
 
 .pdf-container iframe {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pdf-container-result {
+  z-index: 999; /* acima do .video-border-overlay que está com z-index: 2 */
+  background-color: white;
+  overflow: hidden;
+  width: 100%;
+  height: 55vh;
+  margin-top: -1px;
+  margin-left: 1px;
+}
+
+.pdf-container-result iframe {
   width: 100%;
   height: 100%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -193,6 +209,23 @@ body {
   z-index: 1001;
 }
 
+.scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
 
 .beneficios{
   display: grid;

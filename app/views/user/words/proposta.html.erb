@@ -15,8 +15,8 @@
   <div class="navbar-right d-flex gap-2">
     <%# Botão CountTimer %>
     <div id="timerDisplay" class="btn btn-success text-white d-flex align-items-center" style="display: none;">
-      <i class="bi bi-stopwatch fs-4 me-1"></i>
-      <span class="fw-bold" id="timerText">00:00</span>
+      <i class="bi bi-stopwatch fs-5 me-1"></i>
+      <span class="fw-bold ms-1" id="timerText">00:00</span>
 
       <div id="resetButton" class="btn text-white d-flex align-items-center p-1 ms-1" style="cursor: pointer; display: none;">
         <i class="bi bi-x-circle fs-6"></i>
@@ -27,7 +27,7 @@
     <div id="timerButton" class="btn btn-outline-dark text-white d-flex align-items-center" style="cursor: pointer;">
       <i id="iconPlay" class="bi bi-play fs-4 me-1"></i>
       <i id="iconPause" class="bi bi-pause fs-4 me-1" style="display: none;"></i>
-      <span id="timerLabel" style="position: relative; top: 1px;">Iniciar Timer</span>
+      <span id="timerLabel" style="position: relative; top: 0px; font-size: 14px;">Iniciar Timer</span>
     </div>
 
     <div class="settings-dropdown">
@@ -121,7 +121,10 @@
     <div class="d-flex" style="text-decoration: none; margin-top: 15px; margin-bottom: -10px;">
       <p class="text-white" style="font-weight: 500; margin-top: 2px; font-size: 14px;">Status: </p>
       <% if @user_word.concluido %>
-        <strong class="text-success" style="font-size: 14px; margin-left: 6px; margin-top: 3px; font-weight: 500;">Redação concluída</strong>
+        <div class="d-flex" style="margin-top: 3px; margin-left: 10px;">
+          <i class="bi bi-send-check text-success" style="font-size: 14px; margin-top: 1px;"></i>
+          <strong class="text-success" style="font-size: 12px; margin-left: 6px; margin-top: 2px; font-weight: 600">Redação enviada para correção</strong>
+        </div>
       <% else %>
         <strong class="text-danger" style="font-size: 14px; margin-left: 6px; margin-top: 3px; font-weight: 500">Redação pendente</strong>
       <% end %>
@@ -133,7 +136,10 @@
         <% if @user_word.corrigido %>
           <strong class="text-success" style="font-size: 14px; margin-left: 6px; margin-top: 4px; font-weight: 500;">Correção concluída</strong>
         <% else %>
-          <strong class="text-danger" style="font-size: 14px; margin-left: 6px; margin-top: 4px; font-weight: 500">Correção pendente</strong>
+          <div class="d-flex" style="margin-top: 3px; margin-left: 10px;">
+            <i class="bi bi-exclamation-triangle text-danger" style="font-size: 14px; margin-top: 1px;"></i>
+            <strong class="text-danger" style="font-size: 12px; margin-left: 6px; margin-top: 3px; font-weight: 600">Correção pendente</strong>
+          </div>
         <% end %>
       </div>
     <% end %>
@@ -141,8 +147,8 @@
     <hr>
     <h6 style="font-weight: 500; font-size: 14px;" class="mb-3">Chat com o Professor</h6>
 
-    <div class="chat-wrapper d-flex flex-column" style="height: 400px;">
-      <div id="chat-messages" class="messages flex-grow-1 overflow-auto mb-3">
+    <div class="chat-wrapper scrollable d-flex flex-column" style="height: 400px;">
+      <div id="chat-messages" class="scrollable messages flex-grow-1 overflow-auto mb-3">
         <% @messages.each do |message| %>
           <div class="mb-2 <%= message.dono_type == 'Admin' ? 'text-start' : 'text-end' %>">
             <span style="font-size: 10px; font-weight: 700" class="badge <%= message.dono_type == 'Admin' ? 'bg-primary' : 'bg-secondary' %>">

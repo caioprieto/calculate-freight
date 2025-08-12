@@ -14,6 +14,7 @@ class User::WordsController < ApplicationController
   def save_user_word_pdf
     @word = Word.find(params[:id])
     @user_word = current_user.user_words.where(word_id: @word.id).first
+    @duration_seconds = params[:duration_seconds]
 
     if params[:file].present?
       if @user_word.user_redacao.attach(params[:file])

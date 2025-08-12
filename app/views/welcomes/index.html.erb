@@ -17,21 +17,24 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.querySelector('.carousel-btn.prev');
     const nextBtn = document.querySelector('.carousel-btn.next');
-    const container = document.querySelector('.carousel-container');
 
-    let scrollAmount = 0;
-    const scrollStep = container.offsetWidth * 1.01;
+    let index = 0;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${index * 101}%)`;
+    }
 
     nextBtn.addEventListener('click', () => {
-      scrollAmount = Math.min(scrollAmount + scrollStep, track.scrollWidth - container.clientWidth);
-      track.style.transform = `translateX(-${scrollAmount}px)`;
+      index = (index + 1) % slides.length; // volta pro início quando chegar no fim
+      updateCarousel();
     });
 
     prevBtn.addEventListener('click', () => {
-      scrollAmount = Math.max(scrollAmount - scrollStep, 0);
-      track.style.transform = `translateX(-${scrollAmount}px)`;
+      index = (index - 1 + slides.length) % slides.length; // vai pro último se voltar no início
+      updateCarousel();
     });
   });
 </script>

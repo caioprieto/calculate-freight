@@ -28,12 +28,12 @@
         <div class="w-100" style="padding: 0 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border-radius: 10px">
           <% if user_word.concluido %>
             <div class="d-flex" style="margin-top: 6px;">
-              <i class="bi bi-send-check fs-6 text-success"></i>
+              <i class="bi bi-send-check text-success" style="font-size: 14px; margin-top: 1px;"></i>
               <strong class="text-success" style="font-size: 12px; margin-left: 6px; margin-top: 2px; font-weight: 600">Redação enviada para correção</strong>
             </div>
           <% else %>
             <div class="d-flex" style="margin-top: 6px;">
-              <i class="bi bi-exclamation-triangle fs-6 text-danger"></i>
+              <i class="bi bi-exclamation-triangle text-danger" style="font-size: 14px; margin-top: 1px;"></i>
               <strong class="text-danger" style="font-size: 12px; margin-left: 6px; margin-top: 3px; font-weight: 600">Redação pendente</strong>
             </div>
           <% end %>
