@@ -6,9 +6,11 @@
   <div class="faixa ms-2">
     <div class="content-curso text-dark mt-3">
       <div class="curso-container d-flex flex-wrap justify-content-between">
-        <div class="curso-info" style="width: 65%;">
-          <h4 class="mt-2 z-index"><%= @curso.name %></h4>
-          <p class="subtitle"><%= @curso.description %></p>
+        <div class="curso-info d-flex" style="width: 65%;">
+          <div class="w-100 ms-2">
+            <h5 class="mt-2 z-index"><%= @curso.name %></h5>
+            <p class="subtitle" style="font-size: 13px;"><%= @curso.description %></p>
+          </div>
         </div>
 
         <div class="curso-preview text-dark">
@@ -36,13 +38,13 @@
             </div>
 
             <p class="tempo-restante fs-6 mt-2">⏱️ <strong>Só mais 8 horas</strong> por este preço!</p>
-            <div style="display: flex; gap: 4px; position: relative">
+            <div style="display: flex; gap: 2px; position: relative">
               <% if current_user.present? %>
                 <% if current_user.user_cursos.where(curso_id: @curso.id).blank? %>
                   <div class="">
                     <%= form_with url: add_to_cart_path(@curso), method: :post, local: true do %>
-                      <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
-                        <i class="bi bi-cart-plus-fill fs-4"></i>
+                      <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-2", onclick: "showLoadingAndRedirect()" do %>
+                        <i class="bi bi-cart-plus-fill fs-5"></i>
                       <% end %>
                     <% end %>
                   </div>
@@ -66,8 +68,8 @@
               <% else %>
                 <div class="">
                   <%= form_with url: add_to_cart_path(@curso), method: :post, local: true do %>
-                    <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-1", onclick: "showLoadingAndRedirect()" do %>
-                      <i class="bi bi-cart-plus-fill fs-4"></i>
+                    <%= button_tag type: "submit", class: "btn-branco btn-carrinho fw-light p-2", onclick: "showLoadingAndRedirect()" do %>
+                      <i class="bi bi-cart-plus-fill fs-5"></i>
                     <% end %>
                   <% end %>
                 </div>
@@ -81,6 +83,9 @@
                 </div>
               <% end %>
             </div>
+          </div>
+
+          <div class="compra-box mt-2">
           </div>
         </div>
       </div>

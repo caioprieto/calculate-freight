@@ -286,11 +286,28 @@ footer.footer {
     margin-left: -5px;
   }
 
-  .cart-card {
-    width: 350px !important;
-    margin-right: -95px !important;
+  .fav-card {
+    position: fixed !important; /* fixa na tela */
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centraliza */
+    margin: 0 !important; /* remove margens antigas */
+    width: 90% !important; /* ocupa a maior parte da tela pequena */
+    max-width: 400px;
+    display: none; /* continua escondido por padrão */
+    z-index: 2000;
   }
-
+  .cart-card {
+    position: fixed !important; /* fixa na tela */
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centraliza */
+    margin: 0 !important; /* remove margens antigas */
+    width: 90% !important; /* ocupa a maior parte da tela pequena */
+    max-width: 400px;
+    display: none; /* continua escondido por padrão */
+    z-index: 2000;
+  }
   .vestibulares {
     margin-top: -60px !important;
   }
@@ -361,6 +378,7 @@ footer.footer {
 
   .user-dropdown {
     top: 1px !important;
+    margin-right: 15px !important;
   }
 
   .margin-top-mobile {
@@ -420,6 +438,13 @@ footer.footer {
 }
 
 .cart-card {
+  width: 400px;
+  display: none;
+  z-index: 1000;
+  margin-top: 0px !important;
+}
+
+.fav-card {
   width: 400px;
   display: none;
   z-index: 1000;

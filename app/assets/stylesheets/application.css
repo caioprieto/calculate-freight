@@ -36,7 +36,7 @@
 }
 
 .faixa {
-  height: 300px;
+  height: 240px;
 }
 
 .content-curso {
@@ -69,12 +69,6 @@ h1 {
   font-size: 32px;
   font-weight: bold;
   margin-top: 10px;
-}
-
-.subtitle {
-  font-size: 18px;
-  margin: 10px 0;
-  color: #6e6e6e;
 }
 
 .meta span {
@@ -155,10 +149,10 @@ h1 {
 .btn-comprar {
   width: 100%;
   margin-top: 10px;
-  padding: 14px;
+  padding: 15px;
   border-radius: 5px;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 }
@@ -201,7 +195,7 @@ h1 {
 
 .btn-carrinho {
   width: 100%;
-  margin-top: 9px;
+  margin-top: 8px;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
@@ -209,7 +203,6 @@ h1 {
 }
 
 .btn-carrinho:hover {
-  transform: scale(1.1); /* Aumenta 20% */
   color: rgb(0, 0, 0);
 }
 

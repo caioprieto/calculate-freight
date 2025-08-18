@@ -7,23 +7,23 @@
     <div class="row">
       <div class="field col-6">
         <%= f.label :nome, class: "form-label fw-light" %>
-        <%= f.text_field :nome, autofocus: true, class: "form-control form-control-sm", style: "margin-top: -6px" %>
+        <%= f.text_field :nome, autofocus: true, class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;" %>
       </div>
 
       <div class="field col-6">
         <%= f.label :sobrenome, class: "form-label fw-light" %>
-        <%= f.text_field :sobrenome, autofocus: true, class: "form-control form-control-sm", style: "margin-top: -6px" %>
+        <%= f.text_field :sobrenome, autofocus: true, class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;" %>
       </div>
     </div>
 
     <div class="field">
       <%= f.label :cpf, "CPF", class: "form-label fw-light" %>
-      <%= f.text_field :cpf, class: 'cpf-field', placeholder: '000.000.000-00', class: "form-control form-control-sm", style: "margin-top: -6px" %>
+      <%= f.text_field :cpf, class: 'cpf-field', placeholder: '000.000.000-00', class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;" %>
     </div>
 
     <div class="field">
       <%= f.label :email, class: "form-label fw-light" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm", style: "margin-top: -6px" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;" %>
     </div>
 
     <div class="field">
@@ -31,12 +31,12 @@
       <% if @minimum_password_length %>
       <em class="label">(8 carateres no mínimo)</em>
       <% end %>
-      <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm", style: "margin-top: -6px" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;" %>
     </div>
 
     <div class="field">
       <%= f.label "Confirmação de senha", class: "form-label fw-light" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm", style: "margin-top: -6px"  %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;"  %>
     </div>
 
     <div class="actions">

@@ -15,7 +15,7 @@
     <div class="row row-cols-1 row-cols-md-2 g-0">
       <% @cursos_collection.each do |curso| %>
         <div class="col" style="margin-right: -15px;" data-prova-nome="<%= curso.prova %>">
-          <div class="card shadow ms-4 rounded-4 hover p-2 card-mobile" style="width: 96.3%; height: 90%;">
+          <div class="card shadow ms-4 hover p-2 card-mobile" style="width: 96.3%; height: 90%;">
             <a href="/cursos/<%= curso.id %>/edit" style="text-decoration: none; color: black">
               <div class="row g-0">
                 <div class="col-md-3 ms-2 d-flex align-items-center justify-content-center">
@@ -36,19 +36,23 @@
                     </div>
 
                     <div class="row mt-2 mobile-none">
-                      <div class="col-12 col-md-5 mb-2">
-                        <div class="item d-flex align-items-center">
-                          <i class="bi bi-file-earmark-arrow-down fs-6 me-1"></i>
-                          <span style="font-size: 11px;"><%= curso.words.count %> temas de redação</span>
+                      <% if curso.grid_counter_words %>
+                        <div class="col-12 col-md-5 mb-2">
+                          <div class="item d-flex align-items-center">
+                            <i class="bi bi-book me-1" style="font-size: 13px; margin-top: 2px;"></i>
+                            <span style="font-size: 10px;"><%= curso.words.count %> redações disponíveis</span>
+                          </div>
                         </div>
-                      </div>
+                      <% end %>
 
-                      <div class="col-12 col-md-7 mb-2">
-                        <div class="item d-flex align-items-center">
-                          <i class="bi bi-phone fs-6 me-1"></i>
-                          <span style="font-size: 11px;">Acesso no dispositivo móvel</span>
+                      <% if curso.grid_mobile_and_tv %>
+                        <div class="col-12 col-md-7 mb-2">
+                          <div class="item d-flex align-items-center">
+                            <i class="bi bi-phone" style="font-size: 13px; margin-top: 2px; margin-right: 2px;"></i>
+                            <span style="font-size: 10px;">Acesso no dispositivo móvel e na TV</span>
+                          </div>
                         </div>
-                      </div>
+                      <% end %>
                     </div>
 
 

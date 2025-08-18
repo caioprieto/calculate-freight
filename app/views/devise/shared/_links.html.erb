@@ -15,8 +15,8 @@
     <div class="text-and-simbol">
       <%- resource_class.omniauth_providers.each do |provider| %>
         <%= button_to omniauth_authorize_path(resource_name, provider), method: :post, data: { turbo: false }, class: "btn btn-outline-dark bg-dark google-input" do %>
-          <img src="/images/google.png" alt="Google logo" style="width:20px; margin-right:10px;margin-bottom:5px; background-color: transparent;">
-          <span class="text-white"> Entrar com o Google </span>
+          <img src="/images/google.png" alt="Google logo" style="width:20px; margin-right:10px;margin-bottom:3px; background-color: transparent;">
+          <span class="text-white" style="font-size: 13px;"> Entrar com o Google </span>
         <% end %>
       <% end %>
     </div>

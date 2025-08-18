@@ -5,13 +5,13 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field">
-      <%= f.label :email, class: "form-label fw-light" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm", style: "margin-top: -6px" %>
+      <%= f.label :email, class: "form-label fw-light", style: "font-size: 14px;" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;" %>
     </div>
 
     <div class="field">
-      <%= f.label "Senha", class: "form-label fw-light" %>
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-sm", style: "margin-top: -6px" %>
+      <%= f.label "Senha", class: "form-label fw-light", style: "font-size: 14px;" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-sm", style: "margin-top: -6px; font-size: 14px;" %>
     </div>
 
     <div class="d-flex justify-content-between align-items-center w-100 mb-3 mt-3 mobile-none">
@@ -21,7 +21,7 @@
             <%= f.check_box :remember_me, { id: "remember_me", checked: true } %>
             <span class="toggle-slider mobile-none"></span>
           </label>
-          <%= f.label :remember_me, "Lembrar conta", for: "remember_me", class: "remember-label mb-0 ms-2 mobile-none" %>
+          <%= f.label :remember_me, "Lembrar conta", for: "remember_me", class: "remember-label mb-0 ms-1 mobile-none", style: "margin-top: -5px; font-size: 13px;" %>
         </div>
       <% end %>
 
@@ -31,7 +31,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Entrar", style: "margin-top: 10px", class: "ajuste-top" %>
+      <%= f.submit "Entrar", style: "margin-top: 10px; font-size: 13px;", class: "ajuste-top" %>
     </div>
 
     <hr class="hr">
