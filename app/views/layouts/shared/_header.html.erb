@@ -125,8 +125,8 @@
 </nav>
 
 <% unless current_page?(root_path) %>
-  <div class="container d-flex mt-2">
-    <p style="margin-top: -74px; margin-left: 31px; font-size: 14px;">Home <span style="margin-right: 10px;"> </span>● <span class="text-secondary" style="margin-left: 10px;"><%= @title_page %> </span> </p>
+  <div class="container d-flex mt-2 mobile-marcador">
+    <p class="text-marcador" style="margin-top: -74px; margin-left: 31px; font-size: 14px;">Home <span style="margin-right: 10px;"> </span>● <span class="text-secondary" style="margin-left: 10px;"><%= @title_page %> </span> </p>
   </div>
 <% end %>
 

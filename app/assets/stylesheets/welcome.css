@@ -214,7 +214,7 @@ footer.footer {
     width: 100%;
     padding: 0;
     margin: 0;
-    display: flex;
+    display: column;
     align-items: center;
     justify-content: space-between;
     margin-top: -70px !important;
@@ -283,7 +283,7 @@ footer.footer {
     width: 110px;
     object-fit: contain;
     margin-top: 12px;
-    margin-left: -5px;
+    margin-left: -10px;
   }
 
   .fav-card {
@@ -381,7 +381,7 @@ footer.footer {
     margin-right: 15px !important;
   }
 
-  .margin-top-mobile {
+  .margin-top-negative {
     margin-top: -70px !important;
   }
 
@@ -403,6 +403,24 @@ footer.footer {
 
   .margin-top-mobile-max {
     margin-top: 50px !important;
+  }
+
+  .margin-top-mobile-max-extra {
+    margin-top: 75px !important;
+  }
+
+  .title-prova-anteriores-mobile {
+    margin-top: 60px !important;
+    margin-left: 15px !important;
+    margin-bottom: -10px !important;
+  }
+
+  .margin-top-mobile-medium {
+    margin-top: 25px !important;
+  }
+
+  .title-redacao-mobile {
+    margin-left: 15px !important;
   }
 
   .margin-top-mobile-min {
@@ -430,6 +448,42 @@ footer.footer {
     width: 150px !important;
     Height: 150px !important;
     margin-top: 10px !important;
+  }
+
+  .mobile-marcador {
+    margin-top: -35px !important;
+    margin-left: -10px !important;
+    margin-bottom: -30px !important;
+  }
+
+  .text-marcador {
+    font-size: 10px !important;
+  }
+
+  .tema-card-mobile {
+    width: 93.5% !important;
+    margin-left: 15px !important;
+  }
+
+  .prova-anteriores-card-mobile {
+    width: 93.5% !important;
+    margin-left: 15px !important;
+  }
+
+  .hr-width-mobile {
+    width: 93.5% !important;
+  }
+
+  .mobile-text-title {
+    font-size: 15px !important;
+  }
+
+  .icon-mobile-size {
+    font-size: 15px !important;
+  }
+
+  .margin-top-mobile-icon {
+    margin-top: -1px !important;
   }
 }
 

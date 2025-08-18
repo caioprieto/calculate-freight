@@ -19,7 +19,7 @@
 
   <body>
     <div class="login-container">
-      <div class="left-panel">
+      <div class="left-panel mobile-none">
         <%= render "devise/shared/error_messages", resource: resource %>
         <img src="/images/imagem_login.png" alt="Login image" />
       </div>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="actions mt-3">
-                  <%= f.submit "Entrar", style: "margin-top: 10px" %>
+                  <%= f.submit "Entrar", style: "margin-top: 10px;" %>
                 </div>
               <% end %>
             </div>
