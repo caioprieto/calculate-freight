@@ -1,5 +1,5 @@
 <nav>
-  <div class="scroll" style="margin-bottom: -40px;">
+  <div class="scroll" style="margin-bottom: -45px;">
     <div class="scroll_container">
       <% 8.times.each do |item| %>
         <div class="scroll_item">10% OFF NA PRIMEIRA COMPRA</div>
@@ -130,16 +130,16 @@
   </div>
 <% end %>
 
-<div class="full-width-container"style="margin-bottom: 30px; margin-top: -60px;">
+<div class="full-width-container" style="margin-bottom: 30px; margin-top: -60px;">
   <% if flash[:noticia] %>
-    <div class="alert alert-success alert-dismissible fade show text-center mb-3" role="alert" style="margin-top: -10px">
+    <div class="alert alert-success alert-dismissible fade show text-center mb-3 margin-top-mobile-max-extra negative-margin-bottom mobile-font-size" role="alert" style="margin-top: -10px">
       <%= flash[:noticia] %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
   <% if flash[:alerta] %>
-    <div class="alert alert-danger alert-dismissible fade show text-center mb-3" role="alert" style="margin-top: -10px">
-      <%= flash[:alerta]%>
+    <div class="alert alert-danger alert-dismissible fade show text-center mb-3 margin-top-mobile-max-extra negative-margin-bottom mobile-font-size" role="alert" style="margin-top: -10px">
+      <%= flash[:alerta] %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>

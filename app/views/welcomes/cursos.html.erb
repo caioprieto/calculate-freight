@@ -1,17 +1,16 @@
 <div style="margin-top: -15px;">
   <%= render 'vestibulares' %>
-  <%= render partial: 'provas_anteriores' %>
 
   <div class="container">
     <div class="mb-3 ms-4 d-flex margin-top-mobile-max-extra" style="width: 93%;">
-      <i class="bi bi-play-btn fs-5" style="margin-top: -4px; margin-right: 6px; margin-left: 10px;"></i>
-      <h2 class="ms-2" style="font-size: 19px; font-weight: 400;">Cursos</h2>
+      <i class="bi bi-play-btn icon-mobile-size margin-left-mobile-icon fs-5" style="margin-top: -3px; margin-right: 6px; margin-left: 10px;"></i>
+      <h2 class="ms-2 mobile-text-title" style="font-size: 19px; font-weight: 400;">Cursos</h2>
     </div>
 
-    <hr class="text-dark" style="width: 95.6%; margin-left: 30px; margin-bottom: 13px; margin-top: -19px; opacity: 10%;">
+    <hr class="text-dark mobile-none" style="width: 95.6%; margin-left: 30px; margin-bottom: 13px; margin-top: -19px; opacity: 10%;">
   </div>
 
-  <div class="container flex-columns-mobile">
+  <div class="container flex-columns-mobile mb-4">
     <div class="row row-cols-1 row-cols-md-2 g-0">
       <% @cursos_collection.each do |curso| %>
         <div class="col" style="margin-right: -15px;" data-prova-nome="<%= curso.prova %>">
@@ -63,7 +62,7 @@
                           <span style="font-size: 11px; margin-top: 4px; margin-left: 1px;">Adicionado</span>
                         <% end %>
                       <% elsif current_user.user_cursos.where(curso_id: curso.id).present? %>
-                        <%= button_tag class: "btn text-success p-1 position-absolute d-flex", style: "top: 10px; right: 10px;  border: none;" do %>
+                        <%= button_tag class: "btn text-success p-1 position-absolute d-flex mobile-none", style: "top: 10px; right: 10px;  border: none;" do %>
                           <span style="font-size: 11px; margin-top: 8px; margin-left: 3px;">
                             <i class="bi bi-check-circle-fill" style="font-size: 10px;"></i>
                             Adquirido: <%= current_user.user_cursos.where(curso_id: curso.id).first.data_inicio.in_time_zone('America/Sao_Paulo').strftime('%d/%m/%Y') %><br>
@@ -89,6 +88,10 @@
         </div>
       <% end %>
     </div>
+  </div>
+
+  <div class="margin-top-mobile-max-extra-extra">
+    <%= render partial: 'provas_anteriores' %>
   </div>
 </div>
 
